@@ -13,7 +13,7 @@ load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 ICONIC = [
     # --- Palermo (PA) ---
     {"name": "Duomo di Monreale", "category": "art", "lat": 38.0817, "lng": 13.2920, "town": "Monreale", "province": "PA",
-     "description": "Capolavoro arabo-normanno con mosaici dorati, patrimonio UNESCO.", "price": "€4 (terrazze €2,50)", "hours": "08:30–12:45 / 14:30–17:00", "duration": "1–2 ore"},
+     "description": "Capolavoro arabo-normanno con mosaici dorati, patrimonio UNESCO.", "price": "Cattedrale + terrazze + museo €6 · Chiostro €8 (ridotto €4) · Cumulativo €12", "duration": "1–2 ore"},
     {"name": "Spiaggia di Mondello", "category": "beach", "lat": 38.2010, "lng": 13.3270, "town": "Mondello", "province": "PA",
      "description": "La spiaggia di Palermo: sabbia bianca e mare turchese tra Monte Pellegrino e Capo Gallo.", "duration": "mezza giornata"},
     {"name": "Cefalù", "category": "art", "lat": 38.0394, "lng": 14.0228, "town": "Cefalù", "province": "PA",
@@ -28,9 +28,9 @@ ICONIC = [
     {"name": "Erice", "category": "art", "lat": 38.0367, "lng": 12.5870, "town": "Erice", "province": "TP",
      "description": "Borgo medievale in cima al monte: chiese, vicoli acciottolati e dolci di mandorla.", "duration": "mezza giornata"},
     {"name": "Segesta — Tempio e Teatro", "category": "art", "lat": 37.9416, "lng": 12.8350, "town": "Calatafimi-Segesta", "province": "TP",
-     "description": "Tempio dorico e teatro greco perfettamente conservati, immersi nella campagna.", "price": "€6", "hours": "09:00–19:30", "duration": "2–3 ore"},
+     "description": "Tempio dorico e teatro greco perfettamente conservati, immersi nella campagna.", "price": "€14 (ridotto €7)", "hours": "09:00–19:30", "duration": "2–3 ore"},
     {"name": "Parco Archeologico di Selinunte", "category": "art", "lat": 37.5836, "lng": 12.8255, "town": "Castelvetrano", "province": "TP",
-     "description": "Uno dei parchi archeologici più estesi del Mediterraneo, affacciato sul mare.", "price": "€6", "duration": "mezza giornata"},
+     "description": "Uno dei parchi archeologici più estesi del Mediterraneo, affacciato sul mare.", "price": "€17 (ridotto €10)", "duration": "mezza giornata"},
     {"name": "Saline di Trapani e Paceco", "category": "nature", "lat": 37.9530, "lng": 12.4870, "town": "Trapani", "province": "TP",
      "description": "Saline con mulini a vento e fenicotteri: spettacolari al tramonto.", "duration": "1–2 ore"},
     {"name": "Favignana (Isole Egadi)", "category": "beach", "lat": 37.9320, "lng": 12.3290, "town": "Favignana", "province": "TP",

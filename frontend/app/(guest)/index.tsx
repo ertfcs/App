@@ -328,7 +328,7 @@ export default function HomeScreen() {
                       <Text style={s.fpName}>{f.name}</Text>
                       <View style={s.festMetaRow}>
                         <Icon name="map-marker" size={13} color={colors.olive} />
-                        <Text style={s.festPlace}>{f.place} ({f.province})</Text>
+                        <Text style={s.festPlace}>{f.province === "IT" || f.province === "SIC" ? f.place : `${f.place} (${f.province})`}</Text>
                       </View>
                     </View>
                   </View>
@@ -337,10 +337,13 @@ export default function HomeScreen() {
                     <Text style={s.festDateTxt}>{f.dateLabel}</Text>
                   </View>
                   <Text style={s.festDesc}>{f.description}</Text>
-                  <View style={s.festCuriosity}>
-                    <Icon name="information-outline" size={15} color={colors.brand} />
-                    <Text style={s.festCuriosityTxt}>{f.curiosity}</Text>
-                  </View>
+                  {f.curiosity ? (
+                    <View style={s.festCuriosity}>
+                      <Icon name="information-outline" size={15} color={colors.brand} />
+                      <Text style={s.festCuriosityTxt}>{f.curiosity}</Text>
+                    </View>
+                  ) : null}
+                  {f.note ? <Text style={s.festNote}>⚠️ {f.note}</Text> : null}
                 </View>
               ))}
               <View style={{ flexDirection: "row", gap: spacing.sm, marginTop: spacing.sm }}>
@@ -393,6 +396,7 @@ const useStyles = makeStyles((c) => ({
   festDateTxt: { color: c.brandPrimary, fontSize: 13, fontWeight: "700", fontFamily: fonts.body },
   festDesc: { color: c.onSurfaceSecondary, fontSize: 14, lineHeight: 20, fontFamily: fonts.body },
   festCuriosity: { flexDirection: "row", gap: 6, backgroundColor: c.surfaceTertiary, padding: spacing.sm, borderRadius: radius.md },
+  festNote: { color: c.warning, fontSize: 12, lineHeight: 17, fontFamily: fonts.body },
   festCuriosityTxt: { color: c.onSurfaceSecondary, fontSize: 13, lineHeight: 18, flex: 1, fontStyle: "italic", fontFamily: fonts.body },
   hero: { height: 340, backgroundColor: c.surfaceInverse },
   heroImg: { width: "100%", height: "100%" },

@@ -56,6 +56,7 @@ def resolve_models(selection: Optional[List[str]] | Optional[str]) -> List[str]:
 # ============================================================
 KNOWLEDGE_BASE = """
 # CONOSCENZE CERTIFICATE — Province di PALERMO e TRAPANI
+(Prezzi aggiornati a novembre 2026, comunque INDICATIVI e da verificare prima della visita.)
 (Tutti i prezzi/orari sono INDICATIVI e da verificare prima della visita.
 Le riduzioni standard in Italia: gratis under 18 nei musei statali e disabile+accompagnatore.
 Ridotto 18-25 anni UE nei musei statali. Gratis prima domenica del mese in molti musei statali.)
@@ -64,15 +65,15 @@ Ridotto 18-25 anni UE nei musei statali. Gratis prima domenica del mese in molti
 
 ### PALERMO CITTÀ
 - **Cattedrale di Palermo** — Corso Vittorio Emanuele. Ingresso chiesa GRATIS.
-  Percorso completo (Tesoro, Cripta, Tombe Reali, Tetti): ~15 € intero, ~12 € ridotto studenti,
-  ~7 € bambini 7-17, gratis under 7. Orari: lun-sab 7:00-19:00, dom 8:00-13:00 e 16:00-19:00.
+  Solo tetti: 7 € intero (4 € 11-17 anni, 6 € over 65). Area monumentale (cripta, tesoro, absidi): 8-13 €.
+  Pass completo (incl. tetti): fino a 18 €. Biglietti solo su ticket-shop-cattedraledipalermo.it o in loco.
+  Area monumentale apr-ott lun-sab 9:30-18:00, dom 10:00-18:00; orari ridotti in inverno.
   Tetti consigliati al tramonto.
 - **Palazzo dei Normanni + Cappella Palatina** — Piazza Indipendenza.
-  Biglietto A (ven-lun, include Sale Reali): ~19 € intero, ~17 € ridotto 14-25,
-  ~12 € studenti, gratis under 14 e disabili+accompagnatore.
-  Biglietto B (mar-gio, solo Cappella e Giardini): ~15,50 € intero. Orari ~8:30-16:30.
-- **Teatro Massimo** — Piazza Verdi. Visita guidata ~12 € intero, ~7 € ridotto (studenti),
-  ~5 € bambini 6-13, gratis under 6. Tour ogni 30 min, 9:30-18:00.
+  19 € intero (Appartamenti Reali, Cappella, giardini, mostre); 17 € 18-25 anni, 15,50 € over 65, 11 € 14-17 anni.
+  Orari lun-sab 8:30-16:30, dom e festivi 8:30-12:30 (verificare chiusure infrasettimanali).
+- **Teatro Massimo** — Piazza Verdi. Visita guidata (40 min) 14 € intero, 7 € under 26, famiglia 36 €.
+  9:30-18:00 (apr-ott fino alle 19:00).
 - **Quattro Canti e Piazza Pretoria** — GRATIS, sempre accessibili.
   Fontana Pretoria visibile dalla piazza. Bellissimi al tramonto.
 - **Mercato di Ballarò** — Via Ballarò. GRATIS. Mattina 7:00-14:00 lun-sab.
@@ -80,76 +81,81 @@ Ridotto 18-25 anni UE nei musei statali. Gratis prima domenica del mese in molti
 - **Mercato della Vucciria** — Piazza Caracciolo. Di giorno è un mercato modesto;
   la sera diventa il cuore della movida (apericena, vino, musica).
 - **Catacombe dei Cappuccini** — Piazza Cappuccini. ~5 € intero, ~3 € ridotto.
-  Orari: 9:00-13:00 e 15:00-18:00. Chiuse domenica pomeriggio nei mesi invernali.
-- **Cattedrale di Monreale** — Piazza Guglielmo II. Chiesa GRATIS. Chiostro: ~6 € intero,
-  ~3 € ridotto 18-25, gratis under 18. Terrazze: ~5 €. Orari 8:30-12:45 e 14:30-17:00.
+  Orari: 9:00-12:30 e 15:00-17:30. Biglietti solo in loco.
+- **Cattedrale di Monreale** — Piazza Guglielmo II. Cattedrale + Cappella Roano + terrazze + museo: 6 €.
+  Chiostro (biglietto separato): 8 € intero, 4 € ridotto. Cumulativo 12 €.
   UNESCO. Imperdibili i mosaici dorati arabo-normanni (oltre 6000 mq).
-- **Galleria d'Arte Moderna (GAM)** — Via Sant'Anna 21. ~10 € intero, ~8 € ridotto.
-- **Palazzo Abatellis (Galleria Regionale)** — Via Alloro 4. ~9 € intero, ~4,50 € ridotto.
+- **Galleria d'Arte Moderna (GAM)** — Via Sant'Anna 21. ~10 € intero, ~8 € ridotto (da verificare).
+- **Palazzo Abatellis (Galleria Regionale)** — Via Alloro 4. 10 € intero.
   Ospita "Trionfo della Morte" e l'Annunciata di Antonello da Messina.
-- **Orto Botanico di Palermo** — Via Lincoln 2. ~7 € intero, ~5 € ridotto. Aperto 9:00-18:00.
+- **Orto Botanico di Palermo** — Via Lincoln 2. 8 € intero; con Palazzo Steri 12 €; con Salinas e Doderlein 13 €.
+- **Museo Salinas** 8 € · **Zisa** 8 € · **San Giovanni degli Eremiti** 8 € · **Martorana** 4 € · **Palazzo Steri** 8 € (ridotto 5 €).
+- **Palermo Culture Pass** (7 giorni: Steri, Salinas, Orto Botanico, Palazzo Riso): 25,60 €.
 
 ### CEFALÙ
 - **Duomo di Cefalù** — Piazza Duomo. Ingresso GRATIS in chiesa.
-  Percorso completo (Cripta + Chiostro + tetti): ~10 € intero, ~6 € ridotto. UNESCO.
-- **La Rocca** — Salita ~30 min, ~5 € biglietto sentiero. Vista mozzafiato sul borgo e sul mare.
+  Itinerario completo (torri, tetti, tesoro, chiostro): 13 €; torri e tetti 10 €; tesoro e chiostro 10 €. UNESCO.
+- **La Rocca** — Salita ~30 min, 5 € (2,50 € 6-14 anni e over 65). Biglietteria Via Pitrè, no sandali.
 - **Lavatoio Medievale** — GRATIS, in Via Vittorio Emanuele.
 
 ### ALTRO (PA)
 - **Duomo di Cefalù** (vedi sopra).
-- **Castello di Carini** — ~5 € intero. La "Baronessa di Carini".
-- **Solunto (area archeologica)** — ~6 € intero. Vista sul Golfo.
-- **Villa Palagonia (Bagheria)** — "Villa dei Mostri". ~6 € intero.
+- **Castello di Carini** — 5 € intero, 3 € ridotto. La "Baronessa di Carini".
+- **Solunto (area archeologica)** — 6 € intero, 3 € ridotto. Vista sul Golfo. **Himera**: 6 € / 3 €.
+- **Villa Palagonia (Bagheria)** — "Villa dei Mostri". 6 € intero.
+- **Palazzo d'Aumale (Terrasini, Museo del carretto)** — 8 € intero, 4 € 18-25 anni, gratis under 18.
 - **Madonie — Piano Battaglia** — sentieri, in inverno neve. Borghi: Petralia Soprana, Castelbuono.
 
 ## ATTRAZIONI PROVINCIA DI TRAPANI
 
 ### SEGESTA (Calatafimi)
-- **Parco Archeologico di Segesta** — Tempio dorico + Teatro Greco. ~6 € intero, ~3 € ridotto 18-25,
-  gratis under 18 e over 65 UE. Orari estivi 9:00-19:30. Navetta interna per il teatro ~1,50 €.
+- **Parco Archeologico di Segesta** — Tempio dorico + Teatro Greco. 14 € intero, 7 € ridotto
+  (16 € / 9 € con mostre in corso). Gratis 1ª domenica del mese. Navetta interna per il teatro a pagamento.
 
 ### SELINUNTE (Castelvetrano)
-- **Parco Archeologico di Selinunte** — il più grande d'Europa. ~6 € intero, ~3 € ridotto.
-  Orari 9:00-19:00. Trenino elettrico interno consigliato ~6 €.
+- **Parco Archeologico di Selinunte** — il più grande d'Europa. 17 € intero, 10 € ridotto
+  (incluso supplemento mostra 3 €). Trenino elettrico interno a pagamento. **Cave di Cusa**: 2 € / 1 €.
 
 ### ERICE
-- **Borgo medievale di Erice** — ingresso libero. Funivia da Trapani ~9 € A/R adulti,
-  ~4,50 € bambini 4-12. Apertura: 8:00-23:30 estate (verificare).
-- **Castello di Venere** — ~6 € intero, ~3 € ridotto.
+- **Borgo medievale di Erice** — ingresso libero. Funivia da Trapani 9 € corsa singola, 15 € A/R
+  (ridotto 3-16 anni, gratis under 3). Chiusa il lunedì mattina per manutenzione.
+- **Castello di Venere** — 5 €; integrato 10 € (Museo Cordici, Torretta Pepoli, Quartiere Spagnolo); Erice Card 15 €.
+  Nov-mar aperto solo sabato e festivi.
 - **Pasticceria Maria Grammatico** — fondamentale per dolci di mandorla, genovesi, cannoli.
 
 ### TRAPANI
 - **Saline di Trapani e Paceco** — Via Chiusa, Nubia. WWF.
   Museo del Sale ~3 € + visita guidata. Tramonto leggendario.
-- **Torre di Ligny** — punta della città. Vista 360°. ~3 €.
+- **Torre di Ligny** — punta della città. Vista 360°. 3 € (ridotto 2 €).
 - **Centro storico** — corso Vittorio Emanuele. GRATIS.
 - **Funivia per Erice** — vedi Erice.
 
 ### MARSALA
-- **Cantine Florio** — degustazione storica. Tour ~15 € (con degustazione 3 vini).
+- **Cantine Florio** — solo su prenotazione. Visita base con 3 vini 25 €, premium 30 €, Food & Wine 40 €.
 - **Cantine Donnafugata** — Tour da ~20 €.
 - **Isola di Mozia / Mothia** — antica città fenicia, "Giovinetto di Mozia".
-  Traghetto ~6 € A/R + ingresso ~9 €. Solo bagaglio piccolo.
+  Isola e museo 12 € (ragazzi 6 €) + barca ~3,50 €. Solo bagaglio piccolo.
 - **Riserva dello Stagnone** — kitesurf e tramonti.
 
 ### SAN VITO LO CAPO
 - **Spiaggia di San Vito** — bandiera blu, sabbia bianca, fondale basso. Lidi 20-30 €/giorno.
 - **Tempio della Tonnara del Secco** — ingresso libero alla zona.
-- **Couscous Fest** — fine settembre, evento gratuito.
+- **Cous Cous Fest** — seconda metà di settembre (2026: 18-27 settembre). Ingresso libero, degustazioni a pagamento.
 
 ### RISERVA DELLO ZINGARO
 - **Riserva Naturale Orientata dello Zingaro** — primo parco regionale d'Italia.
-  ~5 € intero, ~3 € ridotto (12-17), gratis under 11. Aperta 7:00-19:30 estate.
+  5 € intero, 3 € ridotto. SOLO pagamento elettronico (niente contanti). Orari stagionali 7:00/8:00-16:00/19:00.
   3 sentieri: costiero (facile), media costa, alta montagna. 7 calette imperdibili
   (Cala dell'Uzzo, Cala Marinella, Cala Berretta, Cala della Disa, Cala del Varo, Cala Tonnarella, Cala Capreria).
 
 ### SCOPELLO / CASTELLAMMARE DEL GOLFO
-- **Tonnara e Faraglioni di Scopello** — ~7 € ingresso al cortile della tonnara per accedere alla cala.
+- **Tonnara e Faraglioni di Scopello** — da fine settembre 2026 la Tonnara NON accoglie visitatori e la
+  balneazione ai Faraglioni è vietata da ordinanza: dire sempre di verificare prima di andare.
 - **Baia di Guidaloca** — spiaggetta in ciottoli, libera.
-- **Castellammare del Golfo** — centro storico + Castello arabo-normanno (~5 €).
+- **Castellammare del Golfo** — centro storico + Castello arabo-normanno (prezzo da verificare).
 
 ### MAZARA DEL VALLO
-- **Museo del Satiro Danzante** — Piazza Plebiscito. ~6 € intero, ~3 € ridotto.
+- **Museo del Satiro Danzante** — Piazza Plebiscito. 8 € intero, 4 € ridotto.
 - **Casbah** — quartiere arabo, ingresso libero a piedi.
 
 ## SCONTI / RIDUZIONI COMUNI
@@ -157,7 +163,7 @@ Ridotto 18-25 anni UE nei musei statali. Gratis prima domenica del mese in molti
 - **Studenti 18-25 UE**: ~50% di sconto ai musei statali con documento.
 - **Over 65 UE**: gratis o ridotto nei musei statali (varia per regione).
 - **Disabili + accompagnatore**: gratis nei musei statali (legge 104).
-- **Prima domenica del mese**: musei statali GRATIS (es. Cefalù, Monreale chiostro, Selinunte, Segesta).
+- **Prima domenica del mese**: siti regionali GRATIS (es. chiostro di Monreale, Selinunte, Segesta, Solunto, Salinas; NON il Duomo di Cefalù, che è diocesano).
 - **Tessere**: CoopCulture e Sicilypass possono includere ingressi multipli.
 
 ## DOVE MANGIARE (locali iconici, da verificare prima della visita)

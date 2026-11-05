@@ -31,6 +31,7 @@ from pydantic import BaseModel, Field
 from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone, ImageContent
 
 # Carmelo IA helpers
+from poi_tickets import apply_poi_tickets
 from carmelo_ai import (
     MODELS as CARMELO_MODELS,
     MODEL_LABELS as CARMELO_MODEL_LABELS,
@@ -533,6 +534,9 @@ async def startup_event():
         await db.pois.insert_many(to_insert)
         logger.info("Seeded %d new POIs (total catalog now: %d)",
                     len(to_insert), len(existing_names) + len(to_insert))
+    n_tickets = await apply_poi_tickets(db)
+    if n_tickets:
+        logger.info("Ticket info filled for %d POIs", n_tickets)
 
     # Seed foto Galleria privata (Dashboard → Galleria) dal batch fornito dall'host.
     # Idempotente e "definitivo": usa un registro persistente delle seed_key
@@ -3176,7 +3180,7 @@ async def export_pois_template(_: str = Depends(get_current_admin)):
         "town": "Calatafimi-Segesta",
         "province": "TP",
         "description": "Tempio dorico del V sec. a.C. perfettamente conservato.",
-        "price": "€6 (ridotto €3)",
+        "price": "€14 (ridotto €7)",
         "hours": "09:00-19:30",
         "duration": "2-3 ore",
         "discount": "Gratis 1ª domenica del mese",
