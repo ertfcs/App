@@ -25,6 +25,10 @@ Clone exactly the repo Okokg (tourist guide + admin for vacation rental "Apparta
   - Marketing: video scripts, editorial calendar (+AI 30-day plan), strategy (background job), coach chat/audit/structured GBP post (multi-model), AI image + attach real photos to library items.
   - Fixes: quote 500 with ai_access codes, duplicate ItineraryIn model, upload/file error handling, 750-char GB description limit, delete confirmations, markdown in AI answers.
 
+- 2026-11 (this fork) Clone re-created from github.com/accetta562-dev/Ol; MATTEO26 + 58 FAQ drafts recreated.
+- 2026-11 Feste & Sagre rewrite (frontend/src/lib/festivals.ts): 157 recurring rules (patrons of all 82 PA + 25 TP comuni, sagre, riti, 16 national/regional holidays), Easter/Pentecost computed, calendar dots for prev/current/next 2 years, filters on /festivals, popup "Usa questa data" uses tapped day.
+- 2026-11 Ticket prices verified (Nov 2026): backend/poi_tickets.py fills empty price/hours/discount/ticket_url/notes on 33 POIs at startup; Carmelo knowledge base prices updated.
+
 ## Backlog
 - P1: move public/private gallery photos from base64-in-Mongo to object storage; delete endpoint for orphan uploads.
 - P1: Matteo must write answers to the 58 seeded FAQ drafts and publish them.

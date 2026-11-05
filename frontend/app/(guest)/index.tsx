@@ -32,6 +32,7 @@ export default function HomeScreen() {
 
   const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });
   const [festPopup, setFestPopup] = useState<Festival[] | null>(null);
+  const [festDay, setFestDay] = useState<string | null>(null);
 
   const av = availability.data;
   const blocked = useMemo(() => new Set(av?.blocked_dates ?? []), [av]);
@@ -96,6 +97,7 @@ export default function HomeScreen() {
     const d = day.dateString;
     const fests = festMap[d];
     if (fests && fests.length > 0) {
+      setFestDay(d);
       setFestPopup(fests);
       return;
     }
@@ -354,7 +356,7 @@ export default function HomeScreen() {
                     icon="calendar-check"
                     variant="olive"
                     onPress={() => {
-                      const d = festPopup?.[0]?.start;
+                      const d = festDay;
                       setFestPopup(null);
                       if (d) selectDay(d);
                     }}

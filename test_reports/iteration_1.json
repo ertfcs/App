@@ -1,0 +1,43 @@
+{
+  "summary": "Tested festival calendar on Home, the /festivals screen, and POI ticket prices on the API and place detail screen. Almost everything works. Found 1 functional bug: the 'Usa questa data' button selects the wrong day for festivals that last several days.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "startup apply_poi_tickets", "issue": "Only fills fields that are empty. If a POI already has an old wrong price/hours in the DB (for example on another environment or in production), the corrected price is never applied. That works here because the fields were empty, but it is a risk for the 'fix ticket prices' request."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Home festival popup 'Usa questa data'", "issue": "Uses festPopup[0].start (the festival's start date) instead of the day that was tapped. Tapping 3 Jan 2027 (only the Presepe Vivente, 25 Dec–6 Jan) and pressing 'Usa questa data' selects 25 Dec 2026, not 3 Jan. The same happens with Trappeto Assunta (8–16 Aug), Cous Cous Fest and others. Fix: store the tapped dateString with the popup and pass it to selectDay.", "selector": "fest-popup-select", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home festival popup", "issues": ["The 'Usa questa data' button label wraps onto 3 lines at 390px width; shorten it or stack the buttons"]},
+      {"screen": "Place detail (Parco archeologico di Selinunte)", "issues": ["The hero image is broken: a placeholder icon shows instead of a photo"]}
+    ]
+  },
+  "verified_ok": [
+    "Nov 2026 dots: 1,2,6,7,8,12,14,15,21,22,25. 26 Nov has no dot, and that is correct: no rule falls on 26 Nov (the review request's expectation was wrong)",
+    "Dec 2026 popups: 8 Immacolata; 13 Santa Lucia; 25 Natale + Presepe; 26 Santo Stefano + Campofiorito + Presepe; 31 San Silvestro + Presepe",
+    "Mar 2027: 19 has 8 entries (San Giuseppe in 7 comuni + Salemi Pani e Cene), the popup scrolls and its buttons are reachable; 25 Trappeto Annunziata + Marsala Giovedì Santo; 26–27 Misteri Trapani; 28 Pasqua (+ 3 local rites)",
+    "National holidays show 'Tutta Italia' with no '(IT)', and regional ones show no '(SIC)'",
+    "/festivals: intro says '157 ricorrenze'; filter counts: all 157, PA 103, TP 38, sagra 10, nazionale 16; approximate items show '(indicativo)' and the warning note",
+    "Gangi ea(50) = 17 May 2027 and Valderice wd(11,20,0) = 21 Nov 2027 are correct in the code, but they are not shown on the list because they fall outside the 12-month window (the list does show Valderice 22 Nov 2026)",
+    "Prices from the API and on the place pages: Teatro Massimo €14 with hours, Segesta €14 (ridotto €7), Selinunte €17; the Tickets button is present"
+  ],
+  "test_report_links": ["/app/backend/tests/test_poi_tickets.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Make fest-popup-select use the tapped date instead of festPopup[0].start",
+    "Consider overwriting the old ticket prices for the listed POIs (or a one-time migration) instead of filling only empty fields",
+    "Fix the broken Selinunte image; shorten the popup button label"
+  ],
+  "critical_code_review_comments": [
+    "In the guest index.tsx the festival popup closes when the backdrop is pressed; that works. Festival days that are blocked (booked) cannot be tapped, so their popup never opens. This is acceptable but worth knowing."
+  ],
+  "updated_files": ["/app/backend/tests/test_poi_tickets.py"],
+  "success_rate": {"backend": "100%", "frontend": "95%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Calendar day testIDs: availability-calendar.day_YYYY-MM-DD; arrows: availability-calendar.header.rightArrow. The browser date is 2026-11-05. POI ids: Teatro Massimo 30ade5bf..., Segesta b43b6a9d..., Selinunte 453309d8...."
+}
