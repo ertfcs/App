@@ -248,6 +248,10 @@
     "subtitle": "Entdecke, was den Gästen im Appartamento Matteo gefallen hat",
     "count": "{{count}} Bewertungen auf Booking.com",
     "cta": "Alle Bewertungen auf Booking.com ansehen",
-    "published": "Bewertung veröffentlicht auf Booking.com"
+    "published": "Bewertung veröffentlicht auf Booking.com",
+    "translate": "Übersetzen",
+    "original": "Original anzeigen",
+    "translating": "Wird übersetzt...",
+    "translate_error": "Übersetzung nicht verfügbar"
   }
 }

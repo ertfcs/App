@@ -14,6 +14,7 @@ import { ItineraryProvider } from "@/src/lib/itinerary";
 import { ToastProvider } from "@/src/components/ui";
 import { useTrackVisit } from "@/src/lib/visits";
 import "@/src/i18n";
+import "@/src/lib/iconFont";
 
 LogBox.ignoreAllLogs(true);
 

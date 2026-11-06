@@ -248,6 +248,10 @@
     "subtitle": "Scopri cosa hanno apprezzato gli ospiti dell'Appartamento Matteo",
     "count": "{{count}} recensioni su Booking.com",
     "cta": "Vedi tutte le recensioni su Booking.com",
-    "published": "Recensione pubblicata su Booking.com"
+    "published": "Recensione pubblicata su Booking.com",
+    "translate": "Traduci",
+    "original": "Mostra originale",
+    "translating": "Traduzione in corso...",
+    "translate_error": "Traduzione non disponibile"
   }
 }

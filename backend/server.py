@@ -3747,6 +3747,42 @@ async def admin_put_booking_reviews(body: BookingReviewsIn, _: str = Depends(get
     return await _get_booking_reviews()
 
 
+class ReviewTranslateIn(BaseModel):
+    lang: str
+
+
+@api.post("/booking-reviews/{review_id}/translate")
+async def translate_booking_review(review_id: str, body: ReviewTranslateIn):
+    if body.lang not in SUPPORTED_LANGS:
+        raise HTTPException(400, "Lingua non supportata")
+    d = await _get_booking_reviews()
+    review = next((r for r in d.get("reviews", []) if r.get("id") == review_id and r.get("visible", True)), None)
+    if not review:
+        raise HTTPException(404, "Recensione non trovata")
+    cached = (review.get("translations") or {}).get(body.lang)
+    if cached and cached.get("src") == review["text"]:
+        return {"text": cached["text"]}
+    lang_name = {"it": "Italian", "en": "English", "es": "Spanish", "fr": "French", "de": "German"}[body.lang]
+    chat = LlmChat(
+        api_key=EMERGENT_LLM_KEY,
+        session_id=f"review-tr-{review_id}-{body.lang}",
+        system_message=(
+            f"Translate the guest review into {lang_name}. Keep tone and meaning, do not translate proper nouns. "
+            "If it is already in that language, return it unchanged. Reply ONLY with the translation, no quotes."
+        ),
+    ).with_model("anthropic", "claude-sonnet-4-5-20250929")
+    try:
+        text = (await chat.send_message(UserMessage(text=review["text"])) or "").strip().strip('"“”')
+    except Exception as e:
+        logger.exception("Review translate error: %s", e)
+        raise HTTPException(502, "Traduzione non disponibile, riprova più tardi")
+    await db.settings.update_one(
+        {"_id": "booking_reviews", "reviews.id": review_id},
+        {"$set": {f"reviews.$.translations.{body.lang}": {"text": text, "src": review["text"]}}},
+    )
+    return {"text": text}
+
+
 # ============================================================
 # WhatsApp notifications settings (admin)
 # ============================================================

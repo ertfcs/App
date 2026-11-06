@@ -125,7 +125,7 @@ export default function AdminBookingReviews() {
                     ))}
                   </View>
                 </View>
-                <Field value={r.text} onChangeText={(v) => upd(i, { text: v })} placeholder="Testo della recensione (copiato da Booking)" multiline testID={`br-text-${i}`} />
+                <Field value={r.text} onChangeText={(v) => upd(i, { text: v })} placeholder="Testo originale, nella lingua dell'ospite (gli ospiti potranno tradurlo)" multiline testID={`br-text-${i}`} />
                 <View style={s.rowBetween}>
                   <Text style={s.label}>Mostra in vetrina</Text>
                   <Switch value={r.visible} onValueChange={(v) => upd(i, { visible: v })} trackColor={{ true: colors.brandPrimary }} testID={`br-visible-${i}`} />

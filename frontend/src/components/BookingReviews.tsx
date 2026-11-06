@@ -23,7 +23,9 @@ const Stars = ({ n, size = 16 }: { n: number; size?: number }) => (
 );
 
 export function BookingReviews() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.language || "it").slice(0, 2);
+  const [tr, setTr] = useState<Record<string, { text?: string; loading?: boolean; show?: boolean; error?: boolean }>>({});
   const s = useStyles();
   const { width } = useWindowDimensions();
   const ref = useRef<ScrollView>(null);
@@ -42,6 +44,19 @@ export function BookingReviews() {
     setIdx(n);
   };
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => setIdx(Math.round(e.nativeEvent.contentOffset.x / step));
+  const toggleTr = async (id: string) => {
+    const key = `${id}:${lang}`;
+    const cur = tr[key];
+    if (cur?.text) return setTr((m) => ({ ...m, [key]: { ...cur, show: !cur.show } }));
+    if (cur?.loading) return;
+    setTr((m) => ({ ...m, [key]: { loading: true } }));
+    try {
+      const { data: res } = await api.post(`/booking-reviews/${id}/translate`, { lang });
+      setTr((m) => ({ ...m, [key]: { text: res.text, show: true } }));
+    } catch {
+      setTr((m) => ({ ...m, [key]: { error: true } }));
+    }
+  };
   const open = () => d.booking_url && Linking.openURL(d.booking_url).catch(() => {});
 
   return (
@@ -80,7 +95,20 @@ export function BookingReviews() {
                   </View>
                   <Stars n={r.rating} size={14} />
                 </View>
-                <Text style={s.text}>“{r.text}”</Text>
+                {(() => {
+                  const st = tr[`${r.id}:${lang}`];
+                  return (
+                    <>
+                      <Text style={s.text} testID={`booking-review-text-${r.id}`}>“{st?.show && st.text ? st.text : r.text}”</Text>
+                      <Pressable testID={`booking-review-translate-${r.id}`} onPress={() => toggleTr(r.id)} style={s.trBtn} hitSlop={6}>
+                        <Icon name="translate" size={15} color={BOOKING_BLUE} />
+                        <Text style={s.trTxt}>
+                          {st?.loading ? t("reviews.translating") : st?.error ? t("reviews.translate_error") : st?.show ? t("reviews.original") : t("reviews.translate")}
+                        </Text>
+                      </Pressable>
+                    </>
+                  );
+                })()}
                 <View style={s.divider} />
                 <Text style={s.source}>{t("reviews.published")}</Text>
               </View>
@@ -128,6 +156,8 @@ const useStyles = makeStyles((c) => ({
   name: { color: c.onSurface, fontSize: 16, fontFamily: fonts.heading },
   country: { color: c.muted, fontSize: 13, fontFamily: fonts.body },
   text: { color: c.onSurface, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, textAlign: "center" },
+  trBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, alignSelf: "center", paddingVertical: 4 },
+  trTxt: { color: BOOKING_BLUE, fontSize: 13, fontWeight: "600", fontFamily: fonts.body },
   divider: { height: 1, backgroundColor: c.border, marginTop: "auto" },
   source: { color: c.muted, fontSize: 12, fontFamily: fonts.body, textAlign: "center" },
   arrow: { position: "absolute", top: "40%", width: 36, height: 36, borderRadius: 18, backgroundColor: BOOKING_BLUE, alignItems: "center", justifyContent: "center", opacity: 0.92 },
