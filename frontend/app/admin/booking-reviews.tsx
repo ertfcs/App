@@ -7,10 +7,12 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Header } from "@/src/components/Header";
 import { Card, Field, Button, SectionTitle, Loading, useToast } from "@/src/components/ui";
 import { Icon } from "@/src/components/Icon";
+import { CountryPicker } from "@/src/components/CountryPicker";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, spacing } from "@/src/lib/typography";
 import { useAuth } from "@/src/lib/auth";
 import { api } from "@/src/lib/api";
+import { countryByName } from "@/src/lib/countries";
 
 type Review = { id?: string; name: string; country: string; flag: string; rating: number; text: string; visible: boolean };
 const EMPTY: Review = { name: "", country: "", flag: "", rating: 5, text: "", visible: true };
@@ -44,7 +46,7 @@ export default function AdminBookingReviews() {
     setUrl(d.booking_url || "");
     setScore(d.score != null ? String(d.score).replace(".", ",") : "");
     setCount(d.review_count != null ? String(d.review_count) : "");
-    setReviews((d.reviews || []).map((r: any) => ({ ...EMPTY, ...r })));
+    setReviews((d.reviews || []).map((r: any) => ({ ...EMPTY, ...r, flag: countryByName(r.country || "")?.flag ?? r.flag ?? "" })));
   }, [cfg.data]);
 
   const upd = (i: number, patch: Partial<Review>) => setReviews((rs) => rs.map((r, j) => (j === i ? { ...r, ...patch } : r)));
@@ -112,10 +114,7 @@ export default function AdminBookingReviews() {
                   </View>
                 </View>
                 <Field value={r.name} onChangeText={(v) => upd(i, { name: v })} placeholder="Nome ospite" icon="account-outline" testID={`br-name-${i}`} />
-                <View style={{ flexDirection: "row", gap: spacing.sm }}>
-                  <View style={{ width: 90 }}><Field value={r.flag} onChangeText={(v) => upd(i, { flag: v })} placeholder="🇮🇹" testID={`br-flag-${i}`} /></View>
-                  <View style={{ flex: 1 }}><Field value={r.country} onChangeText={(v) => upd(i, { country: v })} placeholder="Paese" icon="earth" testID={`br-country-${i}`} /></View>
-                </View>
+                <CountryPicker value={r.country} flag={r.flag} onSelect={(c) => upd(i, { country: c.name, flag: c.flag })} testID={`br-country-${i}`} />
                 <View style={s.rowBetween}>
                   <Text style={s.label}>Stelle</Text>
                   <View style={{ flexDirection: "row", gap: 4 }}>
