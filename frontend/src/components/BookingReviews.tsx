@@ -121,7 +121,7 @@ const useStyles = makeStyles((c) => ({
   scorePill: { alignSelf: "center", flexDirection: "row", alignItems: "center", flexWrap: "wrap", justifyContent: "center", gap: 10, paddingVertical: 10, paddingHorizontal: 18, borderRadius: radius.pill, backgroundColor: c.surfaceSecondary, borderWidth: 1, borderColor: c.border },
   score: { color: BOOKING_BLUE, fontSize: 24, fontWeight: "700", fontFamily: fonts.heading },
   scoreTxt: { color: c.muted, fontSize: 13, fontFamily: fonts.body },
-  card: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md, gap: spacing.sm },
+  card: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md, paddingHorizontal: 30, gap: spacing.sm },
   cardHead: { flexDirection: "row", alignItems: "center", gap: 10 },
   avatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: BOOKING_BLUE, alignItems: "center", justifyContent: "center" },
   avatarTxt: { color: "#fff", fontSize: 18, fontWeight: "700" },
