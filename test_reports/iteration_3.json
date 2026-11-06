@@ -1,0 +1,32 @@
+{
+  "summary": "Tested icon-font bug fix, admin CountryPicker, review original-language + Translate toggle, and translate API (mobile 390x844). BUG FIX: Home and admin load with no red error banner/overlay, no 'Failed to load font' console messages, document.fonts shows MaterialDesignIcons:loaded, icons render. BACKEND: 7/7 pytest pass for POST /api/booking-reviews/{id}/translate (EN from Polish, IT from Portuguese, cached second call returns the same text fast, invalid lang 400, unknown id 404, missing body 422). FRONTEND: Home cards show the original text. Translate shows 'Translating...' then the English text and 'Show original'. Toggling back works. Switching to IT via header-lang -> lang-it resets the button to 'Traduci', gives Italian, and 'Mostra originale' toggles back. Long Polish review (Lucyna) translated fine. Admin: br-add adds a card. br-country-<i> opens the modal; the search field is autofocused. 'germ' -> only 'Germania'. opt-DE sets 🇩🇪 Germania; changing to opt-FR sets 🇫🇷 Francia. The 'Nessun Paese trovato' empty state and the close button work. Save shows a toast and the Home card shows 🇫🇷 Francia. All passed.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "PUT /api/admin/booking-reviews", "issue": "BookingReview model has no 'translations' field, so every admin save removes all cached translations (each review is re-translated by the LLM after any save). Seen live: the Dinis IT cache disappeared after a user save."},
+    {"endpoint": "GET /api/booking-reviews", "issue": "Public response includes the internal translations map (text+src), which grows the payload. Consider leaving it out."}
+  ]},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home reviews carousel", "issues": ["All cards stretch to the height of the longest review (Lucyna's long Polish text), so short reviews such as Dinis have a big empty gap. Arrows at top:40% float in this gap. Consider alignItems:'flex-start' or a max text height with 'read more'."]},
+      {"screen": "Home review card", "issues": ["Country name is always Italian ('Polonia', 'Portogallo') even when the app is in EN/ES/FR/DE. Could be localised from the ISO code."]},
+      {"screen": "Admin CountryPicker", "issues": ["The web search TextInput shows the browser's default focus outline (dark rectangle) - set outlineStyle:'none'."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_review_translate.py", "/app/test_reports/pytest/pytest_review_translate.xml"],
+  "action_items": [
+    "Optional: keep review translations on admin PUT (add translations to BookingReview or merge the existing cache by id when src text is unchanged)",
+    "Optional: localise country names on Home by ISO code; fix uneven card heights in the carousel"
+  ],
+  "critical_code_review_comments": [
+    "iconFont.ts: the web @font-face plus setDynamicLoadingEnabled(false) fixed the timeout error. Verified the font loads.",
+    "The translate endpoint validates lang, returns 404 for unknown or hidden reviews, returns 502 on LLM error, and caches by source text. Good.",
+    "The admin PUT replaces the whole reviews document (last write wins). With concurrent editors (seen during this test) this can overwrite edits."
+  ],
+  "updated_files": ["/app/backend/tests/test_review_translate.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "Temporary review TEST_Hans (Francia) added through the admin UI, then removed by name via the API. NOTE: when testing started, the DB did NOT match the brief (score 9.4, count 12, Ania+Dinis). While testing, someone (likely the real user) edited live: Ania was removed and Lucyna (Polonia, long Polish text) added. I did NOT restore 8.8/49/Ania, to avoid overwriting the user's own edits. Final state = the user's state: Dinis + Lucyna, score 9.4, count 12, url https://www.booking.com/Share-OlPuJb.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Review ids change because the admin edits live, so read them from the DOM (booking-review-text-<id>). Language switch: header-lang then lang-it/lang-en. Admin login testIDs: admin-username/admin-password/admin-login-submit. Run pytest with -n 0 to avoid xdist conflicts with test_booking_reviews.py, whose state restore could overwrite live user edits - be careful."
+}

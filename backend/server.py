@@ -3729,7 +3729,7 @@ async def _get_booking_reviews() -> dict:
 @api.get("/booking-reviews")
 async def public_booking_reviews():
     d = await _get_booking_reviews()
-    d["reviews"] = [r for r in d.get("reviews", []) if r.get("visible", True)]
+    d["reviews"] = [{k: v for k, v in r.items() if k != "translations"} for r in d.get("reviews", []) if r.get("visible", True)]
     return d
 
 
@@ -3741,8 +3741,11 @@ async def admin_get_booking_reviews(_: str = Depends(get_current_admin)):
 @api.put("/admin/booking-reviews")
 async def admin_put_booking_reviews(body: BookingReviewsIn, _: str = Depends(get_current_admin)):
     data = body.model_dump()
+    old = {r.get("id"): r for r in (await _get_booking_reviews()).get("reviews", [])}
     for r in data["reviews"]:
         r["id"] = r.get("id") or str(uuid.uuid4())
+        if old.get(r["id"], {}).get("translations"):
+            r["translations"] = old[r["id"]]["translations"]
     await db.settings.update_one({"_id": "booking_reviews"}, {"$set": data}, upsert=True)
     return await _get_booking_reviews()
 

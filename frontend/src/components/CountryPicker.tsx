@@ -72,7 +72,7 @@ const useStyles = makeStyles((c) => ({
   backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.45)", justifyContent: "center", padding: spacing.md },
   sheet: { maxHeight: "80%", backgroundColor: c.surface, borderRadius: radius.lg, overflow: "hidden" },
   searchRow: { flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 14, borderBottomWidth: 1, borderColor: c.border },
-  search: { flex: 1, height: 52, color: c.onSurface, fontSize: 16, fontFamily: fonts.body },
+  search: { flex: 1, height: 52, color: c.onSurface, fontSize: 16, fontFamily: fonts.body, outlineStyle: "none" } as any,
   opt: { flexDirection: "row", alignItems: "center", gap: 12, paddingVertical: 12, paddingHorizontal: 16, borderBottomWidth: 1, borderColor: c.border },
   empty: { padding: spacing.lg, textAlign: "center", color: c.muted, fontFamily: fonts.body },
 }));

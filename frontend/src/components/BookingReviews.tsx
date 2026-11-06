@@ -8,6 +8,19 @@ import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { api } from "@/src/lib/api";
 
+// Nome del Paese nella lingua dell'app (dal codice ISO della bandiera), con fallback al nome salvato.
+function countryLabel(name: string, flag: string | undefined, lang: string) {
+  try {
+    const cps = [...(flag || "")].map((ch) => (ch.codePointAt(0) ?? 0) - 127397);
+    if (lang === "it" || cps.length !== 2 || cps.some((n) => n < 65 || n > 90)) return name;
+    const code = String.fromCharCode(...cps);
+    const DN = (Intl as any).DisplayNames;
+    return DN ? new DN([lang], { type: "region" }).of(code) || name : name;
+  } catch {
+    return name;
+  }
+}
+
 const BOOKING_BLUE = "#003580";
 const STAR = "#FEBB02";
 
@@ -83,7 +96,7 @@ export function BookingReviews() {
             onMomentumScrollEnd={onScroll}
             onScrollEndDrag={onScroll}
             scrollEventThrottle={16}
-            contentContainerStyle={{ gap: spacing.sm, paddingHorizontal: 8 }}
+            contentContainerStyle={{ gap: spacing.sm, paddingHorizontal: 8, alignItems: "flex-start" }}
           >
             {reviews.map((r) => (
               <View key={r.id} style={[s.card, { width: cardW }]} testID={`booking-review-${r.id}`}>
@@ -91,7 +104,7 @@ export function BookingReviews() {
                   <View style={s.avatar}><Text style={s.avatarTxt}>{r.name.trim().charAt(0).toUpperCase()}</Text></View>
                   <View style={{ flex: 1 }}>
                     <Text style={s.name} numberOfLines={1}>{r.name}</Text>
-                    {r.country ? <Text style={s.country}>{r.flag ? `${r.flag} ` : ""}{r.country}</Text> : null}
+                    {r.country ? <Text style={s.country}>{r.flag ? `${r.flag} ` : ""}{countryLabel(r.country, r.flag, lang)}</Text> : null}
                   </View>
                   <Stars n={r.rating} size={14} />
                 </View>
@@ -158,9 +171,9 @@ const useStyles = makeStyles((c) => ({
   text: { color: c.onSurface, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, textAlign: "center" },
   trBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, alignSelf: "center", paddingVertical: 4 },
   trTxt: { color: BOOKING_BLUE, fontSize: 13, fontWeight: "600", fontFamily: fonts.body },
-  divider: { height: 1, backgroundColor: c.border, marginTop: "auto" },
+  divider: { height: 1, backgroundColor: c.border },
   source: { color: c.muted, fontSize: 12, fontFamily: fonts.body, textAlign: "center" },
-  arrow: { position: "absolute", top: "40%", width: 36, height: 36, borderRadius: 18, backgroundColor: BOOKING_BLUE, alignItems: "center", justifyContent: "center", opacity: 0.92 },
+  arrow: { position: "absolute", top: 90, width: 36, height: 36, borderRadius: 18, backgroundColor: BOOKING_BLUE, alignItems: "center", justifyContent: "center", opacity: 0.92 },
   dots: { flexDirection: "row", justifyContent: "center", gap: 6, marginTop: spacing.md },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: c.border },
   dotOn: { width: 24, backgroundColor: BOOKING_BLUE },
