@@ -73,6 +73,7 @@ export default function AdminDashboard() {
       tiles: [
         { icon: "bullhorn-outline", label: "Marketing AI", desc: "Genera post e contenuti", route: "/admin/marketing" },
         { icon: "google", label: "Google Business", desc: "Recensioni e post GBP", route: "/admin/google-business" },
+        { icon: "star-circle-outline", label: "Recensioni Booking", desc: "Vetrina recensioni in Home", route: "/admin/booking-reviews" },
         { icon: "whatsapp", label: "WhatsApp", desc: "Notifiche prenotazioni", route: "/admin/whatsapp" },
       ],
     },

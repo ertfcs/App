@@ -3694,6 +3694,60 @@ async def update_commission_rates(body: CommissionRatesIn, _: str = Depends(get_
 
 
 # ============================================================
+# Booking.com reviews showcase
+# ============================================================
+class BookingReview(BaseModel):
+    id: Optional[str] = None
+    name: str
+    country: Optional[str] = ""
+    flag: Optional[str] = ""
+    rating: int = Field(5, ge=1, le=5)
+    text: str
+    visible: bool = True
+
+
+class BookingReviewsIn(BaseModel):
+    booking_url: Optional[str] = ""
+    score: Optional[float] = Field(None, ge=0, le=10)
+    review_count: Optional[int] = Field(None, ge=0)
+    reviews: List[BookingReview] = []
+
+
+BOOKING_REVIEWS_DEFAULT = {
+    "booking_url": "https://www.booking.com/Share-OlPuJb",
+    "score": None,
+    "review_count": None,
+    "reviews": [],
+}
+
+
+async def _get_booking_reviews() -> dict:
+    doc = await db.settings.find_one({"_id": "booking_reviews"}, {"_id": 0})
+    return {**BOOKING_REVIEWS_DEFAULT, **(doc or {})}
+
+
+@api.get("/booking-reviews")
+async def public_booking_reviews():
+    d = await _get_booking_reviews()
+    d["reviews"] = [r for r in d.get("reviews", []) if r.get("visible", True)]
+    return d
+
+
+@api.get("/admin/booking-reviews")
+async def admin_get_booking_reviews(_: str = Depends(get_current_admin)):
+    return await _get_booking_reviews()
+
+
+@api.put("/admin/booking-reviews")
+async def admin_put_booking_reviews(body: BookingReviewsIn, _: str = Depends(get_current_admin)):
+    data = body.model_dump()
+    for r in data["reviews"]:
+        r["id"] = r.get("id") or str(uuid.uuid4())
+    await db.settings.update_one({"_id": "booking_reviews"}, {"$set": data}, upsert=True)
+    return await _get_booking_reviews()
+
+
+# ============================================================
 # WhatsApp notifications settings (admin)
 # ============================================================
 @api.get("/admin/whatsapp")

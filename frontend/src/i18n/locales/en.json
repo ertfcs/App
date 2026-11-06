@@ -242,5 +242,12 @@
     "no_faq": "No FAQ available",
     "info_title": "Info & FAQ",
     "codes_title": "Property codes"
+  },
+  "reviews": {
+    "title": "In our guests' words",
+    "subtitle": "See what guests loved about Appartamento Matteo",
+    "count": "{{count}} reviews on Booking.com",
+    "cta": "See all reviews on Booking.com",
+    "published": "Review published on Booking.com"
   }
 }

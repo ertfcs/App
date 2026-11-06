@@ -11,6 +11,7 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { Header } from "@/src/components/Header";
 import { Button, Card, SectionTitle, Loading } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
+import { BookingReviews } from "@/src/components/BookingReviews";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
@@ -314,6 +315,8 @@ export default function HomeScreen() {
               </View>
             </View>
           </Pressable>
+
+          <BookingReviews />
         </View>
       </ScrollView>
 
