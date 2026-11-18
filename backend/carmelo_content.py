@@ -12,7 +12,7 @@ from __future__ import annotations
 import logging
 import re
 from typing import Optional, List, Dict, Any
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+from llm_client import LlmChat, UserMessage
 
 logger = logging.getLogger("carmelo.content")
 

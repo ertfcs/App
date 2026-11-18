@@ -18,8 +18,7 @@ import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
 import { festivalDateSet, upcomingFestivals, Festival } from "@/src/lib/festivals";
 import { euro, toISODate, nightsBetween } from "@/src/lib/format";
 
-const HERO_IMG =
-  "https://customer-assets.emergentagent.com/job_appart-app/artifacts/o3l6t9b1_Trappeto_borgo_marinaro_sicilia_occidentale_italy.jpg";
+const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -134,7 +133,7 @@ export default function HomeScreen() {
       >
         {/* Hero */}
         <View style={s.hero}>
-          <Image source={{ uri: HERO_IMG }} style={s.heroImg} contentFit="cover" transition={300} />
+          <Image source={HERO_IMG} style={s.heroImg} contentFit="cover" transition={300} />
           <LinearGradient colors={["rgba(44,42,40,0.1)", "rgba(44,42,40,0.75)"]} style={s.heroOverlay} />
           <View style={s.heroContent}>
             <Text style={s.heroTitle}>

@@ -28,7 +28,7 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone, ImageContent
+from llm_client import LlmChat, UserMessage, TextDelta, StreamDone, ImageContent
 
 # Carmelo IA helpers
 from poi_tickets import apply_poi_tickets
@@ -85,7 +85,7 @@ JWT_SECRET = os.environ['JWT_SECRET']
 JWT_ALGORITHM = "HS256"
 ADMIN_USERNAME = os.environ['ADMIN_USERNAME']
 ADMIN_PASSWORD = os.environ['ADMIN_PASSWORD']
-EMERGENT_LLM_KEY = os.environ['EMERGENT_LLM_KEY']
+LLM_API_KEY = ""  # non usata: la chiave è ANTHROPIC_API_KEY (vedi llm_client.py)
 
 app = FastAPI(title="Appartamento Matteo API")
 api = APIRouter(prefix="/api")
@@ -470,6 +470,16 @@ class WhatsAppTestIn(BaseModel):
     text: Optional[str] = None
 
 
+SEED_DIR_BASE = Path(__file__).parent
+
+
+def _read_seed_image(rel_path: str):
+    """Foto di partenza salvate nel progetto (backend/assets/seed/)."""
+    p = SEED_DIR_BASE / rel_path
+    mime = "image/png" if p.suffix.lower() == ".png" else "image/jpeg"
+    return p.read_bytes(), mime
+
+
 # ============================================================
 # Startup
 # ============================================================
@@ -549,26 +559,26 @@ async def startup_event():
     GALLERY_SEED = [
         # Batch fornito dall'host (luglio 2026) — Galleria privata Dashboard
         ("galleria_grotta_madonna_lourdes_belvedere.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/4d2sa8vk_IMG-20260713-WA0009.jpg"),
+         "assets/seed/galleria_grotta_madonna_lourdes_belvedere.jpg"),
         ("galleria_vista_porto_palme_cactus_alba.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/d0456eqq_IMG-20260713-WA0014.jpg"),
+         "assets/seed/galleria_vista_porto_palme_cactus_alba.jpg"),
         ("galleria_balcone_fiorito_petunie_porto.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/dtp3ftb7_IMG-20260713-WA0024.jpg"),
+         "assets/seed/galleria_balcone_fiorito_petunie_porto.jpg"),
         ("galleria_palma_porticciolo_mare_montagne.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/gxwdwjyx_IMG-20260713-WA0016.jpg"),
+         "assets/seed/galleria_palma_porticciolo_mare_montagne.jpg"),
         ("galleria_cartello_kiss_me_please_porto.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/f7shyoc9_IMG-20260713-WA0011.jpg"),
+         "assets/seed/galleria_cartello_kiss_me_please_porto.jpg"),
         # Batch 2 (luglio 2026) — altre foto iconiche di Trappeto
         ("galleria_belvedere_kiss_me_panchina_rossa.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/9ic3lg9d_IMG-20260713-WA0017.jpg"),
+         "assets/seed/galleria_belvedere_kiss_me_panchina_rossa.jpg"),
         ("galleria_trappeto_porto_vista_monte_cofano.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/hdq1s83m_IMG-20260713-WA0018.jpg"),
+         "assets/seed/galleria_trappeto_porto_vista_monte_cofano.jpg"),
         ("galleria_parco_giochi_bambini_trappeto.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/itw13hbp_Gemini_Generated_Image_mshlchmshlchmshl~2.jpg"),
+         "assets/seed/galleria_parco_giochi_bambini_trappeto.jpg"),
         ("galleria_murales_madonna_pescatori_trappeto.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/pnc3f12w_IMG-20260713-WA0015.jpg"),
+         "assets/seed/galleria_murales_madonna_pescatori_trappeto.jpg"),
         ("galleria_porticciolo_pescatori_barche_trappeto.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/lycey2sj_IMG-20260713-WA0012.jpg"),
+         "assets/seed/galleria_porticciolo_pescatori_barche_trappeto.jpg"),
     ]
     # Seed_key "legacy" del repo originale che NON devono più essere seedate né
     # ripristinate (l'host non le ha fornite e non le vuole più).
@@ -617,10 +627,8 @@ async def startup_event():
             async with httpx.AsyncClient(timeout=20.0) as http_seed:
                 for i, (filename, url) in enumerate(missing):
                     try:
-                        r = await http_seed.get(url)
-                        r.raise_for_status()
-                        mime = r.headers.get("content-type", "image/jpeg").split(";")[0]
-                        b64 = base64.b64encode(r.content).decode("ascii")
+                        raw_bytes, mime = _read_seed_image(url)
+                        b64 = base64.b64encode(raw_bytes).decode("ascii")
                         data_url = f"data:{mime};base64,{b64}"
                         await db.private_photos.insert_one({
                             "id": str(uuid.uuid4()),
@@ -653,15 +661,15 @@ async def startup_event():
     # dall'interfaccia) il seed le salta.
     PUBLIC_PHOTOS_SEED = [
         ("appartamento_matteo_soggiorno_orologio.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/16u6y9hw_527793756_24321829234079342_3082813497404339534_n.jpg"),
+         "assets/seed/appartamento_matteo_soggiorno_orologio.jpg"),
         ("appartamento_matteo_salotto_relax.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/mil2osc9_528044386_24321829434079322_9099943916039380541_n.jpg"),
+         "assets/seed/appartamento_matteo_salotto_relax.jpg"),
         ("appartamento_matteo_camera_matrimoniale.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/ls66idr3_527404663_24321829620745970_6468062849176385990_n.jpg"),
+         "assets/seed/appartamento_matteo_camera_matrimoniale.jpg"),
         ("appartamento_matteo_cucina_soggiorno.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/hiw1h756_527190010_24321829830745949_8790051268822359350_n.jpg"),
+         "assets/seed/appartamento_matteo_cucina_soggiorno.jpg"),
         ("appartamento_matteo_camera_singola.jpg",
-         "https://customer-assets.emergentagent.com/job_aer-preview/artifacts/kqj364rr_527651528_24321830177412581_5290042434970837103_n.jpg"),
+         "assets/seed/appartamento_matteo_camera_singola.jpg"),
     ]
     # Log persistente delle seed_key già utilizzate (una tantum, per sempre).
     seed_log_doc = await db.settings.find_one({"_id": "public_photos_seed_log"}, {"_id": 0}) or {}
@@ -692,10 +700,8 @@ async def startup_event():
             async with httpx.AsyncClient(timeout=20.0) as http_seed_pub:
                 for i, (filename, url) in enumerate(missing_public):
                     try:
-                        r = await http_seed_pub.get(url)
-                        r.raise_for_status()
-                        mime = r.headers.get("content-type", "image/jpeg").split(";")[0]
-                        b64 = base64.b64encode(r.content).decode("ascii")
+                        raw_bytes, mime = _read_seed_image(url)
+                        b64 = base64.b64encode(raw_bytes).decode("ascii")
                         data_url = f"data:{mime};base64,{b64}"
                         await db.photos.insert_one({
                             "id": str(uuid.uuid4()),
@@ -1364,7 +1370,7 @@ async def ai_itinerary(body: ItineraryIn):
     )
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"itinerary-{code_clean}",
         system_message=system_message,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929")
@@ -1466,7 +1472,7 @@ async def carmelo_chat(body: CarmeloChatIn):
         raise HTTPException(status_code=400, detail="Messaggio vuoto")
 
     system_prompt = carmelo_build_system_prompt(mode="chat")
-    chat = carmelo_get_chat(body.session_id, model_key, EMERGENT_LLM_KEY, system_prompt)
+    chat = carmelo_get_chat(body.session_id, model_key, LLM_API_KEY, system_prompt)
     user_text = body.message.strip()
 
     # Save user message immediately
@@ -1523,7 +1529,7 @@ async def carmelo_itinerary(body: CarmeloItineraryIn):
     )
     # Per gli itinerari usa una sessione "itin-<session>-<model>" così non interferisce con la chat
     itin_session = f"itin-{body.session_id}"
-    chat = carmelo_get_chat(itin_session, model_key, EMERGENT_LLM_KEY, system_prompt)
+    chat = carmelo_get_chat(itin_session, model_key, LLM_API_KEY, system_prompt)
 
     # Limite token più generoso per evitare troncamenti a metà frase
     try:
@@ -1816,7 +1822,7 @@ async def _enrich_structured(data: dict, days: int) -> dict:
 
 def _fresh_chat(session_id: str, model_key: str, system_prompt: str, max_tokens: int = 3000):
     provider, model_name = CARMELO_MODELS[model_key]
-    chat = LlmChat(api_key=EMERGENT_LLM_KEY, session_id=session_id,
+    chat = LlmChat(api_key=LLM_API_KEY, session_id=session_id,
                    system_message=system_prompt).with_model(provider, model_name)
     try:
         chat.with_params(max_tokens=max_tokens)
@@ -2200,7 +2206,7 @@ async def carmelo_adapt_itinerary(body: CarmeloAdaptIn):
     model_key = carmelo_resolve_models(body.model)[0]
     system_prompt = carmelo_build_system_prompt(mode="adapt", extra=body.notes)
     adapt_session = f"adapt-{body.session_id}"
-    chat = carmelo_get_chat(adapt_session, model_key, EMERGENT_LLM_KEY, system_prompt)
+    chat = carmelo_get_chat(adapt_session, model_key, LLM_API_KEY, system_prompt)
 
     user_prompt = (
         "Ecco l'itinerario originale dell'ospite. Adattalo arricchendolo con prezzi indicativi, "
@@ -2655,7 +2661,7 @@ async def admin_translate_faq(faq_id: str, body: FaqTranslateIn,
         raise HTTPException(400, "Rispondi alla FAQ in italiano prima di tradurla")
     try:
         result = await content_translate_faq(
-            EMERGENT_LLM_KEY,
+            LLM_API_KEY,
             doc["question_it"],
             doc["answer_it"],
             body.target_lang,
@@ -3767,7 +3773,7 @@ async def translate_booking_review(review_id: str, body: ReviewTranslateIn):
         return {"text": cached["text"]}
     lang_name = {"it": "Italian", "en": "English", "es": "Spanish", "fr": "French", "de": "German"}[body.lang]
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"review-tr-{review_id}-{body.lang}",
         system_message=(
             f"Translate the guest review into {lang_name}. Keep tone and meaning, do not translate proper nouns. "
@@ -4164,7 +4170,7 @@ async def marketing_generate(body: MarketingGenerateIn, _: str = Depends(get_cur
         raise HTTPException(status_code=400, detail="Indica un argomento / tema (almeno 3 caratteri)")
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"marketing-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929")
@@ -4223,7 +4229,7 @@ async def marketing_generate_stream(body: MarketingGenerateIn, _: str = Depends(
         raise HTTPException(status_code=400, detail="Indica un argomento / tema (almeno 3 caratteri)")
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"marketing-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929")
@@ -4295,7 +4301,7 @@ async def marketing_image(body: MarketingImageIn, _: str = Depends(get_current_a
         ref_data_url = photo.get("data_url")
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"mkt-img-{uuid.uuid4().hex[:8]}",
         system_message="You are a professional travel & hospitality photographer.",
     ).with_model("gemini", "gemini-3.1-flash-image-preview").with_params(modalities=["image", "text"])
@@ -4437,7 +4443,7 @@ async def marketing_video_script(body: VideoScriptIn, _: str = Depends(get_curre
     )
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"vscript-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929").with_params(max_tokens=4000)
@@ -4564,7 +4570,7 @@ async def marketing_strategy(body: MarketingStrategyIn, _: str = Depends(get_cur
     )
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"strategy-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929")
@@ -4632,7 +4638,7 @@ async def marketing_strategy_stream(body: MarketingStrategyIn, _: str = Depends(
     )
 
     chat = LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"strategy-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929").with_params(max_tokens=8000)
@@ -4719,7 +4725,7 @@ async def _run_strategy_job(job_id: str, goal: Optional[str]):
         ctx = _build_property_context(avail)
         prompt = _build_strategy_prompt(goal, ctx)
         chat = LlmChat(
-            api_key=EMERGENT_LLM_KEY,
+            api_key=LLM_API_KEY,
             session_id=f"strategy-{uuid.uuid4().hex[:8]}",
             system_message=CARMELO_SYSTEM_MESSAGE,
         ).with_model("gemini", "gemini-2.5-flash").with_params(max_tokens=8000)
@@ -4803,7 +4809,7 @@ async def _get_gb_settings() -> dict:
 
 def _carmelo_chat(tag: str) -> LlmChat:
     return LlmChat(
-        api_key=EMERGENT_LLM_KEY,
+        api_key=LLM_API_KEY,
         session_id=f"{tag}-{uuid.uuid4().hex[:8]}",
         system_message=CARMELO_SYSTEM_MESSAGE,
     ).with_model("anthropic", "claude-sonnet-4-5-20250929")
@@ -5262,7 +5268,7 @@ async def mkt_chat(body: MktChatIn, _: str = Depends(get_current_admin)):
 
     async def _call_one(mk: str):
         try:
-            chat = mkt_get_chat(session_id, mk, EMERGENT_LLM_KEY, system_prompt, mode="chat")
+            chat = mkt_get_chat(session_id, mk, LLM_API_KEY, system_prompt, mode="chat")
             answer = await mkt_send_message(chat, body.message, images=body.images)
             return {"model": mk, "label": MKT_MODEL_LABELS[mk], "answer": answer, "error": None}
         except Exception as e:
@@ -5318,7 +5324,7 @@ async def mkt_generate_post(body: MktGeneratePostIn, _: str = Depends(get_curren
     async def _call_one(mk: str):
         try:
             session_id = f"post-{uuid.uuid4().hex[:8]}"
-            chat = mkt_get_chat(session_id, mk, EMERGENT_LLM_KEY, system_prompt, mode="post")
+            chat = mkt_get_chat(session_id, mk, LLM_API_KEY, system_prompt, mode="post")
             raw = await mkt_send_message(chat, user_msg)
             parsed = mkt_extract_json(raw)
             return {
@@ -5362,7 +5368,7 @@ async def mkt_audit(body: MktAuditIn, _: str = Depends(get_current_admin)):
     async def _call_one(mk: str):
         try:
             session_id = f"audit-{uuid.uuid4().hex[:8]}"
-            chat = mkt_get_chat(session_id, mk, EMERGENT_LLM_KEY, system_prompt, mode="audit")
+            chat = mkt_get_chat(session_id, mk, LLM_API_KEY, system_prompt, mode="audit")
             raw = await mkt_send_message(chat, user_msg)
             parsed = mkt_extract_json(raw)
             return {
@@ -5393,7 +5399,7 @@ async def mkt_calendar(body: MktCalendarIn, _: str = Depends(get_current_admin))
     async def _call_one(mk: str):
         try:
             session_id = f"cal-{uuid.uuid4().hex[:8]}"
-            chat = mkt_get_chat(session_id, mk, EMERGENT_LLM_KEY, system_prompt, mode="calendar")
+            chat = mkt_get_chat(session_id, mk, LLM_API_KEY, system_prompt, mode="calendar")
             raw = await mkt_send_message(chat, user_msg)
             parsed = mkt_extract_json(raw)
             return {

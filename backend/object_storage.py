@@ -1,37 +1,44 @@
+"""File storage on the server's own disk (replaces Emergent Object Storage).
+
+Files live under STORAGE_DIR (default: backend/storage). Same interface as before:
+put_object(path, data, content_type) / get_object(path) -> (bytes, content_type).
+"""
+import json
+import mimetypes
 import os
-import requests
 
-STORAGE_BASE = (os.environ.get("INTEGRATION_PROXY_URL") or "").strip() or "https://integrations.emergentagent.com"
-STORAGE_URL = STORAGE_BASE.rstrip("/") + "/objstore/api/v1/storage"
 APP_NAME = "appartamento-matteo"
-_storage_key = None
+STORAGE_DIR = os.path.abspath(
+    os.environ.get("STORAGE_DIR") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "storage")
+)
 
 
-def init_storage(force: bool = False) -> str:
-    global _storage_key
-    if _storage_key and not force:
-        return _storage_key
-    resp = requests.post(f"{STORAGE_URL}/init", json={"emergent_key": os.environ["EMERGENT_LLM_KEY"]}, timeout=30)
-    resp.raise_for_status()
-    _storage_key = resp.json()["storage_key"]
-    return _storage_key
-
-
-def _request(method: str, path: str, **kw) -> requests.Response:
-    for attempt in range(2):
-        key = init_storage(force=attempt > 0)
-        headers = {"X-Storage-Key": key, **kw.pop("headers", {})}
-        resp = requests.request(method, f"{STORAGE_URL}/objects/{path}", headers=headers, **kw)
-        if resp.status_code != 404 or attempt > 0:
-            break
-    resp.raise_for_status()
-    return resp
+def _full(path: str) -> str:
+    full = os.path.abspath(os.path.join(STORAGE_DIR, path.lstrip("/")))
+    if not full.startswith(STORAGE_DIR + os.sep):
+        raise ValueError("percorso non valido")
+    return full
 
 
 def put_object(path: str, data: bytes, content_type: str) -> dict:
-    return _request("PUT", path, headers={"Content-Type": content_type}, data=data, timeout=120).json()
+    full = _full(path)
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    with open(full, "wb") as f:
+        f.write(data)
+    with open(full + ".meta", "w") as f:
+        json.dump({"content_type": content_type}, f)
+    return {"path": path, "size": len(data), "content_type": content_type}
 
 
 def get_object(path: str) -> tuple:
-    resp = _request("GET", path, timeout=60)
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+    full = _full(path)
+    if not os.path.isfile(full):
+        raise FileNotFoundError(path)
+    ct = None
+    try:
+        with open(full + ".meta") as f:
+            ct = json.load(f).get("content_type")
+    except (OSError, ValueError):
+        pass
+    with open(full, "rb") as f:
+        return f.read(), ct or mimetypes.guess_type(full)[0] or "application/octet-stream"
