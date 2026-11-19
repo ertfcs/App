@@ -1,4 +1,5 @@
-# Render Blueprint: crea il servizio web privato dell'app.
+# Render Blueprint: crea il servizio web dell'app (pubblico).
+# Per renderlo privato aggiungi la variabile SITE_PASSWORD nelle impostazioni del servizio.
 # Su Render: New + > Blueprint > scegli questo repository.
 services:
   - type: web
@@ -18,8 +19,6 @@ services:
       - key: ADMIN_USERNAME
         value: Matteo
       - key: ADMIN_PASSWORD     # password dell'area admin
-        sync: false
-      - key: SITE_PASSWORD      # password per entrare nel sito (versione privata)
         sync: false
       - key: ANTHROPIC_API_KEY  # facoltativa: attiva Carmelo e il marketing
         sync: false
