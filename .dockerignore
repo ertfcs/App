@@ -1,0 +1,14 @@
+.git
+**/node_modules
+frontend/.metro-cache
+frontend/dist
+dev_preview
+test_reports
+tests
+memory
+plan
+.emergent
+backend/storage
+backend/uploads
+backend/.env
+**/__pycache__

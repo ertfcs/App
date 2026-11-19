@@ -1,0 +1,31 @@
+# Render Blueprint: crea il servizio web privato dell'app.
+# Su Render: New + > Blueprint > scegli questo repository.
+services:
+  - type: web
+    name: appartamento-matteo
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: ccr-25394ded-3qps6v
+    healthCheckPath: /healthz
+    envVars:
+      - key: MONGO_URL          # stringa di connessione di MongoDB Atlas
+        sync: false
+      - key: DB_NAME
+        value: appartamento_matteo
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: Matteo
+      - key: ADMIN_PASSWORD     # password dell'area admin
+        sync: false
+      - key: SITE_PASSWORD      # password per entrare nel sito (versione privata)
+        sync: false
+      - key: ANTHROPIC_API_KEY  # facoltativa: attiva Carmelo e il marketing
+        sync: false
+      - key: CLAUDE_MODEL
+        value: claude-opus-5-5
+      - key: STORAGE_BACKEND
+        value: mongo
+      - key: CORS_ORIGINS
+        value: "*"

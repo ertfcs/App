@@ -5593,3 +5593,9 @@ app.add_middleware(
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+
+# Password gate + exported web app on the same origin (used when hosting on Render).
+import site_hosting  # noqa: E402
+
+site_hosting.setup(app)
