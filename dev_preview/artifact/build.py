@@ -34,7 +34,7 @@ INDEX = """<title>Appartamento Matteo</title>
 <style id="leaflet-css">__LEAFLET_CSS__</style>
 <script>window.__PREVIEW_MAP__ = __MAP__;</script>
 <div id="root"></div>
-<button id="pv-pill" type="button" title="Tocca per nascondere">ANTEPRIMA · dati di esempio</button>
+<button id="pv-pill" type="button" title="Tocca per nascondere">PROVA PRIVATA · nulla viene inviato</button>
 <script>
   (function () {
     var pill = document.getElementById("pv-pill");
@@ -44,6 +44,7 @@ INDEX = """<title>Appartamento Matteo</title>
   (function () {
     var base = location.href.replace(/[#?].*$/, "").replace(/[^/]*$/, "");
     window.__PREVIEW_BASE__ = base;
+    window.__PREVIEW_HREF__ = location.href;
     function load(src, done) {
       var s = document.createElement("script");
       s.src = base + src;
