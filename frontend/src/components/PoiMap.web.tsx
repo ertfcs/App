@@ -36,11 +36,43 @@ export function PoiMap({
     ensureCss();
     if (!el.current || map.current) return;
     const m = L.map(el.current, { zoomControl: true, attributionControl: true, maxBounds: [[35.5, 11.0], [39.5, 16.5]] });
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 18,
-      minZoom: 6,
-      attribution: "&copy; OpenStreetMap",
-    }).addTo(m);
+    const offline = (window as any).__PREVIEW_MAP__;
+    if (offline) {
+      // Preview link (claude.ai) cannot load map tiles: draw Sicily from bundled GeoJSON.
+      el.current.style.background = "#BFDCEB";
+      m.setMaxZoom(13);
+      m.setMinZoom(6);
+      L.geoJSON(offline.land, {
+        style: { color: "#8FA88A", weight: 1, fillColor: "#F3EEDF", fillOpacity: 1 },
+        interactive: false,
+      }).addTo(m);
+      const labels = L.layerGroup().addTo(m);
+      const drawLabels = () => {
+        labels.clearLayers();
+        const z = m.getZoom();
+        (offline.towns || []).forEach((t: { name: string; lat: number; lng: number; z?: number }) => {
+          if ((t.z ?? 9) > z) return;
+          L.marker([t.lat, t.lng], {
+            interactive: false,
+            icon: L.divIcon({
+              className: "",
+              html: `<span style="font:600 11px system-ui,sans-serif;color:#5B5348;white-space:nowrap;text-shadow:0 0 3px #F3EEDF">${t.name}</span>`,
+              iconSize: [0, 0],
+              iconAnchor: [-6, 6],
+            }),
+          }).addTo(labels);
+        });
+      };
+      m.on("zoomend", drawLabels);
+      m.whenReady(drawLabels);
+      m.attributionControl.addAttribution("Natural Earth");
+    } else {
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        minZoom: 6,
+        attribution: "&copy; OpenStreetMap",
+      }).addTo(m);
+    }
     m.fitBounds(SICILY);
     layer.current = L.layerGroup().addTo(m);
     map.current = m;

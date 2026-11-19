@@ -90,7 +90,18 @@
       return [401, { detail: "Credenziali non valide" }];
     }
     if (path === "/api/track/visit") return [200, { ok: true }];
-    if (/^\/api\/(bookings|guest-questions|quote|verify-code)\b/.test(path) && method === "POST" && path.split("/").length <= 3) {
+    if (path === "/api/verify-code") {
+      var code = String((body && body.code) || "").trim().toUpperCase();
+      var today = new Date().toISOString().slice(0, 10);
+      var bk = (listOf(DB["/api/bookings"]) || []).filter(function (b) { return b.confirmation_code === code && b.status === "approved"; })[0];
+      if (bk) return [200, { valid: true, kind: "booking", guest_name: bk.guest_name, check_in: bk.check_in, check_out: bk.check_out }];
+      var ai = (listOf(DB["/api/discount-codes"]) || []).filter(function (c) {
+        return c.code === code && c.active && c.type === "ai_access" && c.valid_from <= today && today <= c.valid_to;
+      })[0];
+      if (ai) return [200, { valid: true, kind: "ai_access" }];
+      return [403, { detail: "Codice non valido o scaduto." }];
+    }
+    if (/^\/api\/(bookings|guest-questions|quote)\b/.test(path) && method === "POST" && path.split("/").length <= 3) {
       return [503, { detail: "Versione anteprima: richieste e prenotazioni non vengono inviate." }];
     }
     var id2 = uid();
@@ -107,6 +118,7 @@
   var realFetch = window.fetch.bind(window);
   window.fetch = function (input, init) {
     var url = typeof input === "string" ? input : (input && input.url) || String(input);
+    if (url.indexOf("api.open-meteo.com/") !== -1) return realFetch(BASE + "weather.json");
     if (!isApi(url)) return realFetch(input, init);
     var method = (init && init.method) || (input && input.method) || "GET";
     var bodyText = init && typeof init.body === "string" ? init.body : null;
