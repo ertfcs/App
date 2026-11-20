@@ -268,5 +268,38 @@
   "home_festivals": {
     "kicker": "Il territorio",
     "title": "Prossime feste"
+  },
+  "home_new": {
+    "no_fees_badge": "Senza commissioni",
+    "gallery_title": "Dai un'occhiata",
+    "services_kicker": "Prenotando qui",
+    "services_title": "Cosa ricevi da Matteo",
+    "svc_no_fees_title": "Nessuna commissione",
+    "svc_no_fees_sub": "Prenoti direttamente con me: paghi meno che sui portali.",
+    "svc_keyring_title": "Portachiavi souvenir in omaggio",
+    "svc_keyring_sub": "Un ricordo di Trappeto con il QR per ritrovare la tua guida.",
+    "svc_itinerary_title": "Il tuo itinerario personale",
+    "svc_itinerary_sub": "Scegli i luoghi che ti piacciono e scarica il PDF da portare con te.",
+    "svc_whatsapp_title": "Matteo sempre raggiungibile",
+    "svc_whatsapp_sub": "Rispondo io su WhatsApp, prima e durante il soggiorno.",
+    "svc_guide_title": "La guida del territorio",
+    "svc_guide_sub": "Spiagge con il vento in tempo reale, feste di paese e cucina tipica.",
+    "apartment_kicker": "L'appartamento",
+    "all_amenities": "Vedi tutti i servizi ({{count}})",
+    "less": "Mostra meno",
+    "territory_kicker": "Dintorni",
+    "territory_title": "Scopri il territorio",
+    "tile_places_title": "Da visitare",
+    "tile_places_sub": "114 luoghi fra Palermo e Trapani",
+    "tile_beaches_title": "Spiagge",
+    "tile_beaches_sub": "Vento in tempo reale: scegli la spiaggia giusta",
+    "tile_festivals_title": "Feste e sagre",
+    "tile_festivals_sub": "Eventi del territorio",
+    "tile_festivals_next": "Prossima: {{name}}, {{date}}",
+    "tile_food_title": "Cucina",
+    "tile_food_sub": "Le specialità di Palermo e Trapani",
+    "end_title": "Ti aspetto a Trappeto",
+    "end_sub": "Controlla le date libere o scrivimi per qualsiasi domanda.",
+    "whatsapp": "Scrivimi su WhatsApp"
   }
 }

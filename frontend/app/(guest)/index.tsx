@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
-import { ScrollView, View, Text, Pressable, RefreshControl } from "react-native";
+import { ScrollView, View, Text, Pressable, RefreshControl, Linking } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
-import { router } from "expo-router";
+import { router, type Href } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
@@ -19,6 +19,16 @@ import { upcomingFestivals } from "@/src/lib/festivals";
 import { euro } from "@/src/lib/format";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
+const AMENITIES_PREVIEW = 6;
+
+// Services Matteo offers to guests who book directly (texts in i18n "home_new.svc_<key>_*").
+const SERVICES: { key: string; icon: IconName }[] = [
+  { key: "no_fees", icon: "cash-check" },
+  { key: "keyring", icon: "key-variant" },
+  { key: "itinerary", icon: "map-marker-path" },
+  { key: "whatsapp", icon: "whatsapp" },
+  { key: "guide", icon: "compass-outline" },
+];
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -31,9 +41,27 @@ export default function HomeScreen() {
   const availability = useAvailability();
 
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const [showAllAmenities, setShowAllAmenities] = useState(false);
 
   const av = availability.data;
-  const nextFestivals = useMemo(() => upcomingFestivals().slice(0, 3), []);
+  const nextFestival = useMemo(() => upcomingFestivals()[0], []);
+  const services = SERVICES;
+  const amenities = showAllAmenities
+    ? property.data?.amenities ?? []
+    : (property.data?.amenities ?? []).slice(0, AMENITIES_PREVIEW);
+  const tiles: { key: string; glyph: string; href: Href; sub: string }[] = [
+    { key: "places", glyph: "🏛️", href: "/(guest)/places", sub: t("home_new.tile_places_sub") },
+    { key: "beaches", glyph: "🏖️", href: "/beaches", sub: t("home_new.tile_beaches_sub") },
+    {
+      key: "festivals",
+      glyph: "🎉",
+      href: "/festivals",
+      sub: nextFestival
+        ? t("home_new.tile_festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
+        : t("home_new.tile_festivals_sub"),
+    },
+    { key: "food", glyph: "🍝", href: "/food", sub: t("home_new.tile_food_sub") },
+  ];
 
 
   const onRefresh = () => {
@@ -74,7 +102,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={s.body}>
-          {/* Booking CTA card */}
+          {/* 1. Prezzo + prenota */}
           <Animated.View entering={FadeInDown.delay(80)}>
             <Card style={{ marginTop: -spacing.xl }}>
               <View style={s.priceRow}>
@@ -86,8 +114,8 @@ export default function HomeScreen() {
                   </Text>
                 </View>
                 <View style={s.badge}>
-                  <Icon name="star" size={14} color={colors.onOlive} />
-                  <Text style={s.badgeTxt}>Trappeto</Text>
+                  <Icon name="tag-outline" size={14} color={colors.onOlive} />
+                  <Text style={s.badgeTxt}>{t("home_new.no_fees_badge")}</Text>
                 </View>
               </View>
               <Button
@@ -99,37 +127,10 @@ export default function HomeScreen() {
             </Card>
           </Animated.View>
 
-          {/* Property */}
-          {property.isLoading ? (
-            <Loading />
-          ) : (
-            <View style={s.section}>
-              <SectionTitle kicker={t("property.kicker")} title={property.data?.name ?? ""} />
-              <Text style={s.desc}>{property.data?.description}</Text>
-              <View style={s.features}>
-                {features.map((f) => (
-                  <View key={f.label} style={s.feature}>
-                    <Icon name={f.icon} size={22} color={colors.olive} />
-                    <Text style={s.featureVal}>{f.value}</Text>
-                    <Text style={s.featureLabel}>{f.label}</Text>
-                  </View>
-                ))}
-              </View>
-              <View style={s.amenities}>
-                {property.data?.amenities.map((a) => (
-                  <View key={a} style={s.amenityChip}>
-                    <Icon name="check-circle-outline" size={14} color={colors.olive} />
-                    <Text style={s.amenityTxt}>{a}</Text>
-                  </View>
-                ))}
-              </View>
-            </View>
-          )}
-
-          {/* Gallery */}
+          {/* 2. Galleria */}
           {photos.data && photos.data.length > 0 ? (
             <View style={s.section}>
-              <SectionTitle title="Galleria" />
+              <SectionTitle kicker={t("property.kicker")} title={t("home_new.gallery_title")} />
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
                 {photos.data.map((p, i) => (
                   <Pressable key={p.id} onPress={() => setViewerIndex(i)} testID={`gallery-photo-${i}`} accessibilityRole="imagebutton">
@@ -140,76 +141,88 @@ export default function HomeScreen() {
             </View>
           ) : null}
 
-          {/* Prossime feste */}
-          <View style={s.section}>
-            <SectionTitle kicker={t("home_festivals.kicker")} title={t("home_festivals.title")} />
-            <View style={{ gap: spacing.sm }}>
-              {nextFestivals.map((f) => (
-                <Pressable key={f.id} testID={`home-fest-${f.id}`} onPress={() => router.push("/festivals")}>
-                  <View style={s.festRow}>
-                    <Text style={s.festGlyph}>{f.icon}</Text>
-                    <View style={{ flex: 1 }}>
-                      <Text style={s.festName} numberOfLines={1}>{f.name}</Text>
-                      <Text style={s.festMeta} numberOfLines={1}>{f.dateLabel} · {f.place}</Text>
-                    </View>
-                    <Icon name="chevron-right" size={20} color={colors.muted} />
+          {/* 3. I servizi di Matteo */}
+          <View style={s.section} testID="home-services">
+            <SectionTitle kicker={t("home_new.services_kicker")} title={t("home_new.services_title")} />
+            <View style={s.services}>
+              {services.map((sv) => (
+                <View key={sv.key} style={s.service}>
+                  <View style={s.serviceIcon}>
+                    <Icon name={sv.icon} size={22} color={colors.brandPrimary} />
                   </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={s.serviceTitle}>{t(`home_new.svc_${sv.key}_title`)}</Text>
+                    <Text style={s.serviceSub}>{t(`home_new.svc_${sv.key}_sub`)}</Text>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/* 4. L'appartamento */}
+          {property.isLoading ? (
+            <Loading />
+          ) : (
+            <View style={s.section}>
+              <SectionTitle kicker={t("home_new.apartment_kicker")} title={property.data?.name ?? ""} />
+              <Text style={s.desc} numberOfLines={showAllAmenities ? undefined : 4}>{property.data?.description}</Text>
+              <View style={s.features}>
+                {features.map((f) => (
+                  <View key={f.label} style={s.feature}>
+                    <Icon name={f.icon} size={22} color={colors.olive} />
+                    <Text style={s.featureVal}>{f.value}</Text>
+                    <Text style={s.featureLabel}>{f.label}</Text>
+                  </View>
+                ))}
+              </View>
+              <View style={s.amenities}>
+                {amenities.map((a) => (
+                  <View key={a} style={s.amenityChip}>
+                    <Icon name="check-circle-outline" size={14} color={colors.olive} />
+                    <Text style={s.amenityTxt}>{a}</Text>
+                  </View>
+                ))}
+              </View>
+              {(property.data?.amenities.length ?? 0) > AMENITIES_PREVIEW ? (
+                <Pressable testID="home-amenities-toggle" onPress={() => setShowAllAmenities((v) => !v)} style={s.linkBtn}>
+                  <Text style={s.linkTxt}>
+                    {showAllAmenities
+                      ? t("home_new.less")
+                      : t("home_new.all_amenities", { count: property.data?.amenities.length ?? 0 })}
+                  </Text>
+                  <Icon name={showAllAmenities ? "chevron-up" : "chevron-down"} size={18} color={colors.brandPrimary} />
+                </Pressable>
+              ) : null}
+            </View>
+          )}
+
+          {/* 5. Recensioni */}
+          <BookingReviews />
+
+          {/* 6. Scopri il territorio */}
+          <View style={s.section} testID="home-territory">
+            <SectionTitle kicker={t("home_new.territory_kicker")} title={t("home_new.territory_title")} />
+            <View style={s.tiles}>
+              {tiles.map((tl) => (
+                <Pressable key={tl.key} testID={`home-${tl.key}-cta`} style={s.tile} onPress={() => router.push(tl.href)}>
+                  <Text style={s.tileGlyph}>{tl.glyph}</Text>
+                  <Text style={s.tileTitle}>{t(`home_new.tile_${tl.key}_title`)}</Text>
+                  <Text style={s.tileSub} numberOfLines={2}>{tl.sub}</Text>
                 </Pressable>
               ))}
             </View>
           </View>
 
-          {/* Spiagge + Feste CTAs */}
-          <View style={[s.section, { flexDirection: "row", gap: spacing.sm }]}>
-            <Pressable testID="home-beaches-cta" style={s.miniCta} onPress={() => router.push("/beaches")}>
-              <Icon name="beach" size={26} color={colors.info} />
-              <Text style={s.miniCtaTitle}>Spiagge</Text>
-              <Text style={s.miniCtaSub}>Bussola dei venti live</Text>
-            </Pressable>
-            <Pressable testID="home-festivals-cta" style={s.miniCta} onPress={() => router.push("/festivals")}>
-              <Icon name="calendar-star" size={26} color={colors.brand} />
-              <Text style={s.miniCtaTitle}>Feste & Sagre</Text>
-              <Text style={s.miniCtaSub}>Eventi del territorio</Text>
+          {/* Chiusura: prenota o scrivi a Matteo */}
+          <View style={[s.section, s.endCard]}>
+            <Text style={s.endTitle}>{t("home_new.end_title")}</Text>
+            <Text style={s.endSub}>{t("home_new.end_sub")}</Text>
+            <Button testID="home-book-cta-bottom" label={t("booking.title")} icon="calendar-check" onPress={() => router.push("/booking")} />
+            <Pressable testID="home-whatsapp" style={s.waBtn} onPress={() => Linking.openURL("https://wa.me/393881611514")}>
+              <Icon name="whatsapp" size={20} color="#1E8E4E" />
+              <Text style={s.waTxt}>{t("home_new.whatsapp")}</Text>
             </Pressable>
           </View>
-
-          {/* Food CTA */}
-          <Pressable testID="home-food-cta" style={s.section} onPress={() => router.push("/food")}>
-            <View style={s.foodCta}>
-              <View style={s.foodGlyphs}>
-                <Text style={s.foodGlyph}>🍝</Text>
-                <Text style={s.foodGlyph}>🥠</Text>
-                <Text style={s.foodGlyph}>🍕</Text>
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={s.foodKicker}>CUCINA SICILIANA</Text>
-                <Text style={s.foodTitle}>Sapori di Palermo & Trapani</Text>
-                <Text style={s.foodSub}>Scopri le specialità del territorio</Text>
-              </View>
-              <Icon name="chevron-right" size={26} color={colors.onBrandPrimary} />
-            </View>
-          </Pressable>
-
-          {/* Map CTA */}
-          <Pressable testID="home-map-cta" style={s.section} onPress={() => router.push("/(guest)/places")}>
-            <View style={s.mapCta}>
-              <Image
-                source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Trappeto-spiaggia.jpg" }}
-                style={s.mapCtaImg}
-                contentFit="cover"
-              />
-              <LinearGradient colors={["rgba(44,42,40,0.85)", "rgba(44,42,40,0.35)"]} style={s.mapCtaOverlay} />
-              <View style={s.mapCtaContent}>
-                <Text style={s.mapCtaKicker}>{t("map_cta.kicker").toUpperCase()}</Text>
-                <Text style={s.mapCtaTitle}>{t("map_cta.title")}</Text>
-                <View style={s.mapCtaBtn}>
-                  <Text style={s.mapCtaBtnTxt}>{t("map_cta.open")}</Text>
-                </View>
-              </View>
-            </View>
-          </Pressable>
-
-          <BookingReviews />
         </View>
       </ScrollView>
 
@@ -298,4 +311,21 @@ const useStyles = makeStyles((c) => ({
   mapCtaTitle: { color: "#FFFFFF", fontSize: 24, fontFamily: fonts.heading, lineHeight: 27 },
   mapCtaBtn: { alignSelf: "flex-start", backgroundColor: "#FFFFFF", paddingHorizontal: spacing.md, paddingVertical: 10, borderRadius: radius.pill },
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
+  services: { gap: spacing.sm },
+  service: { flexDirection: "row", alignItems: "center", gap: spacing.md, backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md },
+  serviceIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
+  serviceTitle: { color: c.onSurface, fontSize: 16, fontFamily: fonts.heading },
+  serviceSub: { color: c.onSurfaceSecondary, fontSize: 13, lineHeight: 18, fontFamily: fonts.body, marginTop: 2 },
+  linkBtn: { flexDirection: "row", alignItems: "center", gap: 4, alignSelf: "flex-start", marginTop: spacing.sm, paddingVertical: 6 },
+  linkTxt: { color: c.brandPrimary, fontSize: 14, fontWeight: "600", fontFamily: fonts.body },
+  tiles: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
+  tile: { flexBasis: "47%", flexGrow: 1, backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md, gap: 4, minHeight: 120 },
+  tileGlyph: { fontSize: 28 },
+  tileTitle: { color: c.onSurface, fontSize: 17, fontFamily: fonts.heading, marginTop: 2 },
+  tileSub: { color: c.muted, fontSize: 12, lineHeight: 16, fontFamily: fonts.body },
+  endCard: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.lg, gap: spacing.sm },
+  endTitle: { color: c.onSurface, fontSize: 22, fontFamily: fonts.heading, textAlign: "center" },
+  endSub: { color: c.onSurfaceSecondary, fontSize: 14, lineHeight: 20, fontFamily: fonts.body, textAlign: "center", marginBottom: spacing.sm },
+  waBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingVertical: 12, borderRadius: radius.pill, borderWidth: 1, borderColor: c.border },
+  waTxt: { color: c.onSurface, fontSize: 15, fontWeight: "600", fontFamily: fonts.body },
 }));
