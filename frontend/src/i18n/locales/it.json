@@ -57,12 +57,15 @@
     "toast_checkout_after": "La partenza deve essere dopo l'arrivo",
     "toast_range_blocked": "Nelle date scelte ci sono giorni non disponibili",
     "confirm_send": "Conferma e invia richiesta",
-    "back": "Indietro"
+    "back": "Indietro",
+    "total": "Totale",
+    "dates_title": "Scegli le date",
+    "submit_short": "Invia richiesta"
   },
   "calendar": {
     "kicker": "Calendario",
     "title": "Disponibilità",
-    "help": "Clicca su due date per selezionare un periodo. Le tariffe giornaliere sono mostrate sotto al giorno.",
+    "help": "Tocca il giorno di arrivo e poi quello di partenza: il prezzo compare subito.",
     "available": "Disponibile",
     "booked": "Occupato",
     "selected": "Selezionato",
@@ -75,7 +78,15 @@
       "V",
       "S",
       "D"
-    ]
+    ],
+    "pick_checkin": "Tocca la data di arrivo",
+    "pick_checkout": "ora tocca la partenza",
+    "book_these": "Prenota queste date",
+    "festivals": "Feste & Sagre",
+    "festivals_that_day": "Feste in questo giorno",
+    "clear": "Cancella",
+    "night_one": "{{n}} notte",
+    "night_other": "{{n}} notti"
   },
   "property": {
     "kicker": "L'appartamento",

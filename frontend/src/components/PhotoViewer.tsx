@@ -8,23 +8,15 @@ import { fonts, spacing } from "@/src/lib/typography";
 type Photo = { id: string; uri: string };
 
 // Full-screen photo viewer: swipe or use the arrows to move, tap X / press Esc to close.
-export function PhotoViewer({
-  photos,
-  index,
-  onClose,
-}: {
-  photos: Photo[];
-  index: number | null;
-  onClose: () => void;
-}) {
+export function PhotoViewer({ photos, index, onClose }: { photos: Photo[]; index: number | null; onClose: () => void }) {
+  if (index === null || photos.length === 0) return null;
+  return <ViewerBody key={index} photos={photos} index={index} onClose={onClose} />;
+}
+
+function ViewerBody({ photos, index, onClose }: { photos: Photo[]; index: number; onClose: () => void }) {
   const { width, height } = useWindowDimensions();
   const list = useRef<FlatList<Photo>>(null);
-  const [current, setCurrent] = useState(index ?? 0);
-  const visible = index !== null && photos.length > 0;
-
-  useEffect(() => {
-    if (index !== null) setCurrent(index);
-  }, [index]);
+  const [current, setCurrent] = useState(index);
 
   const go = (i: number) => {
     const next = Math.max(0, Math.min(photos.length - 1, i));
@@ -33,7 +25,7 @@ export function PhotoViewer({
   };
 
   useEffect(() => {
-    if (!visible || Platform.OS !== "web") return;
+    if (Platform.OS !== "web") return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       else if (e.key === "ArrowRight") go(current + 1);
@@ -42,8 +34,6 @@ export function PhotoViewer({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   });
-
-  if (!visible) return null;
 
   return (
     <Modal visible transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
@@ -55,7 +45,7 @@ export function PhotoViewer({
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          initialScrollIndex={index ?? 0}
+          initialScrollIndex={index}
           getItemLayout={(_, i) => ({ length: width, offset: width * i, index: i })}
           onMomentumScrollEnd={(e) => setCurrent(Math.round(e.nativeEvent.contentOffset.x / width))}
           onScroll={

@@ -57,12 +57,15 @@
     "toast_checkout_after": "La salida debe ser posterior a la llegada",
     "toast_range_blocked": "Algunos días del rango seleccionado no están disponibles",
     "confirm_send": "Confirmar y enviar solicitud",
-    "back": "Atrás"
+    "back": "Atrás",
+    "total": "Total",
+    "dates_title": "Elige las fechas",
+    "submit_short": "Enviar solicitud"
   },
   "calendar": {
     "kicker": "Calendario",
     "title": "Disponibilidad",
-    "help": "Haz clic en dos fechas para seleccionar un período. Las tarifas diarias aparecen bajo cada día.",
+    "help": "Toca el día de llegada y luego el de salida: el precio aparece al instante.",
     "available": "Disponible",
     "booked": "Ocupado",
     "selected": "Seleccionado",
@@ -75,7 +78,15 @@
       "V",
       "S",
       "D"
-    ]
+    ],
+    "pick_checkin": "Toca la fecha de llegada",
+    "pick_checkout": "ahora toca la salida",
+    "book_these": "Reservar estas fechas",
+    "festivals": "Fiestas",
+    "festivals_that_day": "Fiestas este día",
+    "clear": "Borrar",
+    "night_one": "{{n}} noche",
+    "night_other": "{{n}} noches"
   },
   "property": {
     "kicker": "El apartamento",

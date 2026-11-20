@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from "react";
-import { ScrollView, View, Text, Pressable, RefreshControl, Modal } from "react-native";
+import { ScrollView, View, Text, Pressable, RefreshControl } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { Calendar } from "react-native-calendars";
 import { useTranslation } from "react-i18next";
 import { router } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,11 +12,12 @@ import { Button, Card, SectionTitle, Loading } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
 import { BookingReviews } from "@/src/components/BookingReviews";
 import { PhotoViewer } from "@/src/components/PhotoViewer";
+import { DateRangeCalendar, DateRange, RangeHint } from "@/src/components/DateRangeCalendar";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
-import { festivalDateSet, upcomingFestivals, Festival } from "@/src/lib/festivals";
-import { euro, toISODate, nightsBetween } from "@/src/lib/format";
+import { upcomingFestivals } from "@/src/lib/festivals";
+import { euro, nightsBetween } from "@/src/lib/format";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 
@@ -31,80 +31,15 @@ export default function HomeScreen() {
   const photos = usePhotos();
   const availability = useAvailability();
 
-  const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });
-  const [festPopup, setFestPopup] = useState<Festival[] | null>(null);
+  const [range, setRange] = useState<DateRange>({ start: null, end: null });
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
-  const [festDay, setFestDay] = useState<string | null>(null);
 
   const av = availability.data;
   const blocked = useMemo(() => new Set(av?.blocked_dates ?? []), [av]);
-
-  const markedDates = useMemo(() => {
-    const marks: Record<string, any> = {};
-    for (const d of blocked) {
-      marks[d] = { disabled: true, disableTouchEvent: true, marked: true, dotColor: colors.error };
-    }
-    if (range.start) {
-      marks[range.start] = {
-        ...(marks[range.start] || {}),
-        startingDay: true,
-        color: colors.brandPrimary,
-        textColor: colors.onBrandPrimary,
-      };
-    }
-    if (range.start && range.end) {
-      let cur = new Date(range.start);
-      const end = new Date(range.end);
-      while (cur <= end) {
-        const iso = toISODate(cur);
-        marks[iso] = {
-          ...(marks[iso] || {}),
-          color: colors.brandPrimary,
-          textColor: colors.onBrandPrimary,
-          startingDay: iso === range.start,
-          endingDay: iso === range.end,
-        };
-        cur.setDate(cur.getDate() + 1);
-      }
-    }
-    return marks;
-  }, [blocked, range, colors]);
-
-  const festMap = useMemo(() => festivalDateSet(), []);
-  const markedWithFestivals = useMemo(() => {
-    const marks = { ...markedDates };
-    Object.keys(festMap).forEach((iso) => {
-      const existing = marks[iso];
-      if (!existing || (!existing.color && !existing.disabled)) {
-        marks[iso] = { ...(existing || {}), marked: true, dotColor: colors.olive };
-      }
-    });
-    return marks;
-  }, [markedDates, festMap, colors]);
-
   const nextFestivals = useMemo(() => upcomingFestivals().slice(0, 3), []);
 
-  const selectDay = (d: string) => {
-    if (blocked.has(d)) return;
-    if (!range.start || (range.start && range.end)) {
-      setRange({ start: d, end: null });
-    } else if (d > range.start) {
-      setRange({ start: range.start, end: d });
-    } else {
-      setRange({ start: d, end: null });
-    }
-  };
-
-  const onDayPress = (day: { dateString: string }) => {
-    const d = day.dateString;
-    const fests = festMap[d];
-    if (fests && fests.length > 0) {
-      setFestDay(d);
-      setFestPopup(fests);
-      return;
-    }
-    selectDay(d);
-  };
+  const goBook = () =>
+    router.push({ pathname: "/booking", params: { start: range.start ?? "", end: range.end ?? "" } });
 
   const nights = nightsBetween(range.start, range.end);
 
@@ -166,16 +101,11 @@ export default function HomeScreen() {
                 testID="home-book-cta"
                 label={
                   nights > 0
-                    ? `${t("booking.submit")} · ${nights} ${nights === 1 ? t("booking.guest_one") : "notti"}`
+                    ? `${t("calendar.book_these")} · ${t(nights === 1 ? "calendar.night_one" : "calendar.night_other", { n: nights })}`
                     : t("booking.title")
                 }
                 icon="calendar-check"
-                onPress={() =>
-                  router.push({
-                    pathname: "/booking",
-                    params: { start: range.start ?? "", end: range.end ?? "" },
-                  })
-                }
+                onPress={goBook}
               />
             </Card>
           </Animated.View>
@@ -226,30 +156,13 @@ export default function HomeScreen() {
             <SectionTitle kicker={t("calendar.kicker")} title={t("calendar.title")} />
             <Text style={s.help}>{t("calendar.help")}</Text>
             <Card style={{ padding: spacing.sm }}>
-              <Calendar
-                testID="availability-calendar"
-                markingType="period"
-                markedDates={markedWithFestivals}
-                onDayPress={onDayPress}
-                minDate={toISODate(new Date())}
-                theme={{
-                  calendarBackground: colors.surfaceSecondary,
-                  monthTextColor: colors.onSurface,
-                  textMonthFontFamily: fonts.heading,
-                  textMonthFontSize: 18,
-                  dayTextColor: colors.onSurface,
-                  textDisabledColor: colors.border,
-                  todayTextColor: colors.brandPrimary,
-                  arrowColor: colors.brandPrimary,
-                  textDayFontFamily: fonts.body,
-                  textDayHeaderFontFamily: fonts.body,
-                }}
-              />
-              <View style={s.legend}>
-                <Legend color={colors.brandPrimary} label={t("calendar.selected")} />
-                <Legend color={colors.error} label={t("calendar.booked")} />
-                <Legend color={colors.olive} label="Feste & Sagre" />
+              <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} />
+              <View style={{ paddingHorizontal: spacing.sm }}>
+                <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
               </View>
+              {nights > 0 ? (
+                <Button testID="calendar-book-cta" label={t("calendar.book_these")} icon="arrow-right" onPress={goBook} />
+              ) : null}
             </Card>
 
             {/* Feste nel periodo */}
@@ -329,68 +242,6 @@ export default function HomeScreen() {
         index={viewerIndex}
         onClose={() => setViewerIndex(null)}
       />
-      <Modal visible={!!festPopup} transparent animationType="fade" onRequestClose={() => setFestPopup(null)}>
-        <Pressable style={s.festBackdrop} onPress={() => setFestPopup(null)}>
-          <Pressable style={s.festSheet} onPress={(e) => e.stopPropagation()}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {(festPopup ?? []).map((f) => (
-                <View key={f.id} style={s.festItem} testID={`fest-popup-${f.id}`}>
-                  <View style={s.festHead}>
-                    <Text style={s.fpGlyph}>{f.icon}</Text>
-                    <View style={{ flex: 1 }}>
-                      <Text style={s.fpName}>{f.name}</Text>
-                      <View style={s.festMetaRow}>
-                        <Icon name="map-marker" size={13} color={colors.olive} />
-                        <Text style={s.festPlace}>{f.province === "IT" || f.province === "SIC" ? f.place : `${f.place} (${f.province})`}</Text>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={s.festDateBox}>
-                    <Icon name="calendar-star" size={15} color={colors.brandPrimary} />
-                    <Text style={s.festDateTxt}>{f.dateLabel}</Text>
-                  </View>
-                  <Text style={s.festDesc}>{f.description}</Text>
-                  {f.curiosity ? (
-                    <View style={s.festCuriosity}>
-                      <Icon name="information-outline" size={15} color={colors.brand} />
-                      <Text style={s.festCuriosityTxt}>{f.curiosity}</Text>
-                    </View>
-                  ) : null}
-                  {f.note ? <Text style={s.festNote}>⚠️ {f.note}</Text> : null}
-                </View>
-              ))}
-              <View style={{ flexDirection: "row", gap: spacing.sm, marginTop: spacing.sm }}>
-                <View style={{ flex: 1 }}>
-                  <Button
-                    testID="fest-popup-select"
-                    label="Usa questa data"
-                    icon="calendar-check"
-                    variant="olive"
-                    onPress={() => {
-                      const d = festDay;
-                      setFestPopup(null);
-                      if (d) selectDay(d);
-                    }}
-                  />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Button testID="fest-popup-all" label="Tutte le feste" icon="calendar-star" onPress={() => { setFestPopup(null); router.push("/festivals"); }} />
-                </View>
-              </View>
-            </ScrollView>
-          </Pressable>
-        </Pressable>
-      </Modal>
-    </View>
-  );
-}
-
-function Legend({ color, label }: { color: string; label: string }) {
-  const s = useStyles();
-  return (
-    <View style={s.legendItem}>
-      <View style={[s.legendDot, { backgroundColor: color }]} />
-      <Text style={s.legendTxt}>{label}</Text>
     </View>
   );
 }

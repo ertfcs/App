@@ -57,12 +57,15 @@
     "toast_checkout_after": "Die Abreise muss nach der Anreise liegen",
     "toast_range_blocked": "Einige Tage im gewählten Zeitraum sind nicht verfügbar",
     "confirm_send": "Bestätigen und Anfrage senden",
-    "back": "Zurück"
+    "back": "Zurück",
+    "total": "Gesamt",
+    "dates_title": "Wähle deine Daten",
+    "submit_short": "Anfrage senden"
   },
   "calendar": {
     "kicker": "Kalender",
     "title": "Verfügbarkeit",
-    "help": "Klicken Sie auf zwei Daten, um einen Zeitraum auszuwählen. Die Tagespreise werden unter jedem Tag angezeigt.",
+    "help": "Tippe auf den Anreisetag und dann auf den Abreisetag: der Preis erscheint sofort.",
     "available": "Verfügbar",
     "booked": "Belegt",
     "selected": "Ausgewählt",
@@ -75,7 +78,15 @@
       "F",
       "S",
       "S"
-    ]
+    ],
+    "pick_checkin": "Tippe auf das Anreisedatum",
+    "pick_checkout": "jetzt die Abreise antippen",
+    "book_these": "Diese Daten buchen",
+    "festivals": "Feste",
+    "festivals_that_day": "Feste an diesem Tag",
+    "clear": "Löschen",
+    "night_one": "{{n}} Nacht",
+    "night_other": "{{n}} Nächte"
   },
   "property": {
     "kicker": "Die Wohnung",

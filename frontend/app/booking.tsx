@@ -12,7 +12,9 @@ import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { api } from "@/src/lib/api";
-import { euro, prettyDate, nightsBetween } from "@/src/lib/format";
+import { euro, nightsBetween } from "@/src/lib/format";
+import { useAvailability } from "@/src/lib/queries";
+import { DateRangeCalendar, DateRange, RangeHint } from "@/src/components/DateRangeCalendar";
 
 export default function BookingScreen() {
   const params = useLocalSearchParams<{ start?: string; end?: string }>();
@@ -31,8 +33,11 @@ export default function BookingScreen() {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const start = params.start || "";
-  const end = params.end || "";
+  const availability = useAvailability();
+  const blocked = useMemo(() => new Set(availability.data?.blocked_dates ?? []), [availability.data]);
+  const [range, setRange] = useState<DateRange>({ start: params.start || null, end: params.end || null });
+  const start = range.start || "";
+  const end = range.end || "";
   const nights = nightsBetween(start, end);
   const canQuote = !!start && !!end && nights > 0;
 
@@ -88,7 +93,8 @@ export default function BookingScreen() {
         message: message || null,
       });
       toast.show(t("booking.toast_sent"), "success");
-      router.back();
+      if (router.canGoBack()) router.back();
+      else router.replace("/");
     } catch (e: any) {
       toast.show(e?.response?.data?.detail || t("booking.toast_error"), "error");
     } finally {
@@ -103,27 +109,19 @@ export default function BookingScreen() {
       <Header title={t("booking.title")} showBack showLang={false} />
       <KeyboardAwareScrollView
         testID="booking-scroll"
-        contentContainerStyle={{ padding: spacing.md, paddingBottom: insets.bottom + spacing.xxl }}
+        contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl }}
         bottomOffset={20}
         showsVerticalScrollIndicator={false}
       >
-        {/* Dates summary */}
-        <Card>
-          <View style={s.datesRow}>
-            <View style={s.dateBox}>
-              <Text style={s.dateLabel}>{t("booking.checkin")}</Text>
-              <Text style={s.dateVal}>{prettyDate(start)}</Text>
-            </View>
-            <Icon name="arrow-right" size={20} color={colors.muted} />
-            <View style={s.dateBox}>
-              <Text style={s.dateLabel}>{t("booking.checkout")}</Text>
-              <Text style={s.dateVal}>{prettyDate(end)}</Text>
-            </View>
+        {/* Dates: pick them right here */}
+        <Card style={{ padding: spacing.sm }}>
+          <View style={{ paddingHorizontal: spacing.sm, paddingTop: spacing.xs }}>
+            <SectionTitle title={t("booking.dates_title")} />
           </View>
-          <Pressable testID="booking-change-dates" onPress={() => router.back()} style={s.changeDates}>
-            <Icon name="calendar-edit" size={16} color={colors.brandPrimary} />
-            <Text style={s.changeDatesTxt}>{nights > 0 ? `${nights} notti` : t("booking.toast_select_dates")}</Text>
-          </Pressable>
+          <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} testID="booking-calendar" />
+          <View style={{ paddingHorizontal: spacing.sm }}>
+            <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
+          </View>
         </Card>
 
         {/* Guests + AC */}
@@ -235,10 +233,26 @@ export default function BookingScreen() {
           <Field value={message} onChangeText={setMessage} placeholder={t("booking.message_placeholder")} icon="message-text-outline" multiline testID="guest-message" />
         </View>
 
-        <View style={{ marginTop: spacing.lg }}>
-          <Button testID="booking-submit" label={t("booking.submit")} icon="send" onPress={submit} loading={submitting} />
-        </View>
       </KeyboardAwareScrollView>
+
+      {/* Always-visible total + send */}
+      <View style={[s.footer, { paddingBottom: insets.bottom + spacing.sm }]}>
+        <View style={{ flex: 1 }}>
+          {canQuote && q ? (
+            <>
+              <Text style={s.footerLabel}>
+                {t("booking.total")} · {t(nights === 1 ? "calendar.night_one" : "calendar.night_other", { n: nights })}
+              </Text>
+              <Text style={s.footerTotal} testID="footer-total">{euro(q.total)}</Text>
+            </>
+          ) : (
+            <Text style={s.footerLabel}>{t("booking.toast_select_dates")}</Text>
+          )}
+        </View>
+        <View style={{ flexShrink: 0, minWidth: 150 }}>
+          <Button testID="booking-submit" label={t("booking.submit_short")} icon="send" onPress={submit} loading={submitting} />
+        </View>
+      </View>
     </View>
   );
 }
@@ -257,6 +271,18 @@ function QuoteRow({ label, value, highlight }: { label: string; value: string; h
 }
 
 const useStyles = makeStyles((c) => ({
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.sm,
+    backgroundColor: c.surfaceSecondary,
+    borderTopWidth: 1,
+    borderTopColor: c.divider,
+  },
+  footerLabel: { color: c.onSurfaceSecondary, fontSize: 13, fontFamily: fonts.body },
+  footerTotal: { color: c.brandPrimary, fontSize: 22, fontFamily: fonts.heading },
   discountStatus: { fontSize: 13, fontFamily: fonts.body, fontWeight: "600", marginTop: 6, marginLeft: 4 },
   screen: { flex: 1, backgroundColor: c.surface },
   datesRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing.sm },

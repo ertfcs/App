@@ -57,12 +57,15 @@
     "toast_checkout_after": "Check-out must be after check-in",
     "toast_range_blocked": "Some days in the selected range are not available",
     "confirm_send": "Confirm and send request",
-    "back": "Back"
+    "back": "Back",
+    "total": "Total",
+    "dates_title": "Choose your dates",
+    "submit_short": "Send request"
   },
   "calendar": {
     "kicker": "Calendar",
     "title": "Availability",
-    "help": "Click on two dates to select a period. Daily rates are shown under each day.",
+    "help": "Tap your arrival day, then your departure day: the price appears right away.",
     "available": "Available",
     "booked": "Booked",
     "selected": "Selected",
@@ -75,7 +78,15 @@
       "F",
       "S",
       "S"
-    ]
+    ],
+    "pick_checkin": "Tap your arrival date",
+    "pick_checkout": "now tap departure",
+    "book_these": "Book these dates",
+    "festivals": "Festivals",
+    "festivals_that_day": "Festivals on this day",
+    "clear": "Clear",
+    "night_one": "{{n}} night",
+    "night_other": "{{n}} nights"
   },
   "property": {
     "kicker": "The apartment",
