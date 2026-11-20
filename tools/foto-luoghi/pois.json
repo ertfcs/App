@@ -1,0 +1,786 @@
+[
+ {
+  "name": "Palazzo dei Normanni e Cappella Palatina",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.111,
+  "lng": 13.352
+ },
+ {
+  "name": "Teatro Massimo",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1206,
+  "lng": 13.3567
+ },
+ {
+  "name": "Teatro Politeama Garibaldi",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1245,
+  "lng": 13.3567
+ },
+ {
+  "name": "Quattro Canti e Piazza Pretoria",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1153,
+  "lng": 13.3617
+ },
+ {
+  "name": "Mercato di Ballarò",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1117,
+  "lng": 13.3589
+ },
+ {
+  "name": "Mercato della Vucciria",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1198,
+  "lng": 13.3653
+ },
+ {
+  "name": "Catacombe dei Cappuccini",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1108,
+  "lng": 13.3406
+ },
+ {
+  "name": "Duomo di Monreale",
+  "category": "art",
+  "town": "Monreale",
+  "lat": 38.082,
+  "lng": 13.2925
+ },
+ {
+  "name": "Duomo di Cefalù",
+  "category": "art",
+  "town": "Cefalù",
+  "lat": 38.0386,
+  "lng": 14.0227
+ },
+ {
+  "name": "Centro storico di Cefalù",
+  "category": "art",
+  "town": "Cefalù",
+  "lat": 38.0365,
+  "lng": 14.024
+ },
+ {
+  "name": "Villa Palagonia",
+  "category": "art",
+  "town": "Bagheria",
+  "lat": 38.0789,
+  "lng": 13.5092
+ },
+ {
+  "name": "Castello di Carini",
+  "category": "art",
+  "town": "Carini",
+  "lat": 38.1352,
+  "lng": 13.1797
+ },
+ {
+  "name": "Castello a Mare",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1361,
+  "lng": 13.3702
+ },
+ {
+  "name": "Tempio di Segesta",
+  "category": "art",
+  "town": "Calatafimi-Segesta",
+  "lat": 37.9415,
+  "lng": 12.8336
+ },
+ {
+  "name": "Teatro greco di Segesta",
+  "category": "art",
+  "town": "Calatafimi-Segesta",
+  "lat": 37.9445,
+  "lng": 12.8395
+ },
+ {
+  "name": "Parco archeologico di Selinunte",
+  "category": "art",
+  "town": "Castelvetrano",
+  "lat": 37.5839,
+  "lng": 12.8252
+ },
+ {
+  "name": "Borgo medievale di Erice",
+  "category": "art",
+  "town": "Erice",
+  "lat": 38.0382,
+  "lng": 12.5887
+ },
+ {
+  "name": "Castello di Venere (Erice)",
+  "category": "art",
+  "town": "Erice",
+  "lat": 38.0364,
+  "lng": 12.5919
+ },
+ {
+  "name": "Saline e Mulini di Trapani",
+  "category": "art",
+  "town": "Trapani",
+  "lat": 37.9544,
+  "lng": 12.507
+ },
+ {
+  "name": "Centro storico di Trapani",
+  "category": "art",
+  "town": "Trapani",
+  "lat": 38.0176,
+  "lng": 12.5365
+ },
+ {
+  "name": "Cattedrale di Marsala",
+  "category": "art",
+  "town": "Marsala",
+  "lat": 37.7993,
+  "lng": 12.4368
+ },
+ {
+  "name": "Cantine storiche di Marsala",
+  "category": "art",
+  "town": "Marsala",
+  "lat": 37.7959,
+  "lng": 12.4378
+ },
+ {
+  "name": "Isola di Mozia (Mothia)",
+  "category": "art",
+  "town": "Marsala",
+  "lat": 37.8703,
+  "lng": 12.4717
+ },
+ {
+  "name": "Casbah di Mazara del Vallo",
+  "category": "art",
+  "town": "Mazara del Vallo",
+  "lat": 37.6519,
+  "lng": 12.5897
+ },
+ {
+  "name": "Museo del Satiro Danzante",
+  "category": "art",
+  "town": "Mazara del Vallo",
+  "lat": 37.6531,
+  "lng": 12.5916
+ },
+ {
+  "name": "Castello arabo-normanno di Salemi",
+  "category": "art",
+  "town": "Salemi",
+  "lat": 37.8156,
+  "lng": 12.805
+ },
+ {
+  "name": "Palazzo della Zisa",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1188,
+  "lng": 13.3399
+ },
+ {
+  "name": "Chiesa della Martorana",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1155,
+  "lng": 13.3625
+ },
+ {
+  "name": "Museo Archeologico Salinas",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1215,
+  "lng": 13.3603
+ },
+ {
+  "name": "San Giovanni degli Eremiti",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1123,
+  "lng": 13.3488
+ },
+ {
+  "name": "Palazzo Abatellis (Galleria Regionale)",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.115,
+  "lng": 13.371
+ },
+ {
+  "name": "Palazzo Chiaramonte-Steri",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1147,
+  "lng": 13.3728
+ },
+ {
+  "name": "Mercato del Capo",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1179,
+  "lng": 13.3536
+ },
+ {
+  "name": "Foro Italico Umberto I",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1141,
+  "lng": 13.3762
+ },
+ {
+  "name": "Molo Trapezoidale (Porto di Palermo)",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1288,
+  "lng": 13.3714
+ },
+ {
+  "name": "Murales Falcone e Borsellino (Palermo)",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.114,
+  "lng": 13.3728
+ },
+ {
+  "name": "Piazza Marina e Giardino Garibaldi",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1147,
+  "lng": 13.372
+ },
+ {
+  "name": "Villa Malfitano Whitaker",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1252,
+  "lng": 13.3405
+ },
+ {
+  "name": "Palazzina Cinese e Museo Pitrè",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1721,
+  "lng": 13.3435
+ },
+ {
+  "name": "Quartiere della Kalsa (Piazza Magione)",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1128,
+  "lng": 13.3708
+ },
+ {
+  "name": "Stand Florio all'Arenella",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1655,
+  "lng": 13.3722
+ },
+ {
+  "name": "Cantieri Culturali alla Zisa",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1214,
+  "lng": 13.3418
+ },
+ {
+  "name": "Antico Mercato del Borgo Vecchio",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1272,
+  "lng": 13.3591
+ },
+ {
+  "name": "Museo del Mare (Arsenale)",
+  "category": "art",
+  "town": "Palermo",
+  "lat": 38.1278,
+  "lng": 13.3695
+ },
+ {
+  "name": "Area archeologica di Solunto",
+  "category": "art",
+  "town": "Santa Flavia",
+  "lat": 38.0928,
+  "lng": 13.5406
+ },
+ {
+  "name": "Centro storico di Castelbuono",
+  "category": "art",
+  "town": "Castelbuono",
+  "lat": 37.9358,
+  "lng": 14.0879
+ },
+ {
+  "name": "Petralia Soprana (borgo)",
+  "category": "art",
+  "town": "Petralia Soprana",
+  "lat": 37.796,
+  "lng": 14.105
+ },
+ {
+  "name": "Gangi (borgo)",
+  "category": "art",
+  "town": "Gangi",
+  "lat": 37.796,
+  "lng": 14.2062
+ },
+ {
+  "name": "Polizzi Generosa",
+  "category": "art",
+  "town": "Polizzi Generosa",
+  "lat": 37.8127,
+  "lng": 14.0195
+ },
+ {
+  "name": "Piana degli Albanesi",
+  "category": "art",
+  "town": "Piana degli Albanesi",
+  "lat": 37.9947,
+  "lng": 13.282
+ },
+ {
+  "name": "Real Casina di Caccia (Ficuzza)",
+  "category": "art",
+  "town": "Corleone",
+  "lat": 37.872,
+  "lng": 13.4093
+ },
+ {
+  "name": "Centro storico di Corleone",
+  "category": "art",
+  "town": "Corleone",
+  "lat": 37.8107,
+  "lng": 13.3021
+ },
+ {
+  "name": "Museo del Carretto Siciliano (Terrasini)",
+  "category": "art",
+  "town": "Terrasini",
+  "lat": 38.1531,
+  "lng": 13.0788
+ },
+ {
+  "name": "Centro storico di Cinisi",
+  "category": "art",
+  "town": "Cinisi",
+  "lat": 38.1585,
+  "lng": 13.1051
+ },
+ {
+  "name": "Duomo di Termini Imerese",
+  "category": "art",
+  "town": "Termini Imerese",
+  "lat": 37.986,
+  "lng": 13.697
+ },
+ {
+  "name": "Himera - Parco archeologico",
+  "category": "art",
+  "town": "Termini Imerese",
+  "lat": 37.966,
+  "lng": 13.8422
+ },
+ {
+  "name": "Santuario di Gibilmanna",
+  "category": "art",
+  "town": "Cefalù",
+  "lat": 37.983,
+  "lng": 14.0293
+ },
+ {
+  "name": "Torre di Ligny",
+  "category": "art",
+  "town": "Trapani",
+  "lat": 38.0193,
+  "lng": 12.4986
+ },
+ {
+  "name": "Cattedrale di San Lorenzo (Trapani)",
+  "category": "art",
+  "town": "Trapani",
+  "lat": 38.017,
+  "lng": 12.5138
+ },
+ {
+  "name": "Santuario dell'Annunziata (Trapani)",
+  "category": "art",
+  "town": "Trapani",
+  "lat": 38.0225,
+  "lng": 12.5296
+ },
+ {
+  "name": "Castello arabo-normanno di Castellammare",
+  "category": "art",
+  "town": "Castellammare del Golfo",
+  "lat": 38.0263,
+  "lng": 12.8863
+ },
+ {
+  "name": "Castello dei Conti di Modica (Alcamo)",
+  "category": "art",
+  "town": "Alcamo",
+  "lat": 37.9773,
+  "lng": 12.966
+ },
+ {
+  "name": "Cretto di Burri (Gibellina)",
+  "category": "art",
+  "town": "Gibellina",
+  "lat": 37.7844,
+  "lng": 12.9068
+ },
+ {
+  "name": "Ruderi di Poggioreale antica",
+  "category": "art",
+  "town": "Poggioreale",
+  "lat": 37.7325,
+  "lng": 13.0393
+ },
+ {
+  "name": "Cave di Cusa",
+  "category": "art",
+  "town": "Campobello di Mazara",
+  "lat": 37.5807,
+  "lng": 12.718
+ },
+ {
+  "name": "Grotta Mangiapane (Custonaci)",
+  "category": "art",
+  "town": "Custonaci",
+  "lat": 38.114,
+  "lng": 12.6772
+ },
+ {
+  "name": "Spiaggia di Mondello",
+  "category": "beach",
+  "town": "Palermo",
+  "lat": 38.2049,
+  "lng": 13.3252
+ },
+ {
+  "name": "Spiaggia di Cefalù",
+  "category": "beach",
+  "town": "Cefalù",
+  "lat": 38.0405,
+  "lng": 14.0177
+ },
+ {
+  "name": "Spiaggia di Trappeto",
+  "category": "beach",
+  "town": "Trappeto",
+  "lat": 38.0815,
+  "lng": 13.0431
+ },
+ {
+  "name": "Spiaggia di Balestrate",
+  "category": "beach",
+  "town": "Balestrate",
+  "lat": 38.0506,
+  "lng": 13.0024
+ },
+ {
+  "name": "Spiaggia di Aspra",
+  "category": "beach",
+  "town": "Bagheria",
+  "lat": 38.0935,
+  "lng": 13.5283
+ },
+ {
+  "name": "Capo Gallo - Cala Rossa",
+  "category": "beach",
+  "town": "Palermo",
+  "lat": 38.2163,
+  "lng": 13.2835
+ },
+ {
+  "name": "Pollina - Finale",
+  "category": "beach",
+  "town": "Pollina",
+  "lat": 38.022,
+  "lng": 14.166
+ },
+ {
+  "name": "San Vito Lo Capo",
+  "category": "beach",
+  "town": "San Vito Lo Capo",
+  "lat": 38.1832,
+  "lng": 12.732
+ },
+ {
+  "name": "Macari - Baia Santa Margherita",
+  "category": "beach",
+  "town": "San Vito Lo Capo",
+  "lat": 38.1648,
+  "lng": 12.7137
+ },
+ {
+  "name": "Cala dell'Uzzo (Zingaro)",
+  "category": "beach",
+  "town": "San Vito Lo Capo",
+  "lat": 38.1085,
+  "lng": 12.7902
+ },
+ {
+  "name": "Cala Bianca (Zingaro)",
+  "category": "beach",
+  "town": "Custonaci",
+  "lat": 38.1011,
+  "lng": 12.7929
+ },
+ {
+  "name": "Spiaggia di Scopello e Faraglioni",
+  "category": "beach",
+  "town": "Castellammare del Golfo",
+  "lat": 38.0689,
+  "lng": 12.8281
+ },
+ {
+  "name": "Spiaggia di Cornino",
+  "category": "beach",
+  "town": "Custonaci",
+  "lat": 38.1187,
+  "lng": 12.6649
+ },
+ {
+  "name": "Lido Marausa",
+  "category": "beach",
+  "town": "Misiliscemi",
+  "lat": 37.8866,
+  "lng": 12.4775
+ },
+ {
+  "name": "Spiaggia di Tre Fontane",
+  "category": "beach",
+  "town": "Campobello di Mazara",
+  "lat": 37.566,
+  "lng": 12.7224
+ },
+ {
+  "name": "Spiaggia delle Saline (Marsala)",
+  "category": "beach",
+  "town": "Marsala",
+  "lat": 37.878,
+  "lng": 12.454
+ },
+ {
+  "name": "Spiaggia di Isola delle Femmine",
+  "category": "beach",
+  "town": "Isola delle Femmine",
+  "lat": 38.2101,
+  "lng": 13.2427
+ },
+ {
+  "name": "Baia dell'Olivella",
+  "category": "beach",
+  "town": "Santa Flavia",
+  "lat": 38.101,
+  "lng": 13.5237
+ },
+ {
+  "name": "Spiaggia dell'Arenella",
+  "category": "beach",
+  "town": "Palermo",
+  "lat": 38.1739,
+  "lng": 13.3808
+ },
+ {
+  "name": "Spiaggia di Sferracavallo",
+  "category": "beach",
+  "town": "Palermo",
+  "lat": 38.2098,
+  "lng": 13.2653
+ },
+ {
+  "name": "Spiaggia di Terrasini (Praia)",
+  "category": "beach",
+  "town": "Terrasini",
+  "lat": 38.152,
+  "lng": 13.08
+ },
+ {
+  "name": "Marettimo (Isole Egadi)",
+  "category": "beach",
+  "town": "Favignana",
+  "lat": 37.9636,
+  "lng": 12.0728
+ },
+ {
+  "name": "Alcamo Marina",
+  "category": "beach",
+  "town": "Alcamo",
+  "lat": 38.043,
+  "lng": 12.9412
+ },
+ {
+  "name": "Spiaggia di Bonagia (Valderice)",
+  "category": "beach",
+  "town": "Valderice",
+  "lat": 38.064,
+  "lng": 12.5665
+ },
+ {
+  "name": "Spiaggia di Selinunte (Marinella)",
+  "category": "beach",
+  "town": "Castelvetrano",
+  "lat": 37.5822,
+  "lng": 12.8228
+ },
+ {
+  "name": "Riserva di Capo Gallo",
+  "category": "nature",
+  "town": "Palermo",
+  "lat": 38.2228,
+  "lng": 13.29
+ },
+ {
+  "name": "Monte Pellegrino e Santuario di Santa Rosalia",
+  "category": "nature",
+  "town": "Palermo",
+  "lat": 38.17,
+  "lng": 13.355
+ },
+ {
+  "name": "Madonie - Piano Battaglia",
+  "category": "nature",
+  "town": "Petralia Sottana",
+  "lat": 37.8689,
+  "lng": 14.0119
+ },
+ {
+  "name": "La Rocca di Cefalù",
+  "category": "nature",
+  "town": "Cefalù",
+  "lat": 38.0444,
+  "lng": 14.0294
+ },
+ {
+  "name": "Riserva di Monte Catalfano",
+  "category": "nature",
+  "town": "Bagheria",
+  "lat": 38.0686,
+  "lng": 13.5519
+ },
+ {
+  "name": "Gole del Pollina",
+  "category": "nature",
+  "town": "Pollina",
+  "lat": 37.9967,
+  "lng": 14.1581
+ },
+ {
+  "name": "Riserva dello Zingaro",
+  "category": "nature",
+  "town": "San Vito Lo Capo",
+  "lat": 38.0856,
+  "lng": 12.7916
+ },
+ {
+  "name": "Riserva di Monte Cofano",
+  "category": "nature",
+  "town": "Custonaci",
+  "lat": 38.1322,
+  "lng": 12.6739
+ },
+ {
+  "name": "Belvedere di Erice",
+  "category": "nature",
+  "town": "Erice",
+  "lat": 38.0395,
+  "lng": 12.5905
+ },
+ {
+  "name": "Lago Rubino",
+  "category": "nature",
+  "town": "Trapani",
+  "lat": 37.9275,
+  "lng": 12.6694
+ },
+ {
+  "name": "Riserva Bosco di Scorace",
+  "category": "nature",
+  "town": "Buseto Palizzolo",
+  "lat": 37.975,
+  "lng": 12.835
+ },
+ {
+  "name": "Isole Egadi - Favignana",
+  "category": "nature",
+  "town": "Favignana",
+  "lat": 37.9325,
+  "lng": 12.3267
+ },
+ {
+  "name": "Isole Egadi - Levanzo",
+  "category": "nature",
+  "town": "Favignana",
+  "lat": 38.0029,
+  "lng": 12.3358
+ },
+ {
+  "name": "Orto Botanico di Palermo",
+  "category": "nature",
+  "town": "Palermo",
+  "lat": 38.1116,
+  "lng": 13.3729
+ },
+ {
+  "name": "Parco della Favorita",
+  "category": "nature",
+  "town": "Palermo",
+  "lat": 38.173,
+  "lng": 13.345
+ },
+ {
+  "name": "Riserva marina di Ustica",
+  "category": "nature",
+  "town": "Ustica",
+  "lat": 38.706,
+  "lng": 13.183
+ },
+ {
+  "name": "Bosco della Ficuzza",
+  "category": "nature",
+  "town": "Corleone",
+  "lat": 37.8595,
+  "lng": 13.403
+ },
+ {
+  "name": "Piano Zucchi (Madonie)",
+  "category": "nature",
+  "town": "Isnello",
+  "lat": 37.9014,
+  "lng": 14.0088
+ },
+ {
+  "name": "Riserva Foce del Belice",
+  "category": "nature",
+  "town": "Menfi",
+  "lat": 37.582,
+  "lng": 12.8698
+ },
+ {
+  "name": "Grotta del Genovese (Levanzo)",
+  "category": "nature",
+  "town": "Favignana",
+  "lat": 38.0026,
+  "lng": 12.332
+ },
+ {
+  "name": "Museo del Sale (Nubia)",
+  "category": "nature",
+  "town": "Paceco",
+  "lat": 37.9691,
+  "lng": 12.497
+ }
+]

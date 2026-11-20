@@ -1,0 +1,41 @@
+# Cerca foto con licenza libera per i luoghi dell'app (Wikipedia/Wikimedia Commons).
+# Gira solo sul ramo "foto-luoghi" e salva i risultati in tools/foto-luoghi/out sullo stesso ramo.
+# Non tocca il sito: Render pubblica un altro ramo.
+name: Foto luoghi
+
+on:
+  push:
+    branches: [foto-luoghi]
+    paths:
+      - "tools/foto-luoghi/fetch.py"
+      - "tools/foto-luoghi/pois.json"
+      - ".github/workflows/foto-luoghi.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: foto-luoghi
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pillow==11.0.0
+      - name: Cerca e scarica le foto
+        run: python tools/foto-luoghi/fetch.py tools/foto-luoghi/pois.json tools/foto-luoghi/out
+      - name: Salva i risultati nel ramo
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add tools/foto-luoghi/out || true
+          git commit -m "Foto luoghi: risultati della ricerca" || echo "nessun risultato da salvare"
+          git push
