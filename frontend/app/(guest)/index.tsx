@@ -12,6 +12,7 @@ import { Header } from "@/src/components/Header";
 import { Button, Card, SectionTitle, Loading } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
 import { BookingReviews } from "@/src/components/BookingReviews";
+import { PhotoViewer } from "@/src/components/PhotoViewer";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
@@ -32,6 +33,7 @@ export default function HomeScreen() {
 
   const [range, setRange] = useState<{ start: string | null; end: string | null }>({ start: null, end: null });
   const [festPopup, setFestPopup] = useState<Festival[] | null>(null);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [festDay, setFestDay] = useState<string | null>(null);
 
   const av = availability.data;
@@ -210,8 +212,10 @@ export default function HomeScreen() {
             <View style={s.section}>
               <SectionTitle title="Galleria" />
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
-                {photos.data.map((p) => (
-                  <Image key={p.id} source={{ uri: p.data_url }} style={s.galleryImg} contentFit="cover" transition={200} />
+                {photos.data.map((p, i) => (
+                  <Pressable key={p.id} onPress={() => setViewerIndex(i)} testID={`gallery-photo-${i}`} accessibilityRole="imagebutton">
+                    <Image source={{ uri: p.data_url }} style={s.galleryImg} contentFit="cover" transition={200} />
+                  </Pressable>
                 ))}
               </ScrollView>
             </View>
@@ -320,6 +324,11 @@ export default function HomeScreen() {
       </ScrollView>
 
       {/* Festival popup */}
+      <PhotoViewer
+        photos={(photos.data ?? []).map((p) => ({ id: p.id, uri: p.data_url }))}
+        index={viewerIndex}
+        onClose={() => setViewerIndex(null)}
+      />
       <Modal visible={!!festPopup} transparent animationType="fade" onRequestClose={() => setFestPopup(null)}>
         <Pressable style={s.festBackdrop} onPress={() => setFestPopup(null)}>
           <Pressable style={s.festSheet} onPress={(e) => e.stopPropagation()}>
