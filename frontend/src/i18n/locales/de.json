@@ -264,5 +264,9 @@
     "original": "Original anzeigen",
     "translating": "Wird übersetzt...",
     "translate_error": "Übersetzung nicht verfügbar"
+  },
+  "home_festivals": {
+    "kicker": "Die Gegend",
+    "title": "Nächste Feste"
   }
 }

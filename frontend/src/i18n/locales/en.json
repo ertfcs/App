@@ -264,5 +264,9 @@
     "original": "Show original",
     "translating": "Translating...",
     "translate_error": "Translation unavailable"
+  },
+  "home_festivals": {
+    "kicker": "Around here",
+    "title": "Upcoming festivals"
   }
 }

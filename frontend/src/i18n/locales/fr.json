@@ -264,5 +264,9 @@
     "original": "Voir l'original",
     "translating": "Traduction en cours...",
     "translate_error": "Traduction indisponible"
+  },
+  "home_festivals": {
+    "kicker": "Les environs",
+    "title": "Prochaines fêtes"
   }
 }

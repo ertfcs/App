@@ -264,5 +264,9 @@
     "original": "Mostra originale",
     "translating": "Traduzione in corso...",
     "translate_error": "Traduzione non disponibile"
+  },
+  "home_festivals": {
+    "kicker": "Il territorio",
+    "title": "Prossime feste"
   }
 }

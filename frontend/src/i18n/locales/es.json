@@ -264,5 +264,9 @@
     "original": "Ver original",
     "translating": "Traduciendo...",
     "translate_error": "Traducción no disponible"
+  },
+  "home_festivals": {
+    "kicker": "La zona",
+    "title": "Próximas fiestas"
   }
 }

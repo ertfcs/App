@@ -12,12 +12,11 @@ import { Button, Card, SectionTitle, Loading } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
 import { BookingReviews } from "@/src/components/BookingReviews";
 import { PhotoViewer } from "@/src/components/PhotoViewer";
-import { DateRangeCalendar, DateRange, RangeHint } from "@/src/components/DateRangeCalendar";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
 import { upcomingFestivals } from "@/src/lib/festivals";
-import { euro, nightsBetween } from "@/src/lib/format";
+import { euro } from "@/src/lib/format";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 
@@ -31,17 +30,11 @@ export default function HomeScreen() {
   const photos = usePhotos();
   const availability = useAvailability();
 
-  const [range, setRange] = useState<DateRange>({ start: null, end: null });
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   const av = availability.data;
-  const blocked = useMemo(() => new Set(av?.blocked_dates ?? []), [av]);
   const nextFestivals = useMemo(() => upcomingFestivals().slice(0, 3), []);
 
-  const goBook = () =>
-    router.push({ pathname: "/booking", params: { start: range.start ?? "", end: range.end ?? "" } });
-
-  const nights = nightsBetween(range.start, range.end);
 
   const onRefresh = () => {
     qc.invalidateQueries({ queryKey: ["property"] });
@@ -99,13 +92,9 @@ export default function HomeScreen() {
               </View>
               <Button
                 testID="home-book-cta"
-                label={
-                  nights > 0
-                    ? `${t("calendar.book_these")} · ${t(nights === 1 ? "calendar.night_one" : "calendar.night_other", { n: nights })}`
-                    : t("booking.title")
-                }
+                label={t("booking.title")}
                 icon="calendar-check"
-                onPress={goBook}
+                onPress={() => router.push("/booking")}
               />
             </Card>
           </Animated.View>
@@ -151,22 +140,10 @@ export default function HomeScreen() {
             </View>
           ) : null}
 
-          {/* Calendar */}
+          {/* Prossime feste */}
           <View style={s.section}>
-            <SectionTitle kicker={t("calendar.kicker")} title={t("calendar.title")} />
-            <Text style={s.help}>{t("calendar.help")}</Text>
-            <Card style={{ padding: spacing.sm }}>
-              <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} />
-              <View style={{ paddingHorizontal: spacing.sm }}>
-                <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
-              </View>
-              {nights > 0 ? (
-                <Button testID="calendar-book-cta" label={t("calendar.book_these")} icon="arrow-right" onPress={goBook} />
-              ) : null}
-            </Card>
-
-            {/* Feste nel periodo */}
-            <View style={{ marginTop: spacing.md, gap: spacing.sm }}>
+            <SectionTitle kicker={t("home_festivals.kicker")} title={t("home_festivals.title")} />
+            <View style={{ gap: spacing.sm }}>
               {nextFestivals.map((f) => (
                 <Pressable key={f.id} testID={`home-fest-${f.id}`} onPress={() => router.push("/festivals")}>
                   <View style={s.festRow}>
