@@ -92,8 +92,15 @@ export default function PlacesScreen() {
             </Text>
           ) : null}
         </View>
-        <Pressable testID={`poi-add-${item.id}`} onPress={() => toggle(item.id)} style={[s.dirBtn, has(item.id) && { backgroundColor: colors.brandPrimary }]} hitSlop={8}>
-          <Icon name={has(item.id) ? "playlist-remove" : "playlist-plus"} size={20} color={has(item.id) ? colors.onBrandPrimary : colors.brandPrimary} />
+        <Pressable
+          testID={`poi-add-${item.id}`}
+          onPress={() => toggle(item.id)}
+          style={[s.addBtn, has(item.id) && { backgroundColor: colors.brandPrimary, borderColor: colors.brandPrimary }]}
+          hitSlop={6}
+          accessibilityLabel={has(item.id) ? t("itin.in_itinerary") : t("itin.add")}
+        >
+          <Icon name={has(item.id) ? "check" : "plus"} size={16} color={has(item.id) ? colors.onBrandPrimary : colors.brandPrimary} />
+          <Text style={[s.addTxt, has(item.id) && { color: colors.onBrandPrimary }]}>{has(item.id) ? t("itin.added_short") : t("itin.add_short")}</Text>
         </Pressable>
         <Pressable testID={`poi-dir-${item.id}`} onPress={() => openDirections(item)} style={s.dirBtn} hitSlop={8}>
           <Icon name="directions" size={20} color={colors.olive} />
@@ -159,6 +166,8 @@ export default function PlacesScreen() {
 }
 
 const useStyles = makeStyles((c) => ({
+  addBtn: { alignItems: "center", justifyContent: "center", gap: 2, minWidth: 64, paddingHorizontal: 8, paddingVertical: 6, borderRadius: radius.md, borderWidth: 1, borderColor: c.brandPrimary },
+  addTxt: { color: c.brandPrimary, fontSize: 10, fontWeight: "700", fontFamily: fonts.body },
   screen: { flex: 1, backgroundColor: c.surface },
   searchWrap: { paddingHorizontal: spacing.md, paddingTop: spacing.sm },
   count: { color: c.muted, fontSize: 12, fontFamily: fonts.body, marginBottom: spacing.sm, textTransform: "uppercase", letterSpacing: 1 },

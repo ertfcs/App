@@ -218,7 +218,7 @@
     "button": "Ver el tutorial"
   },
   "guest": {
-    "map_title": "Mapa e itinerario",
+    "map_title": "Itinerarios recomendados",
     "map_kicker": "Explora",
     "all": "Todos",
     "need_code_details": "Introduce el código para ver los detalles",
@@ -268,5 +268,8 @@
   "home_festivals": {
     "kicker": "La zona",
     "title": "Próximas fiestas"
+  },
+  "services": {
+    "itineraries_tab": "Itinerarios"
   }
 }

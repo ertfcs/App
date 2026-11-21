@@ -11,14 +11,15 @@ import { API_BASE } from "@/src/lib/api";
 import i18n from "@/src/i18n";
 
 // Public library of ready-made itineraries curated by Matteo (PDF downloads).
-export function SuggestedItineraries({ code }: { code: string }) {
+export function SuggestedItineraries({ code, hideTitle }: { code: string; hideTitle?: boolean }) {
   const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const toast = useToast();
   const list = useItineraries(i18n.language);
   const items = list.data ?? [];
-  if (items.length === 0) return null;
+  if (items.length === 0)
+    return hideTitle ? <Text style={s.empty} testID="suggested-empty">{t("itin.suggested_empty")}</Text> : null;
 
   const download = (it: any) => {
     if (!it.has_pdf) return;
@@ -29,7 +30,7 @@ export function SuggestedItineraries({ code }: { code: string }) {
 
   return (
     <View style={{ gap: spacing.sm }} testID="suggested-itineraries">
-      <Text style={s.title}>{t("guest.suggested_title")}</Text>
+      {hideTitle ? null : <Text style={s.title}>{t("guest.suggested_title")}</Text>}
       {items.map((it: any) => (
         <Pressable key={it.id} testID={`sugg-${it.slug}`} style={s.card} onPress={() => download(it)}>
           <View style={{ flex: 1 }}>
@@ -47,6 +48,7 @@ export function SuggestedItineraries({ code }: { code: string }) {
 }
 
 const useStyles = makeStyles((c) => ({
+  empty: { color: c.muted, fontSize: 14, lineHeight: 20, fontFamily: fonts.body },
   title: { color: c.onSurface, fontSize: 17, fontFamily: fonts.heading, marginTop: spacing.sm },
   card: { flexDirection: "row", alignItems: "center", gap: spacing.sm, backgroundColor: c.surfaceSecondary, borderRadius: radius.md, padding: spacing.md, borderWidth: 1, borderColor: c.border },
   name: { color: c.onSurface, fontSize: 15, fontFamily: fonts.heading },

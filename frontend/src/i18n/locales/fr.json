@@ -218,7 +218,7 @@
     "button": "Voir le tutoriel"
   },
   "guest": {
-    "map_title": "Carte & itinéraire",
+    "map_title": "Itinéraires conseillés",
     "map_kicker": "Explorer",
     "all": "Tous",
     "need_code_details": "Saisissez le code pour voir les détails",
@@ -268,5 +268,8 @@
   "home_festivals": {
     "kicker": "Les environs",
     "title": "Prochaines fêtes"
+  },
+  "services": {
+    "itineraries_tab": "Itinéraires"
   }
 }

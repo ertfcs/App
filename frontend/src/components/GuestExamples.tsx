@@ -6,6 +6,7 @@ import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import type { Poi } from "@/src/lib/queries";
+import { useItinerary } from "@/src/lib/itinerary";
 import type { Dish } from "@/src/lib/culinary";
 import { analyzeBeach, type Beach } from "@/src/lib/beaches";
 
@@ -114,6 +115,8 @@ export function ExamplePlaceCard({ poi }: { poi: Poi }) {
   const { colors } = useTheme();
   const ex = EXAMPLE_PLACES[poi.name];
   const ticket = poi.ticket_url;
+  const { has, toggle } = useItinerary();
+  const added = has(poi.id);
   return (
     <View style={s.card} testID={`example-place-${poi.id}`}>
       <Photo
@@ -147,6 +150,15 @@ export function ExamplePlaceCard({ poi }: { poi: Poi }) {
           ]}
         />
         {ex?.tip || poi.notes ? <Tip title="Il consiglio di Matteo:" text={ex?.tip ?? poi.notes ?? ""} /> : null}
+        <Pressable
+          testID={`example-add-${poi.id}`}
+          onPress={() => toggle(poi.id)}
+          style={[s.addBig, added && { backgroundColor: colors.brandPrimary }]}
+          accessibilityRole="button"
+        >
+          <Icon name={added ? "check" : "plus"} size={18} color={added ? "#FFFFFF" : colors.brandPrimary} />
+          <Text style={[s.addBigTxt, added && { color: "#FFFFFF" }]}>{added ? "Nel tuo itinerario" : "Aggiungi al tuo itinerario"}</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -245,6 +257,8 @@ const useStyles = makeStyles((c) => ({
   chips: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
   chip: { overflow: "hidden", color: c.olive, backgroundColor: c.olive + "1F", fontSize: 13, fontWeight: "600", fontFamily: fonts.body, paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
   status: { alignSelf: "flex-start", overflow: "hidden", fontSize: 13, fontWeight: "700", fontFamily: fonts.body, paddingHorizontal: 12, paddingVertical: 5, borderRadius: radius.pill },
+  addBig: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, paddingVertical: 12, borderRadius: radius.pill, borderWidth: 1, borderColor: c.brandPrimary },
+  addBigTxt: { color: c.brandPrimary, fontSize: 15, fontWeight: "700", fontFamily: fonts.body },
   freeRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   freeTxt: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, fontFamily: fonts.body },
   freeLine: { flex: 1, height: 1, backgroundColor: c.border },

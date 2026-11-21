@@ -339,5 +339,21 @@
     "see_preview": "Vedi anteprima",
     "home_code_title": "Ricevi il tuo codice personale",
     "home_unlocked_title": "Codice attivo"
+  },
+  "itin": {
+    "suggested_kicker": "Pronti da seguire",
+    "suggested_title": "Itinerari consigliati",
+    "create_kicker": "Su misura per te",
+    "create_title": "Crea il tuo itinerario",
+    "create_hint": "Apri Luoghi e attrazioni e tocca “+ Itinerario” sui posti che ti piacciono: li ritrovi qui, in ordine, e puoi scaricarli in PDF.",
+    "pick_places": "Scegli i luoghi",
+    "empty": "Nessun luogo ancora: aggiungili da Luoghi e attrazioni.",
+    "pdf_locked_title": "Scarica il tuo itinerario in PDF",
+    "pdf_locked_text": "Inserisci il codice della prenotazione per scaricare il PDF con i luoghi che hai scelto.",
+    "add": "Aggiungi all'itinerario",
+    "in_itinerary": "Nell'itinerario",
+    "add_short": "Itinerario",
+    "added_short": "Aggiunto",
+    "suggested_empty": "Gli itinerari consigliati da Matteo arrivano a breve. Intanto crea il tuo qui sotto."
   }
 }

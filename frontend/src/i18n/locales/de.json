@@ -218,7 +218,7 @@
     "button": "Tutorial ansehen"
   },
   "guest": {
-    "map_title": "Karte & Reiseroute",
+    "map_title": "Empfohlene Reiserouten",
     "map_kicker": "Entdecken",
     "all": "Alle",
     "need_code_details": "Code eingeben, um Details zu sehen",
@@ -268,5 +268,8 @@
   "home_festivals": {
     "kicker": "Die Gegend",
     "title": "Nächste Feste"
+  },
+  "services": {
+    "itineraries_tab": "Reiserouten"
   }
 }

@@ -218,7 +218,7 @@
     "button": "Watch the tutorial"
   },
   "guest": {
-    "map_title": "Map & Itinerary",
+    "map_title": "Recommended itineraries",
     "map_kicker": "Explore",
     "all": "All",
     "need_code_details": "Enter the code to see place details",
@@ -268,5 +268,8 @@
   "home_festivals": {
     "kicker": "Around here",
     "title": "Upcoming festivals"
+  },
+  "services": {
+    "itineraries_tab": "Itineraries"
   }
 }

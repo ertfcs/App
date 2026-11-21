@@ -4,15 +4,16 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 
 import { Header } from "@/src/components/Header";
-import { ChipRow, Loading, Field, Button, useToast } from "@/src/components/ui";
+import { Field, Button, useToast } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
-import { PoiMap } from "@/src/components/PoiMap";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { usePois, Poi } from "@/src/lib/queries";
 import { useItinerary } from "@/src/lib/itinerary";
 import { downloadItineraryPdf } from "@/src/lib/pdf";
 import { SuggestedItineraries } from "@/src/components/SuggestedItineraries";
+import { LockedSection } from "@/src/components/LockedSection";
+import { router } from "expo-router";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 
 const CAT_TINT: Record<string, (c: any) => string> = {
@@ -30,52 +31,20 @@ export default function MapScreen() {
   const pois = usePois();
   const { ids: selected, toggle, remove, clear, has } = useItinerary();
 
-  const [cat, setCat] = useState("all");
   const access = useGuestAccess();
-  const [code, setCode] = useState("");
   const unlocked = access.unlocked;
   const [name, setName] = useState("");
-  const [verifying, setVerifying] = useState(false);
   const [downloading, setDownloading] = useState(false);
   const [detail, setDetail] = useState<Poi | null>(null);
 
-  const chips = [
-    { key: "all", label: t("guest.all"), icon: "map-marker-multiple" as IconName },
-    { key: "art", label: t("map_page.categories.art"), icon: "bank" as IconName },
-    { key: "beach", label: t("map_page.categories.beach"), icon: "beach" as IconName },
-    { key: "nature", label: t("map_page.categories.nature"), icon: "pine-tree" as IconName },
-  ];
-
   const all = useMemo(() => pois.data ?? [], [pois.data]);
-  const filtered = useMemo(() => (cat === "all" ? all : all.filter((p) => p.category === cat)), [all, cat]);
   const selectedPois = useMemo(() => all.filter((p) => selected.includes(p.id)), [all, selected]);
 
   const tintFor = useCallback((category: string) => (CAT_TINT[category] ?? CAT_TINT.art)(colors), [colors]);
 
-  const onPressPoi = (p: Poi) => {
-    if (!unlocked) {
-      toast.show(t("guest.need_code_details"), "error");
-      return;
-    }
-    setDetail(p);
-  };
-
   const openDirections = (p: Poi) => {
     const url = p.maps_url || `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
     Linking.openURL(url).catch(() => {});
-  };
-
-  const verify = async () => {
-    if (!code.trim()) return toast.show(t("guest.enter_code"), "error");
-    setVerifying(true);
-    try {
-      await access.unlock(code);
-      toast.show(t("guest.unlocked_toast"), "success");
-    } catch (e: any) {
-      toast.show(e?.response?.data?.detail || t("guest.invalid_code"), "error");
-    } finally {
-      setVerifying(false);
-    }
   };
 
   const download = async () => {
@@ -95,75 +64,63 @@ export default function MapScreen() {
   return (
     <View style={s.screen}>
       <Header title={t("guest.map_title")} kicker={t("guest.map_kicker")} />
-      <ChipRow items={chips} selected={cat} onSelect={setCat} />
-
-      <View style={s.mapBox}>
-        {pois.isLoading ? (
-          <Loading />
-        ) : (
-          <PoiMap pois={filtered} selectedIds={selected} onPressPoi={onPressPoi} tintFor={tintFor} />
-        )}
-        {!unlocked ? (
-          <View style={s.lockOverlay} pointerEvents="none">
-            <View style={s.lockPill}>
-              <Icon name="lock-outline" size={14} color={colors.onBrandPrimary} />
-              <Text style={s.lockPillTxt}>{t("guest.lock_pill")}</Text>
-            </View>
-          </View>
-        ) : null}
-      </View>
-
       <ScrollView contentContainerStyle={{ padding: spacing.md, paddingBottom: insets.bottom + 24, gap: spacing.md }} showsVerticalScrollIndicator={false}>
-        <View style={s.unlockCard}>
-          <View style={s.unlockHead}>
-            <Icon name={unlocked ? "lock-open-variant" : "lock-outline"} size={18} color={unlocked ? colors.success : colors.brand} />
-            <Text style={s.unlockTitle}>{unlocked ? t("guest.map_unlocked") : t("guest.unlock_map")}</Text>
+        {/* 1. Itinerari consigliati */}
+        <View style={{ gap: 4 }}>
+          <Text style={s.kicker}>{t("itin.suggested_kicker")}</Text>
+          <Text style={s.h2}>{t("itin.suggested_title")}</Text>
+        </View>
+        <SuggestedItineraries code={access.code} hideTitle />
+
+        {/* 2. Crea il tuo itinerario */}
+        <View style={[s.createCard]} testID="create-itinerary">
+          <Text style={s.kicker}>{t("itin.create_kicker")}</Text>
+          <Text style={s.h2}>{t("itin.create_title")}</Text>
+          <Text style={s.hint}>{t("itin.create_hint")}</Text>
+          <Button testID="pick-places" label={t("itin.pick_places")} icon="plus" variant="outline" onPress={() => router.push("/places")} />
+
+          <View style={s.sel}>
+            <Icon name="playlist-check" size={18} color={colors.brandPrimary} />
+            <Text style={s.selTitle}>{t("map_page.my_itinerary")} · {selected.length}</Text>
+            {selected.length > 0 ? (
+              <Pressable testID="clear-itinerary" onPress={clear} hitSlop={6}>
+                <Text style={s.clear}>{t("map_page.clear")}</Text>
+              </Pressable>
+            ) : null}
           </View>
-          {!unlocked ? (
+
+          {selectedPois.length === 0 ? (
+            <Text style={s.hint}>{t("itin.empty")}</Text>
+          ) : (
+            <View style={{ gap: 6 }}>
+              {selectedPois.map((p, i) => (
+                <View key={p.id} style={s.selRow} testID={`sel-${p.id}`}>
+                  <View style={[s.num, { backgroundColor: colors.brandPrimary }]}>
+                    <Text style={s.numTxt}>{i + 1}</Text>
+                  </View>
+                  <Pressable style={{ flex: 1 }} onPress={() => setDetail(p)}>
+                    <Text style={s.selName} numberOfLines={1}>{p.name}</Text>
+                  </Pressable>
+                  <Pressable testID={`sel-dir-${p.id}`} onPress={() => openDirections(p)} hitSlop={8} style={{ padding: 4 }}>
+                    <Icon name="directions" size={18} color={colors.olive} />
+                  </Pressable>
+                  <Pressable testID={`sel-remove-${p.id}`} onPress={() => remove(p.id)} hitSlop={8} style={{ padding: 4 }}>
+                    <Icon name="close" size={18} color={colors.muted} />
+                  </Pressable>
+                </View>
+              ))}
+            </View>
+          )}
+
+          {unlocked ? (
             <>
-              <Text style={s.hint}>{t("guest.unlock_hint")}</Text>
-              <Field value={code} onChangeText={setCode} placeholder={t("guest.code_ph")} icon="key-variant" autoCapitalize="characters" testID="unlock-code" />
-              <Button testID="unlock-btn" label={t("guest.unlock_btn")} icon="lock-open-variant" variant="olive" onPress={verify} loading={verifying} />
+              <Field value={name} onChangeText={setName} placeholder={t("map_page.traveler_name_ph")} icon="account-outline" testID="traveler-name" />
+              <Button testID="download-pdf" label={t("map_page.download_pdf")} icon="file-pdf-box" onPress={download} loading={downloading} disabled={selected.length === 0} />
             </>
           ) : (
-            <Field value={name} onChangeText={setName} placeholder={t("map_page.traveler_name_ph")} icon="account-outline" testID="traveler-name" />
+            <LockedSection compact title={t("itin.pdf_locked_title")} text={t("itin.pdf_locked_text")} />
           )}
         </View>
-
-        <View style={s.sel}>
-          <Icon name="playlist-check" size={18} color={colors.brandPrimary} />
-          <Text style={s.selTitle}>{t("map_page.my_itinerary")} · {selected.length}</Text>
-          {selected.length > 0 ? (
-            <Pressable testID="clear-itinerary" onPress={clear} hitSlop={6}>
-              <Text style={s.clear}>{t("map_page.clear")}</Text>
-            </Pressable>
-          ) : null}
-        </View>
-
-        {selectedPois.length === 0 ? (
-          <Text style={s.hint}>{t("guest.build_hint")}</Text>
-        ) : (
-          <View style={{ gap: 6 }}>
-            {selectedPois.map((p, i) => (
-              <View key={p.id} style={s.selRow} testID={`sel-${p.id}`}>
-                <View style={[s.num, { backgroundColor: colors.brandPrimary }]}>
-                  <Text style={s.numTxt}>{i + 1}</Text>
-                </View>
-                <Text style={s.selName} numberOfLines={1}>{p.name}</Text>
-                <Pressable testID={`sel-dir-${p.id}`} onPress={() => openDirections(p)} hitSlop={8} style={{ padding: 4 }}>
-                  <Icon name="directions" size={18} color={colors.olive} />
-                </Pressable>
-                <Pressable testID={`sel-remove-${p.id}`} onPress={() => remove(p.id)} hitSlop={8} style={{ padding: 4 }}>
-                  <Icon name="close" size={18} color={colors.muted} />
-                </Pressable>
-              </View>
-            ))}
-          </View>
-        )}
-
-        <Button testID="download-pdf" label={t("map_page.download_pdf")} icon="file-pdf-box" onPress={download} loading={downloading} disabled={selected.length === 0} />
-
-        <SuggestedItineraries code={unlocked ? code.trim() : ""} />
       </ScrollView>
 
       {/* POI detail sheet */}
@@ -233,6 +190,9 @@ function InfoChip({ icon, label, c }: { icon: IconName; label: string; c: any })
 }
 
 const useStyles = makeStyles((c) => ({
+  kicker: { color: c.brandPrimary, fontSize: 11, fontWeight: "700", letterSpacing: 1.2, textTransform: "uppercase", fontFamily: fonts.body },
+  h2: { color: c.onSurface, fontSize: 24, lineHeight: 28, fontFamily: fonts.heading },
+  createCard: { gap: spacing.sm, marginTop: spacing.md, padding: spacing.md, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, backgroundColor: c.surfaceSecondary },
   screen: { flex: 1, backgroundColor: c.surface },
   mapBox: { height: 340, overflow: "hidden", backgroundColor: c.surfaceTertiary, borderBottomWidth: 1, borderBottomColor: c.divider },
   lockOverlay: { ...({ position: "absolute" } as const), left: 0, right: 0, bottom: 10, alignItems: "center" },
