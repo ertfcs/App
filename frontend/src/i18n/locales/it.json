@@ -316,6 +316,7 @@
     "services_title": "Hai prenotato? Inserisci il tuo codice",
     "services_text": "Lo ricevi con la conferma della prenotazione. Basta inserirlo una volta per sbloccare tutti i servizi.",
     "home_note": "Con la prenotazione ricevi il tuo codice personale: inseriscilo nell'app per sbloccare i servizi con il lucchetto.",
-    "home_unlocked": "Codice inserito: tutti i servizi sono sbloccati."
+    "home_unlocked": "Codice inserito: tutti i servizi sono sbloccati.",
+    "see_preview": "Vedi anteprima"
   }
 }

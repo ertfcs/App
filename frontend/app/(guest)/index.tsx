@@ -36,6 +36,7 @@ const GUIDE: Perk[] = [
 
 function PerkRow({ perk, label }: { perk: Perk; label: string }) {
   const s = useStyles();
+  const { t } = useTranslation();
   const { unlocked } = useGuestAccess();
   const { colors } = useTheme();
   return (
@@ -49,8 +50,14 @@ function PerkRow({ perk, label }: { perk: Perk; label: string }) {
         <Icon name={perk.icon} size={18} color={colors.brandPrimary} />
       </View>
       <Text style={s.perkTxt}>{label}</Text>
-      {perk.locked && !unlocked ? <Icon name="lock-outline" size={16} color={colors.muted} /> : null}
-      <Icon name="chevron-right" size={20} color={colors.muted} />
+      {perk.locked && !unlocked ? (
+        <View style={s.previewPill}>
+          <Icon name="lock-outline" size={12} color="#FFFFFF" />
+          <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+        </View>
+      ) : (
+        <Icon name="chevron-right" size={20} color={colors.muted} />
+      )}
     </Pressable>
   );
 }
@@ -297,6 +304,8 @@ const useStyles = makeStyles((c) => ({
   mapCtaTitle: { color: "#FFFFFF", fontSize: 24, fontFamily: fonts.heading, lineHeight: 27 },
   mapCtaBtn: { alignSelf: "flex-start", backgroundColor: "#FFFFFF", paddingHorizontal: spacing.md, paddingVertical: 10, borderRadius: radius.pill },
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
+  previewPill: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: c.success, paddingHorizontal: 9, paddingVertical: 5, borderRadius: radius.pill },
+  previewTxt: { color: "#FFFFFF", fontSize: 11, fontWeight: "700", fontFamily: fonts.body },
   codeNote: { flexDirection: "row", gap: spacing.sm, alignItems: "flex-start", backgroundColor: c.terracottaSoft, borderRadius: radius.md, padding: spacing.sm, marginBottom: spacing.md },
   codeNoteTxt: { flex: 1, color: c.onSurface, fontSize: 13, lineHeight: 19, fontFamily: fonts.body },
   perksTitle: { color: c.onSurface, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, marginBottom: spacing.sm },

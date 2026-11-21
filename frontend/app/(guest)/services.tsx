@@ -12,15 +12,15 @@ import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 
 // The guest services, each opening its own section (texts in i18n "services.<key>_*").
-type Service = { key: string; icon: IconName; href: Href };
+type Service = { key: string; icon: IconName; href: Href; locked?: boolean };
 const GUIDE: Service[] = [
-  { key: "places", icon: "bank-outline", href: "/places" },
-  { key: "beaches", icon: "weather-windy", href: "/beaches" },
+  { key: "places", icon: "bank-outline", href: "/places", locked: true },
+  { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
   { key: "festivals", icon: "calendar-star", href: "/festivals" },
-  { key: "food", icon: "silverware-fork-knife", href: "/food" },
+  { key: "food", icon: "silverware-fork-knife", href: "/food", locked: true },
 ];
 const OTHERS: Service[] = [
-  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" },
+  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map", locked: true },
   { key: "keyring", icon: "key-variant", href: "/booking" },
 ];
 
@@ -56,6 +56,12 @@ export default function ServicesScreen() {
                   ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
                   : t(`services.${sv.key}_sub`)}
               </Text>
+              {sv.locked && !unlocked ? (
+                <View style={s.previewPill}>
+                  <Icon name="lock-outline" size={12} color="#FFFFFF" />
+                  <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+                </View>
+              ) : null}
             </View>
             <Icon name="chevron-right" size={24} color={colors.muted} />
           </Pressable>
@@ -79,6 +85,12 @@ export default function ServicesScreen() {
                   ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
                   : t(`services.${sv.key}_sub`)}
               </Text>
+              {sv.locked && !unlocked ? (
+                <View style={s.previewPill}>
+                  <Icon name="lock-outline" size={12} color="#FFFFFF" />
+                  <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+                </View>
+              ) : null}
             </View>
             <Icon name="chevron-right" size={24} color={colors.muted} />
           </Pressable>
@@ -91,6 +103,8 @@ export default function ServicesScreen() {
 const useStyles = makeStyles((c) => ({
   screen: { flex: 1, backgroundColor: c.surface },
   content: { padding: spacing.md, gap: spacing.sm, paddingBottom: spacing.xxl },
+  previewPill: { alignSelf: "flex-start", marginTop: 8, flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: c.success, paddingHorizontal: 10, paddingVertical: 6, borderRadius: radius.pill },
+  previewTxt: { color: "#FFFFFF", fontSize: 12, fontWeight: "700", fontFamily: fonts.body },
   group: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body, marginTop: spacing.md },
   intro: { color: c.onSurfaceSecondary, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, marginBottom: spacing.sm },
   card: {
