@@ -437,7 +437,9 @@
     "keyring_photo_soon": "The keyring photo is coming soon",
     "close": "Close",
     "pick_dates": "Choose the dates of your stay",
-    "see_availability": "See availability"
+    "see_availability": "See availability",
+    "keyring_front": "Front",
+    "keyring_back": "Back"
   },
   "lock": {
     "unlock": "Unlock",

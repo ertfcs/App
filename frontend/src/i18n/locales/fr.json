@@ -437,7 +437,9 @@
     "keyring_photo_soon": "La photo du porte-clés arrive bientôt",
     "close": "Fermer",
     "pick_dates": "Choisissez les dates de votre séjour",
-    "see_availability": "Voir les disponibilités"
+    "see_availability": "Voir les disponibilités",
+    "keyring_front": "Recto",
+    "keyring_back": "Verso"
   },
   "lock": {
     "unlock": "Débloquer",

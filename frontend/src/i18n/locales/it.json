@@ -290,7 +290,9 @@
     "keyring_photo_soon": "La foto del portachiavi arriva a breve",
     "close": "Chiudi",
     "pick_dates": "Scegli le date del tuo soggiorno",
-    "see_availability": "Vedi disponibilità"
+    "see_availability": "Vedi disponibilità",
+    "keyring_front": "Fronte",
+    "keyring_back": "Retro"
   },
   "services": {
     "tab": "Servizi",
