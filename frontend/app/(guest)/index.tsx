@@ -143,6 +143,9 @@ export default function HomeScreen() {
                 </View>
               </View>
               <Text style={s.perksTitle}>{t("home_new.perks_title")}</Text>
+              <View style={[s.perks, { marginBottom: spacing.sm }]}>
+                <PerkRow perk={KEYRING} label={t("home_new.perk_keyring")} onPress={() => setKeyringOpen(true)} />
+              </View>
               <View style={[s.codeHero, unlocked && { backgroundColor: colors.success }]} testID="home-code-note">
                 <View style={s.codeHeroIcon}>
                   <Icon name={unlocked ? "lock-open-variant" : "key-variant"} size={22} color={unlocked ? colors.success : colors.brandPrimary} />
@@ -153,7 +156,6 @@ export default function HomeScreen() {
                 </View>
               </View>
               <View style={s.perks}>
-                <PerkRow perk={KEYRING} label={t("home_new.perk_keyring")} onPress={() => setKeyringOpen(true)} />
                 <View style={s.guide}>
                   <View style={s.guideHead}>
                     <Icon name="compass-outline" size={18} color={colors.olive} />

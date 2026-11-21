@@ -276,8 +276,8 @@
     "apartment_kicker": "Cosa trovi in casa",
     "all_amenities": "Vedi tutti i servizi ({{count}})",
     "less": "Mostra meno",
-    "perks_title": "Prenotando qui ricevi:",
-    "perk_keyring": "Portachiavi souvenir in omaggio",
+    "perks_title": "Prenotando qui:",
+    "perk_keyring": "Ricevi il portachiavi souvenir in omaggio",
     "perk_itinerary": "Itinerari consigliati e il tuo itinerario in PDF",
     "perk_places": "Luoghi e attrazioni, con tutte le informazioni e i link ai siti ufficiali",
     "perk_beaches": "Spiagge consigliate in base al meteo",
@@ -334,10 +334,10 @@
     "places_text": "Inserisci il codice della prenotazione per sbloccare tutti i luoghi, i link ufficiali dei biglietti e il tuo itinerario in PDF.",
     "services_title": "Hai prenotato? Inserisci il tuo codice",
     "services_text": "Lo ricevi con la conferma della prenotazione. Basta inserirlo una volta per sbloccare tutti i servizi.",
-    "home_note": "Prenotando qui ti mando un codice: inseriscilo nell'app e sblocchi la guida al territorio e il tuo itinerario in PDF.",
+    "home_note": "Inseriscilo nell'app e sblocchi la guida al territorio e il tuo itinerario in PDF.",
     "home_unlocked": "Hai sbloccato la guida al territorio e l'itinerario in PDF.",
     "see_preview": "Vedi anteprima",
-    "home_code_title": "Ricevi il tuo codice personale",
+    "home_code_title": "Il tuo codice personale",
     "home_unlocked_title": "Codice attivo"
   },
   "itin": {
