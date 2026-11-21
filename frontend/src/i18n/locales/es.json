@@ -437,9 +437,7 @@
     "keyring_photo_soon": "La foto del llavero llega pronto",
     "close": "Cerrar",
     "pick_dates": "Elige las fechas de tu estancia",
-    "see_availability": "Ver disponibilidad",
-    "keyring_front": "Delante",
-    "keyring_back": "Detrás"
+    "see_availability": "Ver disponibilidad"
   },
   "lock": {
     "unlock": "Desbloquear",

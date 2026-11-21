@@ -27,7 +27,7 @@ type Perk = { key: string; icon: IconName; href?: Href; locked?: boolean };
 const KEYRING: Perk = { key: "keyring", icon: "key-chain-variant" };
 const ITINERARY: Perk = { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" };
 // Photo of the souvenir keyring: set it here once the file is in assets/images (null = "photo coming soon").
-const KEYRING_PHOTO: number | null = require("../../assets/images/keyring.png");
+const KEYRING_PHOTO: number | null = require("../../assets/images/keyring.jpg");
 const GUIDE: Perk[] = [
   { key: "places", icon: "bank-outline", href: "/places", locked: true },
   { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
@@ -259,13 +259,7 @@ export default function HomeScreen() {
         <Pressable style={s.kBackdrop} onPress={() => setKeyringOpen(false)} testID="keyring-backdrop">
           <Pressable style={s.kSheet} onPress={() => {}}>
             {KEYRING_PHOTO ? (
-              <View style={s.kPhotoWrap}>
-                <Image source={KEYRING_PHOTO} style={s.kPhotoImg} contentFit="contain" />
-                <View style={s.kSides}>
-                  <Text style={s.kSide}>{t("home_new.keyring_front")}</Text>
-                  <Text style={s.kSide}>{t("home_new.keyring_back")}</Text>
-                </View>
-              </View>
+              <Image source={KEYRING_PHOTO} style={s.kPhoto} contentFit="cover" />
             ) : (
               <View style={[s.kPhoto, s.kPlaceholder]}>
                 <Icon name="key-chain-variant" size={48} color={colors.brandPrimary} />
@@ -385,10 +379,6 @@ const useStyles = makeStyles((c) => ({
   kBackdrop: { flex: 1, backgroundColor: "rgba(28,26,24,0.6)", justifyContent: "center", padding: spacing.lg },
   kSheet: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, overflow: "hidden", maxWidth: 480, width: "100%", alignSelf: "center" },
   kPhoto: { width: "100%", aspectRatio: 4 / 3 },
-  kPhotoWrap: { backgroundColor: c.terracottaSoft, paddingTop: spacing.md, paddingBottom: spacing.sm, paddingHorizontal: spacing.sm },
-  kPhotoImg: { width: "100%", aspectRatio: 1000 / 757 },
-  kSides: { flexDirection: "row", justifyContent: "space-around", marginTop: 4 },
-  kSide: { color: c.onSurfaceSecondary, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body },
   kPlaceholder: { backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center", gap: 8 },
   kSoon: { color: c.onSurfaceSecondary, fontSize: 13, fontFamily: fonts.body },
   kTitle: { color: c.onSurface, fontSize: 20, fontFamily: fonts.heading },

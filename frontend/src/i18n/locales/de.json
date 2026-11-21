@@ -437,9 +437,7 @@
     "keyring_photo_soon": "Das Foto des Anhängers folgt in Kürze",
     "close": "Schließen",
     "pick_dates": "Wähle die Daten deines Aufenthalts",
-    "see_availability": "Verfügbarkeit ansehen",
-    "keyring_front": "Vorderseite",
-    "keyring_back": "Rückseite"
+    "see_availability": "Verfügbarkeit ansehen"
   },
   "lock": {
     "unlock": "Freischalten",
