@@ -13,6 +13,7 @@ import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import { ExampleBeachCard, FreeLabel, EXAMPLE_BEACH } from "@/src/components/GuestExamples";
 import i18n from "@/src/i18n";
+import { useTranslation } from "react-i18next";
 
 type Weather = { temp: number; windSpeed: number; windName: string; windLabel: string; uv: number; sunset: string };
 
@@ -38,7 +39,8 @@ const SOUTH = ["Scirocco", "Ostro", "Libeccio"];
 export default function BeachesScreen() {
   const s = useStyles();
   const { colors } = useTheme();
-  const lang = i18n.language === "en" ? "en" : "it";
+  const { t } = useTranslation();
+  const lang = i18n.language === "it" ? "it" : "en";
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
   const { unlocked } = useGuestAccess();
@@ -51,27 +53,27 @@ export default function BeachesScreen() {
     if (!windName) return { rec: "", avoid: "" };
     if (NORTH.includes(windName))
       return {
-        rec: `Oggi soffia vento da NORD (${w!.windLabel}). Punta sulla Costa Sud (Mazara, Selinunte, Tre Fontane) o calette riparate: mare piatto e calmo!`,
-        avoid: "Evita la costa Nord esposta (Trappeto, Balestrate, Cefalù): mare mosso, onde e possibili alghe a riva.",
+        rec: t("ui.beaches.north_rec", { wind: w!.windLabel }),
+        avoid: t("ui.beaches.north_avoid"),
       };
     if (SOUTH.includes(windName))
       return {
-        rec: `Oggi vento da SUD (${w!.windLabel}). Giornata perfetta vicino casa! La costa Nord (Trappeto, Balestrate, Terrasini) avrà acqua calma e cristallina.`,
-        avoid: "Attenzione alla Costa Sud (Mazara, Campobello): il mare spinge da fuori e porta moto ondoso.",
+        rec: t("ui.beaches.south_rec", { wind: w!.windLabel }),
+        avoid: t("ui.beaches.south_avoid"),
       };
     return {
-      rec: `Vento laterale di ${w!.windLabel}. Scegli le spiagge protette dai promontori per goderti la giornata.`,
-      avoid: `Evita le coste direttamente esposte a ${w!.windLabel}.`,
+      rec: t("ui.beaches.side_rec", { wind: w!.windLabel }),
+      avoid: t("ui.beaches.side_avoid", { wind: w!.windLabel }),
     };
-  }, [windName, w]);
+  }, [windName, w, t]);
 
   const chips: { key: string; label: string; icon: IconName }[] = [
-    { key: "all", label: "Tutte", icon: "beach" },
-    { key: "kids", label: "Bambini", icon: "baby-face-outline" },
-    { key: "lidi", label: "Attrezzate", icon: "umbrella-outline" },
-    { key: "snorkel", label: "Snorkel", icon: "diving-snorkel" },
-    { key: "park", label: "Parcheggio", icon: "parking" },
-    { key: "park_free", label: "Park Gratis", icon: "cash-off" },
+    { key: "all", label: t("ui.beaches.chip_all"), icon: "beach" },
+    { key: "kids", label: t("ui.beaches.chip_kids"), icon: "baby-face-outline" },
+    { key: "lidi", label: t("ui.beaches.chip_lidi"), icon: "umbrella-outline" },
+    { key: "snorkel", label: t("ui.beaches.chip_snorkel"), icon: "diving-snorkel" },
+    { key: "park", label: t("ui.beaches.chip_park"), icon: "parking" },
+    { key: "park_free", label: t("ui.beaches.chip_park_free"), icon: "cash-off" },
   ];
 
   const filtered = useMemo(() => {
@@ -92,15 +94,15 @@ export default function BeachesScreen() {
   }, [cat, q, windName]);
 
   const statusMeta = (st: BeachStatus) => {
-    if (st === "recommended") return { color: colors.success, label: "✨ IDEALE OGGI" };
-    if (st === "avoid") return { color: colors.error, label: "⚠️ MARE MOSSO" };
-    return { color: colors.muted, label: "🌤️ ACCETTABILE" };
+    if (st === "recommended") return { color: colors.success, label: t("ui.beaches.st_ideal") };
+    if (st === "avoid") return { color: colors.error, label: t("ui.beaches.st_rough") };
+    return { color: colors.muted, label: t("ui.beaches.st_ok") };
   };
 
   const parkingBadge = (type: Beach["parking_type"]) => {
-    if (type === "free") return { color: colors.success, label: "🆓 Gratis" };
-    if (type === "paid") return { color: colors.warning, label: "🪙 A pagamento" };
-    return { color: colors.info, label: "⚖️ Misto / Strisce blu" };
+    if (type === "free") return { color: colors.success, label: t("ui.beaches.pk_free") };
+    if (type === "paid") return { color: colors.warning, label: t("ui.beaches.pk_paid") };
+    return { color: colors.info, label: t("ui.beaches.pk_mixed") };
   };
 
   const openDir = (b: Beach) =>
@@ -139,7 +141,7 @@ export default function BeachesScreen() {
 
         <View style={s.infoBox}>
           <View style={s.infoLine}>
-            <Text style={s.infoKey}>Parcheggio</Text>
+            <Text style={s.infoKey}>{t("ui.beaches.parking")}</Text>
             <View style={[s.pkBadge, { backgroundColor: pk.color + "22" }]}>
               <Text style={[s.pkTxt, { color: pk.color }]}>{pk.label}</Text>
             </View>
@@ -167,7 +169,7 @@ export default function BeachesScreen() {
           </View>
           <Pressable testID={`beach-dir-${item.id}`} onPress={() => openDir(item)} style={s.dirBtn}>
             <Icon name="directions" size={16} color={colors.onBrandPrimary} />
-            <Text style={s.dirTxt}>Portami lì</Text>
+            <Text style={s.dirTxt}>{t("ui.beaches.take_me")}</Text>
           </Pressable>
         </View>
       </View>
@@ -176,7 +178,7 @@ export default function BeachesScreen() {
 
   return (
     <View style={s.screen}>
-      <Header title="Spiagge" kicker="Bussola dei venti" showBack />
+      <Header title={t("ui.beaches.title")} kicker={t("ui.beaches.kicker")} showBack />
       <FlatList
         testID="beaches-list"
         data={unlocked ? filtered : []}
@@ -189,7 +191,7 @@ export default function BeachesScreen() {
           unlocked ? null : (
             <LockedSection
               names={beaches.filter((b) => b.id !== EXAMPLE_BEACH.id).slice(0, 6).map((b) => `${b.name} · ${b.location}`)}
-              title={`Altre ${beaches.length - 1} spiagge con il vento di oggi`} text="Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare." />
+              title={t("ui.beaches.lock_title", { n: beaches.length - 1 })} text={t("ui.beaches.lock_text")} />
           )
         }
         ListHeaderComponent={
@@ -199,14 +201,14 @@ export default function BeachesScreen() {
               <LinearGradient colors={[colors.brandPrimary, colors.olive]} style={s.weatherBg} />
               {weather.isLoading ? (
                 <View style={{ padding: spacing.lg }}>
-                  <Loading label="Meteo in tempo reale..." />
+                  <Loading label={t("ui.beaches.loading")} />
                 </View>
               ) : (
                 <View style={s.weatherRow}>
-                  <WeatherCell icon="🌡️" label="Temp" value={`${w?.temp ?? "--"}°`} />
-                  <WeatherCell icon="🌬️" label="Vento" value={w?.windName ?? "--"} sub={`${w?.windSpeed ?? "--"} km/h`} />
-                  <WeatherCell icon="☀️" label="UV" value={`${w?.uv ?? "--"}`} />
-                  <WeatherCell icon="🌅" label="Tramonto" value={w?.sunset ?? "--"} />
+                  <WeatherCell icon="🌡️" label={t("ui.beaches.temp")} value={`${w?.temp ?? "--"}°`} />
+                  <WeatherCell icon="🌬️" label={t("ui.beaches.wind")} value={w?.windName ?? "--"} sub={`${w?.windSpeed ?? "--"} km/h`} />
+                  <WeatherCell icon="☀️" label={t("ui.beaches.uv")} value={`${w?.uv ?? "--"}`} />
+                  <WeatherCell icon="🌅" label={t("ui.beaches.sunset")} value={w?.sunset ?? "--"} />
                 </View>
               )}
             </View>
@@ -215,11 +217,11 @@ export default function BeachesScreen() {
             {w ? (
               <View style={s.adviceWrap}>
                 <View style={[s.advice, { backgroundColor: colors.success + "18", borderColor: colors.success }]}>
-                  <Text style={[s.adviceTitle, { color: colors.success }]}>✨ Consigliate oggi</Text>
+                  <Text style={[s.adviceTitle, { color: colors.success }]}>{t("ui.beaches.rec_title")}</Text>
                   <Text style={s.adviceTxt}>{advice.rec}</Text>
                 </View>
                 <View style={[s.advice, { backgroundColor: colors.error + "14", borderColor: colors.error }]}>
-                  <Text style={[s.adviceTitle, { color: colors.error }]}>⚠️ Da evitare</Text>
+                  <Text style={[s.adviceTitle, { color: colors.error }]}>{t("ui.beaches.avoid_title")}</Text>
                   <Text style={s.adviceTxt}>{advice.avoid}</Text>
                 </View>
               </View>
@@ -229,10 +231,10 @@ export default function BeachesScreen() {
               <>
                 <UnlockedNote />
                 <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.sm }}>
-                  <Field value={q} onChangeText={setQ} placeholder="Cerca (San Vito, Cefalù, Mondello...)" icon="magnify" testID="beach-search" />
+                  <Field value={q} onChangeText={setQ} placeholder={t("ui.beaches.search_ph")} icon="magnify" testID="beach-search" />
                 </View>
                 <ChipRow items={chips} selected={cat} onSelect={setCat} />
-                <Text style={s.count}>{filtered.length} spiagge</Text>
+                <Text style={s.count}>{t("ui.beaches.count", { n: filtered.length })}</Text>
               </>
             ) : (
               <View style={{ gap: spacing.md, paddingTop: spacing.md }}>

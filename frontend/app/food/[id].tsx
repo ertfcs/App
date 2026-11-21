@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
@@ -14,6 +15,7 @@ import { useDishes } from "@/src/lib/dishes";
 import { useFavorites } from "@/src/lib/favorites";
 
 export default function FoodDetail() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const s = useStyles();
   const { colors } = useTheme();
@@ -25,7 +27,7 @@ export default function FoodDetail() {
     return (
       <View style={s.screen}>
         <Header title="—" showBack showLang={false} />
-        <EmptyState icon="silverware-variant" title="Piatto non trovato" />
+        <EmptyState icon="silverware-variant" title={t("ui.dish.not_found")} />
       </View>
     );
   }
@@ -72,7 +74,7 @@ export default function FoodDetail() {
           <Card style={{ marginTop: spacing.md }}>
             <View style={s.sectionHead}>
               <Icon name="silverware-fork-knife" size={20} color={colors.brand} />
-              <Text style={s.sectionTitle}>Il piatto tradizionale</Text>
+              <Text style={s.sectionTitle}>{t("ui.dish.traditional")}</Text>
             </View>
             <Text style={s.desc}>{dish.description}</Text>
           </Card>
@@ -80,7 +82,7 @@ export default function FoodDetail() {
           <Card style={{ marginTop: spacing.md }}>
             <View style={s.sectionHead}>
               <Icon name="basket-outline" size={20} color={colors.olive} />
-              <Text style={s.sectionTitle}>Ingredienti chiave</Text>
+              <Text style={s.sectionTitle}>{t("ui.dish.ingredients")}</Text>
             </View>
             <View style={{ gap: spacing.sm, marginTop: spacing.sm }}>
               {dish.ingredients.map((ing) => (
@@ -94,7 +96,7 @@ export default function FoodDetail() {
 
           <View style={s.funCard}>
             <Icon name="information-outline" size={20} color={colors.brand} />
-            <Text style={s.funLabel}>Curiosità per il turista</Text>
+            <Text style={s.funLabel}>{t("ui.dish.fun")}</Text>
             <Text style={s.funTxt}>“{dish.funFact}”</Text>
           </View>
         </View>

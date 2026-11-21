@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import { ExampleDishCard, FreeLabel } from "@/src/components/GuestExamples";
@@ -18,6 +19,7 @@ import { useDishes, foodCategories, MergedDish } from "@/src/lib/dishes";
 import { useFavorites } from "@/src/lib/favorites";
 
 export default function FoodList() {
+  const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const { favorites, toggle, isFav } = useFavorites();
@@ -26,7 +28,7 @@ export default function FoodList() {
   const [favOnly, setFavOnly] = useState(false);
   const { unlocked } = useGuestAccess();
 
-  const chips = foodCategories.map((c) => ({ key: c, label: c === "All" ? "Tutte" : c }));
+  const chips = foodCategories.map((c) => ({ key: c, label: c === "All" ? t("ui.food.all") : c }));
 
   const filtered = useMemo(() => {
     let list = dishes.data ?? [];
@@ -80,8 +82,8 @@ export default function FoodList() {
   return (
     <View style={s.screen}>
       <Header
-        title="Cucina Siciliana"
-        kicker="Palermo & Trapani"
+        title={t("ui.food.title")}
+        kicker={t("ui.food.kicker")}
         showBack
         right={
           <Pressable
@@ -109,9 +111,9 @@ export default function FoodList() {
               <LinearGradient colors={[colors.brandPrimary, colors.olive]} style={s.coverBg} />
               <View style={s.coverContent}>
                 <Icon name="silverware-fork-knife" size={28} color="#fff" />
-                <Text style={s.coverTitle}>Guida ai sapori del territorio</Text>
+                <Text style={s.coverTitle}>{t("ui.food.cover_title")}</Text>
                 <Text style={s.coverSub}>
-                  {culinaryData.length} specialità tradizionali, dai mercati di Palermo alle coste di Trapani, Erice e Pantelleria.
+                  {t("ui.food.cover_sub", { n: culinaryData.length })}
                 </Text>
               </View>
             </View>
@@ -138,11 +140,11 @@ export default function FoodList() {
           unlocked ? null : (
             <LockedSection
               names={(dishes.data ?? []).filter((d) => d.id !== "arancina" && d.id !== "pane-ca-meusa").slice(0, 6).map((d) => d.name)}
-              title={`Altri ${(dishes.data?.length ?? 0) - 2} piatti ti aspettano`} text="Inserisci il codice della prenotazione per sbloccare tutta la guida gastronomica." />
+              title={t("ui.food.lock_title", { n: (dishes.data?.length ?? 0) - 2 })} text={t("ui.food.lock_text")} />
           )
         }
         ListEmptyComponent={
-          !unlocked ? null : <EmptyState icon="heart-off-outline" title="Nessun piatto" subtitle={favOnly ? "Aggiungi i tuoi preferiti col cuore" : "Nessun risultato"} />
+          !unlocked ? null : <EmptyState icon="heart-off-outline" title={t("ui.food.none_title")} subtitle={favOnly ? t("ui.food.none_fav") : t("ui.food.none_results")} />
         }
       />
     </View>

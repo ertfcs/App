@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, Linking } from "react-native";
 import { Image } from "expo-image";
+import { useTranslation } from "react-i18next";
 
 import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
@@ -20,21 +21,17 @@ function kmFromHome(lat: number, lng: number) {
   return Math.round(2 * 6371 * Math.asin(Math.sqrt(h)));
 }
 
-export const EXAMPLE_PLACES: Record<string, { image: number; credit: string; description: string; duration: string; tip: string }> = {
+// Texts are i18n keys under "ui.ex.<key>_desc|_duration|_tip".
+export const EXAMPLE_PLACES: Record<string, { image: number; credit: string; key: string }> = {
   "Cattedrale di Palermo": {
     image: require("../../assets/images/examples/cattedrale-di-palermo.jpg"),
     credit: "Pava, pubblico dominio (Wikimedia Commons)",
-    description:
-      "Il simbolo di Palermo. Iniziata nel 1185, mescola stili normanno, gotico, catalano e neoclassico. Dentro ci sono le tombe reali di Ruggero II e Federico II; dai tetti si vede tutta la città.",
-    duration: "1–2 ore (con tetti e tesoro)",
-    tip: "Sali sui tetti verso il tramonto: la luce sulla città è bellissima. In chiesa servono spalle e gambe coperte.",
+    key: "cathedral",
   },
   "Tempio di Segesta": {
     image: require("../../assets/images/examples/tempio-di-segesta.jpg"),
     credit: "Ludvig14, CC BY-SA 4.0 (Wikimedia Commons)",
-    description: "Tempio dorico del V secolo a.C. in mezzo alla campagna, quasi intatto. È uno dei templi greci meglio conservati al mondo.",
-    duration: "1–2 ore (con il teatro)",
-    tip: "A circa 30 minuti da Trappeto: vai al mattino presto o nel tardo pomeriggio.",
+    key: "segesta",
   },
 };
 
@@ -50,9 +47,6 @@ export const EXAMPLE_BEACH = {
   id: "cala-rossa-favignana",
   image: require("../../assets/images/examples/cala-rossa-favignana.jpg"),
   credit: "Arcona B&B, CC BY 3.0 (Wikimedia Commons)",
-  extra: "È la caletta più fotografata delle Egadi.",
-  howTo: "Aliscafo Trapani–Favignana, poi bici o scooter (circa 4 km dal porto)",
-  tip: "Niente servizi né ombra: porta acqua, cappello e scarpette da scoglio. Arriva presto: a metà mattina è già piena.",
 };
 
 function Photo({ source, credit, badges }: { source: number | string; credit: string; badges: { text: string; kind: "dark" | "light" | "star" }[] }) {
@@ -100,8 +94,10 @@ function Tip({ title, text }: { title: string; text: string }) {
   );
 }
 
-export function FreeLabel({ text = "Esempio gratuito" }: { text?: string }) {
+export function FreeLabel({ text }: { text?: string }) {
   const s = useStyles();
+  const { t } = useTranslation();
+  text = text ?? t("ui.ex.free");
   return (
     <View style={s.freeRow}>
       <Text style={s.freeTxt}>{text.toUpperCase()}</Text>
@@ -112,6 +108,7 @@ export function FreeLabel({ text = "Esempio gratuito" }: { text?: string }) {
 
 export function ExamplePlaceCard({ poi }: { poi: Poi }) {
   const s = useStyles();
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const ex = EXAMPLE_PLACES[poi.name];
   const ticket = poi.ticket_url;
@@ -124,32 +121,32 @@ export function ExamplePlaceCard({ poi }: { poi: Poi }) {
         credit={ex?.credit ?? ""}
         badges={[
           { text: poi.town ?? "", kind: "dark" },
-          { text: "🏛️ Arte e cultura", kind: "light" },
-          { text: "★ Imperdibile", kind: "star" },
+          { text: t("ui.ex.art"), kind: "light" },
+          { text: t("ui.ex.must"), kind: "star" },
         ]}
       />
       <View style={s.body}>
         <Text style={s.title}>{poi.name}</Text>
-        <Text style={s.sub}>a {kmFromHome(poi.lat, poi.lng)} km da Trappeto in linea d&apos;aria</Text>
-        <Text style={s.desc}>{ex?.description ?? poi.description}</Text>
+        <Text style={s.sub}>{t("ui.ex.km", { km: kmFromHome(poi.lat, poi.lng) })}</Text>
+        <Text style={s.desc}>{ex ? t(`ui.ex.${ex.key}_desc`) : poi.description}</Text>
         <InfoBox
           rows={[
-            { label: "Orari", value: poi.hours || "Variano con la stagione: controlla sul sito ufficiale prima di partire" },
-            { label: "Prezzo", value: poi.price },
-            { label: "Sconti", value: poi.discount },
-            { label: "Durata della visita", value: poi.duration || ex?.duration },
+            { label: t("ui.ex.hours"), value: poi.hours || t("ui.ex.hours_fallback") },
+            { label: t("ui.ex.price"), value: poi.price },
+            { label: t("ui.ex.discounts"), value: poi.discount },
+            { label: t("ui.ex.duration"), value: ex ? t(`ui.ex.${ex.key}_duration`) : poi.duration },
             {
-              label: "Biglietti",
+              label: t("ui.ex.tickets"),
               value: ticket ? (
                 <Pressable onPress={() => Linking.openURL(ticket).catch(() => {})} accessibilityRole="link" style={s.link}>
-                  <Text style={s.linkTxt}>Sito ufficiale</Text>
+                  <Text style={s.linkTxt}>{t("ui.ex.official_site")}</Text>
                   <Icon name="open-in-new" size={14} color={colors.brandPrimary} />
                 </Pressable>
               ) : undefined,
             },
           ]}
         />
-        {ex?.tip || poi.notes ? <Tip title="Il consiglio di Matteo:" text={ex?.tip ?? poi.notes ?? ""} /> : null}
+        {ex || poi.notes ? <Tip title={t("ui.ex.tip")} text={ex ? t(`ui.ex.${ex.key}_tip`) : poi.notes ?? ""} /> : null}
         <Pressable
           testID={`example-add-${poi.id}`}
           onPress={() => toggle(poi.id)}
@@ -157,7 +154,7 @@ export function ExamplePlaceCard({ poi }: { poi: Poi }) {
           accessibilityRole="button"
         >
           <Icon name={added ? "check" : "plus"} size={18} color={added ? "#FFFFFF" : colors.brandPrimary} />
-          <Text style={[s.addBigTxt, added && { color: "#FFFFFF" }]}>{added ? "Nel tuo itinerario" : "Aggiungi al tuo itinerario"}</Text>
+          <Text style={[s.addBigTxt, added && { color: "#FFFFFF" }]}>{added ? t("ui.ex.added") : t("ui.ex.add")}</Text>
         </Pressable>
       </View>
     </View>
@@ -166,16 +163,17 @@ export function ExamplePlaceCard({ poi }: { poi: Poi }) {
 
 export function ExampleDishCard({ dish }: { dish: Dish }) {
   const s = useStyles();
+  const { t } = useTranslation();
   const ex = EXAMPLE_DISHES[dish.id];
   return (
     <View style={s.card} testID={`example-dish-${dish.id}`}>
       {ex ? (
-        <Photo source={ex.image} credit={ex.credit} badges={[{ text: dish.region, kind: "dark" }, { text: "Cibo di strada", kind: "light" }]} />
+        <Photo source={ex.image} credit={ex.credit} badges={[{ text: dish.region, kind: "dark" }, { text: t("ui.ex.street_food"), kind: "light" }]} />
       ) : null}
       <View style={s.body}>
         <Text style={s.title}>{dish.name}</Text>
         <Text style={s.desc}>{dish.description}</Text>
-        <FreeLabel text="Ingredienti" />
+        <FreeLabel text={t("ui.ex.ingredients")} />
         <View style={s.chips}>
           {dish.ingredients.map((i) => (
             <Text key={i} style={s.chip}>
@@ -183,7 +181,7 @@ export function ExampleDishCard({ dish }: { dish: Dish }) {
             </Text>
           ))}
         </View>
-        {dish.funFact ? <Tip title="Lo sapevi?" text={dish.funFact} /> : null}
+        {dish.funFact ? <Tip title={t("ui.ex.did_you_know")} text={dish.funFact} /> : null}
       </View>
     </View>
   );
@@ -191,15 +189,16 @@ export function ExampleDishCard({ dish }: { dish: Dish }) {
 
 export function ExampleBeachCard({ beach, windName }: { beach: Beach; windName: string }) {
   const s = useStyles();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
-  const bl = beach.it;
+  const bl = i18n.language === "it" ? beach.it : beach.en;
   const st = windName ? analyzeBeach(beach, windName) : "neutral";
   const status =
     st === "recommended"
-      ? { txt: "✓ Consigliata oggi: riparata da questo vento", color: colors.success }
+      ? { txt: t("ui.ex.rec_today"), color: colors.success }
       : st === "avoid"
-        ? { txt: "⚠️ Oggi sconsigliata: è esposta a questo vento", color: colors.error }
-        : { txt: "Oggi nella media", color: colors.muted };
+        ? { txt: t("ui.ex.avoid_today"), color: colors.error }
+        : { txt: t("ui.ex.neutral_today"), color: colors.muted };
   return (
     <View style={s.card} testID={`example-beach-${beach.id}`}>
       <Photo
@@ -208,27 +207,27 @@ export function ExampleBeachCard({ beach, windName }: { beach: Beach; windName: 
         badges={[
           { text: beach.location, kind: "dark" },
           { text: `🏖️ ${bl.type}`, kind: "light" },
-          { text: "★ Imperdibile", kind: "star" },
+          { text: t("ui.ex.must"), kind: "star" },
         ]}
       />
       <View style={s.body}>
         {windName ? <Text style={[s.status, { color: status.color, backgroundColor: status.color + "1F" }]}>{status.txt}</Text> : null}
         <Text style={s.title}>{beach.name.replace(/\s*\(.*\)$/, "")}</Text>
-        <Text style={s.sub}>{beach.location} · aliscafo da Trapani</Text>
+        <Text style={s.sub}>{beach.location} · {t("ui.ex.ferry_sub")}</Text>
         <Text style={s.desc}>
-          {bl.desc} {EXAMPLE_BEACH.extra}
+          {bl.desc} {t("ui.ex.beach_extra")}
         </Text>
         <InfoBox
           rows={[
-            { label: "Accesso", value: bl.access },
-            { label: "Fondale", value: bl.seabed },
-            { label: "Affollamento", value: bl.crowd },
-            { label: "Da mangiare", value: bl.food },
-            { label: "Come arrivare", value: EXAMPLE_BEACH.howTo },
-            { label: "Parcheggio", value: bl.parking_info },
+            { label: t("ui.ex.access"), value: bl.access },
+            { label: t("ui.ex.seabed"), value: bl.seabed },
+            { label: t("ui.ex.crowd"), value: bl.crowd },
+            { label: t("ui.ex.food"), value: bl.food },
+            { label: t("ui.ex.how_to"), value: t("ui.ex.beach_howto") },
+            { label: t("ui.ex.parking"), value: bl.parking_info },
           ]}
         />
-        <Tip title="Il consiglio di Matteo:" text={EXAMPLE_BEACH.tip} />
+        <Tip title={t("ui.ex.tip")} text={t("ui.ex.beach_tip")} />
       </View>
     </View>
   );

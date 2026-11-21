@@ -1,5 +1,6 @@
 import React from "react";
 import { Pressable, Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { makeStyles, useTheme } from "@/src/theme";
@@ -9,6 +10,7 @@ import { useItinerary } from "@/src/lib/itinerary";
 
 // Floating "Il mio itinerario" pill shown over guest screens. Opens the map tab.
 export function ItineraryFab() {
+  const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
@@ -23,7 +25,7 @@ export function ItineraryFab() {
       onPress={() => router.push("/(guest)/map")}
     >
       <Icon name="playlist-edit" size={20} color={colors.onBrandPrimary} />
-      <Text style={s.txt}>Il mio itinerario</Text>
+      <Text style={s.txt}>{t("ui.fab.my_itinerary")}</Text>
       <View style={s.badge}>
         <Text style={s.badgeTxt}>{ids.length}</Text>
       </View>
