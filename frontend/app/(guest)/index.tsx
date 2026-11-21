@@ -14,7 +14,7 @@ import { BookingReviews } from "@/src/components/BookingReviews";
 import { PhotoViewer } from "@/src/components/PhotoViewer";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
-import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
+import { useProperty, useAllPhotos, useAvailability } from "@/src/lib/queries";
 import { euro } from "@/src/lib/format";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 
@@ -69,7 +69,7 @@ export default function HomeScreen() {
   const qc = useQueryClient();
 
   const property = useProperty();
-  const photos = usePhotos();
+  const allPhotos = useAllPhotos();
   const availability = useAvailability();
 
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
@@ -83,6 +83,7 @@ export default function HomeScreen() {
   const onRefresh = () => {
     qc.invalidateQueries({ queryKey: ["property"] });
     qc.invalidateQueries({ queryKey: ["photos"] });
+    qc.invalidateQueries({ queryKey: ["gallery-photos"] });
     qc.invalidateQueries({ queryKey: ["availability"] });
   };
 
@@ -162,17 +163,40 @@ export default function HomeScreen() {
             </Card>
           </Animated.View>
 
-          {/* 2. Galleria */}
-          {photos.data && photos.data.length > 0 ? (
-            <View style={s.section}>
+          {/* 2. Foto: la casa prima, poi la galleria */}
+          {allPhotos.data.length > 0 ? (
+            <View style={s.section} testID="home-photos">
               <SectionTitle title={t("home_new.gallery_title")} />
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
-                {photos.data.map((p, i) => (
-                  <Pressable key={p.id} onPress={() => setViewerIndex(i)} testID={`gallery-photo-${i}`} accessibilityRole="imagebutton">
-                    <Image source={{ uri: p.data_url }} style={s.galleryImg} contentFit="cover" transition={200} />
-                  </Pressable>
-                ))}
-              </ScrollView>
+              <Pressable onPress={() => setViewerIndex(0)} testID="gallery-photo-0" accessibilityRole="imagebutton">
+                <Image source={{ uri: allPhotos.data[0].data_url }} style={s.photoMain} contentFit="cover" transition={200} />
+              </Pressable>
+              <View style={s.photoGrid}>
+                {allPhotos.data.slice(1, 5).map((p, k) => {
+                  const i = k + 1;
+                  const rest = allPhotos.data.length - 5;
+                  const last = k === 3 && rest > 0;
+                  return (
+                    <Pressable
+                      key={p.id}
+                      style={s.photoCell}
+                      onPress={() => (last ? router.push("/photos") : setViewerIndex(i))}
+                      testID={`gallery-photo-${i}`}
+                      accessibilityRole="imagebutton"
+                    >
+                      <Image source={{ uri: p.data_url }} style={s.photoThumb} contentFit="cover" transition={200} />
+                      {last ? (
+                        <View style={s.moreOverlay}>
+                          <Text style={s.moreTxt}>+{rest}</Text>
+                        </View>
+                      ) : null}
+                    </Pressable>
+                  );
+                })}
+              </View>
+              <Pressable testID="home-all-photos" onPress={() => router.push("/photos")} style={s.allPhotosBtn} accessibilityRole="button">
+                <Icon name="image-multiple-outline" size={18} color={colors.onSurface} />
+                <Text style={s.allPhotosTxt}>{t("home_new.all_photos", { count: allPhotos.data.length })}</Text>
+              </Pressable>
             </View>
           ) : null}
 
@@ -221,7 +245,7 @@ export default function HomeScreen() {
 
       {/* Festival popup */}
       <PhotoViewer
-        photos={(photos.data ?? []).map((p) => ({ id: p.id, uri: p.data_url }))}
+        photos={allPhotos.data.map((p) => ({ id: p.id, uri: p.data_url }))}
         index={viewerIndex}
         onClose={() => setViewerIndex(null)}
       />
@@ -277,6 +301,14 @@ const useStyles = makeStyles((c) => ({
   amenities: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm, marginTop: spacing.md },
   amenityChip: { flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: c.surfaceTertiary, paddingHorizontal: 12, paddingVertical: 8, borderRadius: radius.pill },
   amenityTxt: { color: c.onSurfaceTertiary, fontSize: 13, fontFamily: fonts.body },
+  photoMain: { width: "100%", aspectRatio: 4 / 3, borderRadius: radius.lg, backgroundColor: c.surfaceTertiary },
+  photoGrid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm, marginTop: spacing.sm },
+  photoCell: { flexBasis: "48%", flexGrow: 1, aspectRatio: 4 / 3, borderRadius: radius.md, overflow: "hidden", backgroundColor: c.surfaceTertiary },
+  photoThumb: { width: "100%", height: "100%" },
+  moreOverlay: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(28,26,24,0.55)", alignItems: "center", justifyContent: "center" },
+  moreTxt: { color: "#FFFFFF", fontSize: 26, fontFamily: fonts.heading },
+  allPhotosBtn: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, marginTop: spacing.sm, paddingVertical: 12, borderRadius: radius.pill, borderWidth: 1, borderColor: c.border, backgroundColor: c.surfaceSecondary },
+  allPhotosTxt: { color: c.onSurface, fontSize: 15, fontWeight: "600", fontFamily: fonts.body },
   galleryImg: { width: 240, height: 170, borderRadius: radius.md, backgroundColor: c.surfaceTertiary },
   help: { color: c.muted, fontSize: 13, marginBottom: spacing.sm, fontFamily: fonts.body },
   legend: { flexDirection: "row", gap: spacing.lg, marginTop: spacing.sm, paddingHorizontal: spacing.sm, paddingBottom: 4 },

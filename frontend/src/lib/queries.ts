@@ -67,6 +67,20 @@ export const usePhotos = () =>
     queryFn: async () => (await api.get<Photo[]>("/photos")).data,
   });
 
+export const useGalleryPhotos = () =>
+  useQuery({
+    queryKey: ["gallery-photos"],
+    queryFn: async () => (await api.get<Photo[]>("/gallery-photos")).data,
+  });
+
+/** All photos for guests: the house first, then the gallery. */
+export const useAllPhotos = () => {
+  const house = usePhotos();
+  const gallery = useGalleryPhotos();
+  const data = [...(house.data ?? []), ...(gallery.data ?? [])];
+  return { data, houseCount: house.data?.length ?? 0, isLoading: house.isLoading };
+};
+
 export const useAvailability = () =>
   useQuery({
     queryKey: ["availability"],

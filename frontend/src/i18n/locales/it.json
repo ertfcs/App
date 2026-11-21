@@ -271,7 +271,7 @@
   },
   "home_new": {
     "no_fees_badge": "Senza commissioni",
-    "gallery_title": "Le foto della casa",
+    "gallery_title": "Le foto",
     "apartment_kicker": "Cosa trovi in casa",
     "all_amenities": "Vedi tutti i servizi ({{count}})",
     "less": "Mostra meno",
@@ -282,7 +282,10 @@
     "perk_beaches": "Spiagge consigliate in base al meteo",
     "perk_food": "Guida gastronomica con tutti i piatti delle province di Palermo e Trapani",
     "guide_title": "Guida al territorio",
-    "perk_festivals": "Sagre e feste di paese"
+    "perk_festivals": "Sagre e feste di paese",
+    "all_photos": "Vedi tutte le foto ({{count}})",
+    "photos_title": "Tutte le foto",
+    "photos_kicker": "{{count}} foto"
   },
   "services": {
     "tab": "Servizi",

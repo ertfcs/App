@@ -253,6 +253,7 @@
     var m;
     if (method === "GET") {
       if (path === "/api/availability") return availability();
+      if (path === "/api/gallery-photos") return DB["/api/private-photos"] || [];
       if (path === "/api/admin/stats") return stats();
       if (path === "/api/admin/accounting") return accounting();
       if (path === "/api/bookings") return bookings().slice().sort(function (a, b) { return a.created_at < b.created_at ? 1 : -1; });

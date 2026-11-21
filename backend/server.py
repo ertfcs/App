@@ -821,6 +821,13 @@ async def reorder_photos(body: PhotoOrderIn, _: str = Depends(get_current_admin)
 # ============================================================
 # Private photos (Galleria — non visibili al pubblico)
 # ============================================================
+@api.get("/gallery-photos", response_model=List[PhotoOut])
+async def list_gallery_photos():
+    """Public read of the admin 'Galleria' photos: the guest home shows them after the house photos."""
+    cur = db.private_photos.find({}, {"_id": 0}).sort("order", 1)
+    return await cur.to_list(500)
+
+
 @api.get("/private-photos", response_model=List[PhotoOut])
 async def list_private_photos(_: str = Depends(get_current_admin)):
     cur = db.private_photos.find({}, {"_id": 0}).sort("order", 1)
