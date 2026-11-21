@@ -11,6 +11,7 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { beaches, windFromDegrees, analyzeBeach, Beach, BeachStatus } from "@/src/lib/beaches";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
+import { ExampleBeachCard, FreeLabel, EXAMPLE_BEACH } from "@/src/components/GuestExamples";
 import i18n from "@/src/i18n";
 
 type Weather = { temp: number; windSpeed: number; windName: string; windLabel: string; uv: number; sunset: string };
@@ -178,7 +179,7 @@ export default function BeachesScreen() {
       <Header title="Spiagge" kicker="Bussola dei venti" showBack />
       <FlatList
         testID="beaches-list"
-        data={unlocked ? filtered : beaches.filter((b) => b.id === "cala-rossa-favignana")}
+        data={unlocked ? filtered : []}
         keyExtractor={(b) => b.id}
         renderItem={renderItem}
         keyboardShouldPersistTaps="handled"
@@ -186,7 +187,9 @@ export default function BeachesScreen() {
         showsVerticalScrollIndicator={false}
         ListFooterComponent={
           unlocked ? null : (
-            <LockedSection title={`Altre ${beaches.length - 1} spiagge con il vento di oggi`} text="Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare." />
+            <LockedSection
+              names={beaches.filter((b) => b.id !== EXAMPLE_BEACH.id).slice(0, 6).map((b) => `${b.name} · ${b.location}`)}
+              title={`Altre ${beaches.length - 1} spiagge con il vento di oggi`} text="Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare." />
           )
         }
         ListHeaderComponent={
@@ -232,7 +235,16 @@ export default function BeachesScreen() {
                 <Text style={s.count}>{filtered.length} spiagge</Text>
               </>
             ) : (
-              <Text style={s.count}>Esempio gratuito</Text>
+              <View style={{ gap: spacing.md, paddingTop: spacing.md }}>
+                <View style={{ paddingHorizontal: spacing.md }}>
+                  <FreeLabel />
+                </View>
+                {beaches
+                  .filter((b) => b.id === EXAMPLE_BEACH.id)
+                  .map((b) => (
+                    <ExampleBeachCard key={b.id} beach={b} windName={windName} />
+                  ))}
+              </View>
             )}
           </View>
         }

@@ -15,6 +15,7 @@ import { useItinerary } from "@/src/lib/itinerary";
 import { ItineraryFab } from "@/src/components/ItineraryFab";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
+import { ExamplePlaceCard, FreeLabel } from "@/src/components/GuestExamples";
 
 const CATEGORY_META: Record<string, { icon: IconName; color: (c: any) => string }> = {
   art: { icon: "bank", color: (c) => c.brandPrimary },
@@ -52,7 +53,8 @@ export default function PlacesScreen() {
     }
     return list;
   }, [pois.data, cat, q]);
-  const shown = unlocked ? filtered : (pois.data ?? []).filter((p) => FREE_PLACES.includes(p.name));
+  const examples = (pois.data ?? []).filter((p) => FREE_PLACES.includes(p.name));
+  const lockedNames = (pois.data ?? []).filter((p) => !FREE_PLACES.includes(p.name)).slice(0, 6).map((p) => p.name);
 
   const openDirections = (p: Poi) => {
     const url = p.maps_url || `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
@@ -116,7 +118,7 @@ export default function PlacesScreen() {
       ) : (
         <FlatList
           testID="poi-list"
-          data={shown}
+          data={unlocked ? filtered : []}
           keyExtractor={(p) => p.id}
           renderItem={renderItem}
           contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl, gap: spacing.sm }}
@@ -127,19 +129,27 @@ export default function PlacesScreen() {
                 <Text style={s.count}>{filtered.length} {t("map_page.itinerary_count")}</Text>
               </View>
             ) : (
-              <Text style={s.count}>{t("lock.free_examples")}</Text>
+              <View style={{ gap: spacing.md, marginHorizontal: -spacing.md }}>
+                <View style={{ paddingHorizontal: spacing.md }}>
+                  <FreeLabel />
+                </View>
+                {examples.map((p) => (
+                  <ExamplePlaceCard key={p.id} poi={p} />
+                ))}
+              </View>
             )
           }
           ListFooterComponent={
             unlocked ? null : (
               <LockedSection
                 compact
-                title={t("lock.places_title", { count: Math.max(0, (pois.data?.length ?? 0) - shown.length) })}
+                names={lockedNames}
+                title={t("lock.places_title", { count: Math.max(0, (pois.data?.length ?? 0) - examples.length) })}
                 text={t("lock.places_text")}
               />
             )
           }
-          ListEmptyComponent={<EmptyState icon="map-search-outline" title={t("map_page.no_results")} />}
+          ListEmptyComponent={unlocked ? <EmptyState icon="map-search-outline" title={t("map_page.no_results")} /> : null}
           showsVerticalScrollIndicator={false}
         />
       )}

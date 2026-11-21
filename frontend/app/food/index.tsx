@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
+import { ExampleDishCard, FreeLabel } from "@/src/components/GuestExamples";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -95,7 +96,7 @@ export default function FoodList() {
       />
       <FlatList
         testID="food-list"
-        data={unlocked ? filtered : (dishes.data ?? []).filter((d) => d.id === "arancina" || d.id === "pane-ca-meusa")}
+        data={unlocked ? filtered : []}
         keyExtractor={(d) => d.id}
         renderItem={renderItem}
         numColumns={2}
@@ -120,17 +121,28 @@ export default function FoodList() {
                 <ChipRow items={chips} selected={cat} onSelect={setCat} />
               </>
             ) : (
-              <Text style={s.freeLabel}>Esempio gratuito</Text>
+              <View style={{ gap: spacing.md, paddingTop: spacing.md }}>
+                <View style={{ paddingHorizontal: spacing.md }}>
+                  <FreeLabel />
+                </View>
+                {(dishes.data ?? [])
+                  .filter((d) => d.id === "arancina" || d.id === "pane-ca-meusa")
+                  .map((d) => (
+                    <ExampleDishCard key={d.id} dish={d} />
+                  ))}
+              </View>
             )}
           </View>
         }
         ListFooterComponent={
           unlocked ? null : (
-            <LockedSection title={`Altri ${(dishes.data?.length ?? 0) - 2} piatti ti aspettano`} text="Inserisci il codice della prenotazione per sbloccare tutta la guida gastronomica." />
+            <LockedSection
+              names={(dishes.data ?? []).filter((d) => d.id !== "arancina" && d.id !== "pane-ca-meusa").slice(0, 6).map((d) => d.name)}
+              title={`Altri ${(dishes.data?.length ?? 0) - 2} piatti ti aspettano`} text="Inserisci il codice della prenotazione per sbloccare tutta la guida gastronomica." />
           )
         }
         ListEmptyComponent={
-          <EmptyState icon="heart-off-outline" title="Nessun piatto" subtitle={favOnly ? "Aggiungi i tuoi preferiti col cuore" : "Nessun risultato"} />
+          !unlocked ? null : <EmptyState icon="heart-off-outline" title="Nessun piatto" subtitle={favOnly ? "Aggiungi i tuoi preferiti col cuore" : "Nessun risultato"} />
         }
       />
     </View>

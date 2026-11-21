@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Platform } from "react-native";
 import { router } from "expo-router";
 import { useTranslation } from "react-i18next";
 
@@ -10,7 +10,7 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 
 /** Code box shown under the free examples of a guest section (or on its own with `compact`). */
-export function LockedSection({ title, text, compact }: { title: string; text: string; compact?: boolean }) {
+export function LockedSection({ title, text, compact, names }: { title: string; text: string; compact?: boolean; names?: string[] }) {
   const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
@@ -34,6 +34,18 @@ export function LockedSection({ title, text, compact }: { title: string; text: s
 
   return (
     <View style={[s.box, compact && s.compact]} testID="locked-section">
+      {names?.length ? (
+        <View style={s.ghost} aria-hidden accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+          {names.map((n) => (
+            <View key={n} style={s.ghostRow}>
+              <View style={s.ghostThumb} />
+              <Text style={[s.ghostTxt, BLUR]} numberOfLines={1}>
+                {n}
+              </Text>
+            </View>
+          ))}
+        </View>
+      ) : null}
       <View style={s.head}>
         <View style={s.lockIcon}>
           <Icon name="lock-outline" size={22} color={colors.brandPrimary} />
@@ -52,6 +64,9 @@ export function LockedSection({ title, text, compact }: { title: string; text: s
     </View>
   );
 }
+
+// Blurred names on web; dimmed elsewhere (native has no CSS blur).
+const BLUR: any = Platform.OS === "web" ? { filter: "blur(4px)", userSelect: "none" } : { opacity: 0.25 };
 
 /** Small green line shown once the sections are unlocked. */
 export function UnlockedNote() {
@@ -78,6 +93,10 @@ const useStyles = makeStyles((c) => ({
     backgroundColor: c.surfaceSecondary,
   },
   compact: { marginHorizontal: 0, marginTop: 0 },
+  ghost: { gap: 8, marginBottom: spacing.sm },
+  ghostRow: { flexDirection: "row", alignItems: "center", gap: 10, padding: 10, borderRadius: radius.md, backgroundColor: c.surfaceTertiary, opacity: 0.85 },
+  ghostThumb: { width: 36, height: 36, borderRadius: 8, backgroundColor: c.border },
+  ghostTxt: { flex: 1, color: c.onSurface, fontSize: 14, fontWeight: "600", fontFamily: fonts.body },
   head: { flexDirection: "row", gap: spacing.md, alignItems: "flex-start", marginBottom: 4 },
   lockIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
   title: { color: c.onSurface, fontSize: 18, fontFamily: fonts.heading },
