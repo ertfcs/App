@@ -60,7 +60,8 @@
     "back": "Indietro",
     "total": "Totale",
     "dates_title": "Scegli le date",
-    "submit_short": "Invia richiesta"
+    "submit_short": "Invia richiesta",
+    "change_dates": "Cambia date"
   },
   "calendar": {
     "kicker": "Calendario",
@@ -287,7 +288,9 @@
     "photos_title": "Tutte le foto",
     "photos_kicker": "{{count}} foto",
     "keyring_photo_soon": "La foto del portachiavi arriva a breve",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "pick_dates": "Scegli le date del tuo soggiorno",
+    "see_availability": "Vedi disponibilità"
   },
   "services": {
     "tab": "Servizi",

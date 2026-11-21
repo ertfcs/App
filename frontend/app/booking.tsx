@@ -40,6 +40,8 @@ export default function BookingScreen() {
   const end = range.end || "";
   const nights = nightsBetween(start, end);
   const canQuote = !!start && !!end && nights > 0;
+  const [showCalendar, setShowCalendar] = useState(!(params.start && params.end));
+  const fmtDate = (iso: string) => (iso ? new Date(iso + "T00:00:00").toLocaleDateString(undefined, { day: "numeric", month: "short" }) : "");
 
   const quoteBody = useMemo(
     () => ({
@@ -113,16 +115,31 @@ export default function BookingScreen() {
         bottomOffset={20}
         showsVerticalScrollIndicator={false}
       >
-        {/* Dates: pick them right here */}
-        <Card style={{ padding: spacing.sm }}>
-          <View style={{ paddingHorizontal: spacing.sm, paddingTop: spacing.xs }}>
-            <SectionTitle title={t("booking.dates_title")} />
-          </View>
-          <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} testID="booking-calendar" />
-          <View style={{ paddingHorizontal: spacing.sm }}>
-            <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
-          </View>
-        </Card>
+        {/* Dates: chosen on the home page (summary + "Cambia date"), or picked here */}
+        {showCalendar ? (
+          <Card style={{ padding: spacing.sm }}>
+            <View style={{ paddingHorizontal: spacing.sm, paddingTop: spacing.xs }}>
+              <SectionTitle title={t("booking.dates_title")} />
+            </View>
+            <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} testID="booking-calendar" />
+            <View style={{ paddingHorizontal: spacing.sm }}>
+              <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
+            </View>
+          </Card>
+        ) : (
+          <Card style={s.datesCard} testID="booking-dates-summary">
+            <Icon name="calendar-check" size={22} color={colors.olive} />
+            <View style={{ flex: 1 }}>
+              <Text style={s.datesLabel}>{t("booking.dates_title")}</Text>
+              <Text style={s.datesValue}>
+                {fmtDate(start)} → {fmtDate(end)} · {t(nights === 1 ? "calendar.night_one" : "calendar.night_other", { n: nights })}
+              </Text>
+            </View>
+            <Pressable testID="booking-change-dates" onPress={() => setShowCalendar(true)} hitSlop={8}>
+              <Text style={s.datesChange}>{t("booking.change_dates")}</Text>
+            </Pressable>
+          </Card>
+        )}
 
         {/* Guests + AC */}
         <Card style={{ marginTop: spacing.md, gap: spacing.md }}>
@@ -154,31 +171,6 @@ export default function BookingScreen() {
               trackColor={{ true: colors.olive, false: colors.border }}
               thumbColor="#fff"
             />
-          </View>
-        </Card>
-
-        {/* Gift / Omaggio */}
-        <Card testID="gift-card" style={s.giftCard}>
-          <View style={s.giftHead}>
-            <View style={s.giftBadge}>
-              <Icon name="gift-outline" size={16} color={colors.onOlive} />
-              <Text style={s.giftBadgeTxt}>IN OMAGGIO</Text>
-            </View>
-            <Text style={s.giftTitle}>Con la tua prenotazione</Text>
-          </View>
-          <View style={s.giftRow}>
-            <Icon name="key-chain" size={20} color={colors.olive} />
-            <View style={{ flex: 1 }}>
-              <Text style={s.giftItemTitle}>Portachiavi souvenir</Text>
-              <Text style={s.giftItemDesc}>Un ricordo siciliano che troverai in casa al tuo arrivo.</Text>
-            </View>
-          </View>
-          <View style={s.giftRow}>
-            <Icon name="map-marker-path" size={20} color={colors.olive} />
-            <View style={{ flex: 1 }}>
-              <Text style={s.giftItemTitle}>Itinerario digitale personalizzato</Text>
-              <Text style={s.giftItemDesc}>Mappa interattiva sbloccata e PDF dei luoghi da non perdere.</Text>
-            </View>
           </View>
         </Card>
 
@@ -271,6 +263,10 @@ function QuoteRow({ label, value, highlight }: { label: string; value: string; h
 }
 
 const useStyles = makeStyles((c) => ({
+  datesCard: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
+  datesLabel: { color: c.muted, fontSize: 11, fontWeight: "700", letterSpacing: 0.6, textTransform: "uppercase", fontFamily: fonts.body },
+  datesValue: { color: c.onSurface, fontSize: 16, fontFamily: fonts.heading, marginTop: 2 },
+  datesChange: { color: c.brandPrimary, fontSize: 14, fontWeight: "700", fontFamily: fonts.body },
   footer: {
     flexDirection: "row",
     alignItems: "center",

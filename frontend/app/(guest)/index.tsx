@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, View, Text, Pressable, RefreshControl, Modal } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
@@ -17,6 +17,7 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, useAllPhotos, useAvailability } from "@/src/lib/queries";
 import { euro } from "@/src/lib/format";
 import { useGuestAccess } from "@/src/lib/guestAccess";
+import { DateRangeCalendar, DateRange, RangeHint } from "@/src/components/DateRangeCalendar";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 const AMENITIES_PREVIEW = 6;
@@ -74,9 +75,15 @@ export default function HomeScreen() {
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [showAllAmenities, setShowAllAmenities] = useState(false);
   const [keyringOpen, setKeyringOpen] = useState(false);
+  const [range, setRange] = useState<DateRange>({ start: null, end: null });
   const { unlocked } = useGuestAccess();
 
   const av = availability.data;
+  const blocked = useMemo(() => new Set(av?.blocked_dates ?? []), [av]);
+  const seeAvailability = () =>
+    range.start && range.end
+      ? router.push({ pathname: "/booking", params: { start: range.start, end: range.end } })
+      : router.push("/booking");
   const amenities = showAllAmenities
     ? property.data?.amenities ?? []
     : (property.data?.amenities ?? []).slice(0, AMENITIES_PREVIEW);
@@ -158,12 +165,12 @@ export default function HomeScreen() {
                 </View>
                 <PerkRow perk={ITINERARY} label={t("home_new.perk_itinerary")} />
               </View>
-              <Button
-                testID="home-book-cta"
-                label={t("booking.title")}
-                icon="calendar-check"
-                onPress={() => router.push("/booking")}
-              />
+              <View style={s.calWrap}>
+                <Text style={s.perksTitle}>{t("home_new.pick_dates")}</Text>
+                <DateRangeCalendar blocked={blocked} value={range} onChange={setRange} testID="home-calendar" />
+                <RangeHint value={range} onClear={() => setRange({ start: null, end: null })} />
+              </View>
+              <Button testID="home-book-cta" label={t("home_new.see_availability")} icon="calendar-check" onPress={seeAvailability} />
             </Card>
           </Animated.View>
 
@@ -364,6 +371,7 @@ const useStyles = makeStyles((c) => ({
   previewTxt: { color: "#FFFFFF", fontSize: 11, fontWeight: "700", fontFamily: fonts.body },
   pastelPill: { backgroundColor: "#DCE6D2", paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
   pastelTxt: { color: "#4E5E40", fontSize: 11, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 0.2 },
+  calWrap: { borderTopWidth: 1, borderTopColor: c.border, paddingTop: spacing.md, marginBottom: spacing.md },
   codeHero: { flexDirection: "row", gap: spacing.sm, alignItems: "center", backgroundColor: c.brandPrimary, borderRadius: radius.lg, padding: spacing.md, marginBottom: spacing.md },
   codeHeroIcon: { width: 42, height: 42, borderRadius: 21, backgroundColor: "#FFFFFF", alignItems: "center", justifyContent: "center" },
   codeHeroTitle: { color: "#FFFFFF", fontSize: 17, fontFamily: fonts.heading },
