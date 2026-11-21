@@ -30,7 +30,7 @@ const PERKS: Perk[] = [
 const GUIDE: Perk[] = [
   { key: "places", icon: "bank-outline", href: "/places", locked: true },
   { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
-  { key: "festivals", icon: "calendar-star", href: "/festivals", locked: true },
+  { key: "festivals", icon: "calendar-star", href: "/festivals" },
   { key: "food", icon: "silverware-fork-knife", href: "/food", locked: true },
 ];
 

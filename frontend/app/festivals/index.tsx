@@ -1,7 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { View, Text, FlatList } from "react-native";
-import { useGuestAccess } from "@/src/lib/guestAccess";
-import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
 import { Header } from "@/src/components/Header";
@@ -30,7 +28,6 @@ export default function FestivalsScreen() {
   const s = useStyles();
   const { colors } = useTheme();
   const [filter, setFilter] = useState("all");
-  const { unlocked } = useGuestAccess();
   const all = useMemo(() => upcomingFestivals(), []);
   const sorted = useMemo(() => {
     if (filter === "all") return all;
@@ -87,32 +84,20 @@ export default function FestivalsScreen() {
       <Header title="Feste & Sagre" kicker="Palermo & Trapani" showBack />
       <FlatList
         testID="festivals-list"
-        data={unlocked ? sorted : all.slice(0, 1)}
+        data={sorted}
         keyExtractor={(f) => f.id}
         renderItem={renderItem}
         contentContainerStyle={{ padding: spacing.md, gap: spacing.md, paddingBottom: spacing.xxl }}
         showsVerticalScrollIndicator={false}
-        ListFooterComponent={
-          unlocked ? null : (
-            <LockedSection compact title={`Altre ${all.length - 1} feste e sagre`} text="Inserisci il codice della prenotazione per vedere tutte le feste dei prossimi 12 mesi." />
-          )
-        }
         ListHeaderComponent={
           <View style={s.intro}>
             <Text style={s.introTxt}>
               {FESTIVAL_COUNT} ricorrenze: i santi patroni di tutti i comuni delle province di Palermo e Trapani, sagre, riti tradizionali e festività nazionali. Elenco dei prossimi 12 mesi; le date segnate come "indicativo" vanno verificate sui siti ufficiali prima di partire.
             </Text>
-            {unlocked ? (
-              <>
-                <View style={{ marginHorizontal: -spacing.md }}>
-                  <UnlockedNote />
-                  <ChipRow items={FILTERS} selected={filter} onSelect={setFilter} />
-                </View>
-                <Text style={s.introTxt} testID="festivals-count">{sorted.length} eventi in elenco</Text>
-              </>
-            ) : (
-              <Text style={s.introTxt}>La prossima festa è aperta a tutti:</Text>
-            )}
+            <View style={{ marginHorizontal: -spacing.md }}>
+              <ChipRow items={FILTERS} selected={filter} onSelect={setFilter} />
+            </View>
+            <Text style={s.introTxt} testID="festivals-count">{sorted.length} eventi in elenco</Text>
           </View>
         }
       />
