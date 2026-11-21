@@ -1,35 +1,32 @@
 import React, { useMemo } from "react";
-import { ScrollView, View, Text, Pressable } from "react-native";
+import { ScrollView, View, Text, Pressable, useWindowDimensions } from "react-native";
 import { useTranslation } from "react-i18next";
 import { router, type Href } from "expo-router";
 
 import { Header } from "@/src/components/Header";
 import { Icon, IconName } from "@/src/components/Icon";
-import { makeStyles, useTheme } from "@/src/theme";
+import { makeStyles } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals } from "@/src/lib/festivals";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 
-// The guest services, each opening its own section (texts in i18n "services.<key>_*").
-type Service = { key: string; icon: IconName; href: Href; locked?: boolean };
-const GUIDE: Service[] = [
-  { key: "places", icon: "bank-outline", href: "/places", locked: true },
-  { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
-  { key: "festivals", icon: "calendar-star", href: "/festivals" },
-  { key: "food", icon: "silverware-fork-knife", href: "/food", locked: true },
-];
-const OTHERS: Service[] = [
-  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map", locked: true },
-  { key: "keyring", icon: "key-variant", href: "/booking" },
+// The four territory guides as colour tiles (soft bohemian palette, readable in both themes).
+type Tile = { key: string; icon: IconName; href: Href; bg: string; ink: string; locked: boolean };
+const TILES: Tile[] = [
+  { key: "places", icon: "bank-outline", href: "/places", bg: "#F3DCCD", ink: "#8A4A2B", locked: true },
+  { key: "beaches", icon: "umbrella-beach-outline", href: "/beaches", bg: "#D3E4E6", ink: "#36616B", locked: true },
+  { key: "food", icon: "silverware-fork-knife", href: "/food", bg: "#DFE7D2", ink: "#4E5E40", locked: true },
+  { key: "festivals", icon: "party-popper", href: "/festivals", bg: "#F2E5BF", ink: "#7A5E1C", locked: false },
 ];
 
 export default function ServicesScreen() {
   const { t } = useTranslation();
   const s = useStyles();
-  const { colors } = useTheme();
+  const { width } = useWindowDimensions();
   const { unlocked } = useGuestAccess();
   const nextFestival = useMemo(() => upcomingFestivals()[0], []);
+  const wide = width >= 760;
 
   return (
     <View style={s.screen}>
@@ -38,63 +35,34 @@ export default function ServicesScreen() {
         <Text style={s.intro}>{t("services.intro")}</Text>
         {unlocked ? <UnlockedNote /> : <LockedSection compact title={t("lock.services_title")} text={t("lock.services_text")} />}
         <Text style={s.group}>{t("services.guide_title")}</Text>
-        {GUIDE.map((sv) => (
-          <Pressable
-            key={sv.key}
-            testID={`service-${sv.key}`}
-            accessibilityRole="button"
-            style={({ pressed }) => [s.card, pressed && { opacity: 0.85 }]}
-            onPress={() => router.push(sv.href)}
-          >
-            <View style={s.iconWrap}>
-              <Icon name={sv.icon} size={26} color={colors.brandPrimary} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={s.title}>{t(`services.${sv.key}_title`)}</Text>
-              <Text style={s.sub}>
-                {sv.key === "festivals" && nextFestival
-                  ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
-                  : t(`services.${sv.key}_sub`)}
+        <View style={s.grid}>
+          {TILES.map((tl) => (
+            <Pressable
+              key={tl.key}
+              testID={`service-${tl.key}`}
+              accessibilityRole="button"
+              onPress={() => router.push(tl.href)}
+              style={({ pressed }) => [s.tile, { backgroundColor: tl.bg, flexBasis: wide ? "23%" : "47%" }, pressed && { opacity: 0.85 }]}
+            >
+              <View style={s.tileIcon}>
+                <Icon name={tl.icon} size={30} color={tl.ink} />
+              </View>
+              <Text style={[s.tileTitle, { color: tl.ink }]}>{t(`services.${tl.key}_short`)}</Text>
+              <Text style={s.tileSub} numberOfLines={3}>
+                {tl.key === "festivals" && nextFestival ? t("services.festivals_next_short", { name: nextFestival.name }) : t(`services.${tl.key}_tile`)}
               </Text>
-              {sv.locked && !unlocked ? (
-                <View style={s.previewPill}>
-                  <Icon name="lock-outline" size={12} color="#FFFFFF" />
-                  <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+              {tl.locked && !unlocked ? (
+                <View style={s.pastelPill}>
+                  <Text style={s.pastelTxt}>{t("lock.see_preview")}</Text>
                 </View>
-              ) : null}
-            </View>
-            <Icon name="chevron-right" size={24} color={colors.muted} />
-          </Pressable>
-        ))}
-        <Text style={s.group}>{t("services.others_title")}</Text>
-        {OTHERS.map((sv) => (
-          <Pressable
-            key={sv.key}
-            testID={`service-${sv.key}`}
-            accessibilityRole="button"
-            style={({ pressed }) => [s.card, pressed && { opacity: 0.85 }]}
-            onPress={() => router.push(sv.href)}
-          >
-            <View style={s.iconWrap}>
-              <Icon name={sv.icon} size={26} color={colors.brandPrimary} />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={s.title}>{t(`services.${sv.key}_title`)}</Text>
-              <Text style={s.sub}>
-                {sv.key === "festivals" && nextFestival
-                  ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
-                  : t(`services.${sv.key}_sub`)}
-              </Text>
-              {sv.locked && !unlocked ? (
-                <View style={s.previewPill}>
-                  <Icon name="lock-outline" size={12} color="#FFFFFF" />
-                  <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+              ) : (
+                <View style={[s.pastelPill, { backgroundColor: "rgba(255,255,255,0.6)" }]}>
+                  <Text style={[s.pastelTxt, { color: tl.ink }]}>{t("services.open")}</Text>
                 </View>
-              ) : null}
-            </View>
-            <Icon name="chevron-right" size={24} color={colors.muted} />
-          </Pressable>
-        ))}
+              )}
+            </Pressable>
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -103,21 +71,13 @@ export default function ServicesScreen() {
 const useStyles = makeStyles((c) => ({
   screen: { flex: 1, backgroundColor: c.surface },
   content: { padding: spacing.md, gap: spacing.sm, paddingBottom: spacing.xxl },
-  previewPill: { alignSelf: "flex-start", marginTop: 8, flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: c.success, paddingHorizontal: 10, paddingVertical: 6, borderRadius: radius.pill },
-  previewTxt: { color: "#FFFFFF", fontSize: 12, fontWeight: "700", fontFamily: fonts.body },
-  group: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body, marginTop: spacing.md },
   intro: { color: c.onSurfaceSecondary, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, marginBottom: spacing.sm },
-  card: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.md,
-    backgroundColor: c.surfaceSecondary,
-    borderRadius: radius.lg,
-    borderWidth: 1,
-    borderColor: c.border,
-    padding: spacing.md,
-  },
-  iconWrap: { width: 52, height: 52, borderRadius: 26, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
-  title: { color: c.onSurface, fontSize: 17, fontFamily: fonts.heading },
-  sub: { color: c.onSurfaceSecondary, fontSize: 13, lineHeight: 18, fontFamily: fonts.body, marginTop: 2 },
+  group: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body, marginTop: spacing.md },
+  grid: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
+  tile: { flexGrow: 1, borderRadius: radius.lg, padding: spacing.md, gap: 6, minHeight: 190 },
+  tileIcon: { width: 56, height: 56, borderRadius: 28, backgroundColor: "rgba(255,255,255,0.65)", alignItems: "center", justifyContent: "center", marginBottom: 4 },
+  tileTitle: { fontSize: 20, lineHeight: 24, fontFamily: fonts.heading },
+  tileSub: { color: "#3B3631", fontSize: 13, lineHeight: 18, fontFamily: fonts.body, flexGrow: 1 },
+  pastelPill: { alignSelf: "flex-start", backgroundColor: "#DCE6D2", paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
+  pastelTxt: { color: "#4E5E40", fontSize: 11, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 0.2 },
 }));

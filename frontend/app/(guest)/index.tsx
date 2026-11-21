@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View, Text, Pressable, RefreshControl } from "react-native";
+import { ScrollView, View, Text, Pressable, RefreshControl, Modal } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
@@ -22,11 +22,11 @@ const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 const AMENITIES_PREVIEW = 6;
 
 // What guests receive when booking here (texts in i18n "home_new.perk_<key>"); each row opens its section.
-type Perk = { key: string; icon: IconName; href: Href; locked?: boolean };
-const PERKS: Perk[] = [
-  { key: "keyring", icon: "key-variant", href: "/booking" },
-  { key: "itinerary", icon: "file-pdf-box", href: "/(guest)/map", locked: true },
-];
+type Perk = { key: string; icon: IconName; href?: Href; locked?: boolean };
+const KEYRING: Perk = { key: "keyring", icon: "key-chain-variant" };
+const ITINERARY: Perk = { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" };
+// Photo of the souvenir keyring: set it here once the file is in assets/images (null = "photo coming soon").
+const KEYRING_PHOTO: number | null = null;
 const GUIDE: Perk[] = [
   { key: "places", icon: "bank-outline", href: "/places", locked: true },
   { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
@@ -34,7 +34,7 @@ const GUIDE: Perk[] = [
   { key: "food", icon: "silverware-fork-knife", href: "/food", locked: true },
 ];
 
-function PerkRow({ perk, label }: { perk: Perk; label: string }) {
+function PerkRow({ perk, label, onPress }: { perk: Perk; label: string; onPress?: () => void }) {
   const s = useStyles();
   const { t } = useTranslation();
   const { unlocked } = useGuestAccess();
@@ -43,7 +43,7 @@ function PerkRow({ perk, label }: { perk: Perk; label: string }) {
     <Pressable
       testID={`perk-${perk.key}`}
       accessibilityRole="link"
-      onPress={() => router.push(perk.href)}
+      onPress={() => (onPress ? onPress() : perk.href && router.push(perk.href))}
       style={({ pressed }) => [s.perk, pressed && { opacity: 0.7 }]}
     >
       <View style={s.perkIcon}>
@@ -51,9 +51,8 @@ function PerkRow({ perk, label }: { perk: Perk; label: string }) {
       </View>
       <Text style={s.perkTxt}>{label}</Text>
       {perk.locked && !unlocked ? (
-        <View style={s.previewPill}>
-          <Icon name="lock-outline" size={12} color="#FFFFFF" />
-          <Text style={s.previewTxt}>{t("lock.see_preview")}</Text>
+        <View style={s.pastelPill}>
+          <Text style={s.pastelTxt}>{t("lock.see_preview")}</Text>
         </View>
       ) : (
         <Icon name="chevron-right" size={20} color={colors.muted} />
@@ -74,6 +73,7 @@ export default function HomeScreen() {
 
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [showAllAmenities, setShowAllAmenities] = useState(false);
+  const [keyringOpen, setKeyringOpen] = useState(false);
   const { unlocked } = useGuestAccess();
 
   const av = availability.data;
@@ -136,14 +136,17 @@ export default function HomeScreen() {
                 </View>
               </View>
               <Text style={s.perksTitle}>{t("home_new.perks_title")}</Text>
-              <View style={s.codeNote}>
-                <Icon name={unlocked ? "lock-open-variant" : "key-variant"} size={18} color={unlocked ? colors.success : colors.brandPrimary} />
-                <Text style={s.codeNoteTxt}>{unlocked ? t("lock.home_unlocked") : t("lock.home_note")}</Text>
+              <View style={[s.codeHero, unlocked && { backgroundColor: colors.success }]} testID="home-code-note">
+                <View style={s.codeHeroIcon}>
+                  <Icon name={unlocked ? "lock-open-variant" : "key-variant"} size={22} color={unlocked ? colors.success : colors.brandPrimary} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={s.codeHeroTitle}>{unlocked ? t("lock.home_unlocked_title") : t("lock.home_code_title")}</Text>
+                  <Text style={s.codeHeroTxt}>{unlocked ? t("lock.home_unlocked") : t("lock.home_note")}</Text>
+                </View>
               </View>
               <View style={s.perks}>
-                {PERKS.map((p) => (
-                  <PerkRow key={p.key} perk={p} label={t(`home_new.perk_${p.key}`)} />
-                ))}
+                <PerkRow perk={KEYRING} label={t("home_new.perk_keyring")} onPress={() => setKeyringOpen(true)} />
                 <View style={s.guide}>
                   <View style={s.guideHead}>
                     <Icon name="compass-outline" size={18} color={colors.olive} />
@@ -153,6 +156,7 @@ export default function HomeScreen() {
                     <PerkRow key={p.key} perk={p} label={t(`home_new.perk_${p.key}`)} />
                   ))}
                 </View>
+                <PerkRow perk={ITINERARY} label={t("home_new.perk_itinerary")} />
               </View>
               <Button
                 testID="home-book-cta"
@@ -244,6 +248,26 @@ export default function HomeScreen() {
       </ScrollView>
 
       {/* Festival popup */}
+      <Modal visible={keyringOpen} transparent animationType="fade" onRequestClose={() => setKeyringOpen(false)}>
+        <Pressable style={s.kBackdrop} onPress={() => setKeyringOpen(false)} testID="keyring-backdrop">
+          <Pressable style={s.kSheet} onPress={() => {}}>
+            {KEYRING_PHOTO ? (
+              <Image source={KEYRING_PHOTO} style={s.kPhoto} contentFit="cover" />
+            ) : (
+              <View style={[s.kPhoto, s.kPlaceholder]}>
+                <Icon name="key-chain-variant" size={48} color={colors.brandPrimary} />
+                <Text style={s.kSoon}>{t("home_new.keyring_photo_soon")}</Text>
+              </View>
+            )}
+            <View style={{ padding: spacing.md, gap: spacing.sm }}>
+              <Text style={s.kTitle}>{t("souvenir.title")}</Text>
+              <Text style={s.kTxt}>{t("souvenir.description")}</Text>
+              <Text style={s.kNote}>{t("souvenir.gift_note")}</Text>
+              <Button testID="keyring-close" label={t("home_new.close")} variant="outline" onPress={() => setKeyringOpen(false)} />
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
       <PhotoViewer
         photos={allPhotos.data.map((p) => ({ id: p.id, uri: p.data_url }))}
         index={viewerIndex}
@@ -338,6 +362,20 @@ const useStyles = makeStyles((c) => ({
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
   previewPill: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: c.success, paddingHorizontal: 9, paddingVertical: 5, borderRadius: radius.pill },
   previewTxt: { color: "#FFFFFF", fontSize: 11, fontWeight: "700", fontFamily: fonts.body },
+  pastelPill: { backgroundColor: "#DCE6D2", paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
+  pastelTxt: { color: "#4E5E40", fontSize: 11, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 0.2 },
+  codeHero: { flexDirection: "row", gap: spacing.sm, alignItems: "center", backgroundColor: c.brandPrimary, borderRadius: radius.lg, padding: spacing.md, marginBottom: spacing.md },
+  codeHeroIcon: { width: 42, height: 42, borderRadius: 21, backgroundColor: "#FFFFFF", alignItems: "center", justifyContent: "center" },
+  codeHeroTitle: { color: "#FFFFFF", fontSize: 17, fontFamily: fonts.heading },
+  codeHeroTxt: { color: "rgba(255,255,255,0.92)", fontSize: 13, lineHeight: 18, fontFamily: fonts.body, marginTop: 2 },
+  kBackdrop: { flex: 1, backgroundColor: "rgba(28,26,24,0.6)", justifyContent: "center", padding: spacing.lg },
+  kSheet: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, overflow: "hidden", maxWidth: 480, width: "100%", alignSelf: "center" },
+  kPhoto: { width: "100%", aspectRatio: 4 / 3 },
+  kPlaceholder: { backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center", gap: 8 },
+  kSoon: { color: c.onSurfaceSecondary, fontSize: 13, fontFamily: fonts.body },
+  kTitle: { color: c.onSurface, fontSize: 20, fontFamily: fonts.heading },
+  kTxt: { color: c.onSurfaceSecondary, fontSize: 14, lineHeight: 20, fontFamily: fonts.body },
+  kNote: { color: c.brandPrimary, fontSize: 13, fontWeight: "600", fontFamily: fonts.body },
   codeNote: { flexDirection: "row", gap: spacing.sm, alignItems: "flex-start", backgroundColor: c.terracottaSoft, borderRadius: radius.md, padding: spacing.sm, marginBottom: spacing.md },
   codeNoteTxt: { flex: 1, color: c.onSurface, fontSize: 13, lineHeight: 19, fontFamily: fonts.body },
   perksTitle: { color: c.onSurface, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, marginBottom: spacing.sm },

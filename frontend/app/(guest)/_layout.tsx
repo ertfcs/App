@@ -41,7 +41,7 @@ export default function GuestLayout() {
       />
       <Tabs.Screen
         name="map"
-        options={{ title: "Itinerario", tabBarIcon: makeIcon("map-marker-path") }}
+        options={{ title: t("services.itineraries_tab"), tabBarIcon: makeIcon("map-marker-path") }}
       />
       <Tabs.Screen
         name="info"
