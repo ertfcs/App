@@ -10,12 +10,15 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals } from "@/src/lib/festivals";
 
 // The guest services, each opening its own section (texts in i18n "services.<key>_*").
-const SERVICES: { key: string; icon: IconName; href: Href }[] = [
+type Service = { key: string; icon: IconName; href: Href };
+const GUIDE: Service[] = [
   { key: "places", icon: "bank-outline", href: "/places" },
   { key: "beaches", icon: "weather-windy", href: "/beaches" },
-  { key: "food", icon: "silverware-fork-knife", href: "/food" },
-  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" },
   { key: "festivals", icon: "calendar-star", href: "/festivals" },
+  { key: "food", icon: "silverware-fork-knife", href: "/food" },
+];
+const OTHERS: Service[] = [
+  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" },
   { key: "keyring", icon: "key-variant", href: "/booking" },
 ];
 
@@ -30,7 +33,31 @@ export default function ServicesScreen() {
       <Header title={t("services.title")} kicker={t("services.kicker")} />
       <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
         <Text style={s.intro}>{t("services.intro")}</Text>
-        {SERVICES.map((sv) => (
+        <Text style={s.group}>{t("services.guide_title")}</Text>
+        {GUIDE.map((sv) => (
+          <Pressable
+            key={sv.key}
+            testID={`service-${sv.key}`}
+            accessibilityRole="button"
+            style={({ pressed }) => [s.card, pressed && { opacity: 0.85 }]}
+            onPress={() => router.push(sv.href)}
+          >
+            <View style={s.iconWrap}>
+              <Icon name={sv.icon} size={26} color={colors.brandPrimary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={s.title}>{t(`services.${sv.key}_title`)}</Text>
+              <Text style={s.sub}>
+                {sv.key === "festivals" && nextFestival
+                  ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
+                  : t(`services.${sv.key}_sub`)}
+              </Text>
+            </View>
+            <Icon name="chevron-right" size={24} color={colors.muted} />
+          </Pressable>
+        ))}
+        <Text style={s.group}>{t("services.others_title")}</Text>
+        {OTHERS.map((sv) => (
           <Pressable
             key={sv.key}
             testID={`service-${sv.key}`}
@@ -60,6 +87,7 @@ export default function ServicesScreen() {
 const useStyles = makeStyles((c) => ({
   screen: { flex: 1, backgroundColor: c.surface },
   content: { padding: spacing.md, gap: spacing.sm, paddingBottom: spacing.xxl },
+  group: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body, marginTop: spacing.md },
   intro: { color: c.onSurfaceSecondary, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, marginBottom: spacing.sm },
   card: {
     flexDirection: "row",

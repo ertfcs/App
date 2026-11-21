@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Pressable, RefreshControl } from "react-native"
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
-import { router } from "expo-router";
+import { router, type Href } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
@@ -20,14 +20,37 @@ import { euro } from "@/src/lib/format";
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 const AMENITIES_PREVIEW = 6;
 
-// What guests receive when booking here (texts in i18n "home_new.perk_<key>").
-const PERKS: { key: string; icon: IconName }[] = [
-  { key: "keyring", icon: "key-variant" },
-  { key: "itinerary", icon: "file-pdf-box" },
-  { key: "places", icon: "bank-outline" },
-  { key: "beaches", icon: "weather-windy" },
-  { key: "food", icon: "silverware-fork-knife" },
+// What guests receive when booking here (texts in i18n "home_new.perk_<key>"); each row opens its section.
+type Perk = { key: string; icon: IconName; href: Href };
+const PERKS: Perk[] = [
+  { key: "keyring", icon: "key-variant", href: "/booking" },
+  { key: "itinerary", icon: "file-pdf-box", href: "/(guest)/map" },
 ];
+const GUIDE: Perk[] = [
+  { key: "places", icon: "bank-outline", href: "/places" },
+  { key: "beaches", icon: "weather-windy", href: "/beaches" },
+  { key: "festivals", icon: "calendar-star", href: "/festivals" },
+  { key: "food", icon: "silverware-fork-knife", href: "/food" },
+];
+
+function PerkRow({ perk, label }: { perk: Perk; label: string }) {
+  const s = useStyles();
+  const { colors } = useTheme();
+  return (
+    <Pressable
+      testID={`perk-${perk.key}`}
+      accessibilityRole="link"
+      onPress={() => router.push(perk.href)}
+      style={({ pressed }) => [s.perk, pressed && { opacity: 0.7 }]}
+    >
+      <View style={s.perkIcon}>
+        <Icon name={perk.icon} size={18} color={colors.brandPrimary} />
+      </View>
+      <Text style={s.perkTxt}>{label}</Text>
+      <Icon name="chevron-right" size={20} color={colors.muted} />
+    </Pressable>
+  );
+}
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -103,13 +126,17 @@ export default function HomeScreen() {
               <Text style={s.perksTitle}>{t("home_new.perks_title")}</Text>
               <View style={s.perks}>
                 {PERKS.map((p) => (
-                  <View key={p.key} style={s.perk}>
-                    <View style={s.perkIcon}>
-                      <Icon name={p.icon} size={18} color={colors.brandPrimary} />
-                    </View>
-                    <Text style={s.perkTxt}>{t(`home_new.perk_${p.key}`)}</Text>
-                  </View>
+                  <PerkRow key={p.key} perk={p} label={t(`home_new.perk_${p.key}`)} />
                 ))}
+                <View style={s.guide}>
+                  <View style={s.guideHead}>
+                    <Icon name="compass-outline" size={18} color={colors.olive} />
+                    <Text style={s.guideTitle}>{t("home_new.guide_title")}</Text>
+                  </View>
+                  {GUIDE.map((p) => (
+                    <PerkRow key={p.key} perk={p} label={t(`home_new.perk_${p.key}`)} />
+                  ))}
+                </View>
               </View>
               <Button
                 testID="home-book-cta"
@@ -264,8 +291,11 @@ const useStyles = makeStyles((c) => ({
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
   perksTitle: { color: c.onSurface, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, marginBottom: spacing.sm },
   perks: { gap: 10, marginBottom: spacing.md },
-  perk: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
+  perk: { flexDirection: "row", alignItems: "center", gap: spacing.sm, paddingVertical: 2 },
   perkIcon: { width: 32, height: 32, borderRadius: 16, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
+  guide: { gap: 10, padding: spacing.sm, borderRadius: radius.md, backgroundColor: c.surfaceTertiary },
+  guideHead: { flexDirection: "row", alignItems: "center", gap: 6 },
+  guideTitle: { color: c.onSurface, fontSize: 14, fontWeight: "700", fontFamily: fonts.body },
   perkTxt: { flex: 1, color: c.onSurfaceSecondary, fontSize: 14, lineHeight: 19, fontFamily: fonts.body },
   services: { gap: spacing.sm },
   service: { flexDirection: "row", alignItems: "center", gap: spacing.md, backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md },

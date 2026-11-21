@@ -278,9 +278,11 @@
     "perks_title": "Prenotando qui ricevi:",
     "perk_keyring": "Portachiavi souvenir in omaggio",
     "perk_itinerary": "Itinerario digitale in PDF",
-    "perk_places": "Guida a luoghi e attrazioni, con tutte le informazioni e i link per i biglietti",
-    "perk_beaches": "Spiagge consigliate in base al vento in tempo reale",
-    "perk_food": "Guida gastronomica ai piatti siciliani delle province di Palermo e Trapani"
+    "perk_places": "Luoghi e attrazioni, con tutte le informazioni e i link ai siti ufficiali",
+    "perk_beaches": "Spiagge consigliate in base al meteo",
+    "perk_food": "Guida gastronomica con tutti i piatti delle province di Palermo e Trapani",
+    "guide_title": "Guida al territorio",
+    "perk_festivals": "Sagre e feste di paese"
   },
   "services": {
     "tab": "Servizi",
@@ -290,15 +292,17 @@
     "places_title": "Luoghi e attrazioni",
     "places_sub": "114 luoghi fra Palermo e Trapani, con orari, prezzi e link ufficiali per i biglietti",
     "beaches_title": "Spiagge e vento",
-    "beaches_sub": "Le spiagge consigliate oggi in base al vento in tempo reale",
+    "beaches_sub": "Le spiagge consigliate in base al meteo e al vento di oggi",
     "food_title": "Guida gastronomica",
     "food_sub": "I piatti tipici delle province di Palermo e Trapani, con ingredienti e curiosità",
     "itinerary_title": "Il tuo itinerario in PDF",
     "itinerary_sub": "Scegli i luoghi che ti piacciono e scarica il tuo itinerario digitale",
-    "festivals_title": "Feste e sagre",
+    "festivals_title": "Sagre e feste di paese",
     "festivals_sub": "Gli eventi del territorio durante la tua vacanza",
     "festivals_next": "Prossima: {{name}}, {{date}}",
     "keyring_title": "Portachiavi souvenir",
-    "keyring_sub": "In omaggio per chi prenota direttamente dal sito"
+    "keyring_sub": "In omaggio per chi prenota direttamente dal sito",
+    "guide_title": "Guida al territorio",
+    "others_title": "Inoltre"
   }
 }
