@@ -16,25 +16,27 @@ import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
 import { euro } from "@/src/lib/format";
+import { useGuestAccess } from "@/src/lib/guestAccess";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 const AMENITIES_PREVIEW = 6;
 
 // What guests receive when booking here (texts in i18n "home_new.perk_<key>"); each row opens its section.
-type Perk = { key: string; icon: IconName; href: Href };
+type Perk = { key: string; icon: IconName; href: Href; locked?: boolean };
 const PERKS: Perk[] = [
   { key: "keyring", icon: "key-variant", href: "/booking" },
-  { key: "itinerary", icon: "file-pdf-box", href: "/(guest)/map" },
+  { key: "itinerary", icon: "file-pdf-box", href: "/(guest)/map", locked: true },
 ];
 const GUIDE: Perk[] = [
-  { key: "places", icon: "bank-outline", href: "/places" },
-  { key: "beaches", icon: "weather-windy", href: "/beaches" },
-  { key: "festivals", icon: "calendar-star", href: "/festivals" },
-  { key: "food", icon: "silverware-fork-knife", href: "/food" },
+  { key: "places", icon: "bank-outline", href: "/places", locked: true },
+  { key: "beaches", icon: "weather-windy", href: "/beaches", locked: true },
+  { key: "festivals", icon: "calendar-star", href: "/festivals", locked: true },
+  { key: "food", icon: "silverware-fork-knife", href: "/food", locked: true },
 ];
 
 function PerkRow({ perk, label }: { perk: Perk; label: string }) {
   const s = useStyles();
+  const { unlocked } = useGuestAccess();
   const { colors } = useTheme();
   return (
     <Pressable
@@ -47,6 +49,7 @@ function PerkRow({ perk, label }: { perk: Perk; label: string }) {
         <Icon name={perk.icon} size={18} color={colors.brandPrimary} />
       </View>
       <Text style={s.perkTxt}>{label}</Text>
+      {perk.locked && !unlocked ? <Icon name="lock-outline" size={16} color={colors.muted} /> : null}
       <Icon name="chevron-right" size={20} color={colors.muted} />
     </Pressable>
   );
@@ -64,6 +67,7 @@ export default function HomeScreen() {
 
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [showAllAmenities, setShowAllAmenities] = useState(false);
+  const { unlocked } = useGuestAccess();
 
   const av = availability.data;
   const amenities = showAllAmenities
@@ -124,6 +128,10 @@ export default function HomeScreen() {
                 </View>
               </View>
               <Text style={s.perksTitle}>{t("home_new.perks_title")}</Text>
+              <View style={s.codeNote}>
+                <Icon name={unlocked ? "lock-open-variant" : "key-variant"} size={18} color={unlocked ? colors.success : colors.brandPrimary} />
+                <Text style={s.codeNoteTxt}>{unlocked ? t("lock.home_unlocked") : t("lock.home_note")}</Text>
+              </View>
               <View style={s.perks}>
                 {PERKS.map((p) => (
                   <PerkRow key={p.key} perk={p} label={t(`home_new.perk_${p.key}`)} />
@@ -289,6 +297,8 @@ const useStyles = makeStyles((c) => ({
   mapCtaTitle: { color: "#FFFFFF", fontSize: 24, fontFamily: fonts.heading, lineHeight: 27 },
   mapCtaBtn: { alignSelf: "flex-start", backgroundColor: "#FFFFFF", paddingHorizontal: spacing.md, paddingVertical: 10, borderRadius: radius.pill },
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
+  codeNote: { flexDirection: "row", gap: spacing.sm, alignItems: "flex-start", backgroundColor: c.terracottaSoft, borderRadius: radius.md, padding: spacing.sm, marginBottom: spacing.md },
+  codeNoteTxt: { flex: 1, color: c.onSurface, fontSize: 13, lineHeight: 19, fontFamily: fonts.body },
   perksTitle: { color: c.onSurface, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, marginBottom: spacing.sm },
   perks: { gap: 10, marginBottom: spacing.md },
   perk: { flexDirection: "row", alignItems: "center", gap: spacing.sm, paddingVertical: 2 },

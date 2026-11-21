@@ -13,12 +13,16 @@ import { usePois, Poi } from "@/src/lib/queries";
 import { mediaUri } from "@/src/lib/api";
 import { useItinerary } from "@/src/lib/itinerary";
 import { ItineraryFab } from "@/src/components/ItineraryFab";
+import { useGuestAccess } from "@/src/lib/guestAccess";
+import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 
 const CATEGORY_META: Record<string, { icon: IconName; color: (c: any) => string }> = {
   art: { icon: "bank", color: (c) => c.brandPrimary },
   beach: { icon: "beach", color: (c) => c.info },
   nature: { icon: "pine-tree", color: (c) => c.olive },
 };
+
+const FREE_PLACES = ["Cattedrale di Palermo", "Tempio di Segesta"];
 
 export default function PlacesScreen() {
   const { t } = useTranslation();
@@ -28,6 +32,7 @@ export default function PlacesScreen() {
   const { has, toggle } = useItinerary();
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
+  const { unlocked } = useGuestAccess();
 
   const chips = [
     { key: "all", label: t("map_page.title"), icon: "map-marker-multiple" as IconName },
@@ -47,6 +52,7 @@ export default function PlacesScreen() {
     }
     return list;
   }, [pois.data, cat, q]);
+  const shown = unlocked ? filtered : (pois.data ?? []).filter((p) => FREE_PLACES.includes(p.name));
 
   const openDirections = (p: Poi) => {
     const url = p.maps_url || `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
@@ -97,20 +103,42 @@ export default function PlacesScreen() {
   return (
     <View style={s.screen}>
       <Header title={t("services.places_title")} kicker={t("services.kicker")} showBack />
-      <View style={s.searchWrap}>
-        <Field value={q} onChangeText={setQ} placeholder={t("map_page.search_placeholder")} icon="magnify" testID="poi-search" />
-      </View>
-      <ChipRow items={chips} selected={cat} onSelect={setCat} />
+      {unlocked ? (
+        <>
+          <View style={s.searchWrap}>
+            <Field value={q} onChangeText={setQ} placeholder={t("map_page.search_placeholder")} icon="magnify" testID="poi-search" />
+          </View>
+          <ChipRow items={chips} selected={cat} onSelect={setCat} />
+        </>
+      ) : null}
       {pois.isLoading ? (
         <Loading />
       ) : (
         <FlatList
           testID="poi-list"
-          data={filtered}
+          data={shown}
           keyExtractor={(p) => p.id}
           renderItem={renderItem}
           contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl, gap: spacing.sm }}
-          ListHeaderComponent={<Text style={s.count}>{filtered.length} {t("map_page.itinerary_count")}</Text>}
+          ListHeaderComponent={
+            unlocked ? (
+              <View>
+                <UnlockedNote />
+                <Text style={s.count}>{filtered.length} {t("map_page.itinerary_count")}</Text>
+              </View>
+            ) : (
+              <Text style={s.count}>{t("lock.free_examples")}</Text>
+            )
+          }
+          ListFooterComponent={
+            unlocked ? null : (
+              <LockedSection
+                compact
+                title={t("lock.places_title", { count: Math.max(0, (pois.data?.length ?? 0) - shown.length) })}
+                text={t("lock.places_text")}
+              />
+            )
+          }
           ListEmptyComponent={<EmptyState icon="map-search-outline" title={t("map_page.no_results")} />}
           showsVerticalScrollIndicator={false}
         />

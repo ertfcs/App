@@ -9,6 +9,8 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { beaches, windFromDegrees, analyzeBeach, Beach, BeachStatus } from "@/src/lib/beaches";
+import { useGuestAccess } from "@/src/lib/guestAccess";
+import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import i18n from "@/src/i18n";
 
 type Weather = { temp: number; windSpeed: number; windName: string; windLabel: string; uv: number; sunset: string };
@@ -38,6 +40,7 @@ export default function BeachesScreen() {
   const lang = i18n.language === "en" ? "en" : "it";
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
+  const { unlocked } = useGuestAccess();
 
   const weather = useQuery({ queryKey: ["beach-weather"], queryFn: fetchWeather, staleTime: 10 * 60 * 1000 });
   const w = weather.data;
@@ -175,12 +178,17 @@ export default function BeachesScreen() {
       <Header title="Spiagge" kicker="Bussola dei venti" showBack />
       <FlatList
         testID="beaches-list"
-        data={filtered}
+        data={unlocked ? filtered : beaches.filter((b) => b.id === "cala-rossa-favignana")}
         keyExtractor={(b) => b.id}
         renderItem={renderItem}
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingBottom: spacing.xxl, gap: spacing.md }}
         showsVerticalScrollIndicator={false}
+        ListFooterComponent={
+          unlocked ? null : (
+            <LockedSection title={`Altre ${beaches.length - 1} spiagge con il vento di oggi`} text="Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare." />
+          )
+        }
         ListHeaderComponent={
           <View>
             {/* Live weather */}
@@ -214,11 +222,18 @@ export default function BeachesScreen() {
               </View>
             ) : null}
 
-            <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.sm }}>
-              <Field value={q} onChangeText={setQ} placeholder="Cerca (San Vito, Cefalù, Mondello...)" icon="magnify" testID="beach-search" />
-            </View>
-            <ChipRow items={chips} selected={cat} onSelect={setCat} />
-            <Text style={s.count}>{filtered.length} spiagge</Text>
+            {unlocked ? (
+              <>
+                <UnlockedNote />
+                <View style={{ paddingHorizontal: spacing.md, paddingTop: spacing.sm }}>
+                  <Field value={q} onChangeText={setQ} placeholder="Cerca (San Vito, Cefalù, Mondello...)" icon="magnify" testID="beach-search" />
+                </View>
+                <ChipRow items={chips} selected={cat} onSelect={setCat} />
+                <Text style={s.count}>{filtered.length} spiagge</Text>
+              </>
+            ) : (
+              <Text style={s.count}>Esempio gratuito</Text>
+            )}
           </View>
         }
       />

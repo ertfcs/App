@@ -11,6 +11,7 @@ import { queryClient } from "@/src/query-client";
 import { AuthProvider } from "@/src/lib/auth";
 import { FavoritesProvider } from "@/src/lib/favorites";
 import { ItineraryProvider } from "@/src/lib/itinerary";
+import { GuestAccessProvider } from "@/src/lib/guestAccess";
 import { ToastProvider } from "@/src/components/ui";
 import { useTrackVisit } from "@/src/lib/visits";
 import "@/src/i18n";
@@ -28,7 +29,8 @@ export default function RootLayout() {
             <QueryClientProvider client={queryClient}>
               <AuthProvider>
                 <FavoritesProvider>
-                  <ItineraryProvider>
+                  <GuestAccessProvider>
+<ItineraryProvider>
                     <ToastProvider>
                       <View style={{ flex: 1, backgroundColor: "#FAF8F5" }}>
                         <StatusBar style="dark" />
@@ -36,6 +38,7 @@ export default function RootLayout() {
                       </View>
                     </ToastProvider>
                   </ItineraryProvider>
+</GuestAccessProvider>
                 </FavoritesProvider>
               </AuthProvider>
             </QueryClientProvider>

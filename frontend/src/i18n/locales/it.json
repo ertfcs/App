@@ -304,5 +304,18 @@
     "keyring_sub": "In omaggio per chi prenota direttamente dal sito",
     "guide_title": "Guida al territorio",
     "others_title": "Inoltre"
+  },
+  "lock": {
+    "unlock": "Sblocca",
+    "no_code": "Non hai il codice? Prenota",
+    "unlocked_all": "Sbloccato! Ora tutti i servizi sono aperti",
+    "unlocked_note": "Sbloccato con il tuo codice",
+    "free_examples": "Esempi gratuiti",
+    "places_title": "Altri {{count}} luoghi selezionati",
+    "places_text": "Inserisci il codice della prenotazione per sbloccare tutti i luoghi, i link ufficiali dei biglietti e il tuo itinerario in PDF.",
+    "services_title": "Hai prenotato? Inserisci il tuo codice",
+    "services_text": "Lo ricevi con la conferma della prenotazione. Basta inserirlo una volta per sbloccare tutti i servizi.",
+    "home_note": "Con la prenotazione ricevi il tuo codice personale: inseriscilo nell'app per sbloccare tutti i servizi qui sotto.",
+    "home_unlocked": "Codice inserito: tutti i servizi sono sbloccati."
   }
 }

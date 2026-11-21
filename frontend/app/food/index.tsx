@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { View, Text, Pressable, FlatList } from "react-native";
+import { useGuestAccess } from "@/src/lib/guestAccess";
+import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -21,6 +23,7 @@ export default function FoodList() {
   const dishes = useDishes();
   const [cat, setCat] = useState("All");
   const [favOnly, setFavOnly] = useState(false);
+  const { unlocked } = useGuestAccess();
 
   const chips = foodCategories.map((c) => ({ key: c, label: c === "All" ? "Tutte" : c }));
 
@@ -92,7 +95,7 @@ export default function FoodList() {
       />
       <FlatList
         testID="food-list"
-        data={filtered}
+        data={unlocked ? filtered : (dishes.data ?? []).filter((d) => d.id === "arancina" || d.id === "pane-ca-meusa")}
         keyExtractor={(d) => d.id}
         renderItem={renderItem}
         numColumns={2}
@@ -111,8 +114,20 @@ export default function FoodList() {
                 </Text>
               </View>
             </View>
-            <ChipRow items={chips} selected={cat} onSelect={setCat} />
+            {unlocked ? (
+              <>
+                <UnlockedNote />
+                <ChipRow items={chips} selected={cat} onSelect={setCat} />
+              </>
+            ) : (
+              <Text style={s.freeLabel}>Esempio gratuito</Text>
+            )}
           </View>
+        }
+        ListFooterComponent={
+          unlocked ? null : (
+            <LockedSection title={`Altri ${(dishes.data?.length ?? 0) - 2} piatti ti aspettano`} text="Inserisci il codice della prenotazione per sbloccare tutta la guida gastronomica." />
+          )
         }
         ListEmptyComponent={
           <EmptyState icon="heart-off-outline" title="Nessun piatto" subtitle={favOnly ? "Aggiungi i tuoi preferiti col cuore" : "Nessun risultato"} />
@@ -123,6 +138,7 @@ export default function FoodList() {
 }
 
 const useStyles = makeStyles((c) => ({
+  freeLabel: { color: c.olive, fontSize: 12, fontWeight: "700", letterSpacing: 1, textTransform: "uppercase", fontFamily: fonts.body, paddingHorizontal: spacing.md, paddingTop: spacing.md },
   screen: { flex: 1, backgroundColor: c.surface },
   favFilter: { width: 40, height: 40, borderRadius: radius.pill, backgroundColor: c.surfaceTertiary, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: c.border },
   cover: { margin: spacing.md, borderRadius: radius.lg, overflow: "hidden", minHeight: 130 },

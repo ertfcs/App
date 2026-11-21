@@ -8,6 +8,8 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals } from "@/src/lib/festivals";
+import { useGuestAccess } from "@/src/lib/guestAccess";
+import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 
 // The guest services, each opening its own section (texts in i18n "services.<key>_*").
 type Service = { key: string; icon: IconName; href: Href };
@@ -26,6 +28,7 @@ export default function ServicesScreen() {
   const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
+  const { unlocked } = useGuestAccess();
   const nextFestival = useMemo(() => upcomingFestivals()[0], []);
 
   return (
@@ -33,6 +36,7 @@ export default function ServicesScreen() {
       <Header title={t("services.title")} kicker={t("services.kicker")} />
       <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
         <Text style={s.intro}>{t("services.intro")}</Text>
+        {unlocked ? <UnlockedNote /> : <LockedSection compact title={t("lock.services_title")} text={t("lock.services_text")} />}
         <Text style={s.group}>{t("services.guide_title")}</Text>
         {GUIDE.map((sv) => (
           <Pressable

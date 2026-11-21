@@ -11,9 +11,9 @@ import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { usePois, Poi } from "@/src/lib/queries";
 import { useItinerary } from "@/src/lib/itinerary";
-import { api } from "@/src/lib/api";
 import { downloadItineraryPdf } from "@/src/lib/pdf";
 import { SuggestedItineraries } from "@/src/components/SuggestedItineraries";
+import { useGuestAccess } from "@/src/lib/guestAccess";
 
 const CAT_TINT: Record<string, (c: any) => string> = {
   art: (c) => c.brandPrimary,
@@ -31,8 +31,9 @@ export default function MapScreen() {
   const { ids: selected, toggle, remove, clear, has } = useItinerary();
 
   const [cat, setCat] = useState("all");
+  const access = useGuestAccess();
   const [code, setCode] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
+  const unlocked = access.unlocked;
   const [name, setName] = useState("");
   const [verifying, setVerifying] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -68,11 +69,9 @@ export default function MapScreen() {
     if (!code.trim()) return toast.show(t("guest.enter_code"), "error");
     setVerifying(true);
     try {
-      await api.post("/verify-code", { code: code.trim() });
-      setUnlocked(true);
+      await access.unlock(code);
       toast.show(t("guest.unlocked_toast"), "success");
     } catch (e: any) {
-      setUnlocked(false);
       toast.show(e?.response?.data?.detail || t("guest.invalid_code"), "error");
     } finally {
       setVerifying(false);
@@ -84,7 +83,7 @@ export default function MapScreen() {
     if (!unlocked) return toast.show(t("guest.unlock_first"), "error");
     setDownloading(true);
     try {
-      await downloadItineraryPdf({ code: code.trim(), poiIds: selected, travelerName: name.trim() });
+      await downloadItineraryPdf({ code: access.code, poiIds: selected, travelerName: name.trim() });
       toast.show(t("guest.itinerary_ready"), "success");
     } catch (e: any) {
       toast.show(e?.message || t("map_page.pdf_error"), "error");
