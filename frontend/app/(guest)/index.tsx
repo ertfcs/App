@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
-import { ScrollView, View, Text, Pressable, RefreshControl, Linking } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View, Text, Pressable, RefreshControl } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
-import { router, type Href } from "expo-router";
+import { router } from "expo-router";
 import { useQueryClient } from "@tanstack/react-query";
 import Animated, { FadeInDown } from "react-native-reanimated";
 
@@ -15,19 +15,18 @@ import { PhotoViewer } from "@/src/components/PhotoViewer";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useProperty, usePhotos, useAvailability } from "@/src/lib/queries";
-import { upcomingFestivals } from "@/src/lib/festivals";
 import { euro } from "@/src/lib/format";
 
 const HERO_IMG = require("../../assets/images/hero-trappeto.jpg");
 const AMENITIES_PREVIEW = 6;
 
-// Services Matteo offers to guests who book directly (texts in i18n "home_new.svc_<key>_*").
-const SERVICES: { key: string; icon: IconName }[] = [
-  { key: "no_fees", icon: "cash-check" },
+// What guests receive when booking here (texts in i18n "home_new.perk_<key>").
+const PERKS: { key: string; icon: IconName }[] = [
   { key: "keyring", icon: "key-variant" },
-  { key: "itinerary", icon: "map-marker-path" },
-  { key: "whatsapp", icon: "whatsapp" },
-  { key: "guide", icon: "compass-outline" },
+  { key: "itinerary", icon: "file-pdf-box" },
+  { key: "places", icon: "bank-outline" },
+  { key: "beaches", icon: "weather-windy" },
+  { key: "food", icon: "silverware-fork-knife" },
 ];
 
 export default function HomeScreen() {
@@ -44,26 +43,9 @@ export default function HomeScreen() {
   const [showAllAmenities, setShowAllAmenities] = useState(false);
 
   const av = availability.data;
-  const nextFestival = useMemo(() => upcomingFestivals()[0], []);
-  const services = SERVICES;
   const amenities = showAllAmenities
     ? property.data?.amenities ?? []
     : (property.data?.amenities ?? []).slice(0, AMENITIES_PREVIEW);
-  const tiles: { key: string; glyph: string; href: Href; sub: string }[] = [
-    { key: "places", glyph: "🏛️", href: "/(guest)/places", sub: t("home_new.tile_places_sub") },
-    { key: "beaches", glyph: "🏖️", href: "/beaches", sub: t("home_new.tile_beaches_sub") },
-    {
-      key: "festivals",
-      glyph: "🎉",
-      href: "/festivals",
-      sub: nextFestival
-        ? t("home_new.tile_festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
-        : t("home_new.tile_festivals_sub"),
-    },
-    { key: "food", glyph: "🍝", href: "/food", sub: t("home_new.tile_food_sub") },
-  ];
-
-
   const onRefresh = () => {
     qc.invalidateQueries({ queryKey: ["property"] });
     qc.invalidateQueries({ queryKey: ["photos"] });
@@ -118,6 +100,17 @@ export default function HomeScreen() {
                   <Text style={s.badgeTxt}>{t("home_new.no_fees_badge")}</Text>
                 </View>
               </View>
+              <Text style={s.perksTitle}>{t("home_new.perks_title")}</Text>
+              <View style={s.perks}>
+                {PERKS.map((p) => (
+                  <View key={p.key} style={s.perk}>
+                    <View style={s.perkIcon}>
+                      <Icon name={p.icon} size={18} color={colors.brandPrimary} />
+                    </View>
+                    <Text style={s.perkTxt}>{t(`home_new.perk_${p.key}`)}</Text>
+                  </View>
+                ))}
+              </View>
               <Button
                 testID="home-book-cta"
                 label={t("booking.title")}
@@ -130,7 +123,7 @@ export default function HomeScreen() {
           {/* 2. Galleria */}
           {photos.data && photos.data.length > 0 ? (
             <View style={s.section}>
-              <SectionTitle kicker={t("property.kicker")} title={t("home_new.gallery_title")} />
+              <SectionTitle title={t("home_new.gallery_title")} />
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
                 {photos.data.map((p, i) => (
                   <Pressable key={p.id} onPress={() => setViewerIndex(i)} testID={`gallery-photo-${i}`} accessibilityRole="imagebutton">
@@ -141,25 +134,7 @@ export default function HomeScreen() {
             </View>
           ) : null}
 
-          {/* 3. I servizi di Matteo */}
-          <View style={s.section} testID="home-services">
-            <SectionTitle kicker={t("home_new.services_kicker")} title={t("home_new.services_title")} />
-            <View style={s.services}>
-              {services.map((sv) => (
-                <View key={sv.key} style={s.service}>
-                  <View style={s.serviceIcon}>
-                    <Icon name={sv.icon} size={22} color={colors.brandPrimary} />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Text style={s.serviceTitle}>{t(`home_new.svc_${sv.key}_title`)}</Text>
-                    <Text style={s.serviceSub}>{t(`home_new.svc_${sv.key}_sub`)}</Text>
-                  </View>
-                </View>
-              ))}
-            </View>
-          </View>
-
-          {/* 4. L'appartamento */}
+          {/* 3. L'appartamento */}
           {property.isLoading ? (
             <Loading />
           ) : (
@@ -196,33 +171,9 @@ export default function HomeScreen() {
             </View>
           )}
 
-          {/* 5. Recensioni */}
+          {/* 4. Recensioni */}
           <BookingReviews />
 
-          {/* 6. Scopri il territorio */}
-          <View style={s.section} testID="home-territory">
-            <SectionTitle kicker={t("home_new.territory_kicker")} title={t("home_new.territory_title")} />
-            <View style={s.tiles}>
-              {tiles.map((tl) => (
-                <Pressable key={tl.key} testID={`home-${tl.key}-cta`} style={s.tile} onPress={() => router.push(tl.href)}>
-                  <Text style={s.tileGlyph}>{tl.glyph}</Text>
-                  <Text style={s.tileTitle}>{t(`home_new.tile_${tl.key}_title`)}</Text>
-                  <Text style={s.tileSub} numberOfLines={2}>{tl.sub}</Text>
-                </Pressable>
-              ))}
-            </View>
-          </View>
-
-          {/* Chiusura: prenota o scrivi a Matteo */}
-          <View style={[s.section, s.endCard]}>
-            <Text style={s.endTitle}>{t("home_new.end_title")}</Text>
-            <Text style={s.endSub}>{t("home_new.end_sub")}</Text>
-            <Button testID="home-book-cta-bottom" label={t("booking.title")} icon="calendar-check" onPress={() => router.push("/booking")} />
-            <Pressable testID="home-whatsapp" style={s.waBtn} onPress={() => Linking.openURL("https://wa.me/393881611514")}>
-              <Icon name="whatsapp" size={20} color="#1E8E4E" />
-              <Text style={s.waTxt}>{t("home_new.whatsapp")}</Text>
-            </Pressable>
-          </View>
         </View>
       </ScrollView>
 
@@ -311,6 +262,11 @@ const useStyles = makeStyles((c) => ({
   mapCtaTitle: { color: "#FFFFFF", fontSize: 24, fontFamily: fonts.heading, lineHeight: 27 },
   mapCtaBtn: { alignSelf: "flex-start", backgroundColor: "#FFFFFF", paddingHorizontal: spacing.md, paddingVertical: 10, borderRadius: radius.pill },
   mapCtaBtnTxt: { color: c.onSurface, fontWeight: "600", fontFamily: fonts.body },
+  perksTitle: { color: c.onSurface, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, marginBottom: spacing.sm },
+  perks: { gap: 10, marginBottom: spacing.md },
+  perk: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
+  perkIcon: { width: 32, height: 32, borderRadius: 16, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
+  perkTxt: { flex: 1, color: c.onSurfaceSecondary, fontSize: 14, lineHeight: 19, fontFamily: fonts.body },
   services: { gap: spacing.sm },
   service: { flexDirection: "row", alignItems: "center", gap: spacing.md, backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, borderWidth: 1, borderColor: c.border, padding: spacing.md },
   serviceIcon: { width: 44, height: 44, borderRadius: 22, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },

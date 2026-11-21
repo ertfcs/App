@@ -1,0 +1,77 @@
+import React, { useMemo } from "react";
+import { ScrollView, View, Text, Pressable } from "react-native";
+import { useTranslation } from "react-i18next";
+import { router, type Href } from "expo-router";
+
+import { Header } from "@/src/components/Header";
+import { Icon, IconName } from "@/src/components/Icon";
+import { makeStyles, useTheme } from "@/src/theme";
+import { fonts, radius, spacing } from "@/src/lib/typography";
+import { upcomingFestivals } from "@/src/lib/festivals";
+
+// The guest services, each opening its own section (texts in i18n "services.<key>_*").
+const SERVICES: { key: string; icon: IconName; href: Href }[] = [
+  { key: "places", icon: "bank-outline", href: "/places" },
+  { key: "beaches", icon: "weather-windy", href: "/beaches" },
+  { key: "food", icon: "silverware-fork-knife", href: "/food" },
+  { key: "itinerary", icon: "map-marker-path", href: "/(guest)/map" },
+  { key: "festivals", icon: "calendar-star", href: "/festivals" },
+  { key: "keyring", icon: "key-variant", href: "/booking" },
+];
+
+export default function ServicesScreen() {
+  const { t } = useTranslation();
+  const s = useStyles();
+  const { colors } = useTheme();
+  const nextFestival = useMemo(() => upcomingFestivals()[0], []);
+
+  return (
+    <View style={s.screen}>
+      <Header title={t("services.title")} kicker={t("services.kicker")} />
+      <ScrollView contentContainerStyle={s.content} showsVerticalScrollIndicator={false}>
+        <Text style={s.intro}>{t("services.intro")}</Text>
+        {SERVICES.map((sv) => (
+          <Pressable
+            key={sv.key}
+            testID={`service-${sv.key}`}
+            accessibilityRole="button"
+            style={({ pressed }) => [s.card, pressed && { opacity: 0.85 }]}
+            onPress={() => router.push(sv.href)}
+          >
+            <View style={s.iconWrap}>
+              <Icon name={sv.icon} size={26} color={colors.brandPrimary} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={s.title}>{t(`services.${sv.key}_title`)}</Text>
+              <Text style={s.sub}>
+                {sv.key === "festivals" && nextFestival
+                  ? t("services.festivals_next", { name: nextFestival.name, date: nextFestival.dateLabel })
+                  : t(`services.${sv.key}_sub`)}
+              </Text>
+            </View>
+            <Icon name="chevron-right" size={24} color={colors.muted} />
+          </Pressable>
+        ))}
+      </ScrollView>
+    </View>
+  );
+}
+
+const useStyles = makeStyles((c) => ({
+  screen: { flex: 1, backgroundColor: c.surface },
+  content: { padding: spacing.md, gap: spacing.sm, paddingBottom: spacing.xxl },
+  intro: { color: c.onSurfaceSecondary, fontSize: 15, lineHeight: 22, fontFamily: fonts.body, marginBottom: spacing.sm },
+  card: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.md,
+    backgroundColor: c.surfaceSecondary,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: c.border,
+    padding: spacing.md,
+  },
+  iconWrap: { width: 52, height: 52, borderRadius: 26, backgroundColor: c.terracottaSoft, alignItems: "center", justifyContent: "center" },
+  title: { color: c.onSurface, fontSize: 17, fontFamily: fonts.heading },
+  sub: { color: c.onSurfaceSecondary, fontSize: 13, lineHeight: 18, fontFamily: fonts.body, marginTop: 2 },
+}));

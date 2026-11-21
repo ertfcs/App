@@ -96,7 +96,7 @@ export default function PlacesScreen() {
 
   return (
     <View style={s.screen}>
-      <Header title={t("map_page.title")} kicker={t("map_page.kicker")} />
+      <Header title={t("services.places_title")} kicker={t("services.kicker")} showBack />
       <View style={s.searchWrap}>
         <Field value={q} onChangeText={setQ} placeholder={t("map_page.search_placeholder")} icon="magnify" testID="poi-search" />
       </View>

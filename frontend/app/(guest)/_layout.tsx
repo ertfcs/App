@@ -36,8 +36,8 @@ export default function GuestLayout() {
         options={{ title: t("nav.home"), tabBarIcon: makeIcon("home-variant") }}
       />
       <Tabs.Screen
-        name="places"
-        options={{ title: "Luoghi", tabBarIcon: makeIcon("map-marker-radius") }}
+        name="services"
+        options={{ title: t("services.tab"), tabBarIcon: makeIcon("room-service-outline") }}
       />
       <Tabs.Screen
         name="map"
