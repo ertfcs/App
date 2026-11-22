@@ -1,18 +1,18 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, Pressable, FlatList, Linking } from "react-native";
+import { View, Text, FlatList, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useQuery } from "@tanstack/react-query";
 
 import { Header } from "@/src/components/Header";
 import { ChipRow, Field, Loading } from "@/src/components/ui";
-import { Icon, IconName } from "@/src/components/Icon";
+import { IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { beaches, windFromDegrees, analyzeBeach, Beach, BeachStatus } from "@/src/lib/beaches";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
-import { ExampleBeachCard, FreeLabel, EXAMPLE_BEACH } from "@/src/components/GuestExamples";
-import i18n from "@/src/i18n";
+import { ExampleBeachCard, FreeLabel, EXAMPLE_BEACH, beachExtras } from "@/src/components/GuestExamples";
+import { BeachCard } from "@/src/components/GuideCards";
 import { useTranslation } from "react-i18next";
 
 type Weather = { temp: number; windSpeed: number; windName: string; windLabel: string; uv: number; sunset: string };
@@ -40,10 +40,11 @@ export default function BeachesScreen() {
   const s = useStyles();
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const lang = i18n.language === "it" ? "it" : "en";
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
   const { unlocked } = useGuestAccess();
+  const { width } = useWindowDimensions();
+  const cols = width >= 1100 ? 3 : width >= 600 ? 2 : 1;
 
   const weather = useQuery({ queryKey: ["beach-weather"], queryFn: fetchWeather, staleTime: 10 * 60 * 1000 });
   const w = weather.data;
@@ -93,89 +94,14 @@ export default function BeachesScreen() {
     return list;
   }, [cat, q, windName]);
 
-  const statusMeta = (st: BeachStatus) => {
-    if (st === "recommended") return { color: colors.success, label: t("ui.beaches.st_ideal") };
-    if (st === "avoid") return { color: colors.error, label: t("ui.beaches.st_rough") };
-    return { color: colors.muted, label: t("ui.beaches.st_ok") };
-  };
 
-  const parkingBadge = (type: Beach["parking_type"]) => {
-    if (type === "free") return { color: colors.success, label: t("ui.beaches.pk_free") };
-    if (type === "paid") return { color: colors.warning, label: t("ui.beaches.pk_paid") };
-    return { color: colors.info, label: t("ui.beaches.pk_mixed") };
-  };
 
-  const openDir = (b: Beach) =>
-    Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=Trappeto,PA&destination=${b.lat},${b.lng}`).catch(() => {});
 
-  const renderItem = ({ item }: { item: Beach }) => {
-    if (item.id === EXAMPLE_BEACH.id) return <ExampleBeachCard beach={item} windName={windName} />;
-    const bl = item[lang];
-    const st = windName ? analyzeBeach(item, windName) : "neutral";
-    const meta = statusMeta(st);
-    const pk = parkingBadge(item.parking_type);
-    const ferry = item.dist.toLowerCase().includes("aliscafo");
-    const tags: { icon: IconName; on: boolean }[] = [
-      { icon: "baby-face-outline", on: item.kids },
-      { icon: "umbrella-outline", on: item.lidi },
-      { icon: "diving-snorkel", on: item.snorkel },
-      { icon: "parking", on: item.park },
-    ];
-    return (
-      <View style={s.card}>
-        <View style={s.cardHead}>
-          <View style={{ flex: 1 }}>
-            <Text style={s.name}>{item.name}</Text>
-            <View style={s.metaRow}>
-              <Icon name={ferry ? "ferry" : "car"} size={13} color={colors.olive} />
-              <Text style={s.metaTxt}>
-                {item.location} ({item.prov}) · {item.time} ({item.dist})
-              </Text>
-            </View>
-          </View>
-          <View style={[s.statusPill, { backgroundColor: meta.color + "22" }]}>
-            <Text style={[s.statusTxt, { color: meta.color }]}>{meta.label}</Text>
-          </View>
-        </View>
-
-        <Text style={s.desc}>{bl.desc}</Text>
-
-        <View style={s.infoBox}>
-          <View style={s.infoLine}>
-            <Text style={s.infoKey}>{t("ui.beaches.parking")}</Text>
-            <View style={[s.pkBadge, { backgroundColor: pk.color + "22" }]}>
-              <Text style={[s.pkTxt, { color: pk.color }]}>{pk.label}</Text>
-            </View>
-          </View>
-          <Text style={s.infoVal}>{bl.parking_info}</Text>
-          <View style={s.infoGrid}>
-            <Text style={s.infoSmall}>👥 {bl.crowd}</Text>
-            <Text style={s.infoSmall}>🍹 {bl.food}</Text>
-            <Text style={s.infoSmall}>🌊 {bl.seabed}</Text>
-          </View>
-        </View>
-
-        {bl.tips ? (
-          <View style={s.tip}>
-            <Icon name="lightbulb-on-outline" size={14} color={colors.brand} />
-            <Text style={s.tipTxt}>{bl.tips}</Text>
-          </View>
-        ) : null}
-
-        <View style={s.cardFoot}>
-          <View style={s.tags}>
-            {tags.filter((tg) => tg.on).map((tg, i) => (
-              <Icon key={i} name={tg.icon} size={18} color={colors.oliveSoft} />
-            ))}
-          </View>
-          <Pressable testID={`beach-dir-${item.id}`} onPress={() => openDir(item)} style={s.dirBtn}>
-            <Icon name="directions" size={16} color={colors.onBrandPrimary} />
-            <Text style={s.dirTxt}>{t("ui.beaches.take_me")}</Text>
-          </Pressable>
-        </View>
-      </View>
-    );
-  };
+  const renderItem = ({ item }: { item: Beach }) => (
+    <View style={{ flex: 1, paddingHorizontal: cols > 1 ? 0 : spacing.md }}>
+      <BeachCard beach={item} windName={windName} {...beachExtras(item.id, t)} />
+    </View>
+  );
 
   return (
     <View style={s.screen}>
@@ -185,6 +111,9 @@ export default function BeachesScreen() {
         data={unlocked ? filtered : []}
         keyExtractor={(b) => b.id}
         renderItem={renderItem}
+        key={cols}
+        numColumns={cols}
+        columnWrapperStyle={cols > 1 ? { gap: spacing.md, paddingHorizontal: spacing.md } : undefined}
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ paddingBottom: spacing.xxl, gap: spacing.md }}
         showsVerticalScrollIndicator={false}

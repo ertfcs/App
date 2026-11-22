@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 
-import { makeStyles, useTheme } from "@/src/theme";
+import { makeStyles } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import type { Poi } from "@/src/lib/queries";
 import { PlaceCard, type PlaceOverride } from "@/src/components/PlaceCard";
-import type { Dish } from "@/src/lib/culinary";
-import { analyzeBeach, type Beach } from "@/src/lib/beaches";
+import type { Beach } from "@/src/lib/beaches";
+import type { MergedDish } from "@/src/lib/dishes";
+import { DishCard, BeachCard } from "@/src/components/GuideCards";
 
 // Free example cards shown to guests without a booking code (same look as the approved preview).
 // Texts and photos of the examples live here; the rest of each section stays behind the code.
@@ -42,52 +42,8 @@ export const EXAMPLE_BEACH = {
   credit: "Arcona B&B, CC BY 3.0 (Wikimedia Commons)",
 };
 
-function Photo({ source, credit, badges }: { source: number | string; credit: string; badges: { text: string; kind: "dark" | "light" | "star" }[] }) {
-  const s = useStyles();
-  return (
-    <View style={s.photo}>
-      <Image source={source} style={s.photoImg} contentFit="cover" transition={200} />
-      <View style={s.badges}>
-        {badges.map((b) => (
-          <Text key={b.text} style={[s.badge, b.kind === "light" && s.badgeLight, b.kind === "star" && s.badgeStar]}>
-            {b.text}
-          </Text>
-        ))}
-      </View>
-      {credit ? (
-        <Text style={s.credit} numberOfLines={1}>
-          Foto: {credit}
-        </Text>
-      ) : null}
-    </View>
-  );
-}
 
-function InfoBox({ rows }: { rows: { label: string; value?: React.ReactNode }[] }) {
-  const s = useStyles();
-  const shown = rows.filter((r) => r.value);
-  if (!shown.length) return null;
-  return (
-    <View style={s.box}>
-      {shown.map((r) => (
-        <View key={r.label} style={{ gap: 2 }}>
-          <Text style={s.boxLabel}>{r.label}</Text>
-          {typeof r.value === "string" ? <Text style={s.boxValue}>{r.value}</Text> : r.value}
-        </View>
-      ))}
-    </View>
-  );
-}
 
-function Tip({ title, text }: { title: string; text: string }) {
-  const s = useStyles();
-  return (
-    <Text style={s.tip}>
-      <Text style={s.tipTitle}>{title} </Text>
-      {text}
-    </Text>
-  );
-}
 
 export function FreeLabel({ text }: { text?: string }) {
   const s = useStyles();
@@ -129,78 +85,34 @@ export function ExamplePlaceCard({ poi, style }: { poi: Poi; style?: object }) {
   );
 }
 
-export function ExampleDishCard({ dish }: { dish: Dish }) {
-  const s = useStyles();
-  const { t } = useTranslation();
-  const ex = EXAMPLE_DISHES[dish.id];
+/** Photo and credit for a dish card: the admin photo, otherwise the bundled example. */
+export function dishPhoto(dish: { id: string; image?: string }) {
+  return { image: dishImageSource(dish.id, dish.image), credit: dish.image ? undefined : EXAMPLE_DISHES[dish.id]?.credit };
+}
+
+/** Extra photo/texts for the example beach (same with and without the code). */
+export function beachExtras(id: string, t: (k: string) => string) {
+  if (id !== EXAMPLE_BEACH.id) return {};
+  return {
+    image: EXAMPLE_BEACH.image as number,
+    credit: EXAMPLE_BEACH.credit,
+    extra: { desc: t("ui.ex.beach_extra"), howTo: t("ui.ex.beach_howto"), tip: t("ui.ex.beach_tip"), mustSee: true },
+  };
+}
+
+export function ExampleDishCard({ dish, style }: { dish: MergedDish; style?: object }) {
   return (
-    <View style={s.card} testID={`example-dish-${dish.id}`}>
-      {ex || (dish as { image?: string }).image ? (
-        <Photo
-          source={dishImageSource(dish.id, (dish as { image?: string }).image) as number}
-          credit={(dish as { image?: string }).image ? "" : ex?.credit ?? ""}
-          badges={[{ text: dish.region, kind: "dark" }, { text: t("ui.ex.street_food"), kind: "light" }]}
-        />
-      ) : null}
-      <View style={s.body}>
-        <Text style={s.title}>{dish.name}</Text>
-        <Text style={s.desc}>{dish.description}</Text>
-        <FreeLabel text={t("ui.ex.ingredients")} />
-        <View style={s.chips}>
-          {dish.ingredients.map((i) => (
-            <Text key={i} style={s.chip}>
-              {i}
-            </Text>
-          ))}
-        </View>
-        {dish.funFact ? <Tip title={t("ui.ex.did_you_know")} text={dish.funFact} /> : null}
-      </View>
+    <View style={[{ marginHorizontal: spacing.md }, style]}>
+      <DishCard dish={dish} {...dishPhoto(dish)} />
     </View>
   );
 }
 
-export function ExampleBeachCard({ beach, windName }: { beach: Beach; windName: string }) {
-  const s = useStyles();
-  const { t, i18n } = useTranslation();
-  const { colors } = useTheme();
-  const bl = i18n.language === "it" ? beach.it : beach.en;
-  const st = windName ? analyzeBeach(beach, windName) : "neutral";
-  const status =
-    st === "recommended"
-      ? { txt: t("ui.ex.rec_today"), color: colors.success }
-      : st === "avoid"
-        ? { txt: t("ui.ex.avoid_today"), color: colors.error }
-        : { txt: t("ui.ex.neutral_today"), color: colors.muted };
+export function ExampleBeachCard({ beach, windName, style }: { beach: Beach; windName: string; style?: object }) {
+  const { t } = useTranslation();
   return (
-    <View style={s.card} testID={`example-beach-${beach.id}`}>
-      <Photo
-        source={EXAMPLE_BEACH.image}
-        credit={EXAMPLE_BEACH.credit}
-        badges={[
-          { text: beach.location, kind: "dark" },
-          { text: `🏖️ ${bl.type}`, kind: "light" },
-          { text: t("ui.ex.must"), kind: "star" },
-        ]}
-      />
-      <View style={s.body}>
-        {windName ? <Text style={[s.status, { color: status.color, backgroundColor: status.color + "1F" }]}>{status.txt}</Text> : null}
-        <Text style={s.title}>{beach.name.replace(/\s*\(.*\)$/, "")}</Text>
-        <Text style={s.sub}>{beach.location} · {t("ui.ex.ferry_sub")}</Text>
-        <Text style={s.desc}>
-          {bl.desc} {t("ui.ex.beach_extra")}
-        </Text>
-        <InfoBox
-          rows={[
-            { label: t("ui.ex.access"), value: bl.access },
-            { label: t("ui.ex.seabed"), value: bl.seabed },
-            { label: t("ui.ex.crowd"), value: bl.crowd },
-            { label: t("ui.ex.food"), value: bl.food },
-            { label: t("ui.ex.how_to"), value: t("ui.ex.beach_howto") },
-            { label: t("ui.ex.parking"), value: bl.parking_info },
-          ]}
-        />
-        <Tip title={t("ui.ex.tip")} text={t("ui.ex.beach_tip")} />
-      </View>
+    <View style={[{ marginHorizontal: spacing.md }, style]}>
+      <BeachCard beach={beach} windName={windName} {...beachExtras(beach.id, t)} />
     </View>
   );
 }

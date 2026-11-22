@@ -336,7 +336,8 @@
       "search_ph": "Suchen (San Vito, Cefalù, Mondello...)",
       "count": "{{n}} Strände",
       "lock_title": "{{n}} weitere Strände mit dem Wind von heute",
-      "lock_text": "Gib den Buchungscode ein, um jeden Tag die empfohlenen und die zu meidenden Strände zu sehen."
+      "lock_text": "Gib den Buchungscode ein, um jeden Tag die empfohlenen und die zu meidenden Strände zu sehen.",
+      "services": "Geeignet für"
     },
     "food": {
       "title": "Sizilianische Küche",
@@ -354,7 +355,10 @@
       "not_found": "Gericht nicht gefunden",
       "traditional": "Das traditionelle Gericht",
       "ingredients": "Wichtigste Zutaten",
-      "fun": "Wissenswertes für Besucher"
+      "fun": "Wissenswertes für Besucher",
+      "typical": "Typische Küche",
+      "add_favorite": "Zu Favoriten",
+      "in_favorites": "In Favoriten"
     },
     "fest": {
       "title": "Feste & Volksfeste",

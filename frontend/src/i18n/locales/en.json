@@ -336,7 +336,8 @@
       "search_ph": "Search (San Vito, Cefalù, Mondello...)",
       "count": "{{n}} beaches",
       "lock_title": "{{n}} more beaches with today's wind",
-      "lock_text": "Enter your booking code to see, every day, which beaches to choose and which to avoid."
+      "lock_text": "Enter your booking code to see, every day, which beaches to choose and which to avoid.",
+      "services": "Good for"
     },
     "food": {
       "title": "Sicilian cuisine",
@@ -354,7 +355,10 @@
       "not_found": "Dish not found",
       "traditional": "The traditional dish",
       "ingredients": "Key ingredients",
-      "fun": "Fun fact for visitors"
+      "fun": "Fun fact for visitors",
+      "typical": "Local cuisine",
+      "add_favorite": "Add to favourites",
+      "in_favorites": "In favourites"
     },
     "fest": {
       "title": "Festivals & fairs",

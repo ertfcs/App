@@ -1,13 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, Pressable, FlatList } from "react-native";
+import { View, Text, Pressable, FlatList, useWindowDimensions } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
-import { ExampleDishCard, FreeLabel, dishImageSource } from "@/src/components/GuestExamples";
-import { Image } from "expo-image";
+import { ExampleDishCard, FreeLabel, dishPhoto } from "@/src/components/GuestExamples";
+import { DishCard } from "@/src/components/GuideCards";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
-import Animated, { FadeInDown } from "react-native-reanimated";
 
 import { Header } from "@/src/components/Header";
 import { ChipRow, EmptyState } from "@/src/components/ui";
@@ -22,11 +20,13 @@ export default function FoodList() {
   const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
-  const { favorites, toggle, isFav } = useFavorites();
+  const { favorites } = useFavorites();
   const dishes = useDishes();
   const [cat, setCat] = useState("All");
   const [favOnly, setFavOnly] = useState(false);
   const { unlocked } = useGuestAccess();
+  const { width } = useWindowDimensions();
+  const cols = width >= 1100 ? 3 : width >= 600 ? 2 : 1;
 
   const chips = foodCategories.map((c) => ({ key: c, label: c === "All" ? t("ui.food.all") : c }));
 
@@ -37,47 +37,11 @@ export default function FoodList() {
     return list;
   }, [cat, favOnly, favorites, dishes.data]);
 
-  const renderItem = ({ item, index }: { item: MergedDish; index: number }) => {
-    const fav = isFav(item.id);
-    return (
-      <Animated.View entering={FadeInDown.delay((index % 8) * 40)} style={s.cell}>
-        <Pressable
-          testID={`dish-${item.id}`}
-          style={s.card}
-          onPress={() => router.push({ pathname: "/food/[id]", params: { id: item.id } })}
-        >
-          <View style={s.glyphWrap}>
-            {dishImageSource(item.id, item.image) ? (
-              <>
-                <Image source={dishImageSource(item.id, item.image)} style={s.thumbImg} contentFit="cover" transition={200} />
-                <LinearGradient colors={["transparent", "rgba(44,42,40,0.35)"]} style={s.thumbShade} />
-                <Text style={s.glyphBadge}>{item.icon}</Text>
-              </>
-            ) : (
-              <Text style={s.glyph}>{item.icon}</Text>
-            )}
-            <Pressable
-              testID={`fav-${item.id}`}
-              onPress={() => toggle(item.id)}
-              hitSlop={10}
-              style={[s.heart, fav && { backgroundColor: colors.error + "22" }]}
-            >
-              <Icon name={fav ? "heart" : "heart-outline"} size={16} color={fav ? colors.error : colors.muted} />
-            </Pressable>
-          </View>
-          <Text style={s.name} numberOfLines={2}>
-            {item.name}
-          </Text>
-          <View style={s.regionRow}>
-            <Icon name="map-marker" size={12} color={colors.olive} />
-            <Text style={s.region} numberOfLines={1}>
-              {item.region}
-            </Text>
-          </View>
-        </Pressable>
-      </Animated.View>
-    );
-  };
+  const renderItem = ({ item }: { item: MergedDish }) => (
+    <View style={{ flex: 1, paddingHorizontal: cols > 1 ? 0 : spacing.md }}>
+      <DishCard dish={item} {...dishPhoto(item)} />
+    </View>
+  );
 
   return (
     <View style={s.screen}>
@@ -101,9 +65,10 @@ export default function FoodList() {
         data={unlocked ? filtered : []}
         keyExtractor={(d) => d.id}
         renderItem={renderItem}
-        numColumns={2}
-        columnWrapperStyle={{ gap: spacing.sm, paddingHorizontal: spacing.md }}
-        contentContainerStyle={{ paddingBottom: spacing.xxl, gap: spacing.sm }}
+        key={cols}
+        numColumns={cols}
+        columnWrapperStyle={cols > 1 ? { gap: spacing.md, paddingHorizontal: spacing.md } : undefined}
+        contentContainerStyle={{ paddingBottom: spacing.xxl, gap: spacing.md }}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View>
@@ -127,11 +92,13 @@ export default function FoodList() {
                 <View style={{ paddingHorizontal: spacing.md }}>
                   <FreeLabel />
                 </View>
-                {(dishes.data ?? [])
-                  .filter((d) => d.id === "arancina" || d.id === "pane-ca-meusa")
-                  .map((d) => (
-                    <ExampleDishCard key={d.id} dish={d} />
-                  ))}
+                <View style={{ flexDirection: cols > 1 ? "row" : "column", gap: spacing.md, paddingHorizontal: cols > 1 ? spacing.md : 0 }}>
+                  {(dishes.data ?? [])
+                    .filter((d) => d.id === "arancina" || d.id === "pane-ca-meusa")
+                    .map((d) => (
+                      <ExampleDishCard key={d.id} dish={d} style={cols > 1 ? { flex: 1, marginHorizontal: 0 } : undefined} />
+                    ))}
+                </View>
               </View>
             )}
           </View>

@@ -392,7 +392,8 @@
       "search_ph": "Cerca (San Vito, Cefalù, Mondello...)",
       "count": "{{n}} spiagge",
       "lock_title": "Altre {{n}} spiagge con il vento di oggi",
-      "lock_text": "Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare."
+      "lock_text": "Inserisci il codice della prenotazione per vedere ogni giorno le spiagge consigliate e quelle da evitare.",
+      "services": "Adatta a"
     },
     "food": {
       "title": "Cucina siciliana",
@@ -410,7 +411,10 @@
       "not_found": "Piatto non trovato",
       "traditional": "Il piatto tradizionale",
       "ingredients": "Ingredienti chiave",
-      "fun": "Curiosità per il turista"
+      "fun": "Curiosità per il turista",
+      "typical": "Cucina tipica",
+      "add_favorite": "Aggiungi ai preferiti",
+      "in_favorites": "Nei preferiti"
     },
     "fest": {
       "title": "Feste e sagre",
