@@ -45,7 +45,19 @@ export type Poi = {
   maps_query?: string;
   must_see?: boolean;
   to_verify?: string[];
+  i18n?: Record<string, Record<string, string>>;
+  i18n_src?: Record<string, string>;
 };
+
+/** Text of a field in the current language. Falls back to the Italian text when there is no translation,
+ * or when the Italian text was changed after it was translated (e.g. edited in the admin). */
+export function poiText(poi: Poi, field: keyof Poi & string, lang: string): string | undefined {
+  const it = poi[field] as string | undefined;
+  const code = (lang || "it").slice(0, 2);
+  if (code === "it" || !it) return it;
+  const tr = poi.i18n?.[code]?.[field];
+  return tr && poi.i18n_src?.[field] === it ? tr : it;
+}
 
 export type Faq = { id: string; category: string; question: string; answer: string };
 

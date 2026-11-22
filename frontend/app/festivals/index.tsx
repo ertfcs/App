@@ -9,6 +9,7 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals, Festival, FESTIVAL_COUNT } from "@/src/lib/festivals";
+import { localizeFestival } from "@/src/lib/festivalsI18n";
 
 const CAT_META: Record<Festival["category"], { icon: IconName; label: string }> = {
   religiosa: { icon: "church", label: "Festa religiosa" },
@@ -26,11 +27,11 @@ const FILTERS: { key: string; label: string; icon: IconName }[] = [
 ];
 
 export default function FestivalsScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const [filter, setFilter] = useState("all");
-  const all = useMemo(() => upcomingFestivals(), []);
+  const all = useMemo(() => upcomingFestivals().map((f) => localizeFestival(f, i18n.language)), [i18n.language]);
   const sorted = useMemo(() => {
     if (filter === "all") return all;
     if (filter === "PA" || filter === "TP") return all.filter((f) => f.province === filter);

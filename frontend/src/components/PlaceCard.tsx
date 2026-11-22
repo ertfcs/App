@@ -7,7 +7,7 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { mediaUri } from "@/src/lib/api";
-import type { Poi } from "@/src/lib/queries";
+import { poiText, type Poi } from "@/src/lib/queries";
 import { useItinerary } from "@/src/lib/itinerary";
 
 // Attraction card: photo with badges, description, practical info, tip, "add to itinerary" + map button.
@@ -37,21 +37,22 @@ export function mapsUrl(p: Poi) {
 export type PlaceOverride = { image?: number; credit?: string; description?: string; duration?: string; tip?: string };
 
 export function PlaceCard({ poi, override }: { poi: Poi; override?: PlaceOverride }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const { has, toggle } = useItinerary();
+  const L = (f: keyof Poi & string) => poiText(poi, f, i18n.language);
   const added = has(poi.id);
   const cat = CAT[poi.category] ?? CAT.art;
   const image = override?.image ?? (poi.image_url ? { uri: mediaUri(poi.image_url) } : null);
-  const tip = override?.tip ?? poi.notes;
+  const tip = override?.tip ?? L("notes");
 
-  const duration = override?.duration ?? poi.duration;
+  const duration = override?.duration ?? L("duration");
   const rows: { key: string; parts: { icon: string; label: string; value?: string }[] }[] = [
-    { key: "h", parts: [{ icon: "🕒", label: t("ui.ex.hours"), value: poi.hours }] },
-    { key: "dp", parts: [{ icon: "⏳", label: t("ui.ex.duration"), value: duration }, { icon: "💶", label: t("ui.ex.price"), value: poi.price }] },
-    { key: "d", parts: [{ icon: "🏷️", label: t("ui.ex.discounts"), value: poi.discount }] },
-    { key: "m", parts: [{ icon: "🚗", label: t("ui.place.how_to"), value: poi.how_to }] },
+    { key: "h", parts: [{ icon: "🕒", label: t("ui.ex.hours"), value: L("hours") }] },
+    { key: "dp", parts: [{ icon: "⏳", label: t("ui.ex.duration"), value: duration }, { icon: "💶", label: t("ui.ex.price"), value: L("price") }] },
+    { key: "d", parts: [{ icon: "🏷️", label: t("ui.ex.discounts"), value: L("discount") }] },
+    { key: "m", parts: [{ icon: "🚗", label: t("ui.place.how_to"), value: L("how_to") }] },
   ];
   const shownRows = rows.map((r) => ({ ...r, parts: r.parts.filter((p) => p.value) })).filter((r) => r.parts.length);
 
@@ -82,7 +83,7 @@ export function PlaceCard({ poi, override }: { poi: Poi; override?: PlaceOverrid
       <View style={s.body}>
         <Text style={s.title}>{poi.name}</Text>
         <Text style={s.sub}>{t("ui.ex.km", { km: kmFromHome(poi.lat, poi.lng) })}</Text>
-        {override?.description ?? poi.description ? <Text style={s.desc}>{override?.description ?? poi.description}</Text> : null}
+        {override?.description ?? L("description") ? <Text style={s.desc}>{override?.description ?? L("description")}</Text> : null}
 
         {shownRows.length || poi.ticket_url ? (
           <View style={s.box}>

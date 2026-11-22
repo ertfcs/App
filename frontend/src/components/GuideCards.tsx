@@ -7,7 +7,8 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { analyzeBeach, type Beach } from "@/src/lib/beaches";
-import type { MergedDish } from "@/src/lib/dishes";
+import { beachText } from "@/src/lib/beachData";
+import { localizeDish, type MergedDish } from "@/src/lib/dishes";
 import { useFavorites } from "@/src/lib/favorites";
 
 // Food and beach cards with the same look as the attraction cards (PlaceCard).
@@ -94,8 +95,9 @@ function GuideCard(props: {
 }
 
 // ---------------- food
-export function DishCard({ dish, image, credit }: { dish: MergedDish; image?: { uri: string } | number; credit?: string }) {
-  const { t } = useTranslation();
+export function DishCard({ dish: raw, image, credit }: { dish: MergedDish; image?: { uri: string } | number; credit?: string }) {
+  const { t, i18n } = useTranslation();
+  const dish = localizeDish(raw, i18n.language);
   const s = useStyles();
   const { colors } = useTheme();
   const { isFav, toggle } = useFavorites();
@@ -156,7 +158,7 @@ export function BeachCard({
   const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
-  const bl = i18n.language === "it" ? beach.it : beach.en;
+  const bl = beachText(beach, i18n.language);
   const st = windName ? analyzeBeach(beach, windName) : "neutral";
   const status =
     st === "recommended"

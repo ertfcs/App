@@ -10,7 +10,10 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 CONTENT = Path(__file__).parent / "assets" / "poi" / "content.json"
-FIELDS = ("description", "hours", "price", "duration", "how_to", "notes", "must_see", "maps_query", "to_verify")
+FIELDS = ("description", "hours", "price", "duration", "discount", "how_to", "notes", "must_see", "maps_query", "to_verify")
+# Translations are not edited in the admin: always refreshed. The app shows a translation only while the
+# Italian text is still the one it was translated from (i18n_src); after an admin edit it shows the Italian text.
+ALWAYS = ("i18n", "i18n_src")
 MARKER = "poi_content_v1"
 
 
@@ -37,6 +40,9 @@ async def apply_poi_content(db, default_descriptions: dict) -> int:
             if empty:
                 patch[field] = info[field]
             done.add(field)
+        for field in ALWAYS:
+            if field in info and doc.get(field) != info[field]:
+                patch[field] = info[field]
         if patch:
             await db.pois.update_one({"name": name}, {"$set": patch})
             updated += 1

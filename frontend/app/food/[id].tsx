@@ -12,17 +12,18 @@ import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { culinaryData } from "@/src/lib/culinary";
-import { useDishes } from "@/src/lib/dishes";
+import { localizeDish, useDishes } from "@/src/lib/dishes";
 import { useFavorites } from "@/src/lib/favorites";
 
 export default function FoodDetail() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const s = useStyles();
   const { colors } = useTheme();
   const { isFav, toggle } = useFavorites();
   const dishes = useDishes();
-  const dish = (dishes.data ?? culinaryData).find((d) => d.id === id);
+  const found = (dishes.data ?? culinaryData).find((d) => d.id === id);
+  const dish = found ? localizeDish(found, i18n.language) : undefined;
 
   if (!dish) {
     return (

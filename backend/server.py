@@ -335,6 +335,8 @@ class PoiIn(BaseModel):
     maps_query: Optional[str] = None   # testo per la ricerca su Google Maps (indirizzo o nome + comune)
     must_see: Optional[bool] = None    # ★ Imperdibile
     to_verify: Optional[List[str]] = None  # campi da ricontrollare (solo admin)
+    i18n: Optional[dict] = None        # traduzioni {lingua: {campo: testo}} (non modificate dall'admin)
+    i18n_src: Optional[dict] = None    # testo italiano da cui è stata fatta ogni traduzione
 
 
 class DiscountCodeIn(BaseModel):
@@ -3139,7 +3141,11 @@ async def create_poi(body: PoiIn, _: str = Depends(get_current_admin)):
 async def update_poi(poi_id: str, body: PoiIn, _: str = Depends(get_current_admin)):
     if body.category not in ("art", "beach", "nature"):
         raise HTTPException(status_code=400, detail="Categoria non valida")
-    res = await db.pois.update_one({"id": poi_id}, {"$set": body.model_dump()})
+    data = body.model_dump()
+    for k in ("i18n", "i18n_src"):  # translations are managed by the app, never cleared by an admin save
+        if data.get(k) is None:
+            data.pop(k, None)
+    res = await db.pois.update_one({"id": poi_id}, {"$set": data})
     if res.matched_count == 0:
         raise HTTPException(status_code=404, detail="POI non trovato")
     return {"ok": True}

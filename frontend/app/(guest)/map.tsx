@@ -8,7 +8,7 @@ import { Field, Button, useToast } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
-import { usePois, Poi } from "@/src/lib/queries";
+import { usePois, Poi , poiText } from "@/src/lib/queries";
 import { useItinerary } from "@/src/lib/itinerary";
 import { downloadItineraryPdf } from "@/src/lib/pdf";
 import { SuggestedItineraries } from "@/src/components/SuggestedItineraries";
@@ -23,7 +23,7 @@ const CAT_TINT: Record<string, (c: any) => string> = {
 };
 
 export default function MapScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
@@ -140,15 +140,15 @@ export default function MapScreen() {
                   <Pressable testID="detail-close" onPress={() => setDetail(null)} hitSlop={8}><Icon name="close" size={24} color={colors.muted} /></Pressable>
                 </View>
 
-                {detail.description ? <Text style={s.sheetDesc}>{detail.description}</Text> : null}
+                {poiText(detail, "description", i18n.language) ? <Text style={s.sheetDesc}>{poiText(detail, "description", i18n.language)}</Text> : null}
 
                 <View style={s.infoGrid}>
-                  {detail.price ? <InfoChip icon="cash" label={detail.price} c={colors} /> : null}
-                  {detail.hours ? <InfoChip icon="clock-outline" label={detail.hours} c={colors} /> : null}
-                  {detail.duration ? <InfoChip icon="timer-sand" label={detail.duration} c={colors} /> : null}
-                  {detail.discount ? <InfoChip icon="sale" label={detail.discount} c={colors} /> : null}
+                  {poiText(detail, "price", i18n.language) ? <InfoChip icon="cash" label={poiText(detail, "price", i18n.language) ?? ""} c={colors} /> : null}
+                  {poiText(detail, "hours", i18n.language) ? <InfoChip icon="clock-outline" label={poiText(detail, "hours", i18n.language) ?? ""} c={colors} /> : null}
+                  {poiText(detail, "duration", i18n.language) ? <InfoChip icon="timer-sand" label={poiText(detail, "duration", i18n.language) ?? ""} c={colors} /> : null}
+                  {poiText(detail, "discount", i18n.language) ? <InfoChip icon="sale" label={poiText(detail, "discount", i18n.language) ?? ""} c={colors} /> : null}
                 </View>
-                {detail.notes ? <Text style={s.notes}>ℹ️ {detail.notes}</Text> : null}
+                {poiText(detail, "notes", i18n.language) ? <Text style={s.notes}>ℹ️ {poiText(detail, "notes", i18n.language)}</Text> : null}
                 <Text style={s.coords}>📍 {detail.lat.toFixed(4)}, {detail.lng.toFixed(4)}</Text>
 
                 <View style={s.sheetBtns}>

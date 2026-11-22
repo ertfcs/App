@@ -10,13 +10,13 @@ import { Button, Card, EmptyState, useToast } from "@/src/components/ui";
 import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
-import { usePois } from "@/src/lib/queries";
+import { usePois , poiText } from "@/src/lib/queries";
 import { useItinerary } from "@/src/lib/itinerary";
 import { mediaUri } from "@/src/lib/api";
 
 export default function PlaceDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const pois = usePois();
@@ -39,10 +39,10 @@ export default function PlaceDetail() {
   };
 
   const rows: { icon: IconName; label: string; value?: string }[] = [
-    { icon: "cash", label: t("map_page.price"), value: poi.price },
-    { icon: "clock-outline", label: t("map_page.hours"), value: poi.hours },
-    { icon: "timer-sand", label: t("map_page.duration"), value: poi.duration },
-    { icon: "tag-outline", label: t("map_page.discount"), value: poi.discount },
+    { icon: "cash", label: t("map_page.price"), value: poiText(poi, "price", i18n.language) },
+    { icon: "clock-outline", label: t("map_page.hours"), value: poiText(poi, "hours", i18n.language) },
+    { icon: "timer-sand", label: t("map_page.duration"), value: poiText(poi, "duration", i18n.language) },
+    { icon: "tag-outline", label: t("map_page.discount"), value: poiText(poi, "discount", i18n.language) },
   ].filter((r) => r.value);
 
   return (
@@ -71,12 +71,12 @@ export default function PlaceDetail() {
         </View>
 
         <View style={s.body}>
-          {poi.description ? <Text style={s.desc}>{poi.description}</Text> : null}
-          {poi.notes ? (
+          {poiText(poi, "description", i18n.language) ? <Text style={s.desc}>{poiText(poi, "description", i18n.language)}</Text> : null}
+          {poiText(poi, "notes", i18n.language) ? (
             <Card style={{ marginTop: spacing.md, backgroundColor: colors.terracottaSoft, borderColor: colors.brandSecondary }}>
               <View style={{ flexDirection: "row", gap: spacing.sm }}>
                 <Icon name="lightbulb-on-outline" size={18} color={colors.brandPrimary} />
-                <Text style={[s.desc, { flex: 1 }]}>{poi.notes}</Text>
+                <Text style={[s.desc, { flex: 1 }]}>{poiText(poi, "notes", i18n.language)}</Text>
               </View>
             </Card>
           ) : null}

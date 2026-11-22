@@ -8,6 +8,7 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals } from "@/src/lib/festivals";
+import { localizeFestival } from "@/src/lib/festivalsI18n";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 
@@ -21,7 +22,7 @@ const TILES: Tile[] = [
 ];
 
 export default function ServicesScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { width } = useWindowDimensions();
   const { unlocked } = useGuestAccess();
@@ -49,7 +50,7 @@ export default function ServicesScreen() {
               </View>
               <Text style={[s.tileTitle, { color: tl.ink }]}>{t(`services.${tl.key}_short`)}</Text>
               <Text style={s.tileSub} numberOfLines={3}>
-                {tl.key === "festivals" && nextFestival ? t("services.festivals_next_short", { name: nextFestival.name }) : t(`services.${tl.key}_tile`)}
+                {tl.key === "festivals" && nextFestival ? t("services.festivals_next_short", { name: localizeFestival(nextFestival, i18n.language).name }) : t(`services.${tl.key}_tile`)}
               </Text>
               {tl.locked && !unlocked ? (
                 <View style={s.pastelPill}>

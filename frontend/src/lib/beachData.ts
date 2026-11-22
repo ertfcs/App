@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./api";
-import { beaches as baseBeaches, type Beach } from "./beaches";
+import { beaches as baseBeaches, type Beach, type BeachLang } from "./beaches";
+import { beachTextI18n } from "./beach_i18n";
 
 // Beaches = built-in list + changes saved from the admin (overrides). Italian texts are editable;
-// the English texts stay as in the built-in list.
+// translations (beachText) are used only while the Italian text is unchanged.
 export type MergedBeach = Beach & { image?: string; hidden?: boolean };
 export type BeachOverride = Partial<Omit<MergedBeach, "it" | "en">> & {
   id: string;
@@ -47,4 +48,20 @@ export function mergeBeaches(overrides: BeachOverride[], includeHidden = false):
 
 export function useBeaches(includeHidden = false) {
   return useQuery({ queryKey: ["beaches"], queryFn: fetchOverrides, select: (o) => mergeBeaches(o, includeHidden) });
+}
+
+const baseById = new Map(baseBeaches.map((b) => [b.id, b]));
+
+/** Beach texts in the guest's language. A text changed in the admin (Italian only) is shown as written. */
+export function beachText(beach: Beach, lang?: string): BeachLang {
+  const code = (lang ?? "it").slice(0, 2);
+  if (code === "it") return beach.it;
+  const base = baseById.get(beach.id);
+  const out = { ...beach.it };
+  for (const f of TEXT_FIELDS) {
+    const it = beach.it[f];
+    if (!base || it !== base.it[f]) continue;
+    out[f] = code === "en" ? base.en[f] : beachTextI18n[it]?.[code] ?? base.en[f];
+  }
+  return out;
 }

@@ -9,6 +9,7 @@ import { useToast } from "@/src/components/ui";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { festivalDateSet } from "@/src/lib/festivals";
+import { localizeFestival } from "@/src/lib/festivalsI18n";
 import { toISODate } from "@/src/lib/format";
 
 export type DateRange = { start: string | null; end: string | null };
@@ -37,7 +38,7 @@ export function DateRangeCalendar({
   onChange: (r: DateRange) => void;
   testID?: string;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const toast = useToast();
@@ -123,7 +124,7 @@ export function DateRangeCalendar({
           <Text style={s.festTitle}>{t("calendar.festivals_that_day")}</Text>
           {fests.slice(0, 3).map((f) => (
             <Text key={f.id} style={s.festItem} numberOfLines={1}>
-              {f.icon} {f.name}
+              {f.icon} {localizeFestival(f, i18n.language).name}
             </Text>
           ))}
         </Pressable>
