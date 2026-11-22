@@ -459,7 +459,9 @@
     "home_unlocked": "Has desbloqueado la guía de la zona y el itinerario en PDF.",
     "see_preview": "Ver vista previa",
     "home_code_title": "Tu código personal",
-    "home_unlocked_title": "Código activo"
+    "home_unlocked_title": "Código activo",
+    "logout": "Salir",
+    "logged_out": "Código eliminado de este dispositivo"
   },
   "itin": {
     "suggested_kicker": "Listos para seguir",

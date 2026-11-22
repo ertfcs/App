@@ -459,7 +459,9 @@
     "home_unlocked": "Vous avez débloqué le guide du territoire et l'itinéraire en PDF.",
     "see_preview": "Voir l'aperçu",
     "home_code_title": "Votre code personnel",
-    "home_unlocked_title": "Code actif"
+    "home_unlocked_title": "Code actif",
+    "logout": "Se déconnecter",
+    "logged_out": "Code supprimé de cet appareil"
   },
   "itin": {
     "suggested_kicker": "Prêts à suivre",

@@ -338,7 +338,9 @@
     "home_unlocked": "Hai sbloccato la guida al territorio e l'itinerario in PDF.",
     "see_preview": "Vedi anteprima",
     "home_code_title": "Il tuo codice personale",
-    "home_unlocked_title": "Codice attivo"
+    "home_unlocked_title": "Codice attivo",
+    "logout": "Esci",
+    "logged_out": "Codice rimosso da questo dispositivo"
   },
   "itin": {
     "suggested_kicker": "Pronti da seguire",

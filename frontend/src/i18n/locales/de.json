@@ -459,7 +459,9 @@
     "home_unlocked": "Du hast den Regionalführer und die PDF-Route freigeschaltet.",
     "see_preview": "Vorschau ansehen",
     "home_code_title": "Dein persönlicher Code",
-    "home_unlocked_title": "Code aktiv"
+    "home_unlocked_title": "Code aktiv",
+    "logout": "Abmelden",
+    "logged_out": "Code von diesem Gerät entfernt"
   },
   "itin": {
     "suggested_kicker": "Fertig zum Nachfahren",

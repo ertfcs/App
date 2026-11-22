@@ -459,7 +459,9 @@
     "home_unlocked": "You have unlocked the local guide and the PDF itinerary.",
     "see_preview": "See preview",
     "home_code_title": "Your personal code",
-    "home_unlocked_title": "Code active"
+    "home_unlocked_title": "Code active",
+    "logout": "Log out",
+    "logged_out": "Code removed from this device"
   },
   "itin": {
     "suggested_kicker": "Ready to follow",

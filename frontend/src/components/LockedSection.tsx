@@ -73,10 +73,25 @@ export function UnlockedNote() {
   const { t } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
+  const toast = useToast();
+  const { lock } = useGuestAccess();
   return (
     <View style={s.okRow}>
       <Icon name="lock-open-variant" size={16} color={colors.success} />
-      <Text style={[s.okTxt, { color: colors.success }]}>{t("lock.unlocked_note")}</Text>
+      <Text style={[s.okTxt, { color: colors.success, flex: 1 }]}>{t("lock.unlocked_note")}</Text>
+      <Pressable
+        testID="lock-logout"
+        onPress={() => {
+          lock();
+          toast.show(t("lock.logged_out"), "success");
+        }}
+        hitSlop={8}
+        accessibilityRole="button"
+        style={s.logoutBtn}
+      >
+        <Icon name="logout" size={14} color={colors.muted} />
+        <Text style={s.logoutTxt}>{t("lock.logout")}</Text>
+      </Pressable>
     </View>
   );
 }
@@ -104,5 +119,7 @@ const useStyles = makeStyles((c) => ({
   bookLink: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 2, paddingVertical: 6 },
   bookTxt: { color: c.brandPrimary, fontSize: 14, fontWeight: "600", fontFamily: fonts.body },
   okRow: { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: spacing.md, paddingVertical: spacing.xs },
+  logoutBtn: { flexDirection: "row", alignItems: "center", gap: 4, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 999, borderWidth: 1, borderColor: c.border },
+  logoutTxt: { color: c.muted, fontSize: 12, fontWeight: "600", fontFamily: fonts.body },
   okTxt: { fontSize: 13, fontWeight: "600", fontFamily: fonts.body },
 }));

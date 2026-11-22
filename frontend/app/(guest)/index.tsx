@@ -76,7 +76,7 @@ export default function HomeScreen() {
   const [showAllAmenities, setShowAllAmenities] = useState(false);
   const [keyringOpen, setKeyringOpen] = useState(false);
   const [range, setRange] = useState<DateRange>({ start: null, end: null });
-  const { unlocked } = useGuestAccess();
+  const { unlocked, lock } = useGuestAccess();
 
   const av = availability.data;
   const blocked = useMemo(() => new Set(av?.blocked_dates ?? []), [av]);
@@ -151,6 +151,11 @@ export default function HomeScreen() {
                   <Text style={s.codeHeroTitle}>{unlocked ? t("lock.home_unlocked_title") : t("lock.home_code_title")}</Text>
                   <Text style={s.codeHeroTxt}>{unlocked ? t("lock.home_unlocked") : t("lock.home_note")}</Text>
                 </View>
+                {unlocked ? (
+                  <Pressable testID="home-lock-logout" onPress={lock} hitSlop={8} accessibilityRole="button" style={s.codeLogout}>
+                    <Text style={s.codeLogoutTxt}>{t("lock.logout")}</Text>
+                  </Pressable>
+                ) : null}
               </View>
               <View style={s.perks}>
                 <PerkRow perk={KEYRING} label={t("home_new.perk_keyring")} onPress={() => setKeyringOpen(true)} />
@@ -373,6 +378,8 @@ const useStyles = makeStyles((c) => ({
   pastelTxt: { color: "#4E5E40", fontSize: 11, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 0.2 },
   calWrap: { borderTopWidth: 1, borderTopColor: c.border, paddingTop: spacing.md, marginBottom: spacing.md },
   codeHero: { flexDirection: "row", gap: spacing.sm, alignItems: "center", backgroundColor: c.brandPrimary, borderRadius: radius.lg, padding: spacing.md, marginBottom: spacing.md },
+  codeLogout: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill, borderWidth: 1, borderColor: "rgba(255,255,255,0.7)" },
+  codeLogoutTxt: { color: "#FFFFFF", fontSize: 12, fontWeight: "700", fontFamily: fonts.body },
   codeHeroIcon: { width: 42, height: 42, borderRadius: 21, backgroundColor: "#FFFFFF", alignItems: "center", justifyContent: "center" },
   codeHeroTitle: { color: "#FFFFFF", fontSize: 17, fontFamily: fonts.heading },
   codeHeroTxt: { color: "rgba(255,255,255,0.92)", fontSize: 13, lineHeight: 18, fontFamily: fonts.body, marginTop: 2 },
