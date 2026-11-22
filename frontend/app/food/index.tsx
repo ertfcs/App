@@ -3,7 +3,7 @@ import { View, Text, Pressable, FlatList } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
-import { ExampleDishCard, FreeLabel } from "@/src/components/GuestExamples";
+import { ExampleDishCard, FreeLabel, dishImageSource } from "@/src/components/GuestExamples";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
@@ -47,9 +47,9 @@ export default function FoodList() {
           onPress={() => router.push({ pathname: "/food/[id]", params: { id: item.id } })}
         >
           <View style={s.glyphWrap}>
-            {item.image ? (
+            {dishImageSource(item.id, item.image) ? (
               <>
-                <Image source={{ uri: item.image }} style={s.thumbImg} contentFit="cover" transition={200} />
+                <Image source={dishImageSource(item.id, item.image)} style={s.thumbImg} contentFit="cover" transition={200} />
                 <LinearGradient colors={["transparent", "rgba(44,42,40,0.35)"]} style={s.thumbShade} />
                 <Text style={s.glyphBadge}>{item.icon}</Text>
               </>

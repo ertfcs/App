@@ -11,7 +11,7 @@ import { usePois, Poi } from "@/src/lib/queries";
 import { ItineraryFab } from "@/src/components/ItineraryFab";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
-import { ExamplePlaceCard, FreeLabel } from "@/src/components/GuestExamples";
+import { ExamplePlaceCard, FreeLabel, placeOverride } from "@/src/components/GuestExamples";
 import { PlaceCard } from "@/src/components/PlaceCard";
 
 
@@ -56,7 +56,7 @@ export default function PlacesScreen() {
 
   const renderItem = ({ item }: { item: Poi }) => (
     <View style={{ flex: 1 }}>
-      <PlaceCard poi={item} />
+      <PlaceCard poi={item} override={placeOverride(item, t)} />
     </View>
   );
 

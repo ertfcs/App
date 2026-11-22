@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import type { Poi } from "@/src/lib/queries";
-import { PlaceCard } from "@/src/components/PlaceCard";
+import { PlaceCard, type PlaceOverride } from "@/src/components/PlaceCard";
 import type { Dish } from "@/src/lib/culinary";
 import { analyzeBeach, type Beach } from "@/src/lib/beaches";
 
@@ -54,9 +54,11 @@ function Photo({ source, credit, badges }: { source: number | string; credit: st
           </Text>
         ))}
       </View>
-      <Text style={s.credit} numberOfLines={1}>
-        Foto: {credit}
-      </Text>
+      {credit ? (
+        <Text style={s.credit} numberOfLines={1}>
+          Foto: {credit}
+        </Text>
+      ) : null}
     </View>
   );
 }
@@ -99,25 +101,30 @@ export function FreeLabel({ text }: { text?: string }) {
   );
 }
 
+/** Photo and translated texts of the free example places; the same in the locked and unlocked views.
+ * A photo uploaded from the admin always wins over the bundled one. */
+export function placeOverride(poi: Poi, t: (k: string) => string): PlaceOverride | undefined {
+  const ex = EXAMPLE_PLACES[poi.name];
+  if (!ex) return undefined;
+  return {
+    image: poi.image_url ? undefined : ex.image,
+    credit: poi.image_url ? undefined : ex.credit,
+    description: t(`ui.ex.${ex.key}_desc`),
+    duration: t(`ui.ex.${ex.key}_duration`),
+    tip: t(`ui.ex.${ex.key}_tip`),
+  };
+}
+
+/** Image source for a dish: the admin photo, otherwise the bundled example photo (if any). */
+export function dishImageSource(id: string, image?: string): { uri: string } | number | undefined {
+  return image ? { uri: image } : EXAMPLE_DISHES[id]?.image;
+}
+
 export function ExamplePlaceCard({ poi, style }: { poi: Poi; style?: object }) {
   const { t } = useTranslation();
-  const ex = EXAMPLE_PLACES[poi.name];
   return (
     <View style={[{ marginHorizontal: spacing.md }, style]}>
-      <PlaceCard
-        poi={poi}
-        override={
-          ex
-            ? {
-                image: ex.image,
-                credit: ex.credit,
-                description: t(`ui.ex.${ex.key}_desc`),
-                duration: t(`ui.ex.${ex.key}_duration`),
-                tip: t(`ui.ex.${ex.key}_tip`),
-              }
-            : undefined
-        }
-      />
+      <PlaceCard poi={poi} override={placeOverride(poi, t)} />
     </View>
   );
 }
@@ -128,8 +135,12 @@ export function ExampleDishCard({ dish }: { dish: Dish }) {
   const ex = EXAMPLE_DISHES[dish.id];
   return (
     <View style={s.card} testID={`example-dish-${dish.id}`}>
-      {ex ? (
-        <Photo source={ex.image} credit={ex.credit} badges={[{ text: dish.region, kind: "dark" }, { text: t("ui.ex.street_food"), kind: "light" }]} />
+      {ex || (dish as { image?: string }).image ? (
+        <Photo
+          source={dishImageSource(dish.id, (dish as { image?: string }).image) as number}
+          credit={(dish as { image?: string }).image ? "" : ex?.credit ?? ""}
+          badges={[{ text: dish.region, kind: "dark" }, { text: t("ui.ex.street_food"), kind: "light" }]}
+        />
       ) : null}
       <View style={s.body}>
         <Text style={s.title}>{dish.name}</Text>

@@ -109,6 +109,7 @@ export default function BeachesScreen() {
     Linking.openURL(`https://www.google.com/maps/dir/?api=1&origin=Trappeto,PA&destination=${b.lat},${b.lng}`).catch(() => {});
 
   const renderItem = ({ item }: { item: Beach }) => {
+    if (item.id === EXAMPLE_BEACH.id) return <ExampleBeachCard beach={item} windName={windName} />;
     const bl = item[lang];
     const st = windName ? analyzeBeach(item, windName) : "neutral";
     const meta = statusMeta(st);

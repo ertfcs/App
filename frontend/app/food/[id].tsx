@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import React from "react";
+import { dishImageSource } from "@/src/components/GuestExamples";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
@@ -53,9 +54,9 @@ export default function FoodDetail() {
       />
       <ScrollView contentContainerStyle={{ paddingBottom: spacing.xxl }} showsVerticalScrollIndicator={false}>
         <View style={s.hero}>
-          {dish.image ? (
+          {dishImageSource(dish.id, (dish as { image?: string }).image) ? (
             <>
-              <Image source={{ uri: dish.image }} style={s.heroBg} contentFit="cover" transition={250} />
+              <Image source={dishImageSource(dish.id, (dish as { image?: string }).image)} style={s.heroBg} contentFit="cover" transition={250} />
               <LinearGradient colors={["rgba(44,42,40,0.15)", "rgba(44,42,40,0.55)"]} style={s.heroBg} />
             </>
           ) : (
