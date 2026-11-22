@@ -32,6 +32,7 @@ from llm_client import LlmChat, UserMessage, TextDelta, StreamDone, ImageContent
 
 # Carmelo IA helpers
 from poi_tickets import apply_poi_tickets
+from poi_content import apply_poi_content
 from carmelo_ai import (
     MODELS as CARMELO_MODELS,
     MODEL_LABELS as CARMELO_MODEL_LABELS,
@@ -330,6 +331,10 @@ class PoiIn(BaseModel):
     ticket_url: Optional[str] = None   # sito per i biglietti
     maps_url: Optional[str] = None     # link Google Maps per le indicazioni (se vuoto, generato dalle coordinate)
     image_url: Optional[str] = None    # foto (URL o data URL)
+    how_to: Optional[str] = None       # come arrivare / mezzi (es. "In auto da Trappeto circa 40 min")
+    maps_query: Optional[str] = None   # testo per la ricerca su Google Maps (indirizzo o nome + comune)
+    must_see: Optional[bool] = None    # ★ Imperdibile
+    to_verify: Optional[List[str]] = None  # campi da ricontrollare (solo admin)
 
 
 class DiscountCodeIn(BaseModel):
@@ -547,6 +552,9 @@ async def startup_event():
     n_tickets = await apply_poi_tickets(db)
     if n_tickets:
         logger.info("Ticket info filled for %d POIs", n_tickets)
+    n_content = await apply_poi_content(db, {p["name"]: p.get("description") for p in DEFAULT_POIS})
+    if n_content:
+        logger.info("Texts and practical info filled for %d POIs", n_content)
 
     # Seed foto Galleria privata (Dashboard → Galleria) dal batch fornito dall'host.
     # Idempotente e "definitivo": usa un registro persistente delle seed_key

@@ -1,36 +1,26 @@
 import React, { useMemo, useState } from "react";
-import { View, Text, Pressable, FlatList, Linking } from "react-native";
-import { Image } from "expo-image";
+import { View, Text, FlatList, useWindowDimensions } from "react-native";
 import { useTranslation } from "react-i18next";
-import { router } from "expo-router";
 
 import { Header } from "@/src/components/Header";
 import { ChipRow, EmptyState, Loading, Field } from "@/src/components/ui";
-import { Icon, IconName } from "@/src/components/Icon";
-import { makeStyles, useTheme } from "@/src/theme";
+import { IconName } from "@/src/components/Icon";
+import { makeStyles } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { usePois, Poi } from "@/src/lib/queries";
-import { mediaUri } from "@/src/lib/api";
-import { useItinerary } from "@/src/lib/itinerary";
 import { ItineraryFab } from "@/src/components/ItineraryFab";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import { ExamplePlaceCard, FreeLabel } from "@/src/components/GuestExamples";
+import { PlaceCard } from "@/src/components/PlaceCard";
 
-const CATEGORY_META: Record<string, { icon: IconName; color: (c: any) => string }> = {
-  art: { icon: "bank", color: (c) => c.brandPrimary },
-  beach: { icon: "beach", color: (c) => c.info },
-  nature: { icon: "pine-tree", color: (c) => c.olive },
-};
 
 const FREE_PLACES = ["Cattedrale di Palermo", "Tempio di Segesta"];
 
 export default function PlacesScreen() {
   const { t } = useTranslation();
   const s = useStyles();
-  const { colors } = useTheme();
   const pois = usePois();
-  const { has, toggle } = useItinerary();
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
   const { unlocked } = useGuestAccess();
@@ -53,61 +43,22 @@ export default function PlacesScreen() {
     }
     return list;
   }, [pois.data, cat, q]);
+  const { width } = useWindowDimensions();
+  const cols = width >= 760 ? 2 : 1;
+  // must-see first, then with a photo, then by name
+  const sorted = useMemo(
+    () => [...filtered].sort((a, b) => Number(!!b.must_see) - Number(!!a.must_see) || Number(!!b.image_url) - Number(!!a.image_url) || a.name.localeCompare(b.name)),
+    [filtered],
+  );
   const examples = (pois.data ?? []).filter((p) => FREE_PLACES.includes(p.name));
   const lockedNames = (pois.data ?? []).filter((p) => !FREE_PLACES.includes(p.name)).slice(0, 6).map((p) => p.name);
 
-  const openDirections = (p: Poi) => {
-    const url = p.maps_url || `https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`;
-    Linking.openURL(url).catch(() => {});
-  };
 
-  const renderItem = ({ item }: { item: Poi }) => {
-    const meta = CATEGORY_META[item.category] ?? CATEGORY_META.art;
-    return (
-      <Pressable
-        testID={`poi-${item.id}`}
-        style={s.card}
-        onPress={() => router.push({ pathname: "/place/[id]", params: { id: item.id } })}
-      >
-        <View style={[s.thumb, { backgroundColor: colors.surfaceTertiary }]}>
-          {item.image_url ? (
-            <Image source={{ uri: mediaUri(item.image_url) }} style={s.thumbImg} contentFit="cover" />
-          ) : (
-            <Icon name={meta.icon} size={26} color={meta.color(colors)} />
-          )}
-        </View>
-        <View style={{ flex: 1 }}>
-          <Text style={s.cardTitle} numberOfLines={1}>
-            {item.name}
-          </Text>
-          <View style={s.metaRow}>
-            <Icon name="map-marker" size={13} color={colors.muted} />
-            <Text style={s.metaTxt} numberOfLines={1}>
-              {item.town ?? item.province ?? "Sicilia"}
-            </Text>
-          </View>
-          {item.description ? (
-            <Text style={s.cardDesc} numberOfLines={2}>
-              {item.description}
-            </Text>
-          ) : null}
-        </View>
-        <Pressable
-          testID={`poi-add-${item.id}`}
-          onPress={() => toggle(item.id)}
-          style={[s.addBtn, has(item.id) && { backgroundColor: colors.brandPrimary, borderColor: colors.brandPrimary }]}
-          hitSlop={6}
-          accessibilityLabel={has(item.id) ? t("itin.in_itinerary") : t("itin.add")}
-        >
-          <Icon name={has(item.id) ? "check" : "plus"} size={16} color={has(item.id) ? colors.onBrandPrimary : colors.brandPrimary} />
-          <Text style={[s.addTxt, has(item.id) && { color: colors.onBrandPrimary }]}>{has(item.id) ? t("itin.added_short") : t("itin.add_short")}</Text>
-        </Pressable>
-        <Pressable testID={`poi-dir-${item.id}`} onPress={() => openDirections(item)} style={s.dirBtn} hitSlop={8}>
-          <Icon name="directions" size={20} color={colors.olive} />
-        </Pressable>
-      </Pressable>
-    );
-  };
+  const renderItem = ({ item }: { item: Poi }) => (
+    <View style={{ flex: 1 }}>
+      <PlaceCard poi={item} />
+    </View>
+  );
 
   return (
     <View style={s.screen}>
@@ -125,10 +76,13 @@ export default function PlacesScreen() {
       ) : (
         <FlatList
           testID="poi-list"
-          data={unlocked ? filtered : []}
+          key={cols}
+          data={unlocked ? sorted : []}
           keyExtractor={(p) => p.id}
           renderItem={renderItem}
-          contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl, gap: spacing.sm }}
+          numColumns={cols}
+          columnWrapperStyle={cols > 1 ? { gap: spacing.md } : undefined}
+          contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xxl, gap: spacing.md }}
           ListHeaderComponent={
             unlocked ? (
               <View>

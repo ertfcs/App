@@ -1,25 +1,18 @@
 import React from "react";
-import { View, Text, Pressable, Linking } from "react-native";
+import { View, Text } from "react-native";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 
-import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import type { Poi } from "@/src/lib/queries";
-import { useItinerary } from "@/src/lib/itinerary";
+import { PlaceCard } from "@/src/components/PlaceCard";
 import type { Dish } from "@/src/lib/culinary";
 import { analyzeBeach, type Beach } from "@/src/lib/beaches";
 
 // Free example cards shown to guests without a booking code (same look as the approved preview).
 // Texts and photos of the examples live here; the rest of each section stays behind the code.
 
-const HOME = { lat: 38.0667, lng: 13.0333 };
-function kmFromHome(lat: number, lng: number) {
-  const r = (d: number) => (d * Math.PI) / 180;
-  const h = Math.sin(r(lat - HOME.lat) / 2) ** 2 + Math.cos(r(HOME.lat)) * Math.cos(r(lat)) * Math.sin(r(lng - HOME.lng) / 2) ** 2;
-  return Math.round(2 * 6371 * Math.asin(Math.sqrt(h)));
-}
 
 // Texts are i18n keys under "ui.ex.<key>_desc|_duration|_tip".
 export const EXAMPLE_PLACES: Record<string, { image: number; credit: string; key: string }> = {
@@ -107,56 +100,24 @@ export function FreeLabel({ text }: { text?: string }) {
 }
 
 export function ExamplePlaceCard({ poi }: { poi: Poi }) {
-  const s = useStyles();
   const { t } = useTranslation();
-  const { colors } = useTheme();
   const ex = EXAMPLE_PLACES[poi.name];
-  const ticket = poi.ticket_url;
-  const { has, toggle } = useItinerary();
-  const added = has(poi.id);
   return (
-    <View style={s.card} testID={`example-place-${poi.id}`}>
-      <Photo
-        source={ex?.image ?? poi.image_url ?? ""}
-        credit={ex?.credit ?? ""}
-        badges={[
-          { text: poi.town ?? "", kind: "dark" },
-          { text: t("ui.ex.art"), kind: "light" },
-          { text: t("ui.ex.must"), kind: "star" },
-        ]}
+    <View style={{ marginHorizontal: spacing.md }}>
+      <PlaceCard
+        poi={poi}
+        override={
+          ex
+            ? {
+                image: ex.image,
+                credit: ex.credit,
+                description: t(`ui.ex.${ex.key}_desc`),
+                duration: t(`ui.ex.${ex.key}_duration`),
+                tip: t(`ui.ex.${ex.key}_tip`),
+              }
+            : undefined
+        }
       />
-      <View style={s.body}>
-        <Text style={s.title}>{poi.name}</Text>
-        <Text style={s.sub}>{t("ui.ex.km", { km: kmFromHome(poi.lat, poi.lng) })}</Text>
-        <Text style={s.desc}>{ex ? t(`ui.ex.${ex.key}_desc`) : poi.description}</Text>
-        <InfoBox
-          rows={[
-            { label: t("ui.ex.hours"), value: poi.hours || t("ui.ex.hours_fallback") },
-            { label: t("ui.ex.price"), value: poi.price },
-            { label: t("ui.ex.discounts"), value: poi.discount },
-            { label: t("ui.ex.duration"), value: ex ? t(`ui.ex.${ex.key}_duration`) : poi.duration },
-            {
-              label: t("ui.ex.tickets"),
-              value: ticket ? (
-                <Pressable onPress={() => Linking.openURL(ticket).catch(() => {})} accessibilityRole="link" style={s.link}>
-                  <Text style={s.linkTxt}>{t("ui.ex.official_site")}</Text>
-                  <Icon name="open-in-new" size={14} color={colors.brandPrimary} />
-                </Pressable>
-              ) : undefined,
-            },
-          ]}
-        />
-        {ex || poi.notes ? <Tip title={t("ui.ex.tip")} text={ex ? t(`ui.ex.${ex.key}_tip`) : poi.notes ?? ""} /> : null}
-        <Pressable
-          testID={`example-add-${poi.id}`}
-          onPress={() => toggle(poi.id)}
-          style={[s.addBig, added && { backgroundColor: colors.brandPrimary }]}
-          accessibilityRole="button"
-        >
-          <Icon name={added ? "check" : "plus"} size={18} color={added ? "#FFFFFF" : colors.brandPrimary} />
-          <Text style={[s.addBigTxt, added && { color: "#FFFFFF" }]}>{added ? t("ui.ex.added") : t("ui.ex.add")}</Text>
-        </Pressable>
-      </View>
     </View>
   );
 }

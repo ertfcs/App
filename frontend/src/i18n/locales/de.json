@@ -415,6 +415,12 @@
     },
     "lang": {
       "change": "Sprache ändern"
+    },
+    "place": {
+      "how_to": "Anreise",
+      "note": "Hinweis:",
+      "add": "Zur Route hinzufügen",
+      "open_map": "In Google Maps öffnen"
     }
   },
   "home_new": {

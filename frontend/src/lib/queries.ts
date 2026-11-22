@@ -41,6 +41,10 @@ export type Poi = {
   ticket_url?: string;
   maps_url?: string;
   image_url?: string;
+  how_to?: string;
+  maps_query?: string;
+  must_see?: boolean;
+  to_verify?: string[];
 };
 
 export type Faq = { id: string; category: string; question: string; answer: string };

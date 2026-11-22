@@ -469,6 +469,12 @@
     },
     "lang": {
       "change": "Cambia lingua"
+    },
+    "place": {
+      "how_to": "Come arrivare",
+      "note": "Nota:",
+      "add": "Aggiungi all'itinerario",
+      "open_map": "Apri in Google Maps"
     }
   }
 }

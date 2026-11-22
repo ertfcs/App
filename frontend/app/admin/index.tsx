@@ -56,7 +56,7 @@ export default function AdminDashboard() {
         { icon: "ticket-percent-outline", label: "Codici sconto", desc: "Sconti e sblocco mappa/IA", route: "/admin/discounts" },
         { icon: "image-multiple-outline", label: "Foto", desc: "Galleria pubblica e privata", route: "/admin/photos" },
         { icon: "silverware-fork-knife", label: "Cucina Siciliana", desc: "Foto, ingredienti, curiosità", route: "/admin/food" },
-        { icon: "map-marker-multiple", label: "Mappa Interattiva", desc: "POI, coordinate, import/export", route: "/admin/map-pois" },
+        { icon: "map-marker-multiple", label: "Attrazioni", desc: "Schede, foto, informazioni da verificare", route: "/admin/map-pois" },
       ],
     },
     {

@@ -1,0 +1,1643 @@
+{
+ "Cattedrale di Palermo": {
+  "description": "Il simbolo di Palermo. Iniziata nel 1185, mescola stili normanno, gotico, catalano e neoclassico. Dentro ci sono le tombe reali di Ruggero II e Federico II; dai tetti si vede tutta la città.",
+  "hours": "Apr–ott lun–sab 9:30–18:00, dom 10:00–18:00 (orari ridotti in inverno)",
+  "price": "Chiesa gratis · Tetti €7 (11–17 anni €4) · Area monumentale €8–13 · Pass completo fino a €18",
+  "duration": "1–2 ore (con tetti e tesoro)",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Acquista solo sul sito ufficiale o in biglietteria.",
+  "must_see": true,
+  "maps_query": "Cattedrale di Palermo, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Palazzo dei Normanni e Cappella Palatina": {
+  "description": "La reggia dei re normanni, oggi sede del Parlamento siciliano. La Cappella Palatina è uno scrigno di mosaici bizantini e soffitti arabi, patrimonio UNESCO.",
+  "hours": "Lun–sab 8:30–16:30, dom e festivi 8:30–12:30 (verificare le chiusure infrasettimanali)",
+  "price": "€19 (18–25 anni €17, over 65 €15,50, 14–17 anni €11)",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Arriva presto la mattina per evitare le code; abbigliamento adeguato.",
+  "must_see": true,
+  "maps_query": "Palazzo dei Normanni e Cappella Palatina, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Teatro Massimo": {
+  "description": "Il più grande teatro lirico d'Italia, simbolo della Palermo liberty. Le visite guidate mostrano la sala, il palco reale e la sala Pompeiana.",
+  "hours": "Tutti i giorni 9:30–18:00 (apr–ott fino alle 19:00)",
+  "price": "Visita guidata €14 (under 26 €7, famiglia €36)",
+  "duration": "40 min",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Se puoi, assisti a un'opera o a un concerto: l'esperienza è unica.",
+  "must_see": false,
+  "maps_query": "Teatro Massimo, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Teatro Politeama Garibaldi": {
+  "description": "Teatro ottocentesco con la facciata ad arco di trionfo e la quadriga di bronzo. È la sede dell'Orchestra Sinfonica Siciliana.",
+  "hours": "Visite guidate in giorni e orari variabili; spettacoli serali secondo cartellone",
+  "price": "Visita guidata circa €5–8 · concerti a pagamento",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Si affaccia su Piazza Politeama, punto di partenza dello shopping in Via Libertà.",
+  "must_see": false,
+  "maps_query": "Teatro Politeama Garibaldi, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Quattro Canti e Piazza Pretoria": {
+  "description": "L'incrocio barocco al centro di Palermo, con le quattro facciate scolpite. A pochi passi la Fontana Pretoria, detta \"della vergogna\" per le sue statue nude.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Punto di partenza ideale per visitare il centro a piedi.",
+  "must_see": true,
+  "maps_query": "Quattro Canti e Piazza Pretoria, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Mercato di Ballarò": {
+  "description": "Il mercato più vivace e multiculturale di Palermo, tra colori, voci e profumi. Qui si assaggiano panelle, crocchè, arancine e sfincione.",
+  "hours": "Tutti i giorni circa 7:00–14:00 (domenica ridotto)",
+  "price": "Ingresso libero",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Vai la mattina; tieni d'occhio borse e telefono nella folla.",
+  "must_see": true,
+  "maps_query": "Mercato di Ballarò, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Mercato della Vucciria": {
+  "description": "Il mercato reso celebre dal dipinto di Guttuso, oggi soprattutto luogo della movida serale. Di sera si mangia carne alla brace e si beve in piazza.",
+  "hours": "Bancarelle la mattina; la sera locali e street food",
+  "price": "Ingresso libero",
+  "duration": "1 ora (meglio la sera)",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Di giorno è più tranquillo; la sera è molto frequentato da giovani.",
+  "must_see": false,
+  "maps_query": "Mercato della Vucciria, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Catacombe dei Cappuccini": {
+  "description": "Lunghi corridoi sotterranei dove riposano migliaia di corpi mummificati tra il '500 e l'800, vestiti con gli abiti dell'epoca. Un luogo unico al mondo, toccante e un po' inquietante.",
+  "hours": "9:00–12:30 e 15:00–17:30",
+  "price": "€5 (ridotto €3)",
+  "duration": "45 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Biglietti solo in loco: non esistono rivenditori online autorizzati.",
+  "must_see": false,
+  "maps_query": "Catacombe dei Cappuccini, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Duomo di Monreale": {
+  "description": "Uno dei capolavori dell'arte normanna: oltre 6.000 metri quadrati di mosaici dorati raccontano la Bibbia. Il chiostro con le sue colonne decorate è incantevole.",
+  "hours": "Lun–sab circa 8:30–12:45 e 14:30–17:00, dom 8:00–10:00 e 14:30–17:00 · terrazze e chiostro con orari propri",
+  "price": "Cattedrale + terrazze + museo €6 · Chiostro €8 (ridotto €4) · Cumulativo €12",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km)",
+  "notes": "Sali sulle terrazze per la vista sulla Conca d'Oro; abbigliamento adeguato per entrare.",
+  "must_see": true,
+  "maps_query": "Duomo di Monreale, Monreale, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Duomo di Cefalù": {
+  "description": "Cattedrale arabo-normanna voluta da Ruggero II, con le due torri e il grande Cristo Pantocratore a mosaico nell'abside. Patrimonio UNESCO.",
+  "hours": "Tutti i giorni circa 8:30–19:00, fuori dalle funzioni",
+  "price": "Chiesa gratis · Itinerario completo €13 · Torri e tetti €10 · Tesoro e chiostro €10",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "I biglietti includono l'Osterio Magno.",
+  "must_see": true,
+  "maps_query": "Duomo di Cefalù, Cefalù, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Centro storico di Cefalù": {
+  "description": "Vicoli medievali stretti tra la Rocca e il mare, con il Duomo normanno al centro. Il lavatoio arabo e la spiaggia sotto le case sono una cartolina.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis (parcheggi a pagamento)",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "D'estate parcheggia fuori dal centro e scendi a piedi: le strade sono strette e il traffico è intenso.",
+  "must_see": false,
+  "maps_query": "Centro storico di Cefalù, Cefalù, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Villa Palagonia": {
+  "description": "Villa barocca di Bagheria famosa per i suoi \"mostri\" di pietra sul muro di cinta. Goethe la descrisse durante il suo viaggio in Sicilia.",
+  "hours": "Tutti i giorni circa 9:00–13:00 e 15:30–19:00 (ridotto in inverno)",
+  "price": "€6 (gruppi da 20 persone €3)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 60 km)",
+  "notes": "Abbinala al Museo Guttuso a Villa Cattolica, sempre a Bagheria.",
+  "must_see": false,
+  "maps_query": "Villa Palagonia, Bagheria, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Castello di Carini": {
+  "description": "Maniero medievale che domina Carini, legato alla celebre leggenda della Baronessa uccisa nel 1563. Sale affrescate, cortile e vista sulla piana fino al mare.",
+  "hours": "Giu–set tutti i giorni 9:00–13:00 e 15:00–19:00",
+  "price": "€5 (ridotto €3: 6–18 anni, over 65)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 25 min (circa 25 km)",
+  "notes": "A soli 20 minuti da Trappeto; d'estate ospita spettacoli serali.",
+  "must_see": false,
+  "maps_query": "Castello di Carini, Carini, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Castello a Mare": {
+  "description": "Resti della fortezza medievale che difendeva il porto di Palermo, oggi parco archeologico sul mare. Bello da attraversare passeggiando verso la Cala.",
+  "hours": "Area archeologica con aperture stagionali, di solito mattina e pomeriggio",
+  "price": "Circa €3–5 (spesso gratis negli eventi)",
+  "duration": "30–60 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Si abbina bene a una passeggiata sul Foro Italico e alla Cala.",
+  "must_see": false,
+  "maps_query": "Castello a Mare, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Tempio di Segesta": {
+  "description": "Tempio dorico del V secolo a.C. in mezzo alla campagna, quasi intatto. È uno dei templi greci meglio conservati al mondo.",
+  "hours": "Tutti i giorni circa 9:00–19:30 (in inverno fino al tramonto)",
+  "price": "€14 (ridotto €7) · €16/€9 con mostre in corso",
+  "duration": "1–2 ore (con il teatro)",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km)",
+  "notes": "Un solo biglietto per tempio e teatro; navetta interna per il teatro a pagamento.",
+  "must_see": true,
+  "maps_query": "Tempio di Segesta, Calatafimi-Segesta, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Teatro greco di Segesta": {
+  "description": "Teatro del III secolo a.C. in cima al Monte Barbaro, con vista sulle colline e sul golfo di Castellammare. D'estate ospita spettacoli all'alba e al tramonto.",
+  "hours": "Tutti i giorni circa 9:00–19:30 (in inverno fino al tramonto)",
+  "price": "Incluso nel biglietto del Parco di Segesta (€14, ridotto €7)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km)",
+  "notes": "Dal parcheggio parte una navetta che sale al teatro.",
+  "must_see": false,
+  "maps_query": "Teatro greco di Segesta, Calatafimi-Segesta, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Parco archeologico di Selinunte": {
+  "description": "Uno dei parchi archeologici più grandi d'Europa, con templi dorici affacciati sul mare. Il Tempio E, ricostruito, è spettacolare al tramonto.",
+  "hours": "Tutti i giorni circa 9:00–19:00 (in inverno fino alle 17:00)",
+  "price": "€17 (ridotto €10), incluso supplemento mostra €3",
+  "duration": "mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 10 min (circa 80 km)",
+  "notes": "Molto esteso e poco ombreggiato: usa le navette elettriche interne, acqua e cappello.",
+  "must_see": true,
+  "maps_query": "Parco archeologico di Selinunte, Castelvetrano, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Borgo medievale di Erice": {
+  "description": "Borgo di pietra a 750 metri sul mare, tra vicoli acciottolati, chiese e pasticcerie storiche. Nelle giornate limpide si vedono le Egadi e le saline di Trapani.",
+  "hours": "Sempre accessibile",
+  "price": "Ingresso libero · Funivia da Trapani €9 corsa singola, €15 A/R",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 55 km). 🚡 In alternativa funivia Trapani–Erice (circa 10 min)",
+  "notes": "La funivia è chiusa il lunedì mattina per manutenzione.",
+  "must_see": true,
+  "maps_query": "Borgo medievale di Erice, Erice, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Castello di Venere (Erice)": {
+  "description": "Castello normanno costruito dove sorgeva il tempio di Venere Ericina, sull'estremità del Monte San Giuliano. Dalle mura il panorama spazia da Trapani alle Egadi.",
+  "hours": "Apr–ott 10:00–18:00 (lug e set fino alle 19:00, ago fino alle 20:00); nov–mar solo sabato e festivi",
+  "price": "€5 · Integrato €10 (Museo Cordici, Torretta Pepoli, Quartiere Spagnolo, Erice in Miniatura) · Erice Card €15",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 55 km). 🚡 In alternativa funivia Trapani–Erice (circa 10 min)",
+  "notes": "Accanto ci sono i Giardini del Balio, perfetti per una pausa all'ombra.",
+  "must_see": false,
+  "maps_query": "Castello di Venere (Erice), Erice, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Saline e Mulini di Trapani": {
+  "description": "Le saline tra Trapani e Paceco, con vasche colorate e mulini a vento, sono una riserva naturale. Al tramonto i colori sono incredibili.",
+  "hours": "Saline sempre visibili dalla strada · mulini e museo con orari stagionali",
+  "price": "Vista gratis · Museo del Sale circa €3–5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 70 km)",
+  "notes": "Fermati al Museo del Sale di Nubia per vedere come si lavora il sale.",
+  "must_see": false,
+  "maps_query": "Saline e Mulini di Trapani, Trapani, Sicilia",
+  "to_verify": [
+   "how_to",
+   "price"
+  ]
+ },
+ "Centro storico di Trapani": {
+  "description": "Una lunga penisola stretta tra due mari, con palazzi barocchi, chiese e la Torre di Ligny sulla punta. La sera via Garibaldi e il lungomare si animano.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 65 km)",
+  "notes": "Assaggia il cous cous di pesce e la busiata col pesto trapanese.",
+  "must_see": false,
+  "maps_query": "Centro storico di Trapani, Trapani, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Cattedrale di Marsala": {
+  "description": "Grande chiesa barocca dedicata a San Tommaso di Canterbury, nel cuore del centro storico. All'interno sculture della scuola dei Gagini.",
+  "hours": "Di solito mattina e pomeriggio, chiusa durante le funzioni",
+  "price": "Ingresso libero",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Si trova in Piazza della Repubblica: abbinala a una passeggiata in Via XI Maggio.",
+  "must_see": false,
+  "maps_query": "Cattedrale di Marsala, Marsala, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Cantine storiche di Marsala": {
+  "description": "Le cantine che hanno reso famoso il Marsala nel mondo, da Florio a Pellegrino e Donnafugata. Visite guidate tra botti secolari e degustazioni dei vini del territorio.",
+  "hours": "Visite guidate su prenotazione, di solito lun–sab",
+  "price": "Cantine Florio: visita con degustazione da €25 (solo su prenotazione)",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Le visite sono quasi sempre su prenotazione: prenota con qualche giorno di anticipo e organizza chi guida al ritorno.",
+  "must_see": false,
+  "maps_query": "Cantine storiche di Marsala, Marsala, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Isola di Mozia (Mothia)": {
+  "description": "Piccola isola nella laguna dello Stagnone dove sorgeva una città fenicia. Il museo custodisce il Giovinetto di Mozia, una delle statue greche più belle al mondo.",
+  "hours": "Barche e museo circa 9:30–18:30 in estate (ridotto in inverno)",
+  "price": "Isola e museo €12 (ragazzi €6) + barca ~€3,50",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto fino all'imbarcadero per Mozia, allo Stagnone (circa 1 h 5 min), poi ⛴️ barca (circa 10 min)",
+  "notes": "Barche dagli imbarcaderi dello Stagnone ogni 30 minuti circa.",
+  "must_see": true,
+  "maps_query": "Isola di Mozia (Mothia), Marsala, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Casbah di Mazara del Vallo": {
+  "description": "Il quartiere arabo di Mazara, un labirinto di vicoli stretti decorati con ceramiche colorate. Racconta secoli di incontri tra Sicilia e Nord Africa.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Abbinala al Museo del Satiro Danzante, a pochi passi, e a un cous cous di pesce in centro.",
+  "must_see": false,
+  "maps_query": "Casbah di Mazara del Vallo, Mazara del Vallo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Museo del Satiro Danzante": {
+  "description": "La chiesa di Sant'Egidio ospita il Satiro Danzante, statua greca in bronzo ripescata da un peschereccio nel 1998. Un capolavoro sorprendente.",
+  "hours": "Tutti i giorni circa 9:00–19:00",
+  "price": "€8 (ridotto €4)",
+  "duration": "30–45 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Combinalo con la Casbah e il lungomare di Mazara.",
+  "must_see": false,
+  "maps_query": "Museo del Satiro Danzante, Mazara del Vallo, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Castello arabo-normanno di Salemi": {
+  "description": "Castello del XII secolo che domina il borgo di Salemi, con la sua torre circolare. Da qui Garibaldi proclamò la sua dittatura nel 1860.",
+  "hours": "Aperture stagionali, verificare con il Comune",
+  "price": "Circa €2–5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 50 min (circa 50 km)",
+  "notes": "Sali anche nel centro storico: vicoli tranquilli e panorama sulla valle del Belice.",
+  "must_see": false,
+  "maps_query": "Castello arabo-normanno di Salemi, Salemi, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Spiaggia di Mondello": {
+  "description": "La spiaggia dei palermitani: sabbia bianca a mezzaluna tra Monte Pellegrino e Capo Gallo, con lo storico stabilimento liberty sul mare.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km)",
+  "notes": "Nel weekend è affollatissima: meglio in settimana o la mattina presto.",
+  "must_see": true,
+  "maps_query": "Spiaggia di Mondello, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Cefalù": {
+  "description": "Spiaggia di sabbia dorata sotto la Rocca e il centro storico di Cefalù, a pochi passi dal Duomo. Bellissima e comoda, ma affollata d'estate.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "Arriva presto in agosto; i parcheggi sono a pagamento.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Cefalù, Cefalù, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Spiaggia di Trappeto": {
+  "description": "La spiaggia sotto casa: sabbia fine e mare limpido nel piccolo borgo di pescatori di Trappeto. Comoda per un bagno a qualsiasi ora.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Quanto vuoi!",
+  "how_to": "🚶 A piedi dall'appartamento (pochi minuti)",
+  "notes": "A pochi minuti a piedi dall'appartamento.",
+  "must_see": true,
+  "maps_query": "Spiaggia di Trappeto, Trappeto, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Spiaggia di Balestrate": {
+  "description": "Lunga spiaggia di sabbia dorata a pochi minuti da Trappeto, con lidi attrezzati e tratti liberi. Mare pulito e lungomare con locali.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 10 min (circa 10 km)",
+  "notes": "Tra le spiagge più comode da casa: ottima anche per il tramonto.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Balestrate, Balestrate, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Aspra": {
+  "description": "Borgo marinaro di Bagheria con calette e barche colorate dei pescatori. Atmosfera autentica e ottimi ristoranti di pesce.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 65 km)",
+  "notes": "Prova il gelato e i ricci di mare al porticciolo.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Aspra, Bagheria, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Capo Gallo - Cala Rossa": {
+  "description": "Calette rocciose nella riserva di Capo Gallo, tra Mondello e Sferracavallo, con acqua limpidissima. Ideale per snorkeling.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km)",
+  "notes": "Accesso su scogli: scarpette consigliate; poca ombra.",
+  "must_see": false,
+  "maps_query": "Capo Gallo - Cala Rossa, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Pollina - Finale": {
+  "description": "Lunghe spiagge di sabbia e ciottoli a est di Cefalù, con mare pulito e meno affollato. Ideale per una giornata rilassante.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 45 min (circa 140 km)",
+  "notes": "Abbinala alle Gole del Pollina o al borgo di Pollina.",
+  "must_see": false,
+  "maps_query": "Pollina - Finale, Pollina, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "San Vito Lo Capo": {
+  "description": "Spiaggia di sabbia bianchissima e mare turchese ai piedi del Monte Monaco, tra le più belle d'Italia. A settembre ospita il Cous Cous Fest.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km)",
+  "notes": "Ad agosto arriva presto per il parcheggio; la sera il paese è vivacissimo.",
+  "must_see": true,
+  "maps_query": "San Vito Lo Capo, San Vito Lo Capo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Macari - Baia Santa Margherita": {
+  "description": "Caletta selvaggia vicino a San Vito Lo Capo, tra scogli, piccole spiagge e acqua cristallina. Atmosfera più tranquilla rispetto a San Vito.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km)",
+  "notes": "Pochi servizi: porta ombrellone e scarpette da scoglio.",
+  "must_see": false,
+  "maps_query": "Macari - Baia Santa Margherita, San Vito Lo Capo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Cala dell'Uzzo (Zingaro)": {
+  "description": "Una delle cale più belle dello Zingaro, con acqua cristallina e una grotta preistorica. Si raggiunge a piedi dall'ingresso nord della riserva.",
+  "hours": "Riserva dello Zingaro: tutti i giorni, circa 7:00–19:30 in estate (in inverno 8:00–16:00)",
+  "price": "Ingresso Riserva dello Zingaro €5 (ridotto €3)",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km). 🥾 Dall'ingresso sud (Scopello) si prosegue solo a piedi",
+  "notes": "Solo pagamento elettronico, niente contanti.",
+  "must_see": false,
+  "maps_query": "Cala dell'Uzzo (Zingaro), San Vito Lo Capo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Cala Bianca (Zingaro)": {
+  "description": "Caletta di ciottoli bianchi dentro la Riserva dello Zingaro, con acqua turchese. Si raggiunge solo a piedi lungo il sentiero costiero.",
+  "hours": "Riserva dello Zingaro: tutti i giorni, orari che cambiano con la stagione (circa 7:00–19:00 in estate)",
+  "price": "Biglietto della riserva circa €5",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km). 🥾 Dall'ingresso sud (Scopello) si prosegue solo a piedi",
+  "notes": "Nessun servizio: porta acqua, cibo e scarpe da trekking. Ingresso alla riserva a pagamento.",
+  "must_see": false,
+  "maps_query": "Cala Bianca (Zingaro), Custonaci, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Spiaggia di Scopello e Faraglioni": {
+  "description": "La cartolina della Sicilia: i faraglioni davanti all'antica tonnara di Scopello, acqua cristallina e scogli. Il borgo è minuscolo e incantevole.",
+  "hours": "Accesso regolato da ordinanze: verificare prima di andare",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 30 min (circa 30 km)",
+  "notes": "Da fine settembre 2026 la Tonnara di Scopello non accoglie visitatori e la balneazione ai Faraglioni è vietata da ordinanza: verificare prima di andare.",
+  "must_see": true,
+  "maps_query": "Spiaggia di Scopello e Faraglioni, Castellammare del Golfo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes"
+  ]
+ },
+ "Spiaggia di Cornino": {
+  "description": "Spiaggia di sabbia e ciottoli ai piedi di Monte Cofano, con acqua limpidissima. Tranquilla e con vista sulla riserva.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 50 km)",
+  "notes": "Abbinala alla Grotta Mangiapane o a un'escursione a Monte Cofano.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Cornino, Custonaci, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Lido Marausa": {
+  "description": "Spiaggia di sabbia chiara a sud di Trapani, con fondale basso e vista sulle Egadi. Perfetta per le famiglie con bambini.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 5 min (circa 75 km)",
+  "notes": "Al tramonto il sole cala dietro le isole: spettacolo garantito.",
+  "must_see": false,
+  "maps_query": "Lido Marausa, Misiliscemi, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Tre Fontane": {
+  "description": "Lunga spiaggia di sabbia dorata sulla costa sud, con dune e mare aperto. Amata dai surfisti nei giorni di vento.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 90 km)",
+  "notes": "Con vento da nord il mare qui è calmo: alternativa perfetta alla costa di casa.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Tre Fontane, Campobello di Mazara, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia delle Saline (Marsala)": {
+  "description": "Spiaggia vicino alle saline dello Stagnone, con acqua bassa e calma e vista su Mozia. Ideale per bambini e kitesurf.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 10 min (circa 80 km)",
+  "notes": "Al tramonto i mulini e le saline si tingono di rosa.",
+  "must_see": false,
+  "maps_query": "Spiaggia delle Saline (Marsala), Marsala, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Riserva di Capo Gallo": {
+  "description": "Promontorio tra Mondello e Sferracavallo con sentieri sul mare e calette rocciose. Panorami splendidi su Palermo.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km)",
+  "notes": "Poca ombra: evita le ore più calde.",
+  "must_see": false,
+  "maps_query": "Riserva di Capo Gallo, Palermo, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Monte Pellegrino e Santuario di Santa Rosalia": {
+  "description": "Il promontorio che Goethe definì il più bello del mondo, con il santuario di Santa Rosalia, patrona di Palermo, in una grotta. Panorama sulla città e su Mondello.",
+  "hours": "Monte sempre accessibile · Santuario circa 7:30–19:00",
+  "price": "Gratis",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km)",
+  "notes": "Si sale in auto o a piedi lungo la Scala Vecchia, per i più allenati.",
+  "must_see": false,
+  "maps_query": "Monte Pellegrino e Santuario di Santa Rosalia, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Madonie - Piano Battaglia": {
+  "description": "Altopiano a 1.600 metri nel Parco delle Madonie, con faggete e sentieri. D'inverno c'è anche la neve per lo sci.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 40 min (circa 125 km)",
+  "notes": "Fa fresco anche d'estate: porta una giacca.",
+  "must_see": false,
+  "maps_query": "Madonie - Piano Battaglia, Petralia Sottana, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "La Rocca di Cefalù": {
+  "description": "La Rocca che sovrasta Cefalù, con il Tempio di Diana e le mura medievali. Dalla cima la vista sulla città e sul mare è splendida.",
+  "hours": "Tutti i giorni circa dalle 8:00 al tramonto (ultimo ingresso un'ora prima)",
+  "price": "€5 (6–14 anni e over 65 €2,50)",
+  "duration": "2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "Biglietteria in Via Pitrè; vietati sandali e suole lisce.",
+  "must_see": false,
+  "maps_query": "La Rocca di Cefalù, Cefalù, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Riserva di Monte Catalfano": {
+  "description": "Piccolo monte sopra Bagheria con vista a 360 gradi sul golfo di Palermo e Capo Zafferano. Sulle pendici sorge l'antica Solunto.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 65 km)",
+  "notes": "Combinala con Solunto e la Baia dell'Olivella.",
+  "must_see": false,
+  "maps_query": "Riserva di Monte Catalfano, Bagheria, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Gole del Pollina": {
+  "description": "Un canyon scavato dal fiume Pollina tra le rocce, vicino a Castelbuono. Escursione suggestiva tra acqua e pareti alte.",
+  "hours": "Accesso libero al sentiero; escursioni guidate su prenotazione",
+  "price": "Sentiero gratis · guida a pagamento",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 45 min (circa 135 km)",
+  "notes": "Percorso impegnativo: scarpe adatte, meglio con una guida locale.",
+  "must_see": false,
+  "maps_query": "Gole del Pollina, Pollina, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Riserva dello Zingaro": {
+  "description": "La prima riserva naturale della Sicilia: 7 km di costa intatta con calette turchesi e sentieri tra palme nane. Nessuna strada, solo natura.",
+  "hours": "Tutti i giorni, circa 7:00–19:30 in estate (in inverno 8:00–16:00)",
+  "price": "€5 (ridotto €3)",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto da Trappeto circa 30 min (circa 35 km). 🥾 Dall'ingresso sud (Scopello) si prosegue solo a piedi",
+  "notes": "Solo pagamento elettronico, niente contanti.",
+  "must_see": true,
+  "maps_query": "Riserva dello Zingaro, San Vito Lo Capo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Riserva di Monte Cofano": {
+  "description": "Promontorio calcareo a picco su un mare turchese, con un sentiero che gli gira intorno. Torri di avvistamento e calette.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 50 km)",
+  "notes": "Il giro completo è lungo e assolato: parti presto e porta molta acqua.",
+  "must_see": false,
+  "maps_query": "Riserva di Monte Cofano, Custonaci, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Stagnone di Marsala": {
+  "description": "Laguna salata con tramonti leggendari e kitesurf.",
+  "hours": "Saline visibili sempre dalla strada · mulini e museo del sale con orari stagionali",
+  "price": "Vista gratis · visita ai mulini a pagamento",
+  "duration": "1–2 ore (mezza giornata con Mozia)",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 10 min (circa 75 km)",
+  "notes": "Vieni al tramonto: le vasche e i cumuli di sale diventano rosa. Dal pontile di fronte partono le barche per l'isola di Mozia.",
+  "must_see": true,
+  "maps_query": "Stagnone di Marsala, Marsala, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Belvedere di Erice": {
+  "description": "Dalle terrazze di Erice la vista spazia dalle saline di Trapani alle Egadi fino a Monte Cofano. Al tramonto è uno spettacolo.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 55 km). 🚡 In alternativa funivia Trapani–Erice (circa 10 min)",
+  "notes": "Spesso in cima c'è nebbia: controlla il meteo prima di salire.",
+  "must_see": false,
+  "maps_query": "Belvedere di Erice, Erice, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Lago Rubino": {
+  "description": "Piccolo lago artificiale nella campagna trapanese, circondato da canneti e uccelli. Luogo tranquillo per una passeggiata.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 50 min (circa 50 km)",
+  "notes": "Ideale per chi ama il birdwatching.",
+  "must_see": false,
+  "maps_query": "Lago Rubino, Trapani, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Riserva Bosco di Scorace": {
+  "description": "Sughereta secolare tra Buseto Palizzolo ed Erice, con sentieri ombreggiati e aree picnic. Tranquillità assoluta.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 30 min (circa 30 km)",
+  "notes": "Ideale per una passeggiata con bambini.",
+  "must_see": false,
+  "maps_query": "Riserva Bosco di Scorace, Buseto Palizzolo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Isole Egadi - Favignana": {
+  "description": "La più grande delle Egadi, piatta e perfetta da girare in bici. Calette turchesi come Cala Rossa e Bue Marino e l'antica tonnara Florio.",
+  "hours": "Isola sempre visitabile · aliscafi da Trapani tutto l'anno (più corse in estate)",
+  "price": "Aliscafo andata e ritorno circa €25–30 a persona",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto fino al porto di Trapani (circa 1 h), poi ⛴️ aliscafo dal porto di Trapani per Favignana (circa 30 min)",
+  "notes": "Aliscafo da Trapani in circa 30 minuti; noleggia bici o scooter al porto.",
+  "must_see": true,
+  "maps_query": "Isole Egadi - Favignana, Favignana, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Isole Egadi - Levanzo": {
+  "description": "La più piccola delle Egadi, con un solo paesino bianco e blu e acqua cristallina. Qui si trova la Grotta del Genovese.",
+  "hours": "Isola sempre visitabile · aliscafi da Trapani tutto l'anno",
+  "price": "Aliscafo andata e ritorno circa €25–30 a persona",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto fino al porto di Trapani (circa 1 h), poi ⛴️ aliscafo dal porto di Trapani per Levanzo (circa 25 min)",
+  "notes": "Aliscafo da Trapani; pochi servizi, porta l'occorrente.",
+  "must_see": false,
+  "maps_query": "Isole Egadi - Levanzo, Favignana, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Palazzo della Zisa": {
+  "description": "Palazzo estivo dei re normanni costruito da maestranze arabe, con la fontana e la sala decorata a mosaico. Patrimonio UNESCO, con un museo d'arte islamica.",
+  "hours": "Tutti i giorni circa 9:00–19:00 (domenica e festivi fino alle 13:30)",
+  "price": "€8",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Davanti al palazzo c'è il giardino del Genoardo, piacevole per una sosta.",
+  "must_see": false,
+  "maps_query": "Palazzo della Zisa, Palermo, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Chiesa della Martorana": {
+  "description": "Chiesa normanna del XII secolo coperta di mosaici bizantini a fondo oro, patrimonio UNESCO. Accanto c'è la piccola chiesa di San Cataldo con le cupole rosse.",
+  "hours": "Lun–sab circa 9:30–13:00 e 15:30–17:30, dom 9:00–10:30",
+  "price": "€4 (€3 con il Circuito del Sacro)",
+  "duration": "30–45 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "È in Piazza Bellini, a due passi dai Quattro Canti: visitale insieme.",
+  "must_see": false,
+  "maps_query": "Chiesa della Martorana, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Museo Archeologico Salinas": {
+  "description": "Il più importante museo archeologico della Sicilia, in un ex convento con chiostri. Custodisce le metope di Selinunte e reperti fenici, greci e romani.",
+  "hours": "Mar–sab circa 9:30–18:30, dom 9:30–13:30, lunedì chiuso",
+  "price": "€8",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Ideale nelle giornate calde o piovose.",
+  "must_see": false,
+  "maps_query": "Museo Archeologico Salinas, Palermo, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "San Giovanni degli Eremiti": {
+  "description": "Chiesa normanna con cinque cupole rosse di stile arabo e un chiostro romantico. Il giardino è profumato di agrumi e fiori.",
+  "hours": "Tutti i giorni circa 9:00–19:00 (domenica fino alle 13:30)",
+  "price": "€8",
+  "duration": "45 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Vicino al Palazzo dei Normanni: visitali nella stessa mattina.",
+  "must_see": false,
+  "maps_query": "San Giovanni degli Eremiti, Palermo, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Palazzo Abatellis (Galleria Regionale)": {
+  "description": "Palazzo gotico-catalano che ospita la Galleria Regionale della Sicilia. Qui si ammirano il Trionfo della Morte e l'Annunciata di Antonello da Messina.",
+  "hours": "Mar–sab circa 9:00–19:00, dom 9:00–13:30, lunedì chiuso",
+  "price": "€10",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Nella Kalsa, vicino a Piazza Marina e Palazzo Steri.",
+  "must_see": false,
+  "maps_query": "Palazzo Abatellis (Galleria Regionale), Palermo, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Palazzo Chiaramonte-Steri": {
+  "description": "Palazzo trecentesco che fu sede dell'Inquisizione: nelle celle restano i graffiti dei prigionieri. Nella sala grande è esposta la Vucciria di Guttuso.",
+  "hours": "Mar–dom circa 10:00–19:00, lunedì chiuso",
+  "price": "€8 (ridotto €5) · con Orto Botanico €12",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Visite guidate consigliate per capire i graffiti delle carceri.",
+  "must_see": false,
+  "maps_query": "Palazzo Chiaramonte-Steri, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Mercato del Capo": {
+  "description": "Il più antico mercato di Palermo, tra bancarelle di pesce, spezie e frutta e le \"abbanniate\" dei venditori. Ottimo per lo street food.",
+  "hours": "Lun–sab circa 7:00–14:00",
+  "price": "Ingresso libero",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Meglio la mattina: nel pomeriggio molte bancarelle chiudono.",
+  "must_see": false,
+  "maps_query": "Mercato del Capo, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Foro Italico Umberto I": {
+  "description": "Il grande lungomare verde di Palermo, tra prati, panchine e vista su Monte Pellegrino. La sera è il posto preferito dai palermitani per una passeggiata.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Al tramonto è perfetto; d'estate ospita concerti e fiere.",
+  "must_see": false,
+  "maps_query": "Foro Italico Umberto I, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Orto Botanico di Palermo": {
+  "description": "Uno dei più antichi orti botanici d'Europa, fondato nel 1789. Piante tropicali, serre ottocentesche e un ficus gigantesco.",
+  "hours": "Tutti i giorni circa 9:00–19:00 in estate (in inverno fino alle 17:00)",
+  "price": "€8 · con Steri €12 · con Salinas e Museo Doderlein €13",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km)",
+  "notes": "Fresco e ombreggiato: perfetto nelle ore calde.",
+  "must_see": false,
+  "maps_query": "Orto Botanico di Palermo, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Molo Trapezoidale (Porto di Palermo)": {
+  "description": "Il nuovo waterfront del porto di Palermo, con passeggiata sul mare, locali e vista su Monte Pellegrino. Spesso ospita eventi e concerti.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Bello al tramonto, combinato con il Museo del Mare e la Cala.",
+  "must_see": false,
+  "maps_query": "Molo Trapezoidale (Porto di Palermo), Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Murales Falcone e Borsellino (Palermo)": {
+  "description": "Grande murale dedicato ai giudici Giovanni Falcone e Paolo Borsellino, uno dei simboli della Palermo che non dimentica. Si trova nella zona della Cala.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "15–30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Abbinalo a una passeggiata alla Kalsa e alla Cala.",
+  "must_see": false,
+  "maps_query": "Murales Falcone e Borsellino (Palermo), Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Piazza Marina e Giardino Garibaldi": {
+  "description": "Una delle piazze più antiche di Palermo, con il Giardino Garibaldi e i suoi giganteschi ficus centenari. Intorno, palazzi storici e locali.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Nel weekend c'è spesso un mercatino dell'antiquariato.",
+  "must_see": false,
+  "maps_query": "Piazza Marina e Giardino Garibaldi, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Villa Malfitano Whitaker": {
+  "description": "Villa liberty della famiglia Whitaker, circondata da un parco con piante rare. All'interno arredi e collezioni originali di inizio Novecento.",
+  "hours": "Aperture variabili, spesso solo mattina",
+  "price": "Circa €6–8",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Visite su orari variabili: verifica prima di andare.",
+  "must_see": false,
+  "maps_query": "Villa Malfitano Whitaker, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Palazzina Cinese e Museo Pitrè": {
+  "description": "Residenza reale in stile cinese voluta dai Borbone nel Parco della Favorita. Accanto, il Museo Pitrè racconta la vita e le tradizioni siciliane.",
+  "hours": "Aperture variabili, spesso mar–dom mattina",
+  "price": "Circa €5",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Aperture variabili: verifica prima di andare; nel parco si passeggia volentieri.",
+  "must_see": false,
+  "maps_query": "Palazzina Cinese e Museo Pitrè, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Parco della Favorita": {
+  "description": "Grande parco borbonico ai piedi di Monte Pellegrino, con viali, agrumeti e la Palazzina Cinese. Amato per jogging e passeggiate.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km)",
+  "notes": "Combinalo con la Palazzina Cinese e il Museo Pitrè.",
+  "must_see": false,
+  "maps_query": "Parco della Favorita, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Quartiere della Kalsa (Piazza Magione)": {
+  "description": "Il quartiere arabo di Palermo, oggi tra i più vivaci: chiese normanne, palazzi nobiliari e street art. La Magione si affaccia su un grande prato.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "La sera la piazza si anima di locali e musica.",
+  "must_see": false,
+  "maps_query": "Quartiere della Kalsa (Piazza Magione), Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Stand Florio all'Arenella": {
+  "description": "Padiglione neogotico fatto costruire dai Florio sul mare dell'Arenella. Oggi ospita eventi e matrimoni.",
+  "hours": "Aperto in occasione di eventi e mostre",
+  "price": "Variabile secondo l'evento",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Visitabile soprattutto in occasione di eventi: verifica prima.",
+  "must_see": false,
+  "maps_query": "Stand Florio all'Arenella, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Cantieri Culturali alla Zisa": {
+  "description": "Ex fabbrica di mobili Ducrot trasformata in un grande polo culturale. Ospita mostre, cinema d'autore, teatro, concerti e il Centro sperimentale di cinematografia.",
+  "hours": "Spazi aperti tutti i giorni; mostre ed eventi con orari propri",
+  "price": "Ingresso libero · eventi a pagamento",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Controlla il programma degli eventi prima di andare: spesso ci sono festival e mercatini nel weekend.",
+  "must_see": false,
+  "maps_query": "Cantieri Culturali alla Zisa, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Antico Mercato del Borgo Vecchio": {
+  "description": "Il mercato più notturno di Palermo: di giorno frutta e pesce, la sera bracieri, panelle e musica tra Via Villafranca e Piazza Ucciardone. Un tuffo nella Palermo popolare e verace.",
+  "hours": "Mattina mercato; la sera, soprattutto nel weekend, bracieri e locali",
+  "price": "Ingresso libero",
+  "duration": "1–2 ore (meglio la sera)",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Il venerdì e il sabato sera è affollatissimo: tieni d'occhio borse e telefono.",
+  "must_see": false,
+  "maps_query": "Antico Mercato del Borgo Vecchio, Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Museo del Mare (Arsenale)": {
+  "description": "Nell'Arsenale borbonico del Settecento, il museo racconta la storia marinara di Palermo con modelli di navi e reperti. Accanto al nuovo waterfront del porto.",
+  "hours": "Aperture variabili",
+  "price": "Circa €3–5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km). 🚆 In alternativa treno dalla stazione di Balestrate a Palermo Centrale (circa 1 ora). In centro si gira bene a piedi.",
+  "notes": "Controlla gli orari prima di andare: aperture variabili.",
+  "must_see": false,
+  "maps_query": "Museo del Mare (Arsenale), Palermo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Area archeologica di Solunto": {
+  "description": "Città punica e poi romana costruita sulle pendici del Monte Catalfano: strade lastricate, mosaici e colonne. Dall'alto il panorama abbraccia tutto il golfo fino a Capo Zafferano.",
+  "hours": "Mar–sab circa 9:00–19:00, dom 9:00–13:30",
+  "price": "€6 (ridotto €3)",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 65 km)",
+  "notes": "Il sito è in salita e poco ombreggiato: scarpe comode e acqua, soprattutto d'estate.",
+  "must_see": false,
+  "maps_query": "Area archeologica di Solunto, Santa Flavia, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Centro storico di Castelbuono": {
+  "description": "Borgo delle Madonie dominato dal castello dei Ventimiglia, con piazze vivaci e botteghe storiche. Famoso per la manna e per i panettoni artigianali.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 40 min (circa 130 km)",
+  "notes": "Assaggia i dolci alla manna; in autunno ci sono sagre dei funghi e delle castagne.",
+  "must_see": false,
+  "maps_query": "Centro storico di Castelbuono, Castelbuono, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Petralia Soprana (borgo)": {
+  "description": "Uno dei borghi più belli d'Italia, a oltre 1.100 metri d'altezza nel cuore delle Madonie. Vicoli in pietra, belvedere e chiese con vista sulle montagne.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 45 min (circa 135 km)",
+  "notes": "Fa fresco anche d'estate; abbinalo a Gangi o a Piano Battaglia.",
+  "must_see": false,
+  "maps_query": "Petralia Soprana, Petralia Soprana, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Gangi (borgo)": {
+  "description": "Borgo medievale arroccato sul Monte Marone, eletto Borgo dei Borghi d'Italia. Case in pietra a terrazze, chiese e panorami sulle Madonie.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 50 min (circa 150 km)",
+  "notes": "È a circa 2 ore da Trappeto: ideale per una gita di una giornata, magari con Petralia.",
+  "must_see": false,
+  "maps_query": "Gangi, Gangi, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Polizzi Generosa": {
+  "description": "Cittadina delle Madonie con chiese ricche di opere d'arte e vista sulle valli. È famosa per la nocciola e lo sfoglio, un dolce tipico.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 40 min (circa 125 km)",
+  "notes": "Punto di partenza per escursioni nel Parco delle Madonie.",
+  "must_see": false,
+  "maps_query": "Polizzi Generosa, Polizzi Generosa, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Piana degli Albanesi": {
+  "description": "Comunità arbëreshë fondata nel Quattrocento da profughi albanesi, che conserva lingua e rito bizantino. Famosa per la Pasqua in costume e per i cannoli.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km)",
+  "notes": "Assaggia il cannolo di Piana; vicino c'è il lago omonimo.",
+  "must_see": false,
+  "maps_query": "Piana degli Albanesi, Piana degli Albanesi, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Real Casina di Caccia (Ficuzza)": {
+  "description": "Palazzina di caccia di Ferdinando di Borbone ai piedi della Rocca Busambra. Intorno si estende il grande Bosco della Ficuzza.",
+  "hours": "Di solito mattina e primo pomeriggio, aperture variabili",
+  "price": "Circa €5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 55 km)",
+  "notes": "Abbinala a una passeggiata nel bosco.",
+  "must_see": false,
+  "maps_query": "Real Casina di Caccia (Ficuzza), Corleone, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Centro storico di Corleone": {
+  "description": "Borgo dell'entroterra tra chiese, cascate e torri saracene, oggi simbolo di riscatto. Il CIDMA racconta la storia della lotta alla mafia.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 50 min (circa 55 km)",
+  "notes": "Non perdere la Cascata delle Due Rocche, a pochi passi dal centro.",
+  "must_see": false,
+  "maps_query": "Centro storico di Corleone, Corleone, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Museo del Carretto Siciliano (Terrasini)": {
+  "description": "Nel Palazzo D'Aumale, sul mare di Terrasini, una ricchissima collezione di carretti siciliani dipinti e decorati. Racconta l'arte popolare dell'isola.",
+  "hours": "Mar–sab 9:00–19:00, dom 9:00–13:00; lunedì chiuso",
+  "price": "Palazzo d'Aumale €8 (18–25 anni UE €4, gratis under 18)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 20 min (circa 20 km)",
+  "notes": "A pochi minuti da Trappeto, perfetto per una mattina di pioggia.",
+  "must_see": false,
+  "maps_query": "Museo del Carretto Siciliano (Terrasini), Terrasini, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Centro storico di Cinisi": {
+  "description": "Paese legato alla memoria di Peppino Impastato, con la sua casa museo e la chiesa madre. Strade in pietra e vista sulla montagna.",
+  "hours": "Sempre accessibile · Casa Memoria Impastato con orari propri",
+  "price": "Gratis · Casa Memoria a offerta libera",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 20 min (circa 20 km)",
+  "notes": "A pochi minuti da Trappeto: visita Casa Memoria Impastato, dove si raccontano i \"cento passi\".",
+  "must_see": false,
+  "maps_query": "Centro storico di Cinisi, Cinisi, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Duomo di Termini Imerese": {
+  "description": "Cattedrale barocca nella parte alta della città, con il Belvedere affacciato sul golfo. Termini è nota fin dall'antichità per le sue terme.",
+  "hours": "Di solito mattina e pomeriggio, chiuso durante le funzioni",
+  "price": "Ingresso libero",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Dopo il Duomo passeggia fino al Belvedere Principe di Piemonte per la vista sul mare.",
+  "must_see": false,
+  "maps_query": "Duomo di Termini Imerese, Termini Imerese, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Himera - Parco archeologico": {
+  "description": "Resti della colonia greca fondata nel 648 a.C., teatro della famosa battaglia contro i Cartaginesi. Il Tempio della Vittoria e l'antiquarium raccontano la città.",
+  "hours": "Mar–dom circa 9:00–19:00 (ridotto in inverno)",
+  "price": "€6 (ridotto €3)",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 25 min (circa 100 km)",
+  "notes": "Poco ombreggiato: meglio di mattina d'estate.",
+  "must_see": false,
+  "maps_query": "Himera - Parco archeologico, Termini Imerese, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Santuario di Gibilmanna": {
+  "description": "Santuario dei Cappuccini a 800 metri sopra Cefalù, immerso nei boschi. Dal piazzale la vista spazia sulla costa e sulle Madonie.",
+  "hours": "Tutti i giorni, circa 8:00–12:30 e 15:30–19:00",
+  "price": "Ingresso libero",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "Fa fresco anche d'estate; abbinalo alla visita di Cefalù.",
+  "must_see": false,
+  "maps_query": "Santuario di Gibilmanna, Cefalù, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Torre di Ligny": {
+  "description": "Torre spagnola del Seicento sulla punta estrema di Trapani, circondata dal mare. Ospita un piccolo museo della preistoria.",
+  "hours": "Ott–mag 10:00–13:00 e 15:30–18:00; lug–set 10:00–13:00 e 17:00–21:00",
+  "price": "€3 (ridotto €2)",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 70 km)",
+  "notes": "Può chiudere per maltempo.",
+  "must_see": false,
+  "maps_query": "Torre di Ligny, Trapani, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Cattedrale di San Lorenzo (Trapani)": {
+  "description": "Cattedrale barocca lungo il corso principale di Trapani, con una bella facciata e il portico. Custodisce dipinti di scuola fiamminga e siciliana.",
+  "hours": "Di solito mattina e pomeriggio, chiusa durante le funzioni",
+  "price": "Ingresso libero",
+  "duration": "30 minuti",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 65 km)",
+  "notes": "Si trova lungo Corso Vittorio Emanuele, la via più elegante del centro.",
+  "must_see": false,
+  "maps_query": "Cattedrale di San Lorenzo (Trapani), Trapani, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to"
+  ]
+ },
+ "Santuario dell'Annunziata (Trapani)": {
+  "description": "Il santuario custodisce la Madonna di Trapani, statua in marmo molto venerata. Accanto c'è il Museo Pepoli con i coralli trapanesi.",
+  "hours": "Santuario tutti i giorni mattina e pomeriggio · Museo Pepoli con orari propri",
+  "price": "Santuario gratis · Museo Pepoli circa €6",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 65 km)",
+  "notes": "Il Museo Pepoli merita la visita per i lavori in corallo.",
+  "must_see": false,
+  "maps_query": "Santuario dell'Annunziata (Trapani), Trapani, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Castello arabo-normanno di Castellammare": {
+  "description": "Fortezza affacciata sul porto di Castellammare del Golfo, tra torri e bastioni sul mare. All'interno un piccolo museo racconta la storia della città.",
+  "hours": "Di solito mar–dom mattina e pomeriggio",
+  "price": "Circa €2–4",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 25 min (circa 20 km)",
+  "notes": "Dopo la visita fermati al porto per un aperitivo al tramonto.",
+  "must_see": false,
+  "maps_query": "Castello arabo-normanno di Castellammare, Castellammare del Golfo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ },
+ "Castello dei Conti di Modica (Alcamo)": {
+  "description": "Castello quattrocentesco a pianta romboidale nel cuore di Alcamo, con torri angolari. Ospita l'enoteca regionale dei vini del territorio.",
+  "hours": "Aperture variabili, di solito mattina e pomeriggio",
+  "price": "Circa €2–5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 20 min (circa 20 km)",
+  "notes": "Alcamo è a pochi minuti da Trappeto: ottimo per una visita nel tardo pomeriggio.",
+  "must_see": false,
+  "maps_query": "Castello dei Conti di Modica (Alcamo), Alcamo, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Cretto di Burri (Gibellina)": {
+  "description": "Gigantesca opera di land art di Alberto Burri che ricopre di cemento bianco le rovine della vecchia Gibellina, distrutta dal terremoto del 1968. Si cammina tra i \"vicoli\" della città scomparsa.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 50 km)",
+  "notes": "Al tramonto è spettacolare. Nessuna ombra: evita le ore più calde d'estate.",
+  "must_see": true,
+  "maps_query": "Cretto di Burri (Gibellina), Gibellina, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Ruderi di Poggioreale antica": {
+  "description": "Paese fantasma abbandonato dopo il terremoto del Belice del 1968: case, chiese e piazze rimaste come in un film. Un luogo silenzioso e suggestivo.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 50 min (circa 55 km)",
+  "notes": "Cammina con prudenza tra i ruderi e non entrare negli edifici pericolanti.",
+  "must_see": false,
+  "maps_query": "Ruderi di Poggioreale antica, Poggioreale, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Cave di Cusa": {
+  "description": "Le cave da cui i Greci di Selinunte estraevano i rocchi per i loro templi, abbandonate di colpo nel 409 a.C. Colonne a metà del lavoro tra ulivi e campagna.",
+  "hours": "Ora legale 9:00–19:00 (biglietteria fino alle 18:00)",
+  "price": "€2 (ridotto €1)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 15 min (circa 85 km)",
+  "notes": "Combina la visita con il Parco di Selinunte, a circa 15 minuti d'auto.",
+  "must_see": false,
+  "maps_query": "Cave di Cusa, Campobello di Mazara, Sicilia",
+  "to_verify": [
+   "discount",
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Grotta Mangiapane (Custonaci)": {
+  "description": "Un antico borgo rurale costruito dentro una grande grotta preistorica ai piedi del Monte Cofano. A Natale diventa un celebre presepe vivente.",
+  "hours": "10:00–18:00; dal 1 maggio al 31 agosto 10:00–20:00",
+  "price": "A pagamento (ridotto 4–10 anni, gratis 0–3 anni)",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 45 km)",
+  "notes": "Abbinala a un bagno alla spiaggia di Cornino, a pochi minuti.",
+  "must_see": false,
+  "maps_query": "Grotta Mangiapane (Custonaci), Custonaci, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Spiaggia di Isola delle Femmine": {
+  "description": "Spiaggia di sabbia dorata di fronte all'isolotto, riserva naturale. Mare limpido e servizi.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 35 min (circa 35 km)",
+  "notes": "A soli 25 minuti da Trappeto; d'estate prenota il lido.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Isola delle Femmine, Isola delle Femmine, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Baia dell'Olivella": {
+  "description": "Piccola baia selvaggia ai piedi di Solunto, con acqua cristallina e fondale roccioso. Lontana dalla folla delle spiagge più famose.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 60 km)",
+  "notes": "Accesso un po' scomodo: porta scarpette da scoglio.",
+  "must_see": false,
+  "maps_query": "Baia dell'Olivella, Santa Flavia, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia dell'Arenella": {
+  "description": "Antico borgo di pescatori di Palermo con una piccola spiaggia e la vista su Monte Pellegrino. Atmosfera autentica e trattorie di pesce.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "1–2 ore",
+  "how_to": "🚗 In auto da Trappeto circa 45 min (circa 50 km)",
+  "notes": "Più che per il bagno, è bella per una cena di pesce sul mare.",
+  "must_see": false,
+  "maps_query": "Spiaggia dell'Arenella, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Sferracavallo": {
+  "description": "Borgata marinara a nord di Palermo con scogli, mare limpido e ristoranti di pesce famosi per il crudo e i ricci.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 40 min (circa 40 km)",
+  "notes": "La sera fermati a cena: menù di pesce a prezzo fisso in molte trattorie.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Sferracavallo, Palermo, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Terrasini (Praia)": {
+  "description": "Calette di sabbia tra scogli rossi a Terrasini, a pochi minuti da Trappeto. Mare limpido e bei tramonti.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 20 min (circa 20 km)",
+  "notes": "Alcune calette sono piccole: in agosto arriva presto.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Terrasini (Praia), Terrasini, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Marettimo (Isole Egadi)": {
+  "description": "L'isola più lontana e selvaggia delle Egadi, con grotte marine e sentieri di montagna. Un piccolo paese di pescatori senza auto.",
+  "hours": "Isola sempre visitabile · aliscafi da Trapani (poche corse in inverno)",
+  "price": "Aliscafo andata e ritorno circa €40–50 a persona",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto fino al porto di Trapani (circa 1 h), poi ⛴️ aliscafo dal porto di Trapani per Marettimo (circa 1 h–1 h 30)",
+  "notes": "Aliscafi da Trapani: verifica gli orari, d'inverno le corse sono poche.",
+  "must_see": false,
+  "maps_query": "Marettimo (Isole Egadi), Favignana, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Alcamo Marina": {
+  "description": "Lunga spiaggia di sabbia dorata sul Golfo di Castellammare, con tratti liberi e lidi attrezzati. Mare limpido e fondale che degrada dolcemente.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 15 min (circa 15 km)",
+  "notes": "A 10 minuti da Trappeto; d'estate attenzione al vento di maestrale che alza le onde.",
+  "must_see": false,
+  "maps_query": "Alcamo Marina, Alcamo, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes"
+  ]
+ },
+ "Spiaggia di Bonagia (Valderice)": {
+  "description": "Borgo di pescatori con la tonnara storica e un mare turchese ai piedi di Monte Cofano. Piccola spiaggia e scogli.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 60 km)",
+  "notes": "Vicino alla Riserva di Monte Cofano e alla spiaggia di Cornino.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Bonagia (Valderice), Valderice, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Spiaggia di Selinunte (Marinella)": {
+  "description": "Ampia spiaggia di sabbia dorata accanto al Parco archeologico, con i templi visibili dalla riva. Il borgo di Marinella ha ristoranti di pesce.",
+  "hours": "Sempre accessibile",
+  "price": "Spiaggia libera (gratis) · lidi a pagamento in estate",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 10 min (circa 80 km)",
+  "notes": "Combinala con la visita ai templi nel tardo pomeriggio.",
+  "must_see": false,
+  "maps_query": "Spiaggia di Selinunte (Marinella), Castelvetrano, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Riserva marina di Ustica": {
+  "description": "Isola vulcanica a nord di Palermo, prima riserva marina d'Italia. Paradiso per snorkeling e immersioni, con grotte e fondali ricchissimi.",
+  "hours": "Isola sempre visitabile · aliscafo e traghetto da Palermo (più corse in estate)",
+  "price": "Aliscafo andata e ritorno circa €40–50 a persona",
+  "duration": "Una giornata",
+  "how_to": "🚗 In auto fino al porto di Palermo (circa 45 min), poi ⛴️ aliscafo (circa 1 h 30) o traghetto (circa 2 h 30) per Ustica",
+  "notes": "Aliscafo o traghetto da Palermo; controlla le corse di ritorno.",
+  "must_see": false,
+  "maps_query": "Riserva marina di Ustica, Ustica, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Bosco della Ficuzza": {
+  "description": "Uno dei boschi più estesi della Sicilia occidentale, ai piedi della Rocca Busambra. Sentieri tra querce, laghetti e cascate.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 55 min (circa 60 km)",
+  "notes": "Scarpe da trekking e acqua; d'estate è un'ottima fuga dal caldo.",
+  "must_see": false,
+  "maps_query": "Bosco della Ficuzza, Corleone, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Piano Zucchi (Madonie)": {
+  "description": "Altopiano delle Madonie tra boschi e pascoli, punto di partenza per escursioni. D'inverno si scia.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 35 min (circa 120 km)",
+  "notes": "Fa fresco: porta una felpa anche ad agosto.",
+  "must_see": false,
+  "maps_query": "Piano Zucchi (Madonie), Isnello, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Riserva Foce del Belice": {
+  "description": "Dune di sabbia e stagni salmastri alla foce del Belice, vicino a Menfi. Area importante per uccelli migratori e tartarughe marine.",
+  "hours": "Sempre accessibile",
+  "price": "Gratis",
+  "duration": "Mezza giornata",
+  "how_to": "🚗 In auto da Trappeto circa 1 h 10 min (circa 80 km)",
+  "notes": "Rispetta le dune: segui i passaggi segnalati.",
+  "must_see": false,
+  "maps_query": "Riserva Foce del Belice, Menfi, Sicilia",
+  "to_verify": [
+   "how_to"
+  ]
+ },
+ "Grotta del Genovese (Levanzo)": {
+  "description": "Grotta con pitture e graffiti preistorici di oltre 10.000 anni fa, sull'isola di Levanzo. Una delle testimonianze più antiche dell'arte in Europa.",
+  "hours": "Solo visite guidate su prenotazione",
+  "price": "Circa €15–25 con trasporto dal paese",
+  "duration": "2 ore (con il viaggio in barca)",
+  "how_to": "🚗 In auto fino al porto di Trapani (circa 1 h), poi ⛴️ aliscafo dal porto di Trapani per Levanzo (circa 25 min), poi barca o jeep con la guida",
+  "notes": "Visita solo guidata e su prenotazione.",
+  "must_see": false,
+  "maps_query": "Grotta del Genovese (Levanzo), Favignana, Sicilia",
+  "to_verify": [
+   "how_to",
+   "notes",
+   "price"
+  ]
+ },
+ "Museo del Sale (Nubia)": {
+  "description": "Un mulino a vento del Cinquecento nelle saline di Nubia, oggi museo del sale. Mostra come si raccoglie e lavora il sale marino.",
+  "hours": "Tutti i giorni, circa 9:30–19:00 in estate (ridotto in inverno)",
+  "price": "Circa €3–5",
+  "duration": "1 ora",
+  "how_to": "🚗 In auto da Trappeto circa 1 h (circa 70 km)",
+  "notes": "Compra il sale integrale di Trapani come souvenir.",
+  "must_see": false,
+  "maps_query": "Museo del Sale (Nubia), Paceco, Sicilia",
+  "to_verify": [
+   "hours",
+   "how_to",
+   "price"
+  ]
+ }
+}
