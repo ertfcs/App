@@ -254,6 +254,7 @@
     if (method === "GET") {
       if (path === "/api/availability") return availability();
       if (path === "/api/gallery-photos") return DB["/api/private-photos"] || [];
+      if (path === "/api/beaches/overrides") return DB["/api/beaches/overrides"] || [];
       if (path === "/api/admin/stats") return stats();
       if (path === "/api/admin/accounting") return accounting();
       if (path === "/api/bookings") return bookings().slice().sort(function (a, b) { return a.created_at < b.created_at ? 1 : -1; });
@@ -274,6 +275,15 @@
       err(401, "Credenziali non valide");
     }
     if (path === "/api/track/visit") return { ok: true };
+    if ((m = path.match(/^\/api\/(beaches|dishes)\/([^/]+)$/)) && m[2] !== "overrides" && (method === "PUT" || method === "DELETE")) {
+      var key = "/api/" + m[1] + "/overrides";
+      var list = (DB[key] = DB[key] || []);
+      for (var i = list.length - 1; i >= 0; i--) if (list[i].id === m[2]) list.splice(i, 1);
+      if (method === "DELETE") return { ok: true };
+      var rec2 = Object.assign({}, body || {}, { id: m[2], updated_at: nowIso() });
+      list.push(rec2);
+      return rec2;
+    }
     if (path === "/api/verify-code") {
       var code = String((body && body.code) || "").trim().toUpperCase();
       if (!code) err(400, "Codice mancante");

@@ -149,7 +149,7 @@ export function BeachCard({
 }: {
   beach: Beach;
   windName: string;
-  image?: number;
+  image?: number | { uri: string };
   credit?: string;
   extra?: { desc?: string; howTo?: string; tip?: string; mustSee?: boolean };
 }) {

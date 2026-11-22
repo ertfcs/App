@@ -5486,6 +5486,55 @@ async def reset_dish(dish_id: str, _: str = Depends(get_current_admin)):
 
 
 # ============================================================
+# Beaches: the guide list is built into the app; the admin saves changes as overrides
+# ============================================================
+class BeachIn(BaseModel):
+    name: Optional[str] = None
+    location: Optional[str] = None
+    prov: Optional[str] = None
+    time: Optional[str] = None
+    dist: Optional[str] = None
+    kids: Optional[bool] = None
+    lidi: Optional[bool] = None
+    snorkel: Optional[bool] = None
+    park: Optional[bool] = None
+    parking_type: Optional[str] = None  # free | paid | mixed
+    wind_good: Optional[List[str]] = None
+    wind_bad: Optional[List[str]] = None
+    image: Optional[str] = None
+    # Italian texts
+    type: Optional[str] = None
+    access: Optional[str] = None
+    desc: Optional[str] = None
+    crowd: Optional[str] = None
+    food: Optional[str] = None
+    seabed: Optional[str] = None
+    parking_info: Optional[str] = None
+    tips: Optional[str] = None
+    hidden: Optional[bool] = None
+
+
+@api.get("/beaches/overrides")
+async def list_beach_overrides():
+    return await db.beach_overrides.find({}, {"_id": 0}).to_list(1000)
+
+
+@api.put("/beaches/{beach_id}")
+async def upsert_beach(beach_id: str, body: BeachIn, _: str = Depends(get_current_admin)):
+    payload = {k: v for k, v in body.model_dump().items() if v is not None}
+    payload["id"] = beach_id
+    payload["updated_at"] = datetime.now(timezone.utc).isoformat()
+    await db.beach_overrides.update_one({"id": beach_id}, {"$set": payload}, upsert=True)
+    return await db.beach_overrides.find_one({"id": beach_id}, {"_id": 0})
+
+
+@api.delete("/beaches/{beach_id}")
+async def reset_beach(beach_id: str, _: str = Depends(get_current_admin)):
+    await db.beach_overrides.delete_one({"id": beach_id})
+    return {"ok": True}
+
+
+# ============================================================
 # Object storage: image uploads (admin) + public file serving
 # ============================================================
 UPLOAD_MAX_BYTES = 10 * 1024 * 1024

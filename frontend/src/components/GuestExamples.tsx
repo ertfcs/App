@@ -91,11 +91,12 @@ export function dishPhoto(dish: { id: string; image?: string }) {
 }
 
 /** Extra photo/texts for the example beach (same with and without the code). */
-export function beachExtras(id: string, t: (k: string) => string) {
-  if (id !== EXAMPLE_BEACH.id) return {};
+export function beachExtras(beach: { id: string; image?: string }, t: (k: string) => string) {
+  const own = beach.image ? { image: { uri: beach.image } } : {};
+  if (beach.id !== EXAMPLE_BEACH.id) return own;
   return {
-    image: EXAMPLE_BEACH.image as number,
-    credit: EXAMPLE_BEACH.credit,
+    image: beach.image ? { uri: beach.image } : (EXAMPLE_BEACH.image as number),
+    credit: beach.image ? undefined : EXAMPLE_BEACH.credit,
     extra: { desc: t("ui.ex.beach_extra"), howTo: t("ui.ex.beach_howto"), tip: t("ui.ex.beach_tip"), mustSee: true },
   };
 }
@@ -112,7 +113,7 @@ export function ExampleBeachCard({ beach, windName, style }: { beach: Beach; win
   const { t } = useTranslation();
   return (
     <View style={[{ marginHorizontal: spacing.md }, style]}>
-      <BeachCard beach={beach} windName={windName} {...beachExtras(beach.id, t)} />
+      <BeachCard beach={beach} windName={windName} {...beachExtras(beach as { id: string; image?: string }, t)} />
     </View>
   );
 }

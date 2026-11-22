@@ -8,7 +8,8 @@ import { ChipRow, Field, Loading } from "@/src/components/ui";
 import { IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
-import { beaches, windFromDegrees, analyzeBeach, Beach, BeachStatus } from "@/src/lib/beaches";
+import { windFromDegrees, analyzeBeach, BeachStatus, beaches as builtInBeaches } from "@/src/lib/beaches";
+import { useBeaches, type MergedBeach } from "@/src/lib/beachData";
 import { useGuestAccess } from "@/src/lib/guestAccess";
 import { LockedSection, UnlockedNote } from "@/src/components/LockedSection";
 import { ExampleBeachCard, FreeLabel, EXAMPLE_BEACH, beachExtras } from "@/src/components/GuestExamples";
@@ -43,6 +44,8 @@ export default function BeachesScreen() {
   const [cat, setCat] = useState("all");
   const [q, setQ] = useState("");
   const { unlocked } = useGuestAccess();
+  const beachData = useBeaches();
+  const beaches: MergedBeach[] = beachData.data ?? builtInBeaches;
   const { width } = useWindowDimensions();
   const cols = width >= 1100 ? 3 : width >= 600 ? 2 : 1;
 
@@ -92,14 +95,14 @@ export default function BeachesScreen() {
       list.sort((a, b) => score[analyzeBeach(a, windName)] - score[analyzeBeach(b, windName)]);
     }
     return list;
-  }, [cat, q, windName]);
+  }, [cat, q, windName, beaches]);
 
 
 
 
-  const renderItem = ({ item }: { item: Beach }) => (
+  const renderItem = ({ item }: { item: MergedBeach }) => (
     <View style={{ flex: 1, paddingHorizontal: cols > 1 ? 0 : spacing.md }}>
-      <BeachCard beach={item} windName={windName} {...beachExtras(item.id, t)} />
+      <BeachCard beach={item} windName={windName} {...beachExtras(item, t)} />
     </View>
   );
 
