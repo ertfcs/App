@@ -99,11 +99,11 @@ export function FreeLabel({ text }: { text?: string }) {
   );
 }
 
-export function ExamplePlaceCard({ poi }: { poi: Poi }) {
+export function ExamplePlaceCard({ poi, style }: { poi: Poi; style?: object }) {
   const { t } = useTranslation();
   const ex = EXAMPLE_PLACES[poi.name];
   return (
-    <View style={{ marginHorizontal: spacing.md }}>
+    <View style={[{ marginHorizontal: spacing.md }, style]}>
       <PlaceCard
         poi={poi}
         override={

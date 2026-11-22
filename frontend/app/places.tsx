@@ -44,7 +44,7 @@ export default function PlacesScreen() {
     return list;
   }, [pois.data, cat, q]);
   const { width } = useWindowDimensions();
-  const cols = width >= 760 ? 2 : 1;
+  const cols = width >= 1100 ? 3 : width >= 600 ? 2 : 1;
   // must-see first, then with a photo, then by name
   const sorted = useMemo(
     () => [...filtered].sort((a, b) => Number(!!b.must_see) - Number(!!a.must_see) || Number(!!b.image_url) - Number(!!a.image_url) || a.name.localeCompare(b.name)),
@@ -94,9 +94,11 @@ export default function PlacesScreen() {
                 <View style={{ paddingHorizontal: spacing.md }}>
                   <FreeLabel />
                 </View>
-                {examples.map((p) => (
-                  <ExamplePlaceCard key={p.id} poi={p} />
-                ))}
+                <View style={{ flexDirection: cols > 1 ? "row" : "column", gap: spacing.md, paddingHorizontal: cols > 1 ? spacing.md : 0 }}>
+                  {examples.map((p) => (
+                    <ExamplePlaceCard key={p.id} poi={p} style={cols > 1 ? { flex: 1, marginHorizontal: 0 } : undefined} />
+                  ))}
+                </View>
               </View>
             )
           }
