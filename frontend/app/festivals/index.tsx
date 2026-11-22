@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useMemo, useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -8,6 +9,7 @@ import { Icon, IconName } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { upcomingFestivals, Festival, FESTIVAL_COUNT } from "@/src/lib/festivals";
+import { localizeFestival } from "@/src/lib/festivalsI18n";
 
 const CAT_META: Record<Festival["category"], { icon: IconName; label: string }> = {
   religiosa: { icon: "church", label: "Festa religiosa" },
@@ -25,10 +27,11 @@ const FILTERS: { key: string; label: string; icon: IconName }[] = [
 ];
 
 export default function FestivalsScreen() {
+  const { t, i18n } = useTranslation();
   const s = useStyles();
   const { colors } = useTheme();
   const [filter, setFilter] = useState("all");
-  const all = useMemo(() => upcomingFestivals(), []);
+  const all = useMemo(() => upcomingFestivals().map((f) => localizeFestival(f, i18n.language)), [i18n.language]);
   const sorted = useMemo(() => {
     if (filter === "all") return all;
     if (filter === "PA" || filter === "TP") return all.filter((f) => f.province === filter);
@@ -47,7 +50,7 @@ export default function FestivalsScreen() {
             <View style={{ flex: 1 }}>
               <View style={s.catRow}>
                 <Icon name={meta.icon} size={13} color={colors.brand} />
-                <Text style={s.catTxt}>{meta.label.toUpperCase()}</Text>
+                <Text style={s.catTxt}>{t(`ui.fest.cat_${item.category}`).toUpperCase()}</Text>
               </View>
               <Text style={s.name}>{item.name}</Text>
               <View style={s.metaRow}>
@@ -81,7 +84,7 @@ export default function FestivalsScreen() {
 
   return (
     <View style={s.screen}>
-      <Header title="Feste & Sagre" kicker="Palermo & Trapani" showBack />
+      <Header title={t("ui.fest.title")} kicker={t("ui.food.kicker")} showBack />
       <FlatList
         testID="festivals-list"
         data={sorted}
@@ -92,12 +95,12 @@ export default function FestivalsScreen() {
         ListHeaderComponent={
           <View style={s.intro}>
             <Text style={s.introTxt}>
-              {FESTIVAL_COUNT} ricorrenze: i santi patroni di tutti i comuni delle province di Palermo e Trapani, sagre, riti tradizionali e festività nazionali. Elenco dei prossimi 12 mesi; le date segnate come "indicativo" vanno verificate sui siti ufficiali prima di partire.
+              {t("ui.fest.intro", { n: FESTIVAL_COUNT })}
             </Text>
             <View style={{ marginHorizontal: -spacing.md }}>
-              <ChipRow items={FILTERS} selected={filter} onSelect={setFilter} />
+              <ChipRow items={FILTERS.map((f) => ({ ...f, label: f.key === "all" ? t("ui.fest.f_all") : f.key === "sagra" ? t("ui.fest.f_sagre") : f.key === "nazionale" ? t("ui.fest.f_national") : f.label }))} selected={filter} onSelect={setFilter} />
             </View>
-            <Text style={s.introTxt} testID="festivals-count">{sorted.length} eventi in elenco</Text>
+            <Text style={s.introTxt} testID="festivals-count">{t("ui.fest.count", { n: sorted.length })}</Text>
           </View>
         }
       />

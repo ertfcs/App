@@ -13,6 +13,7 @@ import { useAuth } from "@/src/lib/auth";
 import { api } from "@/src/lib/api";
 import { pickImageDataUrl } from "@/src/lib/upload";
 import { confirmAction } from "@/src/lib/confirm";
+import { PhotoViewer } from "@/src/components/PhotoViewer";
 
 type Photo = { id: string; data_url: string; filename?: string };
 const BASE: Record<string, string> = { public: "/photos", private: "/private-photos" };
@@ -25,6 +26,7 @@ export default function AdminPhotos() {
   const qc = useQueryClient();
   const [tab, setTab] = useState("public");
   const [uploading, setUploading] = useState(false);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const base = BASE[tab];
 
   useEffect(() => {
@@ -102,7 +104,9 @@ export default function AdminPhotos() {
           <View style={s.grid}>
             {list.map((p, i) => (
               <View key={p.id} style={s.cell} testID={`photo-${p.id}`}>
-                <Image source={{ uri: p.data_url }} style={s.img} contentFit="cover" />
+                <Pressable onPress={() => setViewerIndex(i)} testID={`photo-open-${p.id}`} accessibilityRole="imagebutton" accessibilityLabel="Ingrandisci foto">
+                  <Image source={{ uri: p.data_url }} style={s.img} contentFit="cover" />
+                </Pressable>
                 <Pressable testID={`photo-del-${p.id}`} style={[s.btn, s.del]} onPress={async () => (await confirmAction("Eliminare questa foto?")) && run(() => api.delete(`${base}/${p.id}`), "Foto eliminata")} hitSlop={6}>
                   <Icon name="close" size={16} color={colors.onError} />
                 </Pressable>
@@ -126,6 +130,7 @@ export default function AdminPhotos() {
           </View>
         )}
       </ScrollView>
+      <PhotoViewer photos={list.map((p) => ({ id: p.id, uri: p.data_url }))} index={viewerIndex} onClose={() => setViewerIndex(null)} />
     </View>
   );
 }

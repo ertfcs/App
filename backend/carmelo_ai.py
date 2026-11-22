@@ -18,23 +18,20 @@ import json
 import logging
 from typing import Dict, List, Optional, Tuple
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage, TextDelta, StreamDone
+from llm_client import LlmChat, UserMessage, TextDelta, StreamDone
 
 logger = logging.getLogger("carmelo")
 
 # ============================================================
 # Modelli disponibili
 # ============================================================
+# Solo Claude (chiave propria ANTHROPIC_API_KEY, modello in CLAUDE_MODEL).
 MODELS = {
-    "claude": ("anthropic", "claude-sonnet-4-5-20250929"),
-    "openai": ("openai", "gpt-4o"),
-    "gemini": ("gemini", "gemini-2.5-flash"),
+    "claude": ("anthropic", "claude"),
 }
 
 MODEL_LABELS = {
-    "claude": "Claude Sonnet 4.5",
-    "openai": "GPT-4o",
-    "gemini": "Gemini 2.5 Flash",
+    "claude": "Claude",
 }
 
 
@@ -44,7 +41,7 @@ def resolve_models(selection: Optional[List[str]] | Optional[str]) -> List[str]:
         return ["claude"]
     if isinstance(selection, str):
         if selection == "all":
-            return ["claude", "openai", "gemini"]
+            return ["claude"]
         selection = [selection]
     out = [m for m in selection if m in MODELS]
     return out or ["claude"]

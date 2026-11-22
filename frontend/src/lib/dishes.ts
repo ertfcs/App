@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./api";
 import { culinaryData, Dish, foodCategories } from "./culinary";
+import { dishI18n } from "./culinary_i18n";
 
 export type MergedDish = Dish & { image?: string; hidden?: boolean; custom?: boolean };
 export type DishOverride = Partial<MergedDish> & { id: string };
@@ -45,3 +46,21 @@ export function useDishes() {
 
 export { foodCategories, culinaryData };
 export type { Dish };
+
+const builtIn = new Map(culinaryData.map((d) => [d.id, d]));
+const sameList = (a?: string[], b?: string[]) => !!a && !!b && a.length === b.length && a.every((x, i) => x === b[i]);
+
+/** Dish texts in the guest's language. A field edited in the admin (no longer equal to the built-in Italian
+ * text that was translated) stays as the admin wrote it. */
+export function localizeDish<T extends Dish>(dish: T, lang?: string): T {
+  const code = (lang ?? "it").slice(0, 2);
+  const tr = code === "it" ? undefined : dishI18n[dish.id]?.[code];
+  const base = builtIn.get(dish.id);
+  if (!tr || !base) return dish;
+  return {
+    ...dish,
+    description: dish.description === base.description ? tr.description : dish.description,
+    ingredients: sameList(dish.ingredients, base.ingredients) ? tr.ingredients : dish.ingredients,
+    funFact: dish.funFact === base.funFact ? tr.funFact : dish.funFact,
+  };
+}

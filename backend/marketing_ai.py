@@ -10,7 +10,7 @@ Espone helpers per:
   - Audit profilo GMB (analisi descrizione + raccomandazioni concrete)
   - Calendario editoriale 30 giorni (piano post bilanciato)
 
-Modelli supportati: Claude Sonnet 4.5, GPT-5, Gemini 2.5 Pro
+Modello: Claude (chiave propria ANTHROPIC_API_KEY)
 """
 
 from __future__ import annotations
@@ -19,29 +19,24 @@ import json
 import logging
 from typing import Dict, List, Optional
 
-from emergentintegrations.llm.chat import LlmChat, UserMessage, ImageContent
+from llm_client import LlmChat, UserMessage, ImageContent
 
 logger = logging.getLogger("marketing_ai")
 
 # ============================================================
 # Modelli disponibili
 # ============================================================
+# Solo Claude (chiave propria ANTHROPIC_API_KEY, modello in CLAUDE_MODEL).
 MODELS: Dict[str, tuple] = {
-    "claude": ("anthropic", "claude-sonnet-4-5-20250929"),
-    "gpt5": ("openai", "gpt-5"),
-    "gemini": ("gemini", "gemini-2.5-pro"),
+    "claude": ("anthropic", "claude"),
 }
 
 MODEL_LABELS = {
-    "claude": "Claude Sonnet 4.5",
-    "gpt5": "GPT-5",
-    "gemini": "Gemini 2.5 Pro",
+    "claude": "Claude",
 }
 
 MODEL_BEST_FOR = {
-    "claude": "Scrittura creativa, copy emozionale, chat coaching",
-    "gpt5": "Analisi SEO, audit strategico, calendario editoriale",
-    "gemini": "Velocità, varianti multiple, post brevi",
+    "claude": "Copy, SEO, audit strategico, calendario editoriale, coaching",
 }
 
 
@@ -51,7 +46,7 @@ def resolve_models(selection) -> List[str]:
         return ["claude"]
     if isinstance(selection, str):
         if selection == "all":
-            return ["claude", "gpt5", "gemini"]
+            return ["claude"]
         selection = [selection]
     out = [m for m in selection if m in MODELS]
     return out or ["claude"]

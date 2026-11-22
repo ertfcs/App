@@ -11,6 +11,7 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useAuth } from "@/src/lib/auth";
 import { api } from "@/src/lib/api";
 import { euro, prettyDate } from "@/src/lib/format";
+import { confirmAction } from "@/src/lib/confirm";
 
 type Booking = {
   id: string;
@@ -63,6 +64,25 @@ export default function AdminBookings() {
     },
     onError: (e: any) => toast.show(e?.response?.data?.detail || "Errore", "error"),
   });
+
+  const remove = useMutation({
+    mutationFn: async (id: string) => (await api.delete(`/bookings/${id}`)).data,
+    onSuccess: () => {
+      toast.show("Prenotazione eliminata", "info");
+      qc.invalidateQueries({ queryKey: ["admin-bookings"] });
+      qc.invalidateQueries({ queryKey: ["admin-stats"] });
+      qc.invalidateQueries({ queryKey: ["admin-accounting"] });
+      qc.invalidateQueries({ queryKey: ["availability"] });
+    },
+    onError: (e: any) => toast.show(e?.response?.data?.detail || "Errore", "error"),
+  });
+
+  const askRemove = async (b: Booking) => {
+    const ok = await confirmAction(
+      `Eliminare definitivamente la prenotazione di ${b.guest_name} (${prettyDate(b.check_in)} → ${prettyDate(b.check_out)})?\n\nL'operazione non si può annullare.`,
+    );
+    if (ok) remove.mutate(b.id);
+  };
 
   if (loading || !token) return <Loading />;
 
@@ -118,6 +138,18 @@ export default function AdminBookings() {
             </View>
           </View>
         ) : null}
+        <Pressable
+          testID={`delete-${item.id}`}
+          onPress={() => askRemove(item)}
+          disabled={remove.isPending}
+          style={s.deleteBtn}
+          accessibilityRole="button"
+          accessibilityLabel={`Elimina prenotazione di ${item.guest_name}`}
+          hitSlop={6}
+        >
+          <Icon name="trash-can-outline" size={16} color={colors.error} />
+          <Text style={[s.deleteTxt, { color: colors.error }]}>Elimina</Text>
+        </Pressable>
       </Card>
     );
   };
@@ -153,5 +185,17 @@ const useStyles = makeStyles((c) => ({
   metaTxt: { color: c.onSurfaceSecondary, fontSize: 14, fontFamily: fonts.body },
   codeBox: { flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: c.surfaceTertiary, padding: spacing.sm, borderRadius: radius.md, alignSelf: "flex-start" },
   codeTxt: { color: c.brandPrimary, fontSize: 15, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 1 },
+  deleteBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "flex-end",
+    gap: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: radius.sm,
+    borderWidth: 1,
+    borderColor: c.error + "55",
+  },
+  deleteTxt: { fontSize: 14, fontWeight: "600", fontFamily: fonts.body },
   actions: { flexDirection: "row", gap: spacing.sm, marginTop: 4 },
 }));

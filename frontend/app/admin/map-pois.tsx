@@ -61,14 +61,17 @@ export default function AdminMapPois() {
 
   const list = useMemo(() => {
     const all = pois.data ?? [];
+    if (cat === "verify") return all.filter((p) => (p.to_verify ?? []).length > 0);
     return cat === "all" ? all : all.filter((p) => p.category === cat);
   }, [pois.data, cat]);
+  const toVerify = (pois.data ?? []).filter((p) => (p.to_verify ?? []).length > 0).length;
 
   const chips = [
     { key: "all", label: `Tutti (${(pois.data ?? []).length})`, icon: "map-marker-multiple" as const },
     { key: "art", label: "Arte", icon: "bank" as const },
     { key: "beach", label: "Spiagge", icon: "beach" as const },
     { key: "nature", label: "Natura", icon: "pine-tree" as const },
+    { key: "verify", label: `Da verificare (${toVerify})`, icon: "alert-circle-outline" as const },
   ];
 
   const tintFor = useCallback(
@@ -98,6 +101,10 @@ export default function AdminMapPois() {
       ticket_url: editing.ticket_url || null,
       maps_url: editing.maps_url || null,
       image_url: editing.image_url || null,
+      how_to: editing.how_to || null,
+      maps_query: editing.maps_query || null,
+      must_see: !!editing.must_see,
+      to_verify: editing.to_verify ?? [],
     };
     try {
       if (editing.id) await api.put(`/pois/${editing.id}`, payload);
@@ -151,12 +158,32 @@ export default function AdminMapPois() {
     }
   };
 
+  const label = (text: string) => <Text style={s.label}>{text}</Text>;
+  const vlabel = (text: string, field: string) => {
+    const pending = (editing?.to_verify ?? []).includes(field);
+    return (
+      <View style={s.labelRow}>
+        <Text style={[s.label, pending && { color: colors.warning }]}>{text}</Text>
+        {pending ? (
+          <Pressable
+            testID={`verify-${field}`}
+            onPress={() => setEditing((e) => ({ ...e, to_verify: (e?.to_verify ?? []).filter((f) => f !== field) }))}
+            style={s.verifyBtn}
+            hitSlop={6}
+          >
+            <Text style={s.verifyBtnTxt}>Da verificare · tocca se verificato ✓</Text>
+          </Pressable>
+        ) : null}
+      </View>
+    );
+  };
+
   if (loading || !token) return <Loading />;
 
   return (
     <View style={s.screen}>
       <Header
-        title="Mappa Interattiva"
+        title="Attrazioni"
         kicker="Admin"
         showBack
         showLang={false}
@@ -210,6 +237,9 @@ export default function AdminMapPois() {
                   <Text style={s.itemName}>{p.name}</Text>
                   <Text style={s.itemMeta}>{p.town ?? "—"} · {p.province ?? "—"} · {p.lat.toFixed(4)},{p.lng.toFixed(4)}</Text>
                   {!p.description ? <Text style={s.incomplete}>scheda da completare</Text> : null}
+                  {(p.to_verify ?? []).length ? (
+                    <Text style={s.verifyPill}>⚠️ {(p.to_verify ?? []).length} da verificare</Text>
+                  ) : null}
                 </View>
                 <Pressable testID={`poi-edit-${p.id}`} onPress={() => setEditing(p)} hitSlop={6} style={s.iconBtn}>
                   <Icon name="pencil-outline" size={18} color={colors.brandPrimary} />
@@ -227,44 +257,83 @@ export default function AdminMapPois() {
         <Pressable style={s.backdrop} onPress={() => setEditing(null)}>
           <Pressable style={s.sheet} onPress={(e) => e.stopPropagation()}>
             <KeyboardAwareScrollView bottomOffset={20} showsVerticalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm }}>
-              <Text style={s.sheetTitle}>{editing?.id ? "Modifica attrazione" : "Nuova attrazione"}</Text>
-              <Field value={editing?.name || ""} onChangeText={(v) => setEditing((e) => ({ ...e, name: v }))} placeholder="Nome attrazione" icon="map-marker" testID="f-name" />
+              <View style={s.sheetHead}>
+                <Text style={s.sheetTitle}>✏️ {editing?.id ? "Modifica attrazione" : "Nuova attrazione"}</Text>
+                <Pressable onPress={() => setEditing(null)} hitSlop={10} testID="poi-close">
+                  <Icon name="close" size={24} color={colors.muted} />
+                </Pressable>
+              </View>
+              {(editing?.to_verify ?? []).length ? (
+                <View style={s.verifyBanner}>
+                  <Text style={s.verifyBannerTxt}>
+                    ⚠️ {(editing?.to_verify ?? []).length} informazioni da verificare, segnate in arancione. Quando hai controllato tocca «Verificato».
+                  </Text>
+                </View>
+              ) : null}
+
+              {label("Nome attrazione")}
+              <Field value={editing?.name || ""} onChangeText={(v) => setEditing((e) => ({ ...e, name: v }))} placeholder="Nome attrazione" testID="f-name" />
+              <View style={s.row2}>
+                <View style={{ flex: 1 }}>
+                  {label("Città")}
+                  <Field value={editing?.town || ""} onChangeText={(v) => setEditing((e) => ({ ...e, town: v }))} placeholder="Comune" testID="f-town" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  {label("Provincia")}
+                  <ChipRow items={[{ key: "PA", label: "PA" }, { key: "TP", label: "TP" }]} selected={editing?.province || "PA"} onSelect={(k) => setEditing((e) => ({ ...e, province: k }))} />
+                </View>
+              </View>
+              {label("Categoria")}
               <ChipRow
-                items={[{ key: "art", label: "Arte" }, { key: "beach", label: "Spiaggia" }, { key: "nature", label: "Natura" }]}
+                items={[{ key: "art", label: "🏛️ Arte e cultura" }, { key: "beach", label: "🏖️ Spiagge" }, { key: "nature", label: "🌿 Natura" }]}
                 selected={editing?.category || "art"}
                 onSelect={(k) => setEditing((e) => ({ ...e, category: k as any }))}
               />
-              <View style={s.row2}>
-                <View style={{ flex: 1 }}>
-                  <Field value={editing?.lat != null ? String(editing.lat) : ""} onChangeText={(v) => setEditing((e) => ({ ...e, lat: v as any }))} placeholder="Latitudine" icon="latitude" keyboardType="numeric" testID="f-lat" />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Field value={editing?.lng != null ? String(editing.lng) : ""} onChangeText={(v) => setEditing((e) => ({ ...e, lng: v as any }))} placeholder="Longitudine" icon="longitude" keyboardType="numeric" testID="f-lng" />
-                </View>
-              </View>
-              <Text style={s.tip}>Tip: su Google Maps, click destro sul punto e copia i numeri (es. 38.0820, 13.2397).</Text>
-              <View style={s.row2}>
-                <View style={{ flex: 1 }}>
-                  <Field value={editing?.town || ""} onChangeText={(v) => setEditing((e) => ({ ...e, town: v }))} placeholder="Comune" icon="city" testID="f-town" />
-                </View>
-                <ChipRow items={[{ key: "PA", label: "PA" }, { key: "TP", label: "TP" }]} selected={editing?.province || "PA"} onSelect={(k) => setEditing((e) => ({ ...e, province: k }))} />
-              </View>
-              <Field value={editing?.description || ""} onChangeText={(v) => setEditing((e) => ({ ...e, description: v }))} placeholder="Descrizione breve" icon="text" multiline testID="f-desc" />
-              <View style={s.row2}>
-                <View style={{ flex: 1 }}><Field value={editing?.price || ""} onChangeText={(v) => setEditing((e) => ({ ...e, price: v }))} placeholder="Prezzo (es. €6)" icon="cash" testID="f-price" /></View>
-                <View style={{ flex: 1 }}><Field value={editing?.hours || ""} onChangeText={(v) => setEditing((e) => ({ ...e, hours: v }))} placeholder="Orari" icon="clock-outline" testID="f-hours" /></View>
-              </View>
-              <View style={s.row2}>
-                <View style={{ flex: 1 }}><Field value={editing?.duration || ""} onChangeText={(v) => setEditing((e) => ({ ...e, duration: v }))} placeholder="Durata (es. 2-3 ore)" icon="timer-sand" testID="f-duration" /></View>
-                <View style={{ flex: 1 }}><Field value={editing?.discount || ""} onChangeText={(v) => setEditing((e) => ({ ...e, discount: v }))} placeholder="Sconti" icon="sale" testID="f-discount" /></View>
-              </View>
-              <Field value={editing?.notes || ""} onChangeText={(v) => setEditing((e) => ({ ...e, notes: v }))} placeholder="Note (opzionale)" icon="information-outline" multiline testID="f-notes" />
-              <Field value={editing?.ticket_url || ""} onChangeText={(v) => setEditing((e) => ({ ...e, ticket_url: v }))} placeholder="Link biglietti (https://...)" icon="ticket-confirmation-outline" autoCapitalize="none" testID="f-ticket" />
-              <Field value={editing?.maps_url || ""} onChangeText={(v) => setEditing((e) => ({ ...e, maps_url: v }))} placeholder="Link Google Maps indicazioni" icon="directions" autoCapitalize="none" testID="f-maps" />
-              <Field value={editing?.image_url || ""} onChangeText={(v) => setEditing((e) => ({ ...e, image_url: v }))} placeholder="Link foto (https://...)" icon="image-outline" autoCapitalize="none" testID="f-image" />
+              <Pressable testID="f-must-see" onPress={() => setEditing((e) => ({ ...e, must_see: !e?.must_see }))} style={s.mustRow}>
+                <Icon name={editing?.must_see ? "checkbox-marked" : "checkbox-blank-outline"} size={24} color={colors.brandPrimary} />
+                <Text style={s.mustTxt}>⭐ Contrassegna come «Imperdibile»</Text>
+              </Pressable>
+
+              {vlabel("Descrizione", "description")}
+              <Field value={editing?.description || ""} onChangeText={(v) => setEditing((e) => ({ ...e, description: v }))} placeholder="Descrizione" multiline testID="f-desc" />
+              {vlabel("Orari di apertura", "hours")}
+              <Field value={editing?.hours || ""} onChangeText={(v) => setEditing((e) => ({ ...e, hours: v }))} placeholder="es. 9:00–19:00, chiuso lunedì" testID="f-hours" />
+              {vlabel("Durata consigliata", "duration")}
+              <Field value={editing?.duration || ""} onChangeText={(v) => setEditing((e) => ({ ...e, duration: v }))} placeholder="es. 2–3 ore" testID="f-duration" />
+              {vlabel("Prezzo / Biglietti", "price")}
+              <Field value={editing?.price || ""} onChangeText={(v) => setEditing((e) => ({ ...e, price: v }))} placeholder="es. €6 (ridotto €3)" testID="f-price" />
+              {vlabel("Sconti", "discount")}
+              <Field value={editing?.discount || ""} onChangeText={(v) => setEditing((e) => ({ ...e, discount: v }))} placeholder="es. gratis la 1ª domenica del mese" testID="f-discount" />
+              {vlabel("Come arrivare (mezzi)", "how_to")}
+              <Field value={editing?.how_to || ""} onChangeText={(v) => setEditing((e) => ({ ...e, how_to: v }))} placeholder="es. In auto da Trappeto circa 40 min" multiline testID="f-how-to" />
+              {vlabel("Consiglio / Nota", "notes")}
+              <Field value={editing?.notes || ""} onChangeText={(v) => setEditing((e) => ({ ...e, notes: v }))} placeholder="Un consiglio pratico per l'ospite" multiline testID="f-notes" />
+              {vlabel("Link biglietti (sito ufficiale)", "ticket_url")}
+              <Field value={editing?.ticket_url || ""} onChangeText={(v) => setEditing((e) => ({ ...e, ticket_url: v }))} placeholder="https://..." autoCapitalize="none" testID="f-ticket" />
+              {label("URL immagine")}
+              <Field value={editing?.image_url || ""} onChangeText={(v) => setEditing((e) => ({ ...e, image_url: v }))} placeholder="https://... oppure carica una foto" autoCapitalize="none" testID="f-image" />
               {editing?.image_url ? <Image source={{ uri: mediaUri(editing.image_url) }} style={s.preview} contentFit="cover" testID="f-image-preview" /> : null}
               <Button testID="f-image-upload" label={editing?.image_url ? "Cambia foto" : "Carica foto dal telefono"} icon="image-plus" variant="outline" onPress={uploadPhoto} loading={uploading} />
-              <Button testID="poi-save" label="Salva attrazione" icon="content-save" onPress={save} loading={busy} />
+              {label("Query Google Maps")}
+              <Field value={editing?.maps_query || ""} onChangeText={(v) => setEditing((e) => ({ ...e, maps_query: v }))} placeholder="es. Cattedrale di Palermo, Corso Vittorio Emanuele, Palermo" autoCapitalize="none" testID="f-maps-query" />
+              <Text style={s.tip}>Il tasto 📍 della scheda apre Google Maps con questa ricerca.</Text>
+              {label("Coordinate (latitudine, longitudine)")}
+              <View style={s.row2}>
+                <View style={{ flex: 1 }}>
+                  <Field value={editing?.lat != null ? String(editing.lat) : ""} onChangeText={(v) => setEditing((e) => ({ ...e, lat: v as any }))} placeholder="Latitudine" keyboardType="numeric" testID="f-lat" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Field value={editing?.lng != null ? String(editing.lng) : ""} onChangeText={(v) => setEditing((e) => ({ ...e, lng: v as any }))} placeholder="Longitudine" keyboardType="numeric" testID="f-lng" />
+                </View>
+              </View>
+              <View style={s.footer}>
+                <Pressable onPress={() => setEditing(null)} hitSlop={8} testID="poi-cancel">
+                  <Text style={s.cancel}>Annulla</Text>
+                </Pressable>
+                <View style={{ flex: 1 }}>
+                  <Button testID="poi-save" label="Salva attrazione" icon="content-save" onPress={save} loading={busy} />
+                </View>
+              </View>
             </KeyboardAwareScrollView>
           </Pressable>
         </Pressable>
@@ -301,5 +370,17 @@ const useStyles = makeStyles((c) => ({
   sheetTitle: { color: c.onSurface, fontSize: 20, fontFamily: fonts.heading, marginBottom: 4 },
   row2: { flexDirection: "row", gap: spacing.sm, alignItems: "center" },
   tip: { color: c.muted, fontSize: 11, fontFamily: fonts.body, marginTop: -2 },
+  sheetHead: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 4 },
+  label: { color: c.onSurface, fontSize: 13, fontWeight: "700", fontFamily: fonts.body, marginTop: 4 },
+  labelRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: spacing.sm, flexWrap: "wrap", marginTop: 4 },
+  verifyBtn: { backgroundColor: c.warning + "22", borderRadius: radius.pill, paddingHorizontal: 10, paddingVertical: 4 },
+  verifyBtnTxt: { color: c.warning, fontSize: 11, fontWeight: "700", fontFamily: fonts.body },
+  verifyBanner: { backgroundColor: c.warning + "18", borderRadius: radius.md, borderWidth: 1, borderColor: c.warning + "55", padding: spacing.sm },
+  verifyBannerTxt: { color: c.onSurface, fontSize: 13, lineHeight: 18, fontFamily: fonts.body },
+  verifyPill: { alignSelf: "flex-start", marginTop: 4, color: c.warning, fontSize: 11, fontWeight: "700", fontFamily: fonts.body },
+  mustRow: { flexDirection: "row", alignItems: "center", gap: spacing.sm, padding: spacing.sm, borderRadius: radius.md, backgroundColor: c.terracottaSoft, borderWidth: 1, borderColor: c.border },
+  mustTxt: { color: c.onSurface, fontSize: 14, fontWeight: "700", fontFamily: fonts.body },
+  footer: { flexDirection: "row", alignItems: "center", gap: spacing.lg, marginTop: spacing.sm },
+  cancel: { color: c.muted, fontSize: 15, fontWeight: "600", fontFamily: fonts.body },
   preview: { width: "100%", height: 160, borderRadius: radius.md, backgroundColor: c.surfaceTertiary },
 }));

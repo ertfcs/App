@@ -165,7 +165,7 @@ export default function InfoScreen() {
         <Card style={{ gap: spacing.sm }}>
           <View style={s.codeRow}>
             <View>
-              <Text style={s.codeLabel}>CIN · Codice Identificativo Nazionale</Text>
+              <Text style={s.codeLabel}>{t("ui.info.cin")}</Text>
               <Text style={s.codeVal} testID="cin-value">IT082074C2NA6HPQMB</Text>
             </View>
             <Icon name="shield-check-outline" size={20} color={colors.olive} />
@@ -173,7 +173,7 @@ export default function InfoScreen() {
           <View style={s.divider} />
           <View style={s.codeRow}>
             <View>
-              <Text style={s.codeLabel}>CIR · Codice Identificativo Regionale</Text>
+              <Text style={s.codeLabel}>{t("ui.info.cir")}</Text>
               <Text style={s.codeVal} testID="cir-value">19082074C252260</Text>
             </View>
             <Icon name="certificate-outline" size={20} color={colors.olive} />

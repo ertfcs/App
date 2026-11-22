@@ -55,8 +55,9 @@ export default function AdminDashboard() {
         { icon: "percent-outline", label: "Costi & tariffe", desc: "Commissioni Booking.com", route: "/admin/commissions" },
         { icon: "ticket-percent-outline", label: "Codici sconto", desc: "Sconti e sblocco mappa/IA", route: "/admin/discounts" },
         { icon: "image-multiple-outline", label: "Foto", desc: "Galleria pubblica e privata", route: "/admin/photos" },
-        { icon: "silverware-fork-knife", label: "Cucina Siciliana", desc: "Foto, ingredienti, curiosità", route: "/admin/food" },
-        { icon: "map-marker-multiple", label: "Mappa Interattiva", desc: "POI, coordinate, import/export", route: "/admin/map-pois" },
+        { icon: "silverware-fork-knife", label: "Guida culinaria", desc: "Piatti: foto, descrizione, ingredienti, curiosità", route: "/admin/food" },
+        { icon: "beach", label: "Spiagge", desc: "Foto, descrizione, servizi, parcheggio, venti", route: "/admin/beaches" },
+        { icon: "map-marker-multiple", label: "Attrazioni", desc: "Schede, foto, informazioni da verificare", route: "/admin/map-pois" },
       ],
     },
     {

@@ -12,6 +12,7 @@ import { fonts, radius, spacing } from "@/src/lib/typography";
 import { useAuth } from "@/src/lib/auth";
 import { api } from "@/src/lib/api";
 import { useDishes, MergedDish } from "@/src/lib/dishes";
+import { dishImageSource } from "@/src/components/GuestExamples";
 
 export default function AdminFood() {
   const s = useStyles();
@@ -43,7 +44,7 @@ export default function AdminFood() {
       onPress={() => router.push({ pathname: "/admin/food/[id]", params: { id: item.id } })}
     >
       <View style={s.thumb}>
-        {item.image ? <Image source={{ uri: item.image }} style={s.thumbImg} contentFit="cover" /> : <Text style={s.glyph}>{item.icon}</Text>}
+        {dishImageSource(item.id, item.image) ? <Image source={dishImageSource(item.id, item.image)} style={s.thumbImg} contentFit="cover" /> : <Text style={s.glyph}>{item.icon}</Text>}
       </View>
       <View style={{ flex: 1 }}>
         <Text style={s.name} numberOfLines={1}>{item.name || "—"}</Text>
@@ -56,7 +57,7 @@ export default function AdminFood() {
   return (
     <View style={s.screen}>
       <Header
-        title="Cucina · Gestione"
+        title="Guida culinaria"
         kicker="Admin"
         showBack
         showLang={false}

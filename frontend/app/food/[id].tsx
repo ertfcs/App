@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
+import { dishImageSource } from "@/src/components/GuestExamples";
 import { ScrollView, View, Text, Pressable } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,22 +12,24 @@ import { Icon } from "@/src/components/Icon";
 import { makeStyles, useTheme } from "@/src/theme";
 import { fonts, radius, spacing } from "@/src/lib/typography";
 import { culinaryData } from "@/src/lib/culinary";
-import { useDishes } from "@/src/lib/dishes";
+import { localizeDish, useDishes } from "@/src/lib/dishes";
 import { useFavorites } from "@/src/lib/favorites";
 
 export default function FoodDetail() {
+  const { t, i18n } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const s = useStyles();
   const { colors } = useTheme();
   const { isFav, toggle } = useFavorites();
   const dishes = useDishes();
-  const dish = (dishes.data ?? culinaryData).find((d) => d.id === id);
+  const found = (dishes.data ?? culinaryData).find((d) => d.id === id);
+  const dish = found ? localizeDish(found, i18n.language) : undefined;
 
   if (!dish) {
     return (
       <View style={s.screen}>
         <Header title="—" showBack showLang={false} />
-        <EmptyState icon="silverware-variant" title="Piatto non trovato" />
+        <EmptyState icon="silverware-variant" title={t("ui.dish.not_found")} />
       </View>
     );
   }
@@ -51,9 +55,9 @@ export default function FoodDetail() {
       />
       <ScrollView contentContainerStyle={{ paddingBottom: spacing.xxl }} showsVerticalScrollIndicator={false}>
         <View style={s.hero}>
-          {dish.image ? (
+          {dishImageSource(dish.id, (dish as { image?: string }).image) ? (
             <>
-              <Image source={{ uri: dish.image }} style={s.heroBg} contentFit="cover" transition={250} />
+              <Image source={dishImageSource(dish.id, (dish as { image?: string }).image)} style={s.heroBg} contentFit="cover" transition={250} />
               <LinearGradient colors={["rgba(44,42,40,0.15)", "rgba(44,42,40,0.55)"]} style={s.heroBg} />
             </>
           ) : (
@@ -72,7 +76,7 @@ export default function FoodDetail() {
           <Card style={{ marginTop: spacing.md }}>
             <View style={s.sectionHead}>
               <Icon name="silverware-fork-knife" size={20} color={colors.brand} />
-              <Text style={s.sectionTitle}>Il piatto tradizionale</Text>
+              <Text style={s.sectionTitle}>{t("ui.dish.traditional")}</Text>
             </View>
             <Text style={s.desc}>{dish.description}</Text>
           </Card>
@@ -80,7 +84,7 @@ export default function FoodDetail() {
           <Card style={{ marginTop: spacing.md }}>
             <View style={s.sectionHead}>
               <Icon name="basket-outline" size={20} color={colors.olive} />
-              <Text style={s.sectionTitle}>Ingredienti chiave</Text>
+              <Text style={s.sectionTitle}>{t("ui.dish.ingredients")}</Text>
             </View>
             <View style={{ gap: spacing.sm, marginTop: spacing.sm }}>
               {dish.ingredients.map((ing) => (
@@ -94,7 +98,7 @@ export default function FoodDetail() {
 
           <View style={s.funCard}>
             <Icon name="information-outline" size={20} color={colors.brand} />
-            <Text style={s.funLabel}>Curiosità per il turista</Text>
+            <Text style={s.funLabel}>{t("ui.dish.fun")}</Text>
             <Text style={s.funTxt}>“{dish.funFact}”</Text>
           </View>
         </View>

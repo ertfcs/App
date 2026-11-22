@@ -44,10 +44,17 @@ export function Header({
         <View style={s.rightRow}>
           {right}
           {showLang ? (
-            <Pressable testID="header-lang" onPress={() => setLangOpen(true)} style={s.langBtn} hitSlop={8}>
-              <Text style={s.flag}>
-                {SUPPORTED_LANGUAGES.find((l) => l.code === i18n.language)?.flag ?? "🌐"}
-              </Text>
+            <Pressable
+              testID="header-lang"
+              onPress={() => setLangOpen(true)}
+              style={s.langBtn}
+              hitSlop={8}
+              accessibilityRole="button"
+              accessibilityLabel={i18n.t("ui.lang.change")}
+            >
+              <Text style={s.flagSmall}>{SUPPORTED_LANGUAGES.find((l) => l.code === i18n.language)?.flag ?? "🌐"}</Text>
+              <Text style={s.langCode}>{(i18n.language || "it").slice(0, 2).toUpperCase()}</Text>
+              <Icon name="chevron-down" size={16} color={colors.onSurfaceSecondary} />
             </Pressable>
           ) : null}
         </View>
@@ -97,15 +104,19 @@ const useStyles = makeStyles((c) => ({
   title: { color: c.onSurface, fontSize: 24, fontFamily: fonts.heading },
   rightRow: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
   langBtn: {
-    width: 40,
     height: 40,
+    paddingLeft: 10,
+    paddingRight: 6,
     borderRadius: radius.pill,
     backgroundColor: c.surfaceTertiary,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    gap: 4,
     borderWidth: 1,
     borderColor: c.border,
   },
+  flagSmall: { fontSize: 18 },
+  langCode: { color: c.onSurface, fontSize: 13, fontWeight: "700", fontFamily: fonts.body, letterSpacing: 0.5 },
   flag: { fontSize: 20 },
   backdrop: { flex: 1, backgroundColor: "rgba(44,42,40,0.45)", justifyContent: "center", padding: spacing.lg },
   sheet: { backgroundColor: c.surfaceSecondary, borderRadius: radius.lg, padding: spacing.md, gap: 4 },

@@ -89,3 +89,8 @@ android-sdk/
 credentials.json
 *.key
 .credentials
+dev_preview/web-dist/
+dev_preview/data/
+backend/storage/
+!backend/.env.example
+dev_preview/artifact/out/
