@@ -10803,9 +10803,9 @@
                                 "attractionId": "bud-1",
                                 "mapQuery": "Széchenyi Thermal Bath, Állatkerti krt. 9-11, 1146 Budapest, Hungary",
                                 "startTime": "14:50",
-                                "durationMin": 220,
-                                "time": "14:50 - 18:30",
-                                "notes": "⚠️ Compra il biglietto online e porta le ciabatte. Fare il bagno all'aperto mentre scende il buio è il momento migliore.",
+                                "durationMin": 150,
+                                "time": "14:50 - 17:20",
+                                "notes": "⚠️ Compra il biglietto online e porta le ciabatte. Circa 2h30 in acqua: fare il bagno all'aperto mentre scende il buio è il momento migliore.",
                                 "transitFromPrev": "Circa 8 min a piedi attraverso il parco Városliget",
                                 "travelMinFromPrev": 8,
                                 "isTransit": false
@@ -10814,9 +10814,9 @@
                                 "id": "v2-28-8",
                                 "name": "Pista di pattinaggio di Városliget e Hősök tere illuminata",
                                 "mapQuery": "Városligeti Műjégpálya, Olof Palme sétány 5, 1146 Budapest, Hungary",
-                                "startTime": "18:35",
+                                "startTime": "17:25",
                                 "durationMin": 40,
-                                "time": "18:35 - 19:15",
+                                "time": "17:25 - 18:05",
                                 "notes": "Si guarda dall'esterno.",
                                 "transitFromPrev": "Pochi passi dalle Terme",
                                 "travelMinFromPrev": 3,
@@ -10826,12 +10826,25 @@
                                 "id": "v2-28-9",
                                 "name": "🍽️ Cena da Paprika Vendéglő",
                                 "mapQuery": "Paprika Vendéglő, Dózsa György út 72, 1071 Budapest, Hungary",
-                                "startTime": "19:30",
+                                "startTime": "18:20",
                                 "durationMin": 75,
-                                "time": "19:30 - 20:45",
-                                "notes": "⚠️ Prenota. 🏨 Rientro (circa 25 min): 8 min a piedi a Hősök tere, M1 ➔ Bajcsy-Zsilinszky út, 5 min a piedi. Stasera prepara le valigie.",
+                                "time": "18:20 - 19:35",
+                                "notes": "⚠️ Prenota per le 18:30 circa: dopo le terme arriva la fame, e così resta tempo per il dolce al New York Café.",
                                 "transitFromPrev": "Circa 10 min a piedi",
                                 "travelMinFromPrev": 10,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-10",
+                                "name": "☕ Dolce al New York Café",
+                                "attractionId": "bud-13",
+                                "mapQuery": "New York Café, Erzsébet krt. 9-11, 1073 Budapest, Hungary",
+                                "startTime": "20:00",
+                                "durationMin": 60,
+                                "time": "20:00 - 21:00",
+                                "notes": "Il caffè più famoso di Budapest, tra stucchi dorati e lampadari. ⚠️ Prenota il tavolo online, altrimenti c'è fila all'ingresso. 🏨 Rientro a piedi in circa 12 minuti fino a Király utca 26. Stasera prepara le valigie.",
+                                "transitFromPrev": "M1 Hősök tere ➔ Oktogon (3 fermate) • tram 4 o 6 ➔ Wesselényi utca/Erzsébet körút (2 fermate) • 1 min a piedi",
+                                "travelMinFromPrev": 25,
                                 "isTransit": false
                         }
                 ]
@@ -11021,8 +11034,8 @@
         },
         {
                 "id": "chk-v2-10",
-                "label": "🏛️ Parlamento del 28 (09:15 circa), Terme Széchenyi e Paprika Vendéglő",
-                "tip": "Presentati al centro visitatori 15 minuti prima",
+                "label": "🏛️ Parlamento del 28 (09:15 circa), Terme Széchenyi, Paprika Vendéglő (18:30) e New York Café (20:00)",
+                "tip": "Al Parlamento presentati al centro visitatori 15 minuti prima; al New York Café prenota il tavolo online",
                 "done": false
         },
         {
@@ -11122,6 +11135,25 @@
                 saveState();
             } catch (e) {
                 console.warn('Errore aggiornamento itinerario:', e);
+            }
+        }
+
+        // Aggiornamento mirato una tantum: giornata del 28 (terme piu' corte, New York Cafe').
+        // Sostituisce solo quel giorno e la relativa voce di checklist, il resto resta com'e'.
+        const PATCH_28_NYC_KEY = 'tour_natale_2026_patch_28_nyc';
+        function applyPatch28NewYorkCafeOnce() {
+            try {
+                if (localStorage.getItem(PATCH_28_NYC_KEY) === '1') return;
+                const defDay = DEFAULT_ITINERARY.find(d => String(d.dayTitle).includes('28 Dicembre'));
+                const idx = state.itinerary.findIndex(d => d && String(d.dayTitle).includes('28 Dicembre'));
+                if (defDay && idx >= 0) state.itinerary[idx] = JSON.parse(JSON.stringify(defDay));
+                const defChk = DEFAULT_CHECKLIST.find(c => c.id === 'chk-v2-10');
+                const chk = state.checklist.find(c => c && c.id === 'chk-v2-10');
+                if (defChk && chk) { chk.label = defChk.label; chk.tip = defChk.tip; }
+                localStorage.setItem(PATCH_28_NYC_KEY, '1');
+                saveState();
+            } catch (e) {
+                console.warn('Errore aggiornamento giornata 28:', e);
             }
         }
 
@@ -12970,6 +13002,7 @@
                 loadState();
                 syncDefaultImagesOnce();
                 applyItineraryV2Once();
+                applyPatch28NewYorkCafeOnce();
                 renderOverview();
                 renderTipsChecklist();
                 filterAttractions();
