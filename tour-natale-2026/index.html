@@ -6,7 +6,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
+        if (window.tailwind) tailwind.config = {
             theme: {
                 extend: {
                     colors: {
@@ -48,6 +48,9 @@
     <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
     <style data-keep="1">
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+        body { overflow-x: clip; }
+        .no-scrollbar { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
         html {
             font-size: 16.5px;
         }
@@ -76,15 +79,15 @@
             #section-itinerary { display: block !important; }
         }
     </style>
-<style data-keep="1">*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Plus Jakarta Sans", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.bottom-5{bottom:1.25rem}.right-0{right:0px}.right-5{right:1.25rem}.top-0{top:0px}.bottom-2{bottom:0.5rem}.left-2{left:0.5rem}.left-3{left:0.75rem}.right-3{right:0.75rem}.top-2{top:0.5rem}.top-3{top:0.75rem}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.mx-1\.5{margin-left:0.375rem;margin-right:0.375rem}.mb-1{margin-bottom:0.25rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:0.25rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.ml-4{margin-left:1rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[16\/10\]{aspect-ratio:16/10}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-56{height:14rem}.h-9{height:2.25rem}.h-11{height:2.75rem}.h-48{height:12rem}.h-6{height:1.5rem}.h-full{height:100%}.h-7{height:1.75rem}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.w-20{width:5rem}.w-24{width:6rem}.w-3\.5{width:0.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-72{width:18rem}.w-9{width:2.25rem}.w-full{width:100%}.w-11{width:2.75rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.min-w-0{min-width:0px}.max-w-7xl{max-width:80rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-24{--tw-translate-y:6rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.select-all{-webkit-user-select:all;user-select:all}.resize-none{resize:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-tortora-200 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(229 221 210 / var(--tw-divide-opacity, 1))}.divide-tortora-800\/60 > :not([hidden]) ~ :not([hidden]){border-color:rgb(86 74 63 / 0.6)}.self-end{align-self:flex-end}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded-md{border-radius:0.375rem}.rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-0{border-bottom-width:0px}.border-l-2{border-left-width:2px}.border-dashed{border-style:dashed}.border-terracotta-200{--tw-border-opacity:1;border-color:rgb(244 207 192 / var(--tw-border-opacity, 1))}.border-terracotta-300\/30{border-color:rgb(234 174 150 / 0.3)}.border-terracotta-400\/30{border-color:rgb(220 133 102 / 0.3)}.border-terracotta-400\/40{border-color:rgb(220 133 102 / 0.4)}.border-terracotta-500\/30{border-color:rgb(196 109 78 / 0.3)}.border-terracotta-500\/40{border-color:rgb(196 109 78 / 0.4)}.border-tortora-200{--tw-border-opacity:1;border-color:rgb(229 221 210 / var(--tw-border-opacity, 1))}.border-tortora-200\/80{border-color:rgb(229 221 210 / 0.8)}.border-tortora-300{--tw-border-opacity:1;border-color:rgb(211 198 182 / var(--tw-border-opacity, 1))}.border-tortora-600{--tw-border-opacity:1;border-color:rgb(130 113 96 / var(--tw-border-opacity, 1))}.border-tortora-700{--tw-border-opacity:1;border-color:rgb(106 91 77 / var(--tw-border-opacity, 1))}.border-tortora-700\/50{border-color:rgb(106 91 77 / 0.5)}.border-tortora-700\/60{border-color:rgb(106 91 77 / 0.6)}.border-tortora-800{--tw-border-opacity:1;border-color:rgb(86 74 63 / var(--tw-border-opacity, 1))}.border-tortora-800\/80{border-color:rgb(86 74 63 / 0.8)}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.border-emerald-300\/60{border-color:rgb(110 231 183 / 0.6)}.border-emerald-300\/90{border-color:rgb(110 231 183 / 0.9)}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.border-terracotta-200\/80{border-color:rgb(244 207 192 / 0.8)}.border-terracotta-200\/90{border-color:rgb(244 207 192 / 0.9)}.border-terracotta-400{--tw-border-opacity:1;border-color:rgb(220 133 102 / var(--tw-border-opacity, 1))}.border-tortora-200\/70{border-color:rgb(229 221 210 / 0.7)}.bg-terracotta-100{--tw-bg-opacity:1;background-color:rgb(250 232 224 / var(--tw-bg-opacity, 1))}.bg-terracotta-50{--tw-bg-opacity:1;background-color:rgb(253 246 243 / var(--tw-bg-opacity, 1))}.bg-terracotta-50\/70{background-color:rgb(253 246 243 / 0.7)}.bg-terracotta-500{--tw-bg-opacity:1;background-color:rgb(196 109 78 / var(--tw-bg-opacity, 1))}.bg-terracotta-500\/20{background-color:rgb(196 109 78 / 0.2)}.bg-terracotta-500\/30{background-color:rgb(196 109 78 / 0.3)}.bg-tortora-100{--tw-bg-opacity:1;background-color:rgb(242 237 230 / var(--tw-bg-opacity, 1))}.bg-tortora-100\/80{background-color:rgb(242 237 230 / 0.8)}.bg-tortora-200{--tw-bg-opacity:1;background-color:rgb(229 221 210 / var(--tw-bg-opacity, 1))}.bg-tortora-50{--tw-bg-opacity:1;background-color:rgb(249 247 244 / var(--tw-bg-opacity, 1))}.bg-tortora-700{--tw-bg-opacity:1;background-color:rgb(106 91 77 / var(--tw-bg-opacity, 1))}.bg-tortora-800{--tw-bg-opacity:1;background-color:rgb(86 74 63 / var(--tw-bg-opacity, 1))}.bg-tortora-800\/80{background-color:rgb(86 74 63 / 0.8)}.bg-tortora-900{--tw-bg-opacity:1;background-color:rgb(70 60 52 / var(--tw-bg-opacity, 1))}.bg-tortora-900\/90{background-color:rgb(70 60 52 / 0.9)}.bg-tortora-950{--tw-bg-opacity:1;background-color:rgb(46 39 34 / var(--tw-bg-opacity, 1))}.bg-tortora-950\/50{background-color:rgb(46 39 34 / 0.5)}.bg-tortora-950\/60{background-color:rgb(46 39 34 / 0.6)}.bg-tortora-950\/75{background-color:rgb(46 39 34 / 0.75)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/80{background-color:rgb(236 253 245 / 0.8)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-terracotta-600{--tw-bg-opacity:1;background-color:rgb(168 84 56 / var(--tw-bg-opacity, 1))}.bg-tortora-950\/85{background-color:rgb(46 39 34 / 0.85)}.bg-white\/80{background-color:rgb(255 255 255 / 0.8)}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-terracotta-900\/60{background-color:rgb(88 44 31 / 0.6)}.bg-tortora-900\/70{background-color:rgb(70 60 52 / 0.7)}.bg-tortora-950\/80{background-color:rgb(46 39 34 / 0.8)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-terracotta-400{--tw-gradient-from:#DC8566 var(--tw-gradient-from-position);--tw-gradient-to:rgb(220 133 102 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-tortora-900{--tw-gradient-from:#463C34 var(--tw-gradient-from-position);--tw-gradient-to:rgb(70 60 52 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-tortora-950{--tw-gradient-from:#2E2722 var(--tw-gradient-from-position);--tw-gradient-to:rgb(46 39 34 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-terracotta-50{--tw-gradient-from:#FDF6F3 var(--tw-gradient-from-position);--tw-gradient-to:rgb(253 246 243 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-tortora-800{--tw-gradient-to:rgb(86 74 63 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #564A3F var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-tortora-900{--tw-gradient-to:rgb(70 60 52 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #463C34 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-terracotta-600{--tw-gradient-to:#A85438 var(--tw-gradient-to-position)}.to-terracotta-900{--tw-gradient-to:#582C1F var(--tw-gradient-to-position)}.to-tortora-100\/90{--tw-gradient-to:rgb(242 237 230 / 0.9) var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.object-center{object-position:center}.p-1\.5{padding:0.375rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-7{padding-top:1.75rem;padding-bottom:1.75rem}.pb-2{padding-bottom:0.5rem}.pb-3{padding-bottom:0.75rem}.pb-3\.5{padding-bottom:0.875rem}.pb-4{padding-bottom:1rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.pb-0{padding-bottom:0px}.pb-5{padding-bottom:1.25rem}.pl-4{padding-left:1rem}.pt-0\.5{padding-top:0.125rem}.pb-2\.5{padding-bottom:0.625rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:"Plus Jakarta Sans", sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.leading-snug{line-height:1.375}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-tortora-900{--tw-text-opacity:1;color:rgb(70 60 52 / var(--tw-text-opacity, 1))}.text-terracotta-200{--tw-text-opacity:1;color:rgb(244 207 192 / var(--tw-text-opacity, 1))}.text-terracotta-300{--tw-text-opacity:1;color:rgb(234 174 150 / var(--tw-text-opacity, 1))}.text-terracotta-400{--tw-text-opacity:1;color:rgb(220 133 102 / var(--tw-text-opacity, 1))}.text-terracotta-600{--tw-text-opacity:1;color:rgb(168 84 56 / var(--tw-text-opacity, 1))}.text-terracotta-700{--tw-text-opacity:1;color:rgb(138 66 43 / var(--tw-text-opacity, 1))}.text-terracotta-800{--tw-text-opacity:1;color:rgb(110 53 36 / var(--tw-text-opacity, 1))}.text-terracotta-900{--tw-text-opacity:1;color:rgb(88 44 31 / var(--tw-text-opacity, 1))}.text-tortora-100{--tw-text-opacity:1;color:rgb(242 237 230 / var(--tw-text-opacity, 1))}.text-tortora-200{--tw-text-opacity:1;color:rgb(229 221 210 / var(--tw-text-opacity, 1))}.text-tortora-300{--tw-text-opacity:1;color:rgb(211 198 182 / var(--tw-text-opacity, 1))}.text-tortora-400{--tw-text-opacity:1;color:rgb(184 168 149 / var(--tw-text-opacity, 1))}.text-tortora-50{--tw-text-opacity:1;color:rgb(249 247 244 / var(--tw-text-opacity, 1))}.text-tortora-500{--tw-text-opacity:1;color:rgb(155 138 119 / var(--tw-text-opacity, 1))}.text-tortora-600{--tw-text-opacity:1;color:rgb(130 113 96 / var(--tw-text-opacity, 1))}.text-tortora-700{--tw-text-opacity:1;color:rgb(106 91 77 / var(--tw-text-opacity, 1))}.text-tortora-800{--tw-text-opacity:1;color:rgb(86 74 63 / var(--tw-text-opacity, 1))}.text-tortora-950{--tw-text-opacity:1;color:rgb(46 39 34 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-emerald-950{--tw-text-opacity:1;color:rgb(2 44 34 / var(--tw-text-opacity, 1))}.accent-terracotta-500{accent-color:#C46D4E}.opacity-0{opacity:0}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-emerald-500\/80{--tw-ring-color:rgb(16 185 129 / 0.8)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.selection\:bg-terracotta-200 *::selection{--tw-bg-opacity:1;background-color:rgb(244 207 192 / var(--tw-bg-opacity, 1))}.selection\:text-tortora-950 *::selection{--tw-text-opacity:1;color:rgb(46 39 34 / var(--tw-text-opacity, 1))}.selection\:bg-terracotta-200::selection{--tw-bg-opacity:1;background-color:rgb(244 207 192 / var(--tw-bg-opacity, 1))}.selection\:text-tortora-950::selection{--tw-text-opacity:1;color:rgb(46 39 34 / var(--tw-text-opacity, 1))}.placeholder\:text-tortora-400::placeholder{--tw-text-opacity:1;color:rgb(184 168 149 / var(--tw-text-opacity, 1))}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-terracotta-300:hover{--tw-border-opacity:1;border-color:rgb(234 174 150 / var(--tw-border-opacity, 1))}.hover\:bg-terracotta-200:hover{--tw-bg-opacity:1;background-color:rgb(244 207 192 / var(--tw-bg-opacity, 1))}.hover\:bg-terracotta-400:hover{--tw-bg-opacity:1;background-color:rgb(220 133 102 / var(--tw-bg-opacity, 1))}.hover\:bg-terracotta-500\/30:hover{background-color:rgb(196 109 78 / 0.3)}.hover\:bg-terracotta-600:hover{--tw-bg-opacity:1;background-color:rgb(168 84 56 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-100:hover{--tw-bg-opacity:1;background-color:rgb(242 237 230 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-300:hover{--tw-bg-opacity:1;background-color:rgb(211 198 182 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-600:hover{--tw-bg-opacity:1;background-color:rgb(130 113 96 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-700:hover{--tw-bg-opacity:1;background-color:rgb(106 91 77 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-800:hover{--tw-bg-opacity:1;background-color:rgb(86 74 63 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-800\/70:hover{background-color:rgb(86 74 63 / 0.7)}.hover\:bg-tortora-950:hover{--tw-bg-opacity:1;background-color:rgb(46 39 34 / var(--tw-bg-opacity, 1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-terracotta-100:hover{--tw-bg-opacity:1;background-color:rgb(250 232 224 / var(--tw-bg-opacity, 1))}.hover\:bg-terracotta-700:hover{--tw-bg-opacity:1;background-color:rgb(138 66 43 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-200:hover{--tw-bg-opacity:1;background-color:rgb(229 221 210 / var(--tw-bg-opacity, 1))}.hover\:bg-terracotta-900:hover{--tw-bg-opacity:1;background-color:rgb(88 44 31 / var(--tw-bg-opacity, 1))}.hover\:bg-tortora-800\/40:hover{background-color:rgb(86 74 63 / 0.4)}.hover\:bg-tortora-900:hover{--tw-bg-opacity:1;background-color:rgb(70 60 52 / var(--tw-bg-opacity, 1))}.hover\:text-terracotta-200:hover{--tw-text-opacity:1;color:rgb(244 207 192 / var(--tw-text-opacity, 1))}.hover\:text-tortora-800:hover{--tw-text-opacity:1;color:rgb(86 74 63 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-terracotta-800:hover{--tw-text-opacity:1;color:rgb(110 53 36 / var(--tw-text-opacity, 1))}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.focus\:border-terracotta-400:focus{--tw-border-opacity:1;border-color:rgb(220 133 102 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-terracotta-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(220 133 102 / var(--tw-ring-opacity, 1))}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:col-span-2{grid-column:span 2 / span 2}.sm\:col-span-3{grid-column:span 3 / span 3}.sm\:ml-8{margin-left:2rem}.sm\:inline{display:inline}.sm\:w-48{width:12rem}.sm\:w-auto{width:auto}.sm\:flex-none{flex:none}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-start{align-items:flex-start}.sm\:items-center{align-items:center}.sm\:space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.sm\:space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.sm\:self-start{align-self:flex-start}.sm\:p-5{padding:1.25rem}.sm\:p-6{padding:1.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}@media (min-width: 768px){.md\:inline{display:inline}.md\:w-auto{width:auto}.md\:w-64{width:16rem}.md\:flex-none{flex:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:items-stretch{align-items:stretch}.md\:pb-3\.5{padding-bottom:0.875rem}.md\:pr-0{padding-right:0px}}@media (min-width: 1024px){.lg\:w-auto{width:auto}.lg\:w-72{width:18rem}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.lg\:flex-row{flex-direction:row}.lg\:items-center{align-items:center}.lg\:px-8{padding-left:2rem;padding-right:2rem}}</style></head>
+<style data-keep="1" id="tw-precompiled">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Plus Jakarta Sans,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.\!container{width:100%!important}.container{width:100%}@media (min-width:640px){.\!container{max-width:640px!important}.container{max-width:640px}}@media (min-width:768px){.\!container{max-width:768px!important}.container{max-width:768px}}@media (min-width:1024px){.\!container{max-width:1024px!important}.container{max-width:1024px}}@media (min-width:1280px){.\!container{max-width:1280px!important}.container{max-width:1280px}}@media (min-width:1536px){.\!container{max-width:1536px!important}.container{max-width:1536px}}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.bottom-2{bottom:.5rem}.bottom-5{bottom:1.25rem}.left-2{left:.5rem}.left-3{left:.75rem}.right-0{right:0}.right-3{right:.75rem}.right-5{right:1.25rem}.top-0{top:0}.top-2{top:.5rem}.top-3{top:.75rem}.z-50{z-index:50}.col-span-full{grid-column:1/-1}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-1\.5{margin-left:.375rem;margin-right:.375rem}.mx-auto{margin-left:auto;margin-right:auto}.my-2{margin-top:.5rem;margin-bottom:.5rem}.mb-1{margin-bottom:.25rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:.25rem}.ml-4{margin-left:1rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.block{display:block}.inline{display:inline}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.\!grid{display:grid!important}.grid{display:grid}.hidden{display:none}.aspect-\[16\/10\]{aspect-ratio:16/10}.h-11{height:2.75rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-48{height:12rem}.h-5{height:1.25rem}.h-56{height:14rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-9{height:2.25rem}.h-full{height:100%}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.w-11{width:2.75rem}.w-20{width:5rem}.w-24{width:6rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-72{width:18rem}.w-9{width:2.25rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-7xl{max-width:80rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.translate-y-24{--tw-translate-y:6rem}.transform,.translate-y-24{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.select-all{-webkit-user-select:all;-moz-user-select:all;user-select:all}.resize-none{resize:none}.resize{resize:both}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-y-2{row-gap:.5rem}.space-x-1>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.25rem*var(--tw-space-x-reverse));margin-left:calc(.25rem*(1 - var(--tw-space-x-reverse)))}.space-x-1\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.375rem*var(--tw-space-x-reverse));margin-left:calc(.375rem*(1 - var(--tw-space-x-reverse)))}.space-x-2>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.5rem*var(--tw-space-x-reverse));margin-left:calc(.5rem*(1 - var(--tw-space-x-reverse)))}.space-x-3>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.75rem*var(--tw-space-x-reverse));margin-left:calc(.75rem*(1 - var(--tw-space-x-reverse)))}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-1\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.375rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.375rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-2\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.625rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.625rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.divide-y>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}.divide-tortora-200>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(229 221 210/var(--tw-divide-opacity,1))}.divide-tortora-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgb(86 74 63/var(--tw-divide-opacity,1))}.divide-tortora-800\/60>:not([hidden])~:not([hidden]){border-color:rgba(86,74,63,.6)}.self-end{align-self:flex-end}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-md{border-radius:.375rem}.rounded-xl{border-radius:.75rem}.rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-0{border-bottom-width:0}.border-l-2{border-left-width:2px}.border-dashed{border-style:dashed}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208/var(--tw-border-opacity,1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183/var(--tw-border-opacity,1))}.border-emerald-300\/60{border-color:rgba(110,231,183,.6)}.border-emerald-300\/90{border-color:rgba(110,231,183,.9)}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153/var(--tw-border-opacity,1))}.border-terracotta-200{--tw-border-opacity:1;border-color:rgb(244 207 192/var(--tw-border-opacity,1))}.border-terracotta-200\/80{border-color:hsla(17,70%,85%,.8)}.border-terracotta-200\/90{border-color:hsla(17,70%,85%,.9)}.border-terracotta-300{--tw-border-opacity:1;border-color:rgb(234 174 150/var(--tw-border-opacity,1))}.border-terracotta-300\/30{border-color:hsla(17,67%,75%,.3)}.border-terracotta-400{--tw-border-opacity:1;border-color:rgb(220 133 102/var(--tw-border-opacity,1))}.border-terracotta-400\/30{border-color:hsla(16,63%,63%,.3)}.border-terracotta-400\/40{border-color:hsla(16,63%,63%,.4)}.border-terracotta-500{--tw-border-opacity:1;border-color:rgb(196 109 78/var(--tw-border-opacity,1))}.border-terracotta-500\/30{border-color:rgba(196,109,78,.3)}.border-terracotta-500\/40{border-color:rgba(196,109,78,.4)}.border-tortora-200{--tw-border-opacity:1;border-color:rgb(229 221 210/var(--tw-border-opacity,1))}.border-tortora-200\/70{border-color:hsla(35,27%,86%,.7)}.border-tortora-200\/80{border-color:hsla(35,27%,86%,.8)}.border-tortora-300{--tw-border-opacity:1;border-color:rgb(211 198 182/var(--tw-border-opacity,1))}.border-tortora-600{--tw-border-opacity:1;border-color:rgb(130 113 96/var(--tw-border-opacity,1))}.border-tortora-700{--tw-border-opacity:1;border-color:rgb(106 91 77/var(--tw-border-opacity,1))}.border-tortora-700\/50{border-color:rgba(106,91,77,.5)}.border-tortora-700\/60{border-color:rgba(106,91,77,.6)}.border-tortora-800{--tw-border-opacity:1;border-color:rgb(86 74 63/var(--tw-border-opacity,1))}.border-tortora-800\/80{border-color:rgba(86,74,63,.8)}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229/var(--tw-bg-opacity,1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245/var(--tw-bg-opacity,1))}.bg-emerald-50\/80{background-color:rgba(236,253,245,.8)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105/var(--tw-bg-opacity,1))}.bg-terracotta-100{--tw-bg-opacity:1;background-color:rgb(250 232 224/var(--tw-bg-opacity,1))}.bg-terracotta-200{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.bg-terracotta-50{--tw-bg-opacity:1;background-color:rgb(253 246 243/var(--tw-bg-opacity,1))}.bg-terracotta-50\/70{background-color:hsla(18,71%,97%,.7)}.bg-terracotta-500{--tw-bg-opacity:1;background-color:rgb(196 109 78/var(--tw-bg-opacity,1))}.bg-terracotta-500\/20{background-color:rgba(196,109,78,.2)}.bg-terracotta-500\/30{background-color:rgba(196,109,78,.3)}.bg-terracotta-600{--tw-bg-opacity:1;background-color:rgb(168 84 56/var(--tw-bg-opacity,1))}.bg-terracotta-900{--tw-bg-opacity:1;background-color:rgb(88 44 31/var(--tw-bg-opacity,1))}.bg-terracotta-900\/60{background-color:rgba(88,44,31,.6)}.bg-tortora-100{--tw-bg-opacity:1;background-color:rgb(242 237 230/var(--tw-bg-opacity,1))}.bg-tortora-100\/70{background-color:hsla(35,32%,93%,.7)}.bg-tortora-100\/80{background-color:hsla(35,32%,93%,.8)}.bg-tortora-200{--tw-bg-opacity:1;background-color:rgb(229 221 210/var(--tw-bg-opacity,1))}.bg-tortora-50{--tw-bg-opacity:1;background-color:rgb(249 247 244/var(--tw-bg-opacity,1))}.bg-tortora-50\/60{background-color:hsla(36,29%,97%,.6)}.bg-tortora-700{--tw-bg-opacity:1;background-color:rgb(106 91 77/var(--tw-bg-opacity,1))}.bg-tortora-800{--tw-bg-opacity:1;background-color:rgb(86 74 63/var(--tw-bg-opacity,1))}.bg-tortora-800\/80{background-color:rgba(86,74,63,.8)}.bg-tortora-900{--tw-bg-opacity:1;background-color:rgb(70 60 52/var(--tw-bg-opacity,1))}.bg-tortora-900\/70{background-color:rgba(70,60,52,.7)}.bg-tortora-900\/80{background-color:rgba(70,60,52,.8)}.bg-tortora-900\/90{background-color:rgba(70,60,52,.9)}.bg-tortora-950{--tw-bg-opacity:1;background-color:rgb(46 39 34/var(--tw-bg-opacity,1))}.bg-tortora-950\/50{background-color:rgba(46,39,34,.5)}.bg-tortora-950\/60{background-color:rgba(46,39,34,.6)}.bg-tortora-950\/75{background-color:rgba(46,39,34,.75)}.bg-tortora-950\/80{background-color:rgba(46,39,34,.8)}.bg-tortora-950\/85{background-color:rgba(46,39,34,.85)}.bg-tortora-950\/90{background-color:rgba(46,39,34,.9)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/80{background-color:hsla(0,0%,100%,.8)}.bg-white\/90{background-color:hsla(0,0%,100%,.9)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.from-terracotta-400{--tw-gradient-from:#dc8566 var(--tw-gradient-from-position);--tw-gradient-to:hsla(16,63%,63%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-terracotta-50{--tw-gradient-from:#fdf6f3 var(--tw-gradient-from-position);--tw-gradient-to:hsla(18,71%,97%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-tortora-900{--tw-gradient-from:#463c34 var(--tw-gradient-from-position);--tw-gradient-to:rgba(70,60,52,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-tortora-950{--tw-gradient-from:#2e2722 var(--tw-gradient-from-position);--tw-gradient-to:rgba(46,39,34,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-tortora-800{--tw-gradient-to:rgba(86,74,63,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#564a3f var(--tw-gradient-via-position),var(--tw-gradient-to)}.via-tortora-900{--tw-gradient-to:rgba(70,60,52,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#463c34 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-terracotta-600{--tw-gradient-to:#a85438 var(--tw-gradient-to-position)}.to-terracotta-900{--tw-gradient-to:#582c1f var(--tw-gradient-to-position)}.to-tortora-100{--tw-gradient-to:#f2ede6 var(--tw-gradient-to-position)}.to-tortora-100\/90{--tw-gradient-to:hsla(35,32%,93%,.9) var(--tw-gradient-to-position)}.object-cover{-o-object-fit:cover;object-fit:cover}.object-center{-o-object-position:center;object-position:center}.p-1{padding:.25rem}.p-1\.5{padding:.375rem}.p-2{padding:.5rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-0{padding-top:0;padding-bottom:0}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-7{padding-top:1.75rem;padding-bottom:1.75rem}.pb-0{padding-bottom:0}.pb-2{padding-bottom:.5rem}.pb-2\.5{padding-bottom:.625rem}.pb-3{padding-bottom:.75rem}.pb-3\.5{padding-bottom:.875rem}.pb-4{padding-bottom:1rem}.pb-5{padding-bottom:1.25rem}.pl-4{padding-left:1rem}.pt-0{padding-top:0}.pt-0\.5{padding-top:.125rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.font-sans{font-family:Plus Jakarta Sans,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.tracking-wider{letter-spacing:.05em}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70/var(--tw-text-opacity,1))}.text-emerald-950{--tw-text-opacity:1;color:rgb(2 44 34/var(--tw-text-opacity,1))}.text-terracotta-200{--tw-text-opacity:1;color:rgb(244 207 192/var(--tw-text-opacity,1))}.text-terracotta-300{--tw-text-opacity:1;color:rgb(234 174 150/var(--tw-text-opacity,1))}.text-terracotta-400{--tw-text-opacity:1;color:rgb(220 133 102/var(--tw-text-opacity,1))}.text-terracotta-600{--tw-text-opacity:1;color:rgb(168 84 56/var(--tw-text-opacity,1))}.text-terracotta-700{--tw-text-opacity:1;color:rgb(138 66 43/var(--tw-text-opacity,1))}.text-terracotta-800{--tw-text-opacity:1;color:rgb(110 53 36/var(--tw-text-opacity,1))}.text-terracotta-900{--tw-text-opacity:1;color:rgb(88 44 31/var(--tw-text-opacity,1))}.text-tortora-100{--tw-text-opacity:1;color:rgb(242 237 230/var(--tw-text-opacity,1))}.text-tortora-200{--tw-text-opacity:1;color:rgb(229 221 210/var(--tw-text-opacity,1))}.text-tortora-300{--tw-text-opacity:1;color:rgb(211 198 182/var(--tw-text-opacity,1))}.text-tortora-400{--tw-text-opacity:1;color:rgb(184 168 149/var(--tw-text-opacity,1))}.text-tortora-50{--tw-text-opacity:1;color:rgb(249 247 244/var(--tw-text-opacity,1))}.text-tortora-500{--tw-text-opacity:1;color:rgb(155 138 119/var(--tw-text-opacity,1))}.text-tortora-600{--tw-text-opacity:1;color:rgb(130 113 96/var(--tw-text-opacity,1))}.text-tortora-700{--tw-text-opacity:1;color:rgb(106 91 77/var(--tw-text-opacity,1))}.text-tortora-800{--tw-text-opacity:1;color:rgb(86 74 63/var(--tw-text-opacity,1))}.text-tortora-900{--tw-text-opacity:1;color:rgb(70 60 52/var(--tw-text-opacity,1))}.text-tortora-950{--tw-text-opacity:1;color:rgb(46 39 34/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.line-through{text-decoration-line:line-through}.accent-terracotta-500{accent-color:#c46d4e}.opacity-0{opacity:0}.opacity-75{opacity:.75}.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color)}.shadow,.shadow-2xl{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgba(0,0,0,.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color)}.shadow-inner,.shadow-lg{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-md,.shadow-sm{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-emerald-500{--tw-ring-opacity:1;--tw-ring-color:rgb(16 185 129/var(--tw-ring-opacity,1))}.ring-emerald-500\/80{--tw-ring-color:rgba(16,185,129,.8)}.blur{--tw-blur:blur(8px)}.blur,.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px)}.backdrop-blur-md,.backdrop-blur-sm{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.selection\:bg-terracotta-200 ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.selection\:bg-terracotta-200 ::selection{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.selection\:text-tortora-950 ::-moz-selection{--tw-text-opacity:1;color:rgb(46 39 34/var(--tw-text-opacity,1))}.selection\:text-tortora-950 ::selection{--tw-text-opacity:1;color:rgb(46 39 34/var(--tw-text-opacity,1))}.selection\:bg-terracotta-200::-moz-selection{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.selection\:bg-terracotta-200::selection{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.selection\:text-tortora-950::-moz-selection{--tw-text-opacity:1;color:rgb(46 39 34/var(--tw-text-opacity,1))}.selection\:text-tortora-950::selection{--tw-text-opacity:1;color:rgb(46 39 34/var(--tw-text-opacity,1))}.placeholder\:text-tortora-400::-moz-placeholder{--tw-text-opacity:1;color:rgb(184 168 149/var(--tw-text-opacity,1))}.placeholder\:text-tortora-400::placeholder{--tw-text-opacity:1;color:rgb(184 168 149/var(--tw-text-opacity,1))}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-terracotta-300:hover{--tw-border-opacity:1;border-color:rgb(234 174 150/var(--tw-border-opacity,1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-100:hover{--tw-bg-opacity:1;background-color:rgb(250 232 224/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-200:hover{--tw-bg-opacity:1;background-color:rgb(244 207 192/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-400:hover{--tw-bg-opacity:1;background-color:rgb(220 133 102/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-500\/30:hover{background-color:rgba(196,109,78,.3)}.hover\:bg-terracotta-600:hover{--tw-bg-opacity:1;background-color:rgb(168 84 56/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-700:hover{--tw-bg-opacity:1;background-color:rgb(138 66 43/var(--tw-bg-opacity,1))}.hover\:bg-terracotta-900:hover{--tw-bg-opacity:1;background-color:rgb(88 44 31/var(--tw-bg-opacity,1))}.hover\:bg-tortora-100:hover{--tw-bg-opacity:1;background-color:rgb(242 237 230/var(--tw-bg-opacity,1))}.hover\:bg-tortora-200:hover{--tw-bg-opacity:1;background-color:rgb(229 221 210/var(--tw-bg-opacity,1))}.hover\:bg-tortora-300:hover{--tw-bg-opacity:1;background-color:rgb(211 198 182/var(--tw-bg-opacity,1))}.hover\:bg-tortora-600:hover{--tw-bg-opacity:1;background-color:rgb(130 113 96/var(--tw-bg-opacity,1))}.hover\:bg-tortora-700:hover{--tw-bg-opacity:1;background-color:rgb(106 91 77/var(--tw-bg-opacity,1))}.hover\:bg-tortora-800:hover{--tw-bg-opacity:1;background-color:rgb(86 74 63/var(--tw-bg-opacity,1))}.hover\:bg-tortora-800\/40:hover{background-color:rgba(86,74,63,.4)}.hover\:bg-tortora-800\/70:hover{background-color:rgba(86,74,63,.7)}.hover\:bg-tortora-900:hover{--tw-bg-opacity:1;background-color:rgb(70 60 52/var(--tw-bg-opacity,1))}.hover\:bg-tortora-950:hover{--tw-bg-opacity:1;background-color:rgb(46 39 34/var(--tw-bg-opacity,1))}.hover\:bg-white:hover{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.hover\:text-terracotta-200:hover{--tw-text-opacity:1;color:rgb(244 207 192/var(--tw-text-opacity,1))}.hover\:text-terracotta-300:hover{--tw-text-opacity:1;color:rgb(234 174 150/var(--tw-text-opacity,1))}.hover\:text-terracotta-800:hover{--tw-text-opacity:1;color:rgb(110 53 36/var(--tw-text-opacity,1))}.hover\:text-tortora-800:hover{--tw-text-opacity:1;color:rgb(86 74 63/var(--tw-text-opacity,1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.focus\:border-terracotta-400:focus{--tw-border-opacity:1;border-color:rgb(220 133 102/var(--tw-border-opacity,1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-terracotta-400:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(220 133 102/var(--tw-ring-opacity,1))}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width:640px){.sm\:col-span-2{grid-column:span 2/span 2}.sm\:col-span-3{grid-column:span 3/span 3}.sm\:ml-8{margin-left:2rem}.sm\:inline{display:inline}.sm\:w-48{width:12rem}.sm\:w-auto{width:auto}.sm\:flex-none{flex:none}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-start{align-items:flex-start}.sm\:items-center{align-items:center}.sm\:gap-3{gap:.75rem}.sm\:space-x-1\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.375rem*var(--tw-space-x-reverse));margin-left:calc(.375rem*(1 - var(--tw-space-x-reverse)))}.sm\:self-start{align-self:flex-start}.sm\:p-5{padding:1.25rem}.sm\:p-6{padding:1.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width:768px){.md\:inline{display:inline}.md\:w-64{width:16rem}.md\:w-auto{width:auto}.md\:flex-none{flex:none}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:items-stretch{align-items:stretch}.md\:pb-3\.5{padding-bottom:.875rem}.md\:pr-0{padding-right:0}}@media (min-width:1024px){.lg\:w-72{width:18rem}.lg\:w-auto{width:auto}.lg\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.lg\:flex-row{flex-direction:row}.lg\:items-center{align-items:center}.lg\:px-8{padding-left:2rem;padding-right:2rem}}@media (min-width:1536px){.\32xl\:w-auto{width:auto}.\32xl\:flex-nowrap{flex-wrap:nowrap}}</style></head>
 <body class="text-tortora-900 min-h-screen flex flex-col selection:bg-terracotta-200 selection:text-tortora-950">
 
     <!-- HEADER / NAVIGATION -->
     <header class="bg-gradient-to-r from-tortora-950 via-tortora-900 to-terracotta-900 text-tortora-50 shadow-xl sticky top-0 z-50 border-b border-tortora-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-18 py-2.5">
+            <div class="flex flex-wrap 2xl:flex-nowrap items-center justify-between gap-x-3 gap-y-2 py-2.5">
                 <!-- Brand Title -->
-                <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('overview')">
+                <div class="flex items-center space-x-3 cursor-pointer group min-w-0" onclick="switchTab('overview')">
                     <div class="bg-gradient-to-br from-terracotta-400 to-terracotta-600 p-2.5 rounded-2xl text-white font-bold shadow-md transform group-hover:scale-105 transition border border-terracotta-300/30 text-lg leading-none">
                         🎄
                     </div>
@@ -97,38 +100,38 @@
                 </div>
 
                 <!-- Navigation Tabs & Admin Login -->
-                <div class="flex items-center space-x-2 sm:space-x-3">
-                    <nav class="flex space-x-1 sm:space-x-1.5 bg-tortora-950/50 p-1.5 rounded-2xl backdrop-blur-md border border-tortora-700/50">
-                        <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70">
+                <div class="flex items-center gap-2 sm:gap-3 w-full 2xl:w-auto min-w-0">
+                    <nav class="flex flex-1 min-w-0 overflow-x-auto no-scrollbar space-x-1 sm:space-x-1.5 bg-tortora-950/50 p-1.5 rounded-2xl backdrop-blur-md border border-tortora-700/50">
+                        <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70">
                             <span>✈️</span>
                             <span class="hidden md:inline">Info e Logistica</span>
                         </button>
-                        <button onclick="switchTab('attractions')" id="tab-btn-attractions" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all font-medium text-tortora-100 hover:bg-tortora-800/70">
+                        <button onclick="switchTab('attractions')" id="tab-btn-attractions" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all font-medium text-tortora-100 hover:bg-tortora-800/70">
                             <span>🧭</span>
                             <span class="hidden md:inline">Esplora Attrazioni</span>
                         </button>
-                        <button onclick="switchTab('itinerary')" id="tab-btn-itinerary" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
+                        <button onclick="switchTab('itinerary')" id="tab-btn-itinerary" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
                             <span>🗓️</span>
                             <span class="hidden md:inline">Mio Itinerario</span>
                             <span id="itinerary-badge" class="ml-1 px-2 py-0.5 bg-tortora-100 text-terracotta-700 text-xs font-extrabold rounded-full">36</span>
                         </button>
-                        <button onclick="switchTab('tips')" id="tab-btn-tips" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
+                        <button onclick="switchTab('tips')" id="tab-btn-tips" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
                             <span>🎟️</span>
                             <span class="hidden md:inline">Pass e Consigli</span>
                         </button>
-                        <button onclick="switchTab('food')" id="tab-btn-food" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
+                        <button onclick="switchTab('food')" id="tab-btn-food" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-tortora-100 hover:bg-tortora-800/70 font-medium">
                             <span>🍽️</span>
                             <span class="hidden md:inline">Cibi Tipici</span>
                         </button>
                         <!-- Dedicated Admin Tab (Visible only when logged in) -->
-                        <button onclick="switchTab('admin')" id="tab-btn-admin" class="tab-btn flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-terracotta-200 hover:bg-terracotta-500/30 font-bold border border-terracotta-400/30 bg-terracotta-500 text-white shadow font-semibold">
+                        <button onclick="switchTab('admin')" id="tab-btn-admin" class="tab-btn shrink-0 flex items-center space-x-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm transition-all text-terracotta-200 hover:bg-terracotta-500/30 font-bold border border-terracotta-400/30 bg-terracotta-500 text-white shadow font-semibold">
                             <span>🔐</span>
-                            <span>Pannello Admin</span>
+                            <span class="hidden md:inline">Pannello Admin</span>
                         </button>
                     </nav>
 
                     <!-- Quick Return to Hotel Menu -->
-                    <div class="relative" id="quick-hotel-wrapper">
+                    <div class="relative shrink-0" id="quick-hotel-wrapper">
                         <button onclick="toggleQuickHotelMenu(event)" class="bg-terracotta-500 hover:bg-terracotta-400 text-white font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-md border border-terracotta-300/30" title="Navigazione rapida verso il tuo Hotel">
                             <span>🏨</span>
                             <span class="hidden sm:inline">Torna in Hotel</span>
@@ -155,9 +158,9 @@
                     </div>
 
                     <!-- Admin Access Button -->
-                    <button id="admin-login-btn" onclick="toggleAdminModal()" class="bg-tortora-100 hover:bg-white text-tortora-950 font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-md border border-tortora-200">
+                    <button id="admin-login-btn" onclick="toggleAdminModal()" class="shrink-0 bg-tortora-100 hover:bg-white text-tortora-950 font-bold px-3.5 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-md border border-tortora-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="unlock" aria-hidden="true" id="admin-btn-icon" class="lucide lucide-unlock lucide-lock w-4 h-4 text-terracotta-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
-                        <span id="admin-btn-text">Logout Admin</span>
+                        <span id="admin-btn-text" class="hidden sm:inline">Logout Admin</span>
                     </button>
                 </div>
             </div>
@@ -10306,456 +10309,652 @@
 
         const DEFAULT_ITINERARY = [
         {
-                "dayTitle": "Giovedì 24 Dicembre 2026 • Arrivo BTS (14:00) ➔ Vigilia tra Luminarie & Rathausplatz",
+                "dayTitle": "Giovedì 24 Dicembre 2026 • Arrivo BTS ➔ Vigilia a Vienna",
                 "city": "🇦🇹 Vienna",
                 "items": [
                         {
-                                "id": "it-1",
-                                "name": "Aeroporto di Bratislava (BTS) - Bus diretto per Vienna",
+                                "id": "v2-24-1",
+                                "name": "✈️ Atterraggio a Bratislava (BTS)",
                                 "mapQuery": "Bratislava Airport, Ivanská cesta, 820 01 Bratislava, Slovakia",
-                                "startTime": "14:30",
-                                "durationMin": 15,
-                                "time": "14:30 - 14:45",
-                                "notes": "Salita sul bus diretto (FlixBus / RegioJet / Slovak Lines) fuori dal terminal arrivi verso Vienna Erdberg (VIB).",
+                                "startTime": "14:00",
+                                "durationMin": 45,
+                                "time": "14:00 - 14:45",
+                                "notes": "Il 24 i mezzi viennesi seguono l'orario del sabato fino alle 18:00; dopo passano tram e bus ogni 15 minuti, mentre la metro funziona tutta la notte. Il mercatino del Rathaus chiude alle 18:30, quindi va fatto per primo. Cammina 4 minuti fino alla fermata Bratislava Airport per il bus delle 14:45.",
                                 "isTransit": false
                         },
                         {
-                                "id": "it-2",
-                                "name": "PLAZA INN Wien Gasometer - Check-in & Deposito Bagagli",
+                                "id": "v2-24-2",
+                                "name": "🏨 PLAZA INN Wien Gasometer – Check-in",
                                 "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
                                 "startTime": "16:25",
                                 "durationMin": 30,
                                 "time": "16:25 - 16:55",
-                                "notes": "Check-in rapido e cambio abiti caldi. La stazione U3 Gasometer è a ~8 min a piedi dall'hotel.",
-                                "transitFromPrev": "Bus BTS ➔ Vienna Erdberg (~1h 25m, arrivo ~15:55) + Metro U3 (1 fermata, 2m) + 8 min a piedi • Totale 100m",
+                                "notes": "Convalida il biglietto 72 ore. ⚠️ Prenota sull'app Slovak Lines e ricontrolla l'orario del 24 (Google Maps avvisa che potrebbe non essere aggiornato). Alternativa FlixBus (totale 2h06, con cambio): FlixBus 14:45 ➔ Vienna Airport (16:05), cambio, FlixBus 16:20 ➔ Vienna Central Bus Station VIB (Erdberg, 16:35), 13 min a piedi ➔ hotel alle 16:47. ⚠️ Prenota le due corse in un'unica prenotazione (BTS ➔ \"Wien Erdberg VIB\") così la coincidenza è garantita. Se perdi il bus delle 14:45: il prossimo è alle 15:45 (hotel verso le 17:47), esci subito senza fermarti in camera. Se perdi la coincidenza a Vienna Airport: S7 fino a Wien Mitte + U3 fino a Gasometer (circa 40 min).",
+                                "transitFromPrev": "✅ Slovak Lines diretto delle 14:45 ➔ Wien Hauptbahnhof (Südtiroler Platz) arrivo 15:55 • compra e convalida il 72 ore alla macchinetta U1 • U1 Südtiroler Platz ➔ Stephansplatz (dir. Leopoldau, 3 fermate) • U3 Stephansplatz ➔ Gasometer (dir. Simmering, 7 fermate) • 8 min a piedi • arrivo verso le 16:30",
                                 "travelMinFromPrev": 100,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-3",
-                                "name": "Duomo di San Stefano (Stephansdom) & Chiesa di San Pietro (Peterskirche)",
-                                "mapQuery": "St. Stephen's Cathedral, Stephansplatz 3, 1010 Wien, Austria",
-                                "startTime": "17:15",
-                                "durationMin": 55,
-                                "time": "17:15 - 18:10",
-                                "notes": "Passeggiata sotto i lampadari luminosi di Graben e Kohlmarkt e visita al presepe monumentale della Peterskirche (chioschi chiudono alle 16:00, atmosfera intima e zero calca).",
-                                "transitFromPrev": "8 min a piedi a Gasometer U + Metro U3 diretta ➔ Stephansplatz (5 fermate) • Totale 20m",
-                                "travelMinFromPrev": 20,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-3b",
-                                "name": "Municipio di Vienna (Wiener Rathaus) & Christkindlmarkt",
+                                "id": "v2-24-3",
+                                "name": "Christkindlmarkt al Rathausplatz (chiude alle 18:30)",
+                                "attractionId": "vie-8",
                                 "mapQuery": "Vienna City Hall, Friedrich-Schmidt-Platz 1, 1010 Wien, Austria",
-                                "startTime": "18:20",
-                                "durationMin": 55,
-                                "time": "18:20 - 19:15",
-                                "notes": "Il mercatino di Rathausplatz è l'unico aperto fino alle 18:30 la Vigilia: vin brulé e Germknödel tra le luci del parco.",
-                                "transitFromPrev": "Passeggiata pedonale Graben ➔ Volksgarten ➔ Rathausplatz (15 min a piedi)",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-3c",
-                                "name": "🍽️ Cena della Vigilia: Cucina Viennese Tradizionale",
-                                "mapQuery": "Zu den 3 Hacken, Singerstraße 28, 1010 Wien, Austria",
-                                "startTime": "19:30",
-                                "durationMin": 75,
-                                "time": "19:30 - 20:45",
-                                "notes": "Cena seduti senza attese (prenotazione consigliata per le 19:30) da Zu den 3 Hacken o Gasthaus Pöschl in centro.",
-                                "transitFromPrev": "Tram 1 o Metro U2/U3 verso il centro storico • Totale 15m",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        }
-                ]
-        },
-        {
-                "dayTitle": "Venerdì 25 Dicembre 2026 • Natale Imperiale: Schönbrunn, Belvedere & Centro",
-                "city": "🇦🇹 Vienna",
-                "items": [
-                        {
-                                "id": "it-4a",
-                                "name": "☕ Colazione di Natale: Pasticceria Viennese (Oberlaa / Hotel)",
-                                "mapQuery": "Kurkonditorei Oberlaa, Neuer Markt 16, 1010 Wien, Austria",
-                                "startTime": "08:00",
-                                "durationMin": 30,
-                                "time": "08:00 - 08:30",
-                                "notes": "Colazione con Melange viennese, brioche e Vanillekipferl prima di prendere la metro.",
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-4",
-                                "name": "Castello di Schönbrunn & Mercatino di Natale",
-                                "mapQuery": "Schönbrunn Palace, Schönbrunner Schloßstraße 47, 1130 Wien, Austria",
-                                "startTime": "09:05",
-                                "durationMin": 185,
-                                "time": "09:05 - 12:10",
-                                "notes": "Visita agli appartamenti imperiali (slot prenotato alle 09:15 per zero coda), parco e mercatino nel cortile (aperto il 25/12).",
-                                "transitFromPrev": "Metro U3 ➔ Landstraße + Metro U4 ➔ Schönbrunn • Totale 30m",
-                                "travelMinFromPrev": 30,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-4b",
-                                "name": "Chiesa di San Carlo (Karlskirche)",
-                                "mapQuery": "Karlskirche, Karlsplatz 10, 1040 Wien, Austria",
-                                "startTime": "12:30",
-                                "durationMin": 35,
-                                "time": "12:30 - 13:05",
-                                "notes": "Sosta lineare lungo la U4 prima del Belvedere per ammirare la cupola barocca e lo specchio d'acqua.",
-                                "transitFromPrev": "Metro U4 diretta da Schönbrunn ➔ Karlsplatz (6 fermate) • Totale 20m",
+                                "startTime": "17:20",
+                                "durationMin": 70,
+                                "time": "17:20 - 18:30",
+                                "notes": "Vin brulé e Punsch, Germknödel, Langos o Kartoffelpuffer: è il momento giusto per una merenda abbondante.",
+                                "transitFromPrev": "8 min a piedi a Gasometer U • U3 diretta ➔ Volkstheater (9 fermate, circa 13 min) • 6 min a piedi",
                                 "travelMinFromPrev": 20,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-4c",
-                                "name": "🍽️ Pranzo di Natale: Pausa Tipica (Café Museum / Salm Bräu)",
-                                "mapQuery": "Salm Bräu, Rennweg 8, 1030 Wien, Austria",
-                                "startTime": "13:20",
-                                "durationMin": 60,
-                                "time": "13:20 - 14:20",
-                                "notes": "Pranzo caldo a 2 minuti dal Belvedere da Salm Bräu (stinco, gulasch e birra artigianale, zero attese con prenotazione) oppure Topfenstrudel al Café Museum.",
-                                "transitFromPrev": "Tram D da Karlsplatz/Schwarzenbergplatz ➔ Schloss Belvedere • Totale 15m",
-                                "travelMinFromPrev": 15,
+                                "id": "v2-24-4",
+                                "name": "Stephansdom e Graben",
+                                "attractionId": "vie-2",
+                                "mapQuery": "St. Stephen's Cathedral, Stephansplatz 3, 1010 Wien, Austria",
+                                "startTime": "18:55",
+                                "durationMin": 25,
+                                "time": "18:55 - 19:20",
+                                "notes": "Guarda il duomo illuminato e la Peterskirche (il presepe si vede da fuori). La Vigilia ci possono essere funzioni in corso, quindi entra con discrezione.",
+                                "transitFromPrev": "Circa 25 min a piedi, tutto illuminato: Volksgarten ➔ Heldenplatz ➔ Hofburg ➔ Michaelerplatz ➔ Kohlmarkt ➔ Graben ➔ Stephansplatz",
+                                "travelMinFromPrev": 25,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-5",
-                                "name": "Palazzo del Belvedere (Oberes Belvedere)",
-                                "mapQuery": "Upper Belvedere, Prinz Eugen-Straße 27, 1030 Wien, Austria",
-                                "startTime": "14:25",
-                                "durationMin": 105,
-                                "time": "14:25 - 16:10",
-                                "notes": "Capolavori di Gustav Klimt ('Il Bacio') e giardini barocchi (aperto il 25/12; slot orario prenotato online).",
-                                "transitFromPrev": "Ingresso contiguo a Salm Bräu • 3 min a piedi",
-                                "travelMinFromPrev": 5,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-5b",
-                                "name": "Opera di Stato (Wiener Staatsoper) & Terrazza Museo Albertina",
-                                "mapQuery": "Albertina, Albertinaplatz 1, 1010 Wien, Austria",
-                                "startTime": "16:30",
+                                "id": "v2-24-5",
+                                "name": "🍽️ Cena della Vigilia veloce: Würstelstand Bitzinger all'Albertina",
+                                "mapQuery": "Bitzinger Würstelstand Albertina, Albertinaplatz 1, 1010 Wien, Austria",
+                                "startTime": "19:30",
                                 "durationMin": 45,
-                                "time": "16:30 - 17:15",
-                                "notes": "Rientro verso il centro: vista panoramica sull'Opera illuminata dalla terrazza dell'Albertina e assaggio veloce di Käsekrainer da Bitzinger.",
-                                "transitFromPrev": "Tram D da Schloss Belvedere ➔ Oper, Karlsplatz U • Totale 18m",
-                                "travelMinFromPrev": 20,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-6",
-                                "name": "Villaggio di Natale a Maria-Theresien-Platz & Kunsthistorisches Museum",
-                                "mapQuery": "Maria-Theresien-Platz, 1010 Wien, Austria",
-                                "startTime": "17:30",
-                                "durationMin": 105,
-                                "time": "17:30 - 19:15",
-                                "notes": "Proseguimento lineare lungo il Ring: mercatino aperto fino alle 19:00 a Natale e sosta fotografica tra i due musei gemelli illuminati.",
-                                "transitFromPrev": "Passeggiata lungo la Ringstraße (Burgring) • 12 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-6b",
-                                "name": "🍽️ Cena di Natale: Wiener Schnitzel o Tafelspitz",
-                                "mapQuery": "Reinthaler's Beisl, Dorotheergasse 2-4, 1010 Wien, Austria",
-                                "startTime": "19:30",
-                                "durationMin": 75,
-                                "time": "19:30 - 20:45",
-                                "notes": "Cena autentica da Reinthaler's Beisl o Plachutta (evitando le lunghe file turistiche di Figlmüller).",
-                                "transitFromPrev": "Passeggiata verso Graben / Dorotheergasse • 12 min a piedi",
-                                "travelMinFromPrev": 15,
+                                "time": "19:30 - 20:15",
+                                "notes": "Chiosco viennese iconico con Käsekrainer, Bratwurst e birra, e vista sull'Opera. ⚠️ Di solito è aperto fino a tarda notte: controlla l'orario del 24 su Google Maps. Piano B: McDonald's in Schwarzenbergplatz 17 (circa 8 min a piedi dall'Albertina, ⚠️ orario della Vigilia da verificare). Piano C (se vuoi mangiare appena chiude il mercatino, alle 18:30): McDonald's al Dr.-Karl-Lueger-Ring 12, a 3 minuti dal Rathaus. 🏨 Rientro (circa 20 min): da Karlsplatz U1 ➔ Stephansplatz (1 fermata), U3 diretta ➔ Gasometer, 8 min a piedi.",
+                                "transitFromPrev": "Circa 8 min a piedi lungo Kärntner Straße fino all'Albertina",
+                                "travelMinFromPrev": 8,
                                 "isTransit": false
                         }
                 ]
         },
         {
-                "dayTitle": "Sabato 26 Dicembre 2026 • Santo Stefano: Hofburg, Biblioteca, Hundertwasser & Prater",
+                "dayTitle": "Venerdì 25 Dicembre 2026 • Schönbrunn, pranzo da Zum Wohl, Belvedere e Ring",
                 "city": "🇦🇹 Vienna",
                 "items": [
                         {
-                                "id": "it-7a",
-                                "name": "☕ Colazione di Santo Stefano",
+                                "id": "v2-25-1",
+                                "name": "☕ Colazione in hotel",
                                 "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
                                 "startTime": "08:00",
                                 "durationMin": 30,
                                 "time": "08:00 - 08:30",
-                                "notes": "Colazione comoda prima di prendere la Metro U3 diretta verso il cuore asburgico.",
+                                "notes": "Il 25 quasi tutte le pasticcerie sono chiuse.",
                                 "isTransit": false
                         },
                         {
-                                "id": "it-7",
-                                "name": "Palazzo Reale Hofburg & Museo di Sisi",
+                                "id": "v2-25-2",
+                                "name": "Castello di Schönbrunn, giardini e mercatino",
+                                "attractionId": "vie-1",
+                                "mapQuery": "Schönbrunn Palace, Schönbrunner Schloßstraße 47, 1130 Wien, Austria",
+                                "startTime": "09:05",
+                                "durationMin": 200,
+                                "time": "09:05 - 12:25",
+                                "notes": "Mercatino aperto dalle 10 alle 19. Hai lo slot delle 09:15 per gli appartamenti. Poi visita il parco e, se ti va, sali alla Gloriette (circa 15 minuti in salita). Finisci con il mercatino nel cortile.",
+                                "transitFromPrev": "U3 Gasometer ➔ Landstraße (4 fermate) • U4 Landstraße ➔ Schönbrunn (dir. Hütteldorf, 8 fermate)",
+                                "travelMinFromPrev": 35,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-3",
+                                "name": "🍽️ Pranzo da Gasthaus Zum Wohl (già prenotato)",
+                                "mapQuery": "Gasthaus Zum Wohl, Stumpergasse 61, 1060 Wien, Austria",
+                                "startTime": "13:00",
+                                "durationMin": 60,
+                                "time": "13:00 - 14:00",
+                                "notes": "Sta proprio sulla strada tra Schönbrunn e il centro, quindi non è fuori mano. Cucina austriaca 100% senza glutine.",
+                                "transitFromPrev": "U4 Schönbrunn ➔ Längenfeldgasse (2 fermate) • U6 ➔ Gumpendorfer Straße (1 fermata) • 5 min a piedi fino a Stumpergasse 61",
+                                "travelMinFromPrev": 25,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-4",
+                                "name": "Karlskirche (cupola barocca e specchio d'acqua)",
+                                "attractionId": "vie-15",
+                                "mapQuery": "Karlskirche, Karlsplatz 10, 1040 Wien, Austria",
+                                "startTime": "14:20",
+                                "durationMin": 30,
+                                "time": "14:20 - 14:50",
+                                "notes": "",
+                                "transitFromPrev": "5 min a piedi a Gumpendorfer Straße • U6 ➔ Längenfeldgasse (1 fermata) • U4 ➔ Karlsplatz (4 fermate)",
+                                "travelMinFromPrev": 20,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-5",
+                                "name": "Belvedere Superiore (il Bacio di Klimt) e mercatino K&K",
+                                "attractionId": "vie-5",
+                                "mapQuery": "Upper Belvedere, Prinz Eugen-Straße 27, 1030 Wien, Austria",
+                                "startTime": "15:05",
+                                "durationMin": 115,
+                                "time": "15:05 - 17:00",
+                                "notes": "⚠️ Prenota lo slot delle 15:00. L'anno scorso il 25 il Belvedere Superiore era aperto fino alle 19.",
+                                "transitFromPrev": "5 min a piedi a Schwarzenbergplatz • tram D ➔ Schloss Belvedere (3 fermate) • 2 min a piedi",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-6",
+                                "name": "Opera illuminata e terrazza dell'Albertina",
+                                "attractionId": "vie-14",
+                                "mapQuery": "Albertina, Albertinaplatz 1, 1010 Wien, Austria",
+                                "startTime": "17:15",
+                                "durationMin": 35,
+                                "time": "17:15 - 17:50",
+                                "notes": "Gratis, all'aperto. ☕ Pausa bar: Café Mozart (Albertinaplatz 2) per una fetta di Sachertorte senza la fila dell'Hotel Sacher, oppure Café Tirolerhof (Führichgasse 8), più semplice e frequentato dai viennesi.",
+                                "transitFromPrev": "Tram D Schloss Belvedere ➔ Oper/Karlsplatz U",
+                                "travelMinFromPrev": 12,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-7",
+                                "name": "Villaggio di Natale a Maria-Theresien-Platz",
+                                "attractionId": "vie-13",
+                                "mapQuery": "Maria-Theresien-Platz, 1010 Wien, Austria",
+                                "startTime": "18:00",
+                                "durationMin": 60,
+                                "time": "18:00 - 19:00",
+                                "notes": "⚠️ Verifica l'orario del 25. Foto tra i due musei gemelli illuminati.",
+                                "transitFromPrev": "Circa 12 min a piedi lungo il Burgring",
+                                "travelMinFromPrev": 12,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-25-8",
+                                "name": "🍽️ Cena di Natale: Plachutta Wollzeile",
+                                "mapQuery": "Plachutta Wollzeile, Wollzeile 38, 1010 Wien, Austria",
+                                "startTime": "19:30",
+                                "durationMin": 75,
+                                "time": "19:30 - 20:45",
+                                "notes": "⚠️ Prenota. Tafelspitz nella casseruola di rame. In alternativa c'è Gasthaus Pöschl (Weihburggasse 17), più piccolo e intimo. 🏨 Rientro (circa 15 min): U3 diretta Stubentor ➔ Gasometer (5 fermate), 8 min a piedi.",
+                                "transitFromPrev": "U3 Volkstheater ➔ Stubentor (3 fermate) • 2 min a piedi",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        }
+                ]
+        },
+        {
+                "dayTitle": "Sabato 26 Dicembre 2026 • Hofburg, Biblioteca, Hundertwasser e Prater",
+                "city": "🇦🇹 Vienna",
+                "items": [
+                        {
+                                "id": "v2-26-1",
+                                "name": "☕ Colazione in hotel",
+                                "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
+                                "startTime": "08:00",
+                                "durationMin": 30,
+                                "time": "08:00 - 08:30",
+                                "notes": "",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-26-2",
+                                "name": "Hofburg: Appartamenti imperiali, Museo di Sisi e Collezione d'argenteria",
+                                "attractionId": "vie-6",
                                 "mapQuery": "Hofburg, Michaelerkuppel, 1010 Wien, Austria",
                                 "startTime": "09:00",
                                 "durationMin": 135,
                                 "time": "09:00 - 11:15",
-                                "notes": "Ingresso all'apertura per visitare con calma gli appartamenti imperiali, argenterie di corte e Museo di Sisi (aperto il 26/12).",
-                                "transitFromPrev": "Metro U3 Gasometer ➔ Herrengasse (diretta) • Totale 25m",
-                                "travelMinFromPrev": 30,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-8",
-                                "name": "Biblioteca Nazionale Austriaca (Prunksaal)",
-                                "mapQuery": "Austrian National Library, Josefsplatz 1, 1015 Wien, Austria",
-                                "startTime": "11:25",
-                                "durationMin": 75,
-                                "time": "11:25 - 12:40",
-                                "notes": "La sala barocca monumentale più bella d'Europa: riapre proprio il 26 dicembre! Subito accanto all'Hofburg.",
-                                "transitFromPrev": "A piedi attraverso Josefsplatz (stesso complesso Hofburg) • 4 min a piedi",
-                                "travelMinFromPrev": 10,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-8a",
-                                "name": "🍽️ Pranzo & Kaiserschmarrn da Demel (Kohlmarkt)",
-                                "mapQuery": "Demel, Kohlmarkt 14, 1010 Wien, Austria",
-                                "startTime": "13:00",
-                                "durationMin": 60,
-                                "time": "13:00 - 14:00",
-                                "notes": "A 3 minuti a piedi: Leberkäse Semmel caldo da Leberkas-Pepi o piatto rapido in centro + Kaiserschmarrn appena fatto al banco take-away di Demel (zero coda al tavolo).",
-                                "transitFromPrev": "Passeggiata su Michaelerplatz e Kohlmarkt • 4 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-8b",
-                                "name": "Hundertwasserhaus Vienna",
-                                "mapQuery": "Hundertwasserhaus, Kegelgasse 36-38, 1030 Wien, Austria",
-                                "startTime": "14:25",
-                                "durationMin": 50,
-                                "time": "14:25 - 15:15",
-                                "notes": "Spostamento verso est (sulla direttrice per il Prater, zero zig-zag): foto alle facciate colorate e ondulate di Hundertwasser.",
-                                "transitFromPrev": "Tram 1 da Burgring / Schwedenplatz ➔ Hetzgasse + 2 min a piedi • Totale 22m",
+                                "notes": "⚠️ Prenota l'ingresso delle 09:00.",
+                                "transitFromPrev": "U3 diretta Gasometer ➔ Herrengasse (circa 15 min) • 3 min a piedi",
                                 "travelMinFromPrev": 25,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-9",
-                                "name": "Prater, Ruota Panoramica (Wiener Riesenrad) & Wintermarkt",
-                                "mapQuery": "Wiener Riesenrad, Riesenradplatz 1, 1020 Wien, Austria",
-                                "startTime": "15:35",
-                                "durationMin": 110,
-                                "time": "15:35 - 17:25",
-                                "notes": "Proseguimento diretto verso nord-est: giro sulla ruota panoramica al tramonto (biglietto online salta-fila) e pausa al Wintermarkt.",
-                                "transitFromPrev": "Tram O da Radetzkyplatz ➔ Praterstern (2 fermate) + 3 min a piedi • Totale 15m",
+                                "id": "v2-26-3",
+                                "name": "Biblioteca Nazionale (Prunksaal)",
+                                "attractionId": "vie-12",
+                                "mapQuery": "Austrian National Library, Josefsplatz 1, 1015 Wien, Austria",
+                                "startTime": "11:20",
+                                "durationMin": 70,
+                                "time": "11:20 - 12:30",
+                                "notes": "",
+                                "transitFromPrev": "Circa 4 min a piedi fino a Josefsplatz",
+                                "travelMinFromPrev": 4,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-26-4",
+                                "name": "Passeggiata tra Michaelerplatz, Kohlmarkt e Graben",
+                                "attractionId": "vie-16",
+                                "mapQuery": "St. Peter's Catholic Church, Petersplatz 1, 1010 Wien, Austria",
+                                "startTime": "12:30",
+                                "durationMin": 30,
+                                "time": "12:30 - 13:00",
+                                "notes": "",
+                                "transitFromPrev": "A piedi da Josefsplatz",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-26-5",
+                                "name": "🍽️ Pranzo al volo: Leberkas-Pepi",
+                                "mapQuery": "Leberkas-Pepi, Operngasse 12, 1010 Wien, Austria",
+                                "startTime": "13:00",
+                                "durationMin": 45,
+                                "time": "13:00 - 13:45",
+                                "notes": "Panino con Leberkäse caldo, in piedi, in 10 minuti. ⚠️ Controlla l'orario festivo. In alternativa c'è di nuovo Bitzinger all'Albertina. Per il dolce: Kaiserschmarrn o strudel al banco da asporto di Demel (Kohlmarkt 14), senza sederti al tavolo.",
+                                "transitFromPrev": "A piedi fino a Operngasse 12",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-26-6",
+                                "name": "Hundertwasserhaus e Hundertwasser Village",
+                                "attractionId": "vie-9",
+                                "mapQuery": "Hundertwasserhaus, Kegelgasse 36-38, 1030 Wien, Austria",
+                                "startTime": "14:05",
+                                "durationMin": 45,
+                                "time": "14:05 - 14:50",
+                                "notes": "☕ Pausa nel Kalke Village, proprio di fronte: un caffè veloce in mezzo alle ceramiche colorate.",
+                                "transitFromPrev": "5 min a piedi a Stephansplatz • U1 ➔ Schwedenplatz (1 fermata) • tram 1 ➔ Hetzgasse (3 fermate) • 2 min a piedi",
                                 "travelMinFromPrev": 20,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-9b",
-                                "name": "Municipio di Vienna (Wiener Rathaus) – Ultima Serata Mercatino",
-                                "mapQuery": "Vienna City Hall, Friedrich-Schmidt-Platz 1, 1010 Wien, Austria",
-                                "startTime": "17:50",
-                                "durationMin": 85,
-                                "time": "17:50 - 19:15",
-                                "notes": "Chiusura definitiva del Christkindlmarkt la sera del 26 dicembre: ultimo punch caldo sotto il Municipio illuminato.",
-                                "transitFromPrev": "Metro U2 diretta da Praterstern ➔ Rathaus (5 fermate) + 2 min a piedi • Totale 20m",
-                                "travelMinFromPrev": 25,
+                                "id": "v2-26-7",
+                                "name": "Prater: Ruota panoramica (Riesenrad) al tramonto e Wintermarkt",
+                                "attractionId": "vie-3",
+                                "mapQuery": "Wiener Riesenrad, Riesenradplatz 1, 1020 Wien, Austria",
+                                "startTime": "15:10",
+                                "durationMin": 120,
+                                "time": "15:10 - 17:10",
+                                "notes": "⚠️ Compra il biglietto online. Il sole tramonta verso le 16:00, quindi sali subito.",
+                                "transitFromPrev": "4 min a piedi a Radetzkyplatz • tram O ➔ Praterstern • 5 min a piedi fino alla Ruota",
+                                "travelMinFromPrev": 15,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-9c",
-                                "name": "🍽️ Cena di Santo Stefano & Rientro per Valigie",
+                                "id": "v2-26-8",
+                                "name": "Christkindlmarkt al Rathaus: ultima sera",
+                                "attractionId": "vie-8",
+                                "mapQuery": "Vienna City Hall, Friedrich-Schmidt-Platz 1, 1010 Wien, Austria",
+                                "startTime": "17:30",
+                                "durationMin": 105,
+                                "time": "17:30 - 19:15",
+                                "notes": "Aperto fino alle 22.",
+                                "transitFromPrev": "U2 diretta Praterstern ➔ Rathaus (5 fermate) • 2 min a piedi",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-26-9",
+                                "name": "🍽️ Cena: Café Landtmann",
                                 "mapQuery": "Café Landtmann, Universitätsring 4, 1010 Wien, Austria",
                                 "startTime": "19:30",
                                 "durationMin": 75,
                                 "time": "19:30 - 20:45",
-                                "notes": "Cena comodissima accanto a Rathausplatz (es. Café Landtmann o taverna lungo la Ringstraße), poi rientro diretto con Metro U3 in hotel.",
-                                "transitFromPrev": "Accanto al Rathauspark • 3 min a piedi",
+                                "notes": "⚠️ Prenota. È il caffè storico più elegante di Vienna, con Schnitzel e Tafelspitz. In alternativa c'è Gasthaus Zum Leupold (Schottengasse 7, a 6 minuti), una cucina viennese di quartiere. 🏨 Rientro (circa 25 min): 8 min a piedi a Herrengasse U, U3 diretta ➔ Gasometer, 8 min a piedi. Stasera prepara le valigie.",
+                                "transitFromPrev": "Circa 3 min a piedi",
+                                "travelMinFromPrev": 3,
+                                "isTransit": false
+                        }
+                ]
+        },
+        {
+                "dayTitle": "Domenica 27 Dicembre 2026 • Vienna ➔ Budapest",
+                "city": "🇭🇺 Budapest",
+                "items": [
+                        {
+                                "id": "v2-27-1",
+                                "name": "☕ Colazione e chiusura delle valigie",
+                                "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
+                                "startTime": "08:00",
+                                "durationMin": 45,
+                                "time": "08:00 - 08:45",
+                                "notes": "",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-2",
+                                "name": "🏨 Check-out anticipato dal PLAZA INN",
+                                "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
+                                "startTime": "09:30",
+                                "durationMin": 10,
+                                "time": "09:30 - 09:40",
+                                "notes": "Il limite è alle 10:00, ma così non corri.",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-3",
+                                "name": "🚆 Treno Railjet/EuroCity Wien Hbf ➔ Budapest Keleti",
+                                "mapQuery": "Wien Hauptbahnhof, Am Hauptbahnhof 1, 1100 Wien, Austria",
+                                "startTime": "10:40",
+                                "durationMin": 160,
+                                "time": "10:40 - 13:20",
+                                "notes": "⚠️ Orario indicativo (circa 10:40 ➔ 13:20, circa 2h40): controlla l'orario esatto e il posto riservato. In stazione puoi comprare uno snack per il treno, oppure mangiare qualcosa nel vagone ristorante.",
+                                "transitFromPrev": "U3 Gasometer ➔ Stephansplatz • U1 ➔ Hauptbahnhof (Südtiroler Platz, 3 fermate) • usi ancora il biglietto 72 ore",
+                                "travelMinFromPrev": 25,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-4",
+                                "name": "🏨 B&B Bengt Király Suite – Check-in o deposito bagagli",
+                                "mapQuery": "Király utca 26, 1061 Budapest, Hungary",
+                                "startTime": "13:45",
+                                "durationMin": 15,
+                                "time": "13:45 - 14:00",
+                                "notes": "",
+                                "transitFromPrev": "Convalida il 72 ore BKK • M2 Keleti ➔ Deák Ferenc tér (3 fermate) • 5 min a piedi fino a Király utca 26",
+                                "travelMinFromPrev": 20,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-5",
+                                "name": "🍽️ Pranzo veloce: Karaván Street Food",
+                                "mapQuery": "Karaván Street Food, Kazinczy u. 18, 1075 Budapest, Hungary",
+                                "startTime": "14:00",
+                                "durationMin": 45,
+                                "time": "14:00 - 14:45",
+                                "notes": "Cortile con chioschi di lángos, gulasch e burger. In alternativa, seduti, c'è Gettó Gulyás (Wesselényi u. 18) ⚠️ prenota.",
+                                "transitFromPrev": "Circa 5 min a piedi",
+                                "travelMinFromPrev": 5,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-6",
+                                "name": "Basilica di Santo Stefano e terrazza panoramica della cupola",
+                                "attractionId": "bud-4",
+                                "mapQuery": "St. Stephen's Basilica, Szent István tér 1, 1051 Budapest, Hungary",
+                                "startTime": "15:00",
+                                "durationMin": 75,
+                                "time": "15:00 - 16:15",
+                                "notes": "Sali in cupola verso le 15:45 per vedere il tramonto sulla città. Poi resta al mercatino Advent Bazilika: proiezioni sulla facciata, kürtőskalács.",
+                                "transitFromPrev": "Circa 10 min a piedi",
+                                "travelMinFromPrev": 10,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-7",
+                                "name": "Mercatino di Natale di Vörösmarty tér",
+                                "attractionId": "bud-12",
+                                "mapQuery": "Vörösmarty tér, 1051 Budapest, Hungary",
+                                "startTime": "16:25",
+                                "durationMin": 70,
+                                "time": "16:25 - 17:35",
+                                "notes": "Il principale di Budapest. ☕ Pausa bar: Gerbeaud, sulla stessa piazza. Fetta di Dobos o Esterházy al banco della pasticceria, così eviti l'attesa per il tavolo.",
+                                "transitFromPrev": "Circa 8 min a piedi",
+                                "travelMinFromPrev": 8,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-8",
+                                "name": "Crociera serale sul Danubio da Vigadó tér",
+                                "attractionId": "bud-7",
+                                "mapQuery": "Vigadó tér, Budapest, 1051 Hungary",
+                                "startTime": "17:45",
+                                "durationMin": 75,
+                                "time": "17:45 - 19:00",
+                                "notes": "⚠️ Prenota la partenza delle 18:00 circa. Vedi il Parlamento, il Castello e il Ponte delle Catene illuminati.",
+                                "transitFromPrev": "Circa 5 min a piedi fino a Vigadó tér",
+                                "travelMinFromPrev": 5,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-9",
+                                "name": "🍽️ Cena ungherese da Menza",
+                                "mapQuery": "Menza, Liszt Ferenc tér 2, 1061 Budapest, Hungary",
+                                "startTime": "19:20",
+                                "durationMin": 75,
+                                "time": "19:20 - 20:35",
+                                "notes": "⚠️ Prenota. Csirkepaprikás e gulyás.",
+                                "transitFromPrev": "5 min a piedi a Vörösmarty tér • M1 ➔ Oktogon (4 fermate) • 4 min a piedi",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-27-10",
+                                "name": "Ruin bar Szimpla Kert",
+                                "attractionId": "bud-8",
+                                "mapQuery": "Szimpla Kert, Kazinczy u. 14, 1075 Budapest, Hungary",
+                                "startTime": "20:50",
+                                "durationMin": 70,
+                                "time": "20:50 - 22:00",
+                                "notes": "Poi rientri a piedi in 4 minuti.",
+                                "transitFromPrev": "Circa 12 min a piedi",
+                                "travelMinFromPrev": 12,
+                                "isTransit": false
+                        }
+                ]
+        },
+        {
+                "dayTitle": "Lunedì 28 Dicembre 2026 • Parlamento, Buda e Terme Széchenyi",
+                "city": "🇭🇺 Budapest",
+                "items": [
+                        {
+                                "id": "v2-28-1",
+                                "name": "☕ Colazione vicino all'alloggio con bejgli",
+                                "mapQuery": "Király utca 26, 1061 Budapest, Hungary",
+                                "startTime": "08:00",
+                                "durationMin": 30,
+                                "time": "08:00 - 08:30",
+                                "notes": "Bejgli: rotolo di noci o papavero. ⚠️ Verifica che il posto apra alle 8.",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-2",
+                                "name": "Parlamento: visita guidata",
+                                "attractionId": "bud-2",
+                                "mapQuery": "Hungarian Parliament Building, Kossuth Lajos tér 1-3, 1055 Budapest, Hungary",
+                                "startTime": "09:00",
+                                "durationMin": 75,
+                                "time": "09:00 - 10:15",
+                                "notes": "⚠️ Prenota uno slot intorno alle 09:15 e presentati 15 minuti prima al centro visitatori.",
+                                "transitFromPrev": "5 min a piedi a Deák Ferenc tér • M2 ➔ Kossuth Lajos tér (1 fermata)",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-3",
+                                "name": "Memoriale delle Scarpe sulla riva del Danubio",
+                                "mapQuery": "Shoes on the Danube Bank, Id. Antall József rkp., 1054 Budapest, Hungary",
+                                "startTime": "10:20",
+                                "durationMin": 20,
+                                "time": "10:20 - 10:40",
+                                "notes": "",
+                                "transitFromPrev": "Circa 8 min a piedi lungo il Danubio",
+                                "travelMinFromPrev": 8,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-4",
+                                "name": "Bastione dei Pescatori, Chiesa di Mattia e passeggiata fino al Palazzo Reale",
+                                "attractionId": "bud-3",
+                                "mapQuery": "Fisherman's Bastion, Szentháromság tér, 1014 Budapest, Hungary",
+                                "startTime": "11:10",
+                                "durationMin": 110,
+                                "time": "11:10 - 13:00",
+                                "notes": "",
+                                "transitFromPrev": "Torna a Kossuth Lajos tér • M2 ➔ Széll Kálmán tér (2 fermate) • bus 16, 16A o 116 ➔ Szentháromság tér (circa 6 min in salita)",
+                                "travelMinFromPrev": 25,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-5",
+                                "name": "🍽️ Pranzo al volo sulla collina: Budavári Rétesvár",
+                                "mapQuery": "Budavári Rétesvár, Balta köz 4, 1014 Budapest, Hungary",
+                                "startTime": "13:00",
+                                "durationMin": 45,
+                                "time": "13:00 - 13:45",
+                                "notes": "Strudel dolci e salati fatti al momento, in 10 minuti. ☕ Per il dolce storico c'è Ruszwurm (Szentháromság u. 7): è minuscolo, se c'è fila prendi la torta da portare via.",
+                                "transitFromPrev": "A piedi nel quartiere del Castello",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-6",
+                                "name": "Piazza degli Eroi alla luce del giorno e Castello di Vajdahunyad",
+                                "attractionId": "bud-10",
+                                "mapQuery": "Heroes' Square, Hősök tere, 1146 Budapest, Hungary",
+                                "startTime": "14:20",
+                                "durationMin": 20,
+                                "time": "14:20 - 14:40",
+                                "notes": "",
+                                "transitFromPrev": "Bus 16 Dísz tér ➔ Deák Ferenc tér (attraversa il Ponte delle Catene: un panorama gratis) • M1 ➔ Hősök tere (7 fermate)",
+                                "travelMinFromPrev": 35,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-7",
+                                "name": "Terme Széchenyi",
+                                "attractionId": "bud-1",
+                                "mapQuery": "Széchenyi Thermal Bath, Állatkerti krt. 9-11, 1146 Budapest, Hungary",
+                                "startTime": "14:50",
+                                "durationMin": 220,
+                                "time": "14:50 - 18:30",
+                                "notes": "⚠️ Compra il biglietto online e porta le ciabatte. Fare il bagno all'aperto mentre scende il buio è il momento migliore.",
+                                "transitFromPrev": "Circa 8 min a piedi attraverso il parco Városliget",
+                                "travelMinFromPrev": 8,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-8",
+                                "name": "Pista di pattinaggio di Városliget e Hősök tere illuminata",
+                                "mapQuery": "Városligeti Műjégpálya, Olof Palme sétány 5, 1146 Budapest, Hungary",
+                                "startTime": "18:35",
+                                "durationMin": 40,
+                                "time": "18:35 - 19:15",
+                                "notes": "Si guarda dall'esterno.",
+                                "transitFromPrev": "Pochi passi dalle Terme",
+                                "travelMinFromPrev": 3,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-28-9",
+                                "name": "🍽️ Cena da Paprika Vendéglő",
+                                "mapQuery": "Paprika Vendéglő, Dózsa György út 72, 1071 Budapest, Hungary",
+                                "startTime": "19:30",
+                                "durationMin": 75,
+                                "time": "19:30 - 20:45",
+                                "notes": "⚠️ Prenota. 🏨 Rientro (circa 25 min): 8 min a piedi a Hősök tere, M1 ➔ Bajcsy-Zsilinszky út, 5 min a piedi. Stasera prepara le valigie.",
+                                "transitFromPrev": "Circa 10 min a piedi",
                                 "travelMinFromPrev": 10,
                                 "isTransit": false
                         }
                 ]
         },
         {
-                "dayTitle": "Domenica 27 Dicembre 2026 • Partenza da Vienna (10:00) ➔ Arrivo & Serata Budapest",
-                "city": "🇭🇺 Budapest",
+                "dayTitle": "Martedì 29 Dicembre 2026 • Budapest ➔ Bratislava ➔ Volo",
+                "city": "🇸🇰 Bratislava",
                 "items": [
                         {
-                                "id": "it-10b",
-                                "name": "☕ Colazione & Preparazione Bagagli (Vienna)",
-                                "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
-                                "startTime": "08:00",
-                                "durationMin": 30,
-                                "time": "08:00 - 08:30",
-                                "notes": "Ultima colazione a Vienna e chiusura bagagli prima del check-out delle 10:00.",
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-10a",
-                                "name": "PLAZA INN Wien Gasometer - Check-out (Ore 10:00)",
-                                "mapQuery": "PLAZA INN Wien Gasometer, Paragonstraße 1, 1110 Wien, Austria",
-                                "startTime": "10:00",
-                                "durationMin": 15,
-                                "time": "10:00 - 10:15",
-                                "notes": "Partenza dall'hotel con bagagli verso la stazione Wien Hauptbahnhof.",
-                                "transitFromPrev": "Chiusura stanza e consegna chiavi alla reception",
-                                "travelMinFromPrev": 5,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-10",
-                                "name": "Stazione Wien Hauptbahnhof ➔ Treno per Budapest",
-                                "mapQuery": "Wien Hauptbahnhof, Am Hauptbahnhof 1, 1100 Wien, Austria",
-                                "startTime": "10:40",
-                                "durationMin": 160,
-                                "time": "10:40 - 13:20",
-                                "notes": "Treno diretto ÖBB Railjet (~2h 40m) verso Budapest Keleti.",
-                                "transitFromPrev": "U3 Gasometer ➔ Landstraße + S-Bahn S1/S2/S3 (o Bus 72A + Tram O/S-Bahn, oppure U3 ➔ Stephansplatz + U1 ➔ Südtiroler Platz-Hauptbahnhof) • Totale ~22-25m",
-                                "travelMinFromPrev": 25,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-11",
-                                "name": "🍽️ Arrivo B&B Bengt Király Suite & Pranzo a Budapest",
-                                "mapQuery": "Király utca 26, 1061 Budapest, Hungary",
-                                "startTime": "13:45",
-                                "durationMin": 75,
-                                "time": "13:45 - 15:00",
-                                "notes": "Check-in a Király utca 26 e pranzo tipico immediato nel quartiere ebraico (Gulyás caldo da Gettó Gulyás o Retró Lángos, zero attese).",
-                                "transitFromPrev": "Metro M2 da Keleti pályaudvar ➔ Deák Ferenc tér (3 fermate) + 4 min a piedi • Totale 25m",
-                                "travelMinFromPrev": 25,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-12",
-                                "name": "Basilica di Santo Stefano & Mercatino Advent Bazilika",
-                                "mapQuery": "St. Stephen's Basilica, Szent István tér 1, 1051 Budapest, Hungary",
-                                "startTime": "15:30",
-                                "durationMin": 150,
-                                "time": "15:30 - 18:00",
-                                "notes": "Proiezioni 3D sulla facciata ogni sera e Kürtőskalács caldo.",
-                                "transitFromPrev": "Passeggiata pedonale nel centro • 8 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-13",
-                                "name": "Crociera Notturna sul Danubio (Vigadó tér) & Ponte delle Catene",
-                                "mapQuery": "Vigadó tér, Budapest, 1051 Hungary",
-                                "startTime": "18:20",
-                                "durationMin": 70,
-                                "time": "18:20 - 19:30",
-                                "notes": "Parlamento e Ponte delle Catene illuminati dall'acqua",
-                                "transitFromPrev": "A piedi verso il lungofiume Danubio • 10 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-13b",
-                                "name": "🍽️ Cena Ungherese & Serata al Ruin Bar Szimpla Kert",
-                                "mapQuery": "Szimpla Kert, Kazinczy u. 14, 1075 Budapest, Hungary",
-                                "startTime": "19:45",
-                                "durationMin": 90,
-                                "time": "19:45 - 21:15",
-                                "notes": "Cena con Csirkepaprikás (pollo alla paprika) da Menza o nel quartiere ebraico, poi drink nello storico Szimpla Kert a 4 min dall'alloggio.",
-                                "transitFromPrev": "Passeggiata verso il quartiere ebraico (Kazinczy utca) • 12 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        }
-                ]
-        },
-        {
-                "dayTitle": "Lunedì 28 Dicembre 2026 • Parlamento, Buda & Terme Széchenyi",
-                "city": "🇭🇺 Budapest",
-                "items": [
-                        {
-                                "id": "it-14a",
-                                "name": "☕ Colazione a Budapest (Viale Andrássy / Király utca)",
+                                "id": "v2-29-1",
+                                "name": "☕ Colazione",
                                 "mapQuery": "Király utca 26, 1061 Budapest, Hungary",
                                 "startTime": "08:00",
                                 "durationMin": 30,
                                 "time": "08:00 - 08:30",
-                                "notes": "Colazione con Torta Dobos o Bejgli alle noci prima di prendere la metro verso il Parlamento.",
+                                "notes": "",
                                 "isTransit": false
                         },
                         {
-                                "id": "it-14",
-                                "name": "Parlamento di Budapest & Scarpette",
-                                "mapQuery": "Hungarian Parliament Building, Kossuth Lajos tér 1-3, 1055 Budapest, Hungary",
-                                "startTime": "09:15",
-                                "durationMin": 120,
-                                "time": "09:15 - 11:15",
-                                "notes": "Visita interna (biglietto prenotato) + memoriale Scarpette sul Danubio",
-                                "transitFromPrev": "Metro M2 da Deák Ferenc tér ➔ Kossuth Lajos tér (1 fermata) • Totale 15m",
+                                "id": "v2-29-2",
+                                "name": "🏨 Check-out dal B&B",
+                                "mapQuery": "Király utca 26, 1061 Budapest, Hungary",
+                                "startTime": "08:40",
+                                "durationMin": 10,
+                                "time": "08:40 - 08:50",
+                                "notes": "",
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-3",
+                                "name": "🚆 Treno EuroCity Budapest ➔ Bratislava hlavná stanica",
+                                "mapQuery": "Budapest-Keleti pályaudvar, Kerepesi út 2-6, 1087 Budapest, Hungary",
+                                "startTime": "09:25",
+                                "durationMin": 145,
+                                "time": "09:25 - 11:50",
+                                "notes": "⚠️ Orario indicativo (circa 09:25 ➔ 11:50, circa 2h25–2h40): controlla l'orario esatto e la stazione (Keleti o Nyugati) sull'app MÁV.",
+                                "transitFromPrev": "Per Nyugati: a piedi fino a Deák • M3 ➔ Nyugati pályaudvar (2 fermate). Per Keleti: M2 Deák ➔ Keleti (3 fermate)",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-4",
+                                "name": "🧳 Bratislava hl. st.: deposito bagagli",
+                                "mapQuery": "Bratislava hlavná stanica, Námestie Franza Liszta 1, 811 04 Bratislava, Slovakia",
+                                "startTime": "12:00",
+                                "durationMin": 10,
+                                "time": "12:00 - 12:10",
+                                "notes": "⚠️ Verifica prima che ci siano armadietti o un deposito; in caso contrario porta solo bagaglio a mano.",
+                                "transitFromPrev": "Arrivo in treno a Bratislava hlavná stanica",
+                                "travelMinFromPrev": 10,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-5",
+                                "name": "Palazzo Grassalkovich, Porta di San Michele, Piazza Principale e la statua di Čumil",
+                                "attractionId": "bts-2",
+                                "mapQuery": "Michael's Gate, Michalská 22, 811 03 Bratislava, Slovakia",
+                                "startTime": "12:15",
+                                "durationMin": 45,
+                                "time": "12:15 - 13:00",
+                                "notes": "",
+                                "transitFromPrev": "Bus 93 ➔ Hodžovo námestie (2–3 fermate), oppure 15–20 min a piedi in discesa",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-6",
+                                "name": "🍽️ Pranzo slovacco: Bratislavská Reštaurácia",
+                                "mapQuery": "Bratislavská reštaurácia, Hurbanovo námestie 1, 811 06 Bratislava, Slovakia",
+                                "startTime": "13:00",
+                                "durationMin": 50,
+                                "time": "13:00 - 13:50",
+                                "notes": "Bryndzové halušky e kapustnica. In alternativa, più veloce, c'è Slovak Pub (Obchodná 62), sulla strada che torna alla stazione.",
+                                "transitFromPrev": "Accanto alla Porta di San Michele",
+                                "travelMinFromPrev": 3,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-7",
+                                "name": "Castello di Bratislava (cortili e vista sul Danubio e sul ponte UFO)",
+                                "attractionId": "bts-1",
+                                "mapQuery": "Bratislava Castle, Zámocká 2, 811 01 Bratislava, Slovakia",
+                                "startTime": "14:05",
+                                "durationMin": 45,
+                                "time": "14:05 - 14:50",
+                                "notes": "",
+                                "transitFromPrev": "Circa 15 min a piedi in salita, passando dalla Cattedrale di San Martino",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-8",
+                                "name": "☕ Pausa al Café Mayer",
+                                "mapQuery": "Café Mayer, Hlavné námestie 4, 811 01 Bratislava, Slovakia",
+                                "startTime": "15:05",
+                                "durationMin": 30,
+                                "time": "15:05 - 15:35",
+                                "notes": "Il caffè storico della piazza principale. La Chiesa Blu è facoltativa: dista 15 minuti a piedi e conviene solo se sei in anticipo.",
+                                "transitFromPrev": "Circa 15 min a piedi in discesa",
+                                "travelMinFromPrev": 15,
+                                "isTransit": false
+                        },
+                        {
+                                "id": "v2-29-9",
+                                "name": "🧳 Ritiro dei bagagli in stazione",
+                                "mapQuery": "Bratislava hlavná stanica, Námestie Franza Liszta 1, 811 04 Bratislava, Slovakia",
+                                "startTime": "16:00",
+                                "durationMin": 10,
+                                "time": "16:00 - 16:10",
+                                "notes": "",
+                                "transitFromPrev": "A piedi fino a Hodžovo námestie • bus 93 ➔ Hlavná stanica",
                                 "travelMinFromPrev": 20,
                                 "isTransit": false
                         },
                         {
-                                "id": "it-15",
-                                "name": "Bastione dei Pescatori & Chiesa di Mattia + 🍽️ Pranzo a Buda",
-                                "mapQuery": "Fisherman's Bastion, Szentháromság tér, 1014 Budapest, Hungary",
-                                "startTime": "11:45",
-                                "durationMin": 175,
-                                "time": "11:45 - 14:40",
-                                "notes": "Vista panoramica sulla collina di Buda e pausa pranzo intorno alle 13:15 (dolce storico alla pasticceria Ruszwurm o bistrot sulla collina).",
-                                "transitFromPrev": "Metro M2 Batthyány tér + Bus 16 ➔ Szentháromság tér • Totale 25m",
-                                "travelMinFromPrev": 30,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-16",
-                                "name": "Terme Széchenyi (Széchenyi Gyógyfürdő) & Piazza degli Eroi",
-                                "mapQuery": "Széchenyi Thermal Bath, Állatkerti krt. 9-11, 1146 Budapest, Hungary",
-                                "startTime": "15:20",
-                                "durationMin": 220,
-                                "time": "15:20 - 19:00",
-                                "notes": "Bagno caldo nelle vasche termali all'aperto e passeggiata serale a Piazza degli Eroi illuminata.",
-                                "transitFromPrev": "Bus 16 ➔ Deák Ferenc tér + Metro M1 ➔ Széchenyi fürdő (9 fermate) • Totale 35m",
-                                "travelMinFromPrev": 40,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-16b",
-                                "name": "🍽️ Cena Tipica Ungherese (Paprika Vendéglő / Viale Andrássy)",
-                                "mapQuery": "Paprika Vendéglő, Dózsa György út 72, 1071 Budapest, Hungary",
-                                "startTime": "19:30",
-                                "durationMin": 80,
-                                "time": "19:30 - 20:50",
-                                "notes": "Cena abbondante a 6 minuti a piedi dalle terme da Paprika Vendéglő (prenotare in anticipo) o lungo Viale Andrássy.",
-                                "transitFromPrev": "Passeggiata lungo il parco Városliget • 6 min a piedi",
-                                "travelMinFromPrev": 15,
-                                "isTransit": false
-                        }
-                ]
-        },
-        {
-                "dayTitle": "Martedì 29 Dicembre 2026 • Bratislava & Volo di Ritorno",
-                "city": "🇸🇰 Bratislava",
-                "items": [
-                        {
-                                "id": "it-17",
-                                "name": "☕ Colazione Rapida & Treno/Bus Budapest ➔ Bratislava",
-                                "mapQuery": "Budapest-Nyugati, Teréz krt. 55, 1062 Budapest, Hungary",
-                                "startTime": "08:00",
-                                "durationMin": 180,
-                                "time": "08:00 - 11:00",
-                                "notes": "Colazione veloce alle 08:00 e collegamento diretto mattutino verso la Slovacchia.",
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-18",
-                                "name": "Castello di Bratislava, Centro Storico & 🍽️ Pranzo Slovacco",
-                                "mapQuery": "Bratislava Castle, Zámocká 2, 811 01 Bratislava, Slovakia",
-                                "startTime": "11:30",
-                                "durationMin": 270,
-                                "time": "11:30 - 16:00",
-                                "notes": "Castello, Cattedrale di San Martino, Čumil, Porta San Michele, Chiesa Blu e pranzo alle 13:15 con Bryndzové Halušky e Kapustnica (Slovak Pub o Bratislavská Reštaurácia).",
-                                "transitFromPrev": "Deposito bagagli in stazione + Bus 93 / Filobus • Totale 25m",
-                                "travelMinFromPrev": 30,
-                                "isTransit": false
-                        },
-                        {
-                                "id": "it-19",
-                                "name": "Aeroporto di Bratislava (BTS) - Imbarco Ritorno",
+                                "id": "v2-29-10",
+                                "name": "✈️ Aeroporto di Bratislava (BTS): check-in e controlli • volo alle 19:00",
                                 "mapQuery": "Bratislava Airport, Ivanská cesta, 820 01 Bratislava, Slovakia",
-                                "startTime": "16:40",
-                                "durationMin": 140,
-                                "time": "16:40 - 19:00",
-                                "notes": "Ritiro bagagli, controlli sicurezza e imbarco volo delle 19:00.",
-                                "transitFromPrev": "Bus 61 diretto verso Letisko / Airport BTS • Totale 25m",
+                                "startTime": "16:45",
+                                "durationMin": 135,
+                                "time": "16:45 - 19:00",
+                                "notes": "",
+                                "transitFromPrev": "Bus 61 Hlavná stanica ➔ Letisko (aeroporto), circa 25–30 min: è il capolinea, quindi trovi posto",
                                 "travelMinFromPrev": 30,
                                 "isTransit": false
                         }
@@ -10767,45 +10966,87 @@
 
         const DEFAULT_CHECKLIST = [
         {
-                "id": "chk-1",
-                "label": "🚌 Bus Aeroporto Bratislava (BTS) ➔ Vienna Erdberg (24 Dic)",
-                "tip": "FlixBus / RegioJet / Slovak Lines (~€12)",
+                "id": "chk-v2-1",
+                "label": "🎫 Vienna – Biglietto 72 ore Wiener Linien (~€17,10)",
+                "tip": "Con il bus Slovak Lines lo compri e convalidi alla macchinetta U1 di Südtiroler Platz (verso le 15:55 del 24): vale 72 ore e copre anche il tragitto per la stazione la mattina del 27. App WienMobil o macchinette.",
                 "done": false
         },
         {
-                "id": "chk-2",
-                "label": "🎨 Biglietto Orario Belvedere Superiore (Klimt - Vienna)",
-                "tip": "Prenotare slot su belvedere.at",
+                "id": "chk-v2-2",
+                "label": "🚌 Bus BTS ➔ Vienna del 24 (Slovak Lines 14:45)",
+                "tip": "App Slovak Lines; ricontrolla l'orario del 24. Alternativa FlixBus: due corse in un'unica prenotazione (BTS ➔ Wien Erdberg VIB).",
                 "done": false
         },
         {
-                "id": "chk-3",
-                "label": "🏰 Biglietto Castello di Schönbrunn (Vienna)",
-                "tip": "Grand Tour / Imperial Tour su schoenbrunn.at",
+                "id": "chk-v2-3",
+                "label": "🏰 Slot Schönbrunn delle 09:15 (25 Dic)",
+                "tip": "Appartamenti imperiali su schoenbrunn.at",
                 "done": false
         },
         {
-                "id": "chk-4",
-                "label": "🚆 Treno Vienna Hauptbahnhof ➔ Budapest (27 Dic)",
-                "tip": "ÖBB Railjet o RegioJet (~2h 40m)",
+                "id": "chk-v2-4",
+                "label": "🎨 Slot Belvedere Superiore delle 15:00 (25 Dic)",
+                "tip": "Prenotare su belvedere.at",
                 "done": false
         },
         {
-                "id": "chk-5",
-                "label": "🏛️ Visita Guidata Parlamento di Budapest (28 Dic)",
-                "tip": "Tariffa UE ~6.500 Ft su jegymester.hu (va sold-out!)",
+                "id": "chk-v2-5",
+                "label": "🍽️ Cena da Plachutta (25 Dic) e da Café Landtmann (26 Dic)",
+                "tip": "Prenotare il tavolo per le 19:30",
                 "done": false
         },
         {
-                "id": "chk-6",
-                "label": "♨️ Ingresso Terme Széchenyi Salta-Coda (Budapest)",
-                "tip": "Sito ufficiale szechenyibath.hu",
+                "id": "chk-v2-6",
+                "label": "👑 Hofburg/Sisi del 26 alle 09:00 e biglietto del Riesenrad",
+                "tip": "Riesenrad: compra online, sali subito (tramonto verso le 16:00)",
                 "done": false
         },
         {
-                "id": "chk-7",
-                "label": "🚆 Treno/Bus Budapest ➔ Bratislava mattino (29 Dic)",
-                "tip": "MÁV / RegioJet / FlixBus (~2h 25m)",
+                "id": "chk-v2-7",
+                "label": "🚆 Treno Vienna ➔ Budapest del 27 con posto riservato",
+                "tip": "ÖBB Railjet/EuroCity: partenze più o meno ogni ora, verso le :40",
+                "done": false
+        },
+        {
+                "id": "chk-v2-8",
+                "label": "🎫 Budapest – Biglietto 72 ore BKK",
+                "tip": "Convalidalo all'arrivo il 27: copre metro, tram e bus 16 fino al 30. App BudapestGO o macchinette.",
+                "done": false
+        },
+        {
+                "id": "chk-v2-9",
+                "label": "🚢 Crociera del 27 (18:00 circa) e cena da Menza",
+                "tip": "Partenza da Vigadó tér",
+                "done": false
+        },
+        {
+                "id": "chk-v2-10",
+                "label": "🏛️ Parlamento del 28 (09:15 circa), Terme Széchenyi e Paprika Vendéglő",
+                "tip": "Presentati al centro visitatori 15 minuti prima",
+                "done": false
+        },
+        {
+                "id": "chk-v2-11",
+                "label": "🚆 Treno Budapest ➔ Bratislava del 29 mattina",
+                "tip": "EuroCity circa ogni 2 ore: controlla sull'app MÁV se parte da Keleti o da Nyugati",
+                "done": false
+        },
+        {
+                "id": "chk-v2-12",
+                "label": "🎫 Bratislava – 2 biglietti singoli (bus 93 e bus 61 per l'aeroporto)",
+                "tip": "App IDS BK o macchinetta in stazione",
+                "done": false
+        },
+        {
+                "id": "chk-v2-13",
+                "label": "⏰ Tre giorni prima: orari del 24 di Bitzinger e McDonald's",
+                "tip": "Controllali su Google Maps",
+                "done": false
+        },
+        {
+                "id": "chk-v2-14",
+                "label": "📱 Il giorno prima: ricontrolla ogni tratta",
+                "tip": "Google Maps (Mezzi pubblici), WienMobil, BKK Futár, IDS BK: nei festivi le frequenze cambiano",
                 "done": false
         }
 ];
@@ -10867,7 +11108,21 @@
             } catch (e) {
                 console.warn('Errore caricamento dati salvati:', e);
             }
-            syncDefaultImagesOnce();
+        }
+
+        // Aggiornamento una tantum all'itinerario v2 (24-29 Dic): sostituisce itinerario e checklist
+        // salvati nel browser con quelli nuovi del file. Le modifiche successive restano salvate.
+        const ITINERARY_VERSION_KEY = 'tour_natale_2026_itinerary_v2';
+        function applyItineraryV2Once() {
+            try {
+                if (localStorage.getItem(ITINERARY_VERSION_KEY) === '1') return;
+                state.itinerary = JSON.parse(JSON.stringify(DEFAULT_ITINERARY));
+                state.checklist = JSON.parse(JSON.stringify(DEFAULT_CHECKLIST));
+                localStorage.setItem(ITINERARY_VERSION_KEY, '1');
+                saveState();
+            } catch (e) {
+                console.warn('Errore aggiornamento itinerario:', e);
+            }
         }
 
         // Riallineamento una tantum delle foto: i dati salvati nel browser
@@ -10955,6 +11210,7 @@
                 if (btnEl) {
                     if (sec === tabName) {
                         btnEl.classList.add('bg-terracotta-500', 'text-white', 'shadow', 'font-semibold');
+                        try { btnEl.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {}
                         btnEl.classList.remove('text-tortora-100', 'hover:bg-tortora-800/70');
                     } else {
                         btnEl.classList.remove('bg-terracotta-500', 'text-white', 'shadow', 'font-semibold');
@@ -11589,11 +11845,11 @@
                         return `
                         ${legConnectorHtml}
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-2xl border bg-white border-tortora-200 shadow-sm hover:border-terracotta-300 transition">
-                            <div class="flex items-start gap-3">
+                            <div class="flex flex-col sm:flex-row items-start gap-2 sm:gap-3 min-w-0">
                                 <button onclick="openEditItineraryItemModal(${dayIdx}, ${itemIdx})" class="text-xs font-extrabold px-2.5 py-1.5 rounded-xl bg-tortora-100 hover:bg-terracotta-100 text-tortora-900 hover:text-terracotta-800 shrink-0 mt-0.5 transition border border-tortora-200" title="Clicca per modificare orario e durata">
                                     🕒 ${escapeHtml(displayTime)}
                                 </button>
-                                <div>
+                                <div class="min-w-0">
                                     <div class="font-bold text-sm sm:text-base text-tortora-950 flex flex-wrap items-center gap-1.5">
                                         <span class="text-xs bg-tortora-900 text-white px-2 py-0.5 rounded-md font-bold">Tappa ${itemIdx + 1}</span>
                                         <span>${escapeHtml(item.name)}</span>
@@ -12712,6 +12968,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             try {
                 loadState();
+                syncDefaultImagesOnce();
+                applyItineraryV2Once();
                 renderOverview();
                 renderTipsChecklist();
                 filterAttractions();
